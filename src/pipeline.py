@@ -24,6 +24,7 @@ from .entity_extraction.rule_based import RuleEntityExtractor, SentenceAnalysis
 from .evidence.verify import EvidenceIndex
 from .ingestion.loader import discover_inputs, parse_document, save_parsed
 from .llm.client import LLMProvider, OllamaClient
+from .llm.instrumented import InstrumentedLLM
 from .llm.prompts import PromptLibrary
 from .normalization.entity_normalizer import EntityNormalizer, NormalizationOverrides, find_abbreviations
 from .normalization.lexicon import Lexicon
@@ -122,6 +123,9 @@ class ExtractionPipeline:
                 raise RuntimeError(f"Ollama model '{s.llm.model}' not reachable at {s.llm.base_url}. "
                                    f"Start Ollama and run: ollama pull {s.llm.model} (or use --mode rule)")
         self.mode = ("hybrid" if self.llm else "rule") if requested == "auto" else requested
+        if self.llm is not None and not isinstance(self.llm, InstrumentedLLM):
+            # measure every call (time, tokens) and reuse answers for identical prompts
+            self.llm = InstrumentedLLM(self.llm, s.path("cache_dir") if s.llm.cache else None)
         self.llm_extractor = None
         if self.llm and self.mode in ("llm", "hybrid"):
             self.llm_extractor = LLMExtractor(self.llm, self.lexicon, self.normalizer, self.prompts,
@@ -177,11 +181,16 @@ class ExtractionPipeline:
         llm_rel: list[Relation] = []
         llm_findings: list[Finding] = []
         dropped: list[dict] = []
-        calls = failures = 0
+        calls = failures = chunks = chunks_skipped = 0
+        if isinstance(self.llm, InstrumentedLLM):
+            self.llm.reset_stats()          # per-paper accounting
         if self.llm_extractor is not None:
-            out = self.llm_extractor.extract(doc, analyses, sorted(skip), s.extraction.chunk_chars)
+            llm_skip = sorted(skip | set(s.extraction.llm_skip_sections))
+            out = self.llm_extractor.extract(doc, analyses, llm_skip, s.extraction.chunk_chars,
+                                             gate=s.extraction.llm_gate)
             llm_rel, llm_findings, dropped = out.relations, out.findings, out.dropped
             calls, failures = out.calls, out.failures
+            chunks, chunks_skipped = out.chunks, out.chunks_skipped
             if failures:
                 warnings.append(f"{failures} LLM chunk(s) returned unusable JSON after retries (see logs)")
 
@@ -245,7 +254,15 @@ class ExtractionPipeline:
             accepted=sum(r.status == ClaimStatus.ACCEPTED for r in relations),
             review=sum(r.status == ClaimStatus.REVIEW for r in relations),
             rejected=sum(r.status == ClaimStatus.REJECTED for r in relations),
-            num_findings=len(findings), llm_calls=calls, llm_failures=failures)
+            num_findings=len(findings), llm_calls=calls, llm_failures=failures,
+            llm_chunks=chunks, llm_chunks_skipped=chunks_skipped)
+        if isinstance(self.llm, InstrumentedLLM):
+            usage = self.llm.summary()   # includes LLM normalization calls made above
+            stats.llm_seconds = usage["seconds"]
+            stats.llm_cache_hits = usage["cache_hits"]
+            stats.llm_prompt_tokens = usage["prompt_tokens"]
+            stats.llm_output_tokens = usage["output_tokens"]
+            stats.llm_by_stage = usage["by_stage"]
         prov = Provenance(
             pipeline_version=PIPELINE_VERSION, extraction_mode=self.mode,
             llm_model=self.llm.model if self.llm and self.mode != "rule" else None,

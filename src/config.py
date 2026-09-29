@@ -36,6 +36,7 @@ class PathsConfig(BaseModel):
     lexicon_file: str = "config/lexicon.yaml"
     prompts_dir: str = "prompts"
     logs_dir: str = "logs"
+    cache_dir: str = "data/cache"
 
 
 class PdfConfig(BaseModel):
@@ -50,6 +51,11 @@ class ExtractionConfig(BaseModel):
     skip_sections: list[str] = Field(default_factory=lambda: ["references", "acknowledgements"])
     llm_findings: bool = True
     llm_normalization: bool = True
+    # Extra sections that are parsed and rule-extracted but NOT sent to the LLM.
+    llm_skip_sections: list[str] = Field(default_factory=lambda: ["front_matter", "title"])
+    # Rule-first gating: only send a chunk to the LLM if the rule-based extractor
+    # found at least one AM entity or a number with a unit in it.
+    llm_gate: bool = True
 
 
 class LLMConfig(BaseModel):
@@ -64,6 +70,9 @@ class LLMConfig(BaseModel):
     # For "thinking" models (qwen3.x, gemma4 ...): False disables the slow reasoning
     # trace. None = do not send the flag (needed for older models such as qwen2.5).
     think: Optional[bool] = None
+    num_predict: int = 1500        # max output tokens per call
+    keep_alive: str = "30m"        # how long Ollama keeps the model loaded after a call
+    cache: bool = True             # reuse answers for identical prompts (data/cache/llm)
 
 
 class QualityConfig(BaseModel):
@@ -172,6 +181,9 @@ def load_settings(config_file: Optional[Path] = None, root: Optional[Path] = Non
         val = _env(env_name)
         if val is not None:
             setattr(obj, attr, cast(val))
+    cache = _env("LLM_CACHE")
+    if cache is not None:
+        settings.llm.cache = cache.strip().lower() in ("1", "true", "yes", "on")
     think = _env("OLLAMA_THINK")
     if think is not None:
         settings.llm.think = think.strip().lower() in ("1", "true", "yes", "on")

@@ -203,6 +203,14 @@ class ExtractionStats(BaseModel):
     llm_calls: int = 0
     llm_failures: int = 0
     seconds: float = 0.0
+    # Speed / cost accounting (Phase 1). Defaults keep old JSON files loadable.
+    llm_seconds: float = 0.0
+    llm_cache_hits: int = 0
+    llm_prompt_tokens: int = 0
+    llm_output_tokens: int = 0
+    llm_chunks: int = 0            # chunks considered for the LLM
+    llm_chunks_skipped: int = 0    # ...of which skipped by rule-first gating
+    llm_by_stage: dict[str, Any] = Field(default_factory=dict)
 
 
 class Provenance(BaseModel):

@@ -25,6 +25,8 @@ extraction:
   skip_sections: [references, acknowledgements]
   llm_findings: true         # run the finding-extraction prompt in llm/hybrid mode
   llm_normalization: true    # ask the LLM to pick among candidate canonicals for unknown terms
+  llm_skip_sections: [front_matter, title]   # parsed + rule-extracted, but never sent to the LLM
+  llm_gate: true             # LLM only sees chunks where rules found an AM entity or a number+unit
 
 llm:
   temperature: 0.0
@@ -32,6 +34,9 @@ llm:
   timeout_s: 600
   max_retries: 2
   structured_output: true    # pass a JSON schema via Ollama's `format` field
+  num_predict: 1500          # max output tokens per call (stops runaway generations)
+  keep_alive: 30m            # keep the model loaded in memory between calls/runs
+  cache: true                # reuse answers for identical prompts (data/cache/llm); env LLM_CACHE=false disables
 
 quality:
   accept_threshold: 0.85     # >= accept -> accepted

@@ -84,6 +84,13 @@ def cmd_extract(args: argparse.Namespace) -> int:
               f"mentions={st.num_mentions} relations={st.num_relations} (accepted={st.accepted}, review={st.review}, "
               f"rejected={st.rejected}) findings={st.num_findings} llm_calls={st.llm_calls} time={st.seconds}s"
               + ("  [DEMO/SYNTHETIC]" if r.paper.is_synthetic else ""))
+        if st.llm_by_stage:
+            print(f"   LLM time {st.llm_seconds}s | chunks {st.llm_chunks - st.llm_chunks_skipped}/{st.llm_chunks} sent "
+                  f"({st.llm_chunks_skipped} skipped by gating) | cache hits {st.llm_cache_hits} | "
+                  f"tokens in/out {st.llm_prompt_tokens}/{st.llm_output_tokens}")
+            for stage, v in st.llm_by_stage.items():
+                print(f"     - {stage:<13} calls={v['calls']:<3} cached={v['cache_hits']:<3} "
+                      f"time={v['seconds']:>7}s  out_tokens={v['output_tokens']}")
         for w in r.warnings:
             print("   WARNING:", w)
     print(f"Extracted JSON written to {get_settings().path('extracted_dir')}")

@@ -32,7 +32,7 @@ class OllamaClient:
     def __init__(self, base_url: str = "http://localhost:11434", model: str = "qwen2.5:3b",
                  temperature: float = 0.0, num_ctx: int = 8192, timeout_s: int = 240,
                  structured_output: bool = True, embed_model: str = "nomic-embed-text",
-                 think: Optional[bool] = None) -> None:
+                 think: Optional[bool] = None, num_predict: int = 1500, keep_alive: str = "30m") -> None:
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.temperature = temperature
@@ -41,6 +41,9 @@ class OllamaClient:
         self.structured_output = structured_output
         self.embed_model = embed_model
         self.think = think
+        self.num_predict = num_predict    # cap on output tokens: stops runaway generations
+        self.keep_alive = keep_alive      # keep the model in memory between calls/runs
+        self.last_usage: dict[str, Any] = {}
         self.calls = 0
         self.failures = 0
 
@@ -48,7 +51,7 @@ class OllamaClient:
     def from_settings(cls, settings: Any) -> "OllamaClient":
         c = settings.llm
         return cls(c.base_url, c.model, c.temperature, c.num_ctx, c.timeout_s, c.structured_output, c.embed_model,
-                   getattr(c, "think", None))
+                   getattr(c, "think", None), getattr(c, "num_predict", 1500), getattr(c, "keep_alive", "30m"))
 
     # ------------------------------------------------------------------
     def list_models(self) -> list[str]:
@@ -72,7 +75,8 @@ class OllamaClient:
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
             "stream": False,
             "options": {"temperature": self.temperature, "num_ctx": self.num_ctx, "seed": 42,
-                        "num_predict": 1500},  # cap output length: stops runaway generations
+                        "num_predict": self.num_predict},
+            "keep_alive": self.keep_alive,
         }
         if json_mode:
             payload["format"] = schema if (schema and self.structured_output) else "json"
@@ -94,8 +98,15 @@ class OllamaClient:
         except requests.RequestException as exc:
             self.failures += 1
             raise LLMError(f"Ollama request failed: {exc}") from exc
-        content = r.json().get("message", {}).get("content", "")
-        log.debug("LLM call %.1fs, %d chars", time.time() - t0, len(content))
+        data = r.json()
+        content = data.get("message", {}).get("content", "")
+        # Ollama reports token counts and timings (nanoseconds) with every response.
+        self.last_usage = {
+            "prompt_tokens": data.get("prompt_eval_count", 0) or 0,
+            "output_tokens": data.get("eval_count", 0) or 0,
+            "load_seconds": round((data.get("load_duration", 0) or 0) / 1e9, 2),
+        }
+        log.debug("LLM call %.1fs, %d chars, usage=%s", time.time() - t0, len(content), self.last_usage)
         return content
 
     def embed(self, texts: list[str], model: Optional[str] = None) -> list[list[float]]:

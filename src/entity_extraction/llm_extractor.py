@@ -20,6 +20,7 @@ from typing import Any, Optional
 from pydantic import BaseModel, Field, field_validator
 
 from ..llm.client import LLMProvider
+from ..llm.instrumented import llm_stage
 from ..llm.json_utils import call_llm_json
 from ..llm.prompts import PromptLibrary
 from ..normalization.entity_normalizer import EntityNormalizer
@@ -132,6 +133,27 @@ class LLMExtractionOutput:
     dropped: list[dict[str, Any]] = field(default_factory=list)   # audit trail of rejected proposals
     calls: int = 0
     failures: int = 0
+    chunks: int = 0            # chunks considered for the LLM
+    chunks_skipped: int = 0    # chunks skipped by rule-first gating
+
+
+_FINDING_SECTIONS = ("abstract", "results", "discussion", "results_discussion", "conclusion")
+
+
+def chunk_is_relevant(sents: list[Sentence], analyses: dict[str, "SentenceAnalysis"]) -> bool:
+    """Rule-first gating: a chunk is worth an LLM call only if the (fast, free)
+    rule-based pass found at least one AM entity or a number with a unit in it.
+    Chunks without either are usually affiliations, copyright lines, funding
+    text or generic background, where the LLM mostly produces noise.
+    Abstract and conclusion chunks are always kept: they carry the paper's main
+    findings even when phrased without lexicon terms or numbers."""
+    for s in sents:
+        if s.section_type in ("abstract", "conclusion"):
+            return True
+        an = analyses.get(s.sentence_id)
+        if an is not None and (an.mentions or an.quantities):
+            return True
+    return False
 
 
 def _find_span(needle: str, hay: str) -> Optional[tuple[int, int]]:
@@ -182,24 +204,33 @@ class LLMExtractor:
         """Used by EntityNormalizer: LLM may only pick from the given candidates."""
         user = self.prompts.render("normalization", term=term, entity_type=entity_type,
                                    candidates="\n".join(f"- {c}" for c in candidates))
-        res, _ = call_llm_json(self.llm, self.prompts.raw("system_extraction"), user, NormChoice, 1)
+        with llm_stage(self.llm, "normalization"):
+            res, _ = call_llm_json(self.llm, self.prompts.raw("system_extraction"), user, NormChoice, 1)
         if res and res.choice in candidates and res.confidence >= 0.6:
             return res.choice
         return None
 
     # ------------------------------------------------------------------
     def extract(self, doc: ParsedDocument, analyses: dict[str, SentenceAnalysis], skip: list[str],
-                chunk_chars: int) -> LLMExtractionOutput:
+                chunk_chars: int, gate: bool = False) -> LLMExtractionOutput:
+        """`skip`: section types never sent to the LLM. `gate`: skip chunks in which
+        the rule-based pass found nothing (see `chunk_is_relevant`)."""
         out = LLMExtractionOutput()
         paper_id = doc.paper.paper_id
         system = self.prompts.raw("system_extraction")
         for section, sents in chunk_sentences(doc, skip, chunk_chars):
+            out.chunks += 1
+            if gate and not chunk_is_relevant(sents, analyses):
+                out.chunks_skipped += 1
+                log.debug("Skipping chunk in %r: no rule-based entities or quantities", section)
+                continue
             local = {f"S{i + 1}": s for i, s in enumerate(sents)}
             numbered = "\n".join(f"[{k}] {s.text}" for k, s in local.items())
             # 1) entities
-            ents, clog = call_llm_json(self.llm, system,
-                                       self.prompts.render("entity_extraction", section=section, sentences=numbered),
-                                       LLMEntities, self.max_retries, wrap_key="entities")
+            with llm_stage(self.llm, "entities"):
+                ents, clog = call_llm_json(self.llm, system,
+                                           self.prompts.render("entity_extraction", section=section, sentences=numbered),
+                                           LLMEntities, self.max_retries, wrap_key="entities")
             out.calls += clog.attempts
             if ents is None:
                 out.failures += 1
@@ -214,10 +245,11 @@ class LLMExtractor:
                 if an:
                     ent_lines += [f"{m.text} ({m.entity_type}, {k})" for m in an.mentions]
             if ent_lines:
-                rels, clog = call_llm_json(self.llm, system,
-                                           self.prompts.render("relation_extraction", section=section,
-                                                               sentences=numbered, entities="; ".join(ent_lines)),
-                                           LLMRelations, self.max_retries, wrap_key="relations")
+                with llm_stage(self.llm, "relations"):
+                    rels, clog = call_llm_json(self.llm, system,
+                                               self.prompts.render("relation_extraction", section=section,
+                                                                   sentences=numbered, entities="; ".join(ent_lines)),
+                                               LLMRelations, self.max_retries, wrap_key="relations")
                 out.calls += clog.attempts
                 if rels is None:
                     out.failures += 1
@@ -228,12 +260,12 @@ class LLMExtractor:
                         if rel:
                             out.relations.append(rel)
             # 3) findings
-            if self.extract_findings and any(s.section_type in ("abstract", "results", "discussion",
-                                                                   "results_discussion", "conclusion")
-                                             for s in sents):
-                fnd, clog = call_llm_json(self.llm, system,
-                                          self.prompts.render("finding_extraction", section=section, sentences=numbered),
-                                          LLMFindings, self.max_retries, wrap_key="findings")
+            if self.extract_findings and any(s.section_type in _FINDING_SECTIONS for s in sents):
+                with llm_stage(self.llm, "findings"):
+                    fnd, clog = call_llm_json(self.llm, system,
+                                              self.prompts.render("finding_extraction", section=section,
+                                                                  sentences=numbered),
+                                              LLMFindings, self.max_retries, wrap_key="findings")
                 out.calls += clog.attempts
                 if fnd is None:
                     out.failures += 1
