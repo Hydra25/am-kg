@@ -45,8 +45,19 @@ def _kv_metadata(lines: list[str]) -> dict[str, str]:
     return out
 
 
+_JOURNAL_HEADER = re.compile(
+    r"(journal\b|contents lists|homepage|sciencedirect|elsevier|materials (&|and) design|science (&|and) engineering"
+    r"|letters$|procedia|^materials$|^metals$|^coatings$|^scientific reports$|www\.|https?://)", re.I)
+
+
+def _plausible_title(t: str) -> bool:
+    return (len(t.split()) >= 4 and not re.match(r"^(microsoft|untitled|document\d*|.*\.(docx?|pdf|tex))", t, re.I)
+            and not _JOURNAL_HEADER.search(t))
+
+
 def _guess_title(raw: RawPdf) -> Optional[str]:
-    spans = [(t, s, y) for t, s, y in raw.first_page_spans if len(t) > 3 and not _KV_RE.match(t)]
+    spans = [(t, s, y) for t, s, y in raw.first_page_spans
+             if len(t) > 3 and not _KV_RE.match(t) and not _JOURNAL_HEADER.search(t)]
     if not spans:
         return None
     max_y = max(y for _, _, y in spans) or 1
@@ -217,10 +228,13 @@ def parse_document(path: Path, settings: Settings) -> ParsedDocument:
         warnings += raw.warnings
         tables = raw.tables
         num_pages = raw.num_pages
-        title = _guess_title(raw)
-        pdf_title = (raw.pdf_metadata or {}).get("title") or ""
-        if not title and len(pdf_title) > 10 and not pdf_title.lower().startswith("microsoft"):
+        # Publisher PDFs (Elsevier, MDPI, Nature) carry the real title in their metadata;
+        # the biggest font on page 1 is often the journal name ("Materials & Design").
+        pdf_title = ((raw.pdf_metadata or {}).get("title") or "").strip()
+        if _plausible_title(pdf_title):
             title = pdf_title
+        else:
+            title = _guess_title(raw)
         lines = raw.lines
         parser_name = "pymupdf"
     elif suffix in {".txt", ".md"}:

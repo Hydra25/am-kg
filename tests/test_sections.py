@@ -31,3 +31,17 @@ def test_sections_pages_and_subsection_inheritance():
     assert types == ["abstract", "materials_methods", "references"]
     powder = [s for s in sents if "powder" in s.text][0]
     assert powder.page == 2 and "fabricated" in powder.text   # de-hyphenation across lines
+
+
+def test_publisher_layout_headings_and_titles():
+    """Seen on real Elsevier / MDPI / Nature PDFs of the LPBF benchmark."""
+    from src.ingestion.loader import _plausible_title
+    from src.ontology.schema import SectionType as S
+    from src.section_parser.sections import classify_heading
+    assert classify_heading("A B S T R A C T") == S.ABSTRACT          # Elsevier letter-spaced heading
+    assert classify_heading("A R T I C L E  I N F O") == S.FRONT_MATTER
+    # a keyword deep inside a long line is not a section type
+    assert classify_heading("Additive manufacturing (AM), contrary to the conventional machining methods") is None
+    assert not _plausible_title("Journal of Materials Research and Technology")
+    assert not _plausible_title("Materials & Design")
+    assert _plausible_title("Effect of process parameters on the mechanical behavior of Ti6Al4V alloys")

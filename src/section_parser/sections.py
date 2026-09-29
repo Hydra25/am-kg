@@ -34,15 +34,25 @@ _SECTION_KEYWORDS: list[tuple[SectionType, tuple[str, ...]]] = [
 _NUMBERING = re.compile(r"^\s*(?P<num>(?:\d+(?:\.\d+)*\.?)|(?:[IVX]+\.))\s+(?P<rest>\S.*)$")
 
 
+_LETTER_SPACED = re.compile(r"^(?:[A-Za-z] ){2,}[A-Za-z](?:\s{2,}(?:[A-Za-z] ){1,}[A-Za-z])*$")
+
+
 def classify_heading(title: str) -> Optional[SectionType]:
     t = title.lower().strip()
+    if _LETTER_SPACED.match(title.strip()):
+        # Elsevier style "A B S T R A C T", "A R T I C L E  I N F O"
+        t = re.sub(r"\s{2,}", "  ", t)
+        t = " ".join(w.replace(" ", "") for w in t.split("  "))
+        if t.startswith("article info"):
+            return S.FRONT_MATTER
     m = _NUMBERING.match(t)
     if m:
         t = m.group("rest")
     t = re.sub(r"[^a-z& ]", " ", t)
     t = re.sub(r"\s+", " ", t).strip()
+    short = len(t.split()) <= 6          # a keyword deep inside a long line is not a heading type
     for stype, keys in _SECTION_KEYWORDS:
-        if any(t.startswith(k) or f" {k}" in f" {t}" for k in keys):
+        if any(t.startswith(k) or (short and f" {k}" in f" {t}") for k in keys):
             return stype
     return None
 
@@ -77,6 +87,8 @@ def looks_like_heading(line: Line, body: float) -> bool:
     if line.is_heading is not None:
         return line.is_heading
     t = line.text.strip()
+    if _LETTER_SPACED.match(t) and classify_heading(t) is not None:
+        return True                     # "A B S T R A C T"
     if not t or len(t) > 90 or len(t.split()) > 12 or not re.search(r"[A-Za-z]{3,}", t):
         return False
     if re.match(r"^(fig(ure)?|table)\s*\d", t, re.I):
@@ -153,6 +165,7 @@ def build_sections(lines: list[Line], paper_id: str, title: Optional[str] = None
     last_top_type = S.FRONT_MATTER
     top_types: dict[str, SectionType] = {}
     title_norm = (title or "").strip().lower()
+    body_started = False   # becomes True at Abstract / Introduction / section "1"
 
     for ln in lines:
         text = ln.text.strip()
@@ -164,6 +177,15 @@ def build_sections(lines: list[Line], paper_id: str, title: Optional[str] = None
             stype = classify_heading(text)
             m = _NUMBERING.match(text)
             num = m.group("num").rstrip(".") if m else None
+            if (stype in (S.ABSTRACT, S.INTRODUCTION) or (num and (num.split(".")[0] == "1" or stype is not None))
+                    or ln.is_heading is True           # explicit headings (markdown/text input) are trusted
+                    or (ln.page >= 2 and stype in (S.MATERIALS_METHODS, S.RESULTS, S.RESULTS_DISCUSSION,
+                                                   S.DISCUSSION, S.CONCLUSION))):   # e.g. Nature: no "Introduction"
+                body_started = True
+            elif not body_started and stype not in (S.REFERENCES, S.ACKNOWLEDGEMENTS):
+                # Before the abstract/introduction every "heading" is front matter: journal
+                # logos ("materials"), author lines, affiliations, "ARTICLE INFO" boxes.
+                stype = S.FRONT_MATTER
             if stype is None:
                 # unclassified subsection inherits its parent's type ("2.1 Powder" -> methods)
                 parent = num.split(".")[0] if num and "." in num else None
@@ -174,6 +196,9 @@ def build_sections(lines: list[Line], paper_id: str, title: Optional[str] = None
                 top_types[num] = stype
             if not (num and "." in num):
                 last_top_type = stype
+            if stype == S.FRONT_MATTER and current.stype == S.FRONT_MATTER:
+                current.parts.append((text, ln.page))   # stay in one front-matter block
+                continue
             if current.parts or current.stype != S.FRONT_MATTER:
                 raw.append(current)
             current = _RawSection(text, stype, ln.page)
@@ -186,6 +211,21 @@ def build_sections(lines: list[Line], paper_id: str, title: Optional[str] = None
             text = re.sub(r"^abstract[\s.:—-]+", "", text, flags=re.I)
         current.parts.append((text, ln.page))
     raw.append(current)
+
+    # A long front-matter block holds the abstract (and, in Nature-style papers without an
+    # "Introduction" heading, the introduction too). Keep it as content, not front matter.
+    kinds = {r.stype for r in raw}
+    for r in raw:
+        if r.stype == S.FRONT_MATTER:
+            size = sum(len(t) for t, _ in r.parts)
+            if size > 1500:
+                if S.ABSTRACT not in kinds and size < 2500:
+                    r.stype = S.ABSTRACT
+                elif S.INTRODUCTION not in kinds:
+                    r.stype = S.INTRODUCTION
+                else:
+                    r.stype = S.OTHER
+                kinds.add(r.stype)
 
     sections: list[Section] = []
     sentences: list[Sentence] = []
