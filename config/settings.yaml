@@ -27,16 +27,26 @@ extraction:
   llm_normalization: true    # ask the LLM to pick among candidate canonicals for unknown terms
   llm_skip_sections: [front_matter, title]   # parsed + rule-extracted, but never sent to the LLM
   llm_gate: true             # LLM only sees chunks where rules found an AM entity or a number+unit
+  entity_backend: auto       # auto (GLiNER if installed, else LLM) | gliner | llm | none
 
 llm:
+  provider: ollama           # ollama (local, default) | groq | cerebras | gemini | openrouter | lmstudio
+                             # cloud providers: set LLM_MODEL and LLM_API_KEY in .env (see .env.example)
   temperature: 0.0
   num_ctx: 8192              # Ollama defaults to 2048 which truncates prompts silently
   timeout_s: 600
   max_retries: 2
   structured_output: true    # pass a JSON schema via Ollama's `format` field
   num_predict: 1500          # max output tokens per call (stops runaway generations)
+  num_predict_by_stage: {entities: 1000, relations: 800, findings: 400, normalization: 100}
   keep_alive: 30m            # keep the model loaded in memory between calls/runs
   cache: true                # reuse answers for identical prompts (data/cache/llm); env LLM_CACHE=false disables
+
+gliner:                      # used when extraction.entity_backend is auto/gliner (pip install gliner)
+  model: urchade/gliner_medium-v2.1   # Apache-2.0, ~0.5 GB, downloaded once from Hugging Face
+  threshold: 0.5             # higher = fewer but surer entities
+  device: cpu                # mps = Apple GPU (try if cpu is slow)
+  batch_size: 8
 
 quality:
   accept_threshold: 0.85     # >= accept -> accepted

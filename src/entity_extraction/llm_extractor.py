@@ -25,10 +25,11 @@ from ..llm.json_utils import call_llm_json
 from ..llm.prompts import PromptLibrary
 from ..normalization.entity_normalizer import EntityNormalizer
 from ..normalization.lexicon import Lexicon
-from ..normalization.text import match_key, normalize_chars, token_overlap
+from ..normalization.text import match_key, normalize_chars
 from ..normalization.units import parse_quantity_text
 from ..ontology.models import EntityMention, EntityRef, Finding, ParsedDocument, Relation, Sentence, stable_id
 from ..ontology.schema import EntityType, KnowledgeType, RelationType, canonicalize_relation
+from ..quality.junk import junk_reason
 from .rule_based import SentenceAnalysis, evidence_for
 
 log = logging.getLogger(__name__)
@@ -79,13 +80,13 @@ class LLMEntities(BaseModel):
 
 
 class LLMRelation(BaseModel):
+    """Compact relation schema. The model does NOT copy the evidence sentence:
+    the sentence id is enough (we already have its verbatim text), and copying it
+    was the largest share of output tokens (= most of the relation time)."""
     subject: str
-    subject_type: Optional[str] = None
     relation: str
     object: str
-    object_type: Optional[str] = None
     sentence: str
-    evidence: str = ""
     effect: Optional[str] = None
     negated: bool = False
     confidence: float = 0.5
@@ -212,9 +213,10 @@ class LLMExtractor:
 
     # ------------------------------------------------------------------
     def extract(self, doc: ParsedDocument, analyses: dict[str, SentenceAnalysis], skip: list[str],
-                chunk_chars: int, gate: bool = False) -> LLMExtractionOutput:
+                chunk_chars: int, gate: bool = False, llm_entities: bool = True) -> LLMExtractionOutput:
         """`skip`: section types never sent to the LLM. `gate`: skip chunks in which
-        the rule-based pass found nothing (see `chunk_is_relevant`)."""
+        the rule-based pass found nothing (see `chunk_is_relevant`). `llm_entities`:
+        False when another extractor (GLiNER) already proposed the entities."""
         out = LLMExtractionOutput()
         paper_id = doc.paper.paper_id
         system = self.prompts.raw("system_extraction")
@@ -226,18 +228,20 @@ class LLMExtractor:
                 continue
             local = {f"S{i + 1}": s for i, s in enumerate(sents)}
             numbered = "\n".join(f"[{k}] {s.text}" for k, s in local.items())
-            # 1) entities
-            with llm_stage(self.llm, "entities"):
-                ents, clog = call_llm_json(self.llm, system,
-                                           self.prompts.render("entity_extraction", section=section, sentences=numbered),
-                                           LLMEntities, self.max_retries, wrap_key="entities")
-            out.calls += clog.attempts
-            if ents is None:
-                out.failures += 1
-                out.dropped.append({"stage": "entities", "section": section, "errors": clog.errors})
-            else:
-                for e in ents.entities:
-                    self._accept_entity(e, local, analyses, paper_id, out)
+            # 1) entities (skipped when GLiNER already did this job)
+            if llm_entities:
+                with llm_stage(self.llm, "entities"):
+                    ents, clog = call_llm_json(self.llm, system,
+                                               self.prompts.render("entity_extraction", section=section,
+                                                                   sentences=numbered),
+                                               LLMEntities, self.max_retries, wrap_key="entities")
+                out.calls += clog.attempts
+                if ents is None:
+                    out.failures += 1
+                    out.dropped.append({"stage": "entities", "section": section, "errors": clog.errors})
+                else:
+                    for e in ents.entities:
+                        self._accept_entity(e, local, analyses, paper_id, out)
             # 2) relations (entity list = rule + LLM mentions of these sentences)
             ent_lines = []
             for k, s in local.items():
@@ -296,6 +300,11 @@ class LLMExtractor:
             return
         an = analyses.setdefault(s.sentence_id, SentenceAnalysis(sentence=s))
         surface = s.text[span[0]:span[1]]
+        # junk filter BEFORE normalisation (which may itself ask the LLM)
+        reason = None if self.lexicon.lookup_any_type(surface) else junk_reason(surface, etype, False)
+        if reason:
+            out.dropped.append({"stage": "entity", "reason": f"junk:{reason}", "item": e.model_dump()})
+            return
         norm = self.normalizer.normalize(surface, etype)
         quantity = None
         if e.value:
@@ -352,12 +361,11 @@ class LLMExtractor:
             return None
         ev = evidence_for(s, paper_id)
         rel_name = (r.relation or "").strip().upper().replace(" ", "_")
-        overlap = token_overlap(r.evidence, s.text) if r.evidence else 0.5
+        # Grounding: both endpoints were found in the cited sentence (checked above
+        # and below), and the evidence stored with the claim is that sentence verbatim.
         llm_conf = min(max(r.confidence, 0.0), 0.95)
-        attrs: dict[str, Any] = {"llm_evidence_quote": r.evidence[:500], "evidence_overlap": round(overlap, 2)}
+        attrs: dict[str, Any] = {"llm_sentence": r.sentence}
         qc: list[str] = []
-        if overlap < 0.6:
-            qc.append("llm_evidence_quote_not_in_sentence")
 
         if rel_name == "HAS_VALUE":
             vspan = _find_span(r.object, s.text)
@@ -395,7 +403,7 @@ class LLMExtractor:
                           "claim_origin": "background" if s.section_type == "introduction" else "this_study"})
         subj_ref = EntityRef(id=subj.canonical_id or "", name=subj.canonical_name or subj.text, type=subj.entity_type,
                              surface=subj.text, normalization_confidence=subj.normalization_confidence)
-        conf = 0.5 * llm_conf + 0.4 * min(overlap, 1.0) + 0.05
+        conf = 0.5 * llm_conf + 0.45
         if s.section_type == "introduction":
             conf -= 0.15
         cid = stable_id("c", paper_id, subj_ref.id, canon, obj_ref.id, s.sentence_id)

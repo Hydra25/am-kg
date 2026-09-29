@@ -41,8 +41,13 @@ class StageStats:
 class InstrumentedLLM:
     """Drop-in replacement for an LLM client: same `chat()` signature."""
 
-    def __init__(self, inner: Any, cache_dir: Optional[Path] = None) -> None:
+    def __init__(self, inner: Any, cache_dir: Optional[Path] = None,
+                 stage_max_tokens: Optional[dict[str, int]] = None) -> None:
         self.inner = inner
+        # Per-stage output caps (e.g. relations: 800). A small model sometimes
+        # starts repeating itself; the cap stops that early instead of after
+        # thousands of tokens. Truncated JSON is repaired downstream.
+        self.stage_max_tokens = dict(stage_max_tokens or {})
         self.model = getattr(inner, "model", "unknown")
         self.stage = "other"
         self.stats: dict[str, StageStats] = {}
@@ -52,6 +57,7 @@ class InstrumentedLLM:
         # Everything that changes the model's answer must be part of the cache key.
         self._key_extra = json.dumps({
             "model": self.model,
+            "provider": getattr(inner, "provider", "ollama"),
             "temperature": temperature,
             "num_ctx": getattr(inner, "num_ctx", None),
             "num_predict": getattr(inner, "num_predict", None),
@@ -95,9 +101,13 @@ class InstrumentedLLM:
     def _cache_path(self, system: str, user: str, schema: Optional[dict], json_mode: bool) -> Optional[Path]:
         if self.cache_dir is None:
             return None
-        blob = json.dumps([self._key_extra, system, user, schema, json_mode], sort_keys=True, ensure_ascii=False)
+        blob = json.dumps([self._key_extra, self._max_tokens(), system, user, schema, json_mode],
+                          sort_keys=True, ensure_ascii=False)
         key = hashlib.sha256(blob.encode("utf-8")).hexdigest()
         return self.cache_dir / key[:2] / f"{key}.json"
+
+    def _max_tokens(self) -> Optional[int]:
+        return self.stage_max_tokens.get(self.stage)
 
     def chat(self, system: str, user: str, schema: Optional[dict[str, Any]] = None, json_mode: bool = True) -> str:
         st = self._stage_stats()
@@ -110,6 +120,10 @@ class InstrumentedLLM:
             except (OSError, ValueError, KeyError):
                 log.debug("Ignoring unreadable cache entry %s", path)
 
+        cap = self._max_tokens()
+        default_cap = getattr(self.inner, "num_predict", None)
+        if cap and default_cap is not None:
+            self.inner.num_predict = min(cap, default_cap)
         t0 = time.perf_counter()
         try:
             response = self.inner.chat(system, user, schema=schema, json_mode=json_mode)
@@ -117,6 +131,9 @@ class InstrumentedLLM:
             st.errors += 1
             st.seconds += time.perf_counter() - t0
             raise
+        finally:
+            if cap and default_cap is not None:
+                self.inner.num_predict = default_cap
         st.calls += 1
         st.seconds += time.perf_counter() - t0
         usage = getattr(self.inner, "last_usage", None) or {}

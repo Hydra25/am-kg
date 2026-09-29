@@ -56,9 +56,19 @@ class ExtractionConfig(BaseModel):
     # Rule-first gating: only send a chunk to the LLM if the rule-based extractor
     # found at least one AM entity or a number with a unit in it.
     llm_gate: bool = True
+    # Who proposes entities beyond the lexicon (in hybrid/llm/gliner modes):
+    #   auto   = GLiNER if the `gliner` package + model are available, else the LLM prompt
+    #   gliner = GLiNER model (fast, local, no generation)
+    #   llm    = LLM entity prompt (slow; the original behaviour)
+    #   none   = lexicon only
+    entity_backend: str = "auto"
 
 
 class LLMConfig(BaseModel):
+    # ollama (default, local, free) | groq | cerebras | gemini | openrouter | lmstudio | openai_compat
+    provider: str = "ollama"
+    api_base: str = ""               # only for provider openai_compat (others have a built-in URL)
+    api_key_env: str = "LLM_API_KEY"  # NAME of the env variable holding the key (key itself lives in .env)
     base_url: str = "http://localhost:11434"
     model: str = "qwen2.5:3b"
     embed_model: str = "nomic-embed-text"
@@ -71,8 +81,19 @@ class LLMConfig(BaseModel):
     # trace. None = do not send the flag (needed for older models such as qwen2.5).
     think: Optional[bool] = None
     num_predict: int = 1500        # max output tokens per call
+    # Tighter caps per extraction stage (stops runaway generations early).
+    num_predict_by_stage: dict[str, int] = Field(default_factory=lambda: {
+        "entities": 1000, "relations": 800, "findings": 400, "normalization": 100})
     keep_alive: str = "30m"        # how long Ollama keeps the model loaded after a call
     cache: bool = True             # reuse answers for identical prompts (data/cache/llm)
+
+
+class GlinerConfig(BaseModel):
+    model: str = "urchade/gliner_medium-v2.1"   # Apache-2.0, ~0.5 GB, downloaded once
+    threshold: float = 0.5
+    device: str = "cpu"            # "mps" uses the Apple GPU (try it if cpu is slow)
+    batch_size: int = 8
+    labels: dict[str, str] = Field(default_factory=dict)   # empty = built-in AM labels
 
 
 class QualityConfig(BaseModel):
@@ -116,6 +137,7 @@ class Settings(BaseModel):
     pdf: PdfConfig = Field(default_factory=PdfConfig)
     extraction: ExtractionConfig = Field(default_factory=ExtractionConfig)
     llm: LLMConfig = Field(default_factory=LLMConfig)
+    gliner: GlinerConfig = Field(default_factory=GlinerConfig)
     quality: QualityConfig = Field(default_factory=QualityConfig)
     neo4j: Neo4jConfig = Field(default_factory=Neo4jConfig)
     graph: GraphConfig = Field(default_factory=GraphConfig)
@@ -155,6 +177,7 @@ def load_settings(config_file: Optional[Path] = None, root: Optional[Path] = Non
         pdf=PdfConfig(**raw.get("pdf", {})),
         extraction=ExtractionConfig(**raw.get("extraction", {})),
         llm=LLMConfig(**llm_raw),
+        gliner=GlinerConfig(**raw.get("gliner", {})),
         quality=QualityConfig(**raw.get("quality", {})),
         graph=GraphConfig(**raw.get("graph", {})),
         retrieval=RetrievalConfig(**raw.get("retrieval", {})),
@@ -166,11 +189,15 @@ def load_settings(config_file: Optional[Path] = None, root: Optional[Path] = Non
         ("OLLAMA_MODEL", settings.llm, "model", str),
         ("MODEL_NAME", settings.llm, "model", str),  # alias used in the project brief
         ("OLLAMA_EMBED_MODEL", settings.llm, "embed_model", str),
+        ("LLM_PROVIDER", settings.llm, "provider", str),
+        ("LLM_API_BASE", settings.llm, "api_base", str),
+        ("LLM_MODEL", settings.llm, "model", str),
         ("NEO4J_URI", settings.neo4j, "uri", str),
         ("NEO4J_USERNAME", settings.neo4j, "username", str),
         ("NEO4J_PASSWORD", settings.neo4j, "password", str),
         ("NEO4J_DATABASE", settings.neo4j, "database", str),
         ("EXTRACTION_MODE", settings.extraction, "mode", str),
+        ("ENTITY_BACKEND", settings.extraction, "entity_backend", str),
         ("GRAPH_BACKEND", settings.graph, "backend", str),
         ("VECTOR_BACKEND", settings.retrieval, "vector_backend", str),
         ("AMKG_ACCEPT_THRESHOLD", settings.quality, "accept_threshold", float),

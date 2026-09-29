@@ -33,11 +33,13 @@ def tmp_project(tmp_path, monkeypatch):
         shutil.copytree(ROOT / d, tmp_path / d)
     shutil.copytree(ROOT / "data" / "demo", tmp_path / "data" / "demo")
     shutil.copytree(ROOT / "data" / "annotations", tmp_path / "data" / "annotations")
-    for var in ("NEO4J_URI", "EXTRACTION_MODE", "GRAPH_BACKEND", "VECTOR_BACKEND", "GROBID_URL"):
+    for var in ("NEO4J_URI", "EXTRACTION_MODE", "GRAPH_BACKEND", "VECTOR_BACKEND", "GROBID_URL",
+                "LLM_PROVIDER", "LLM_API_BASE", "LLM_MODEL", "ENTITY_BACKEND", "LLM_CACHE"):
         monkeypatch.delenv(var, raising=False)
     monkeypatch.setenv("OLLAMA_BASE_URL", "http://127.0.0.1:9")  # guaranteed unreachable
     settings = load_settings(root=tmp_path)
     settings.graph.backend = "local"
+    settings.extraction.entity_backend = "llm"   # GLiNER tests inject a fake model explicitly
     return settings
 
 

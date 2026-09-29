@@ -20,6 +20,7 @@ from ..config import Settings, get_settings
 from ..entity_extraction.matcher import LexiconMatcher
 from ..knowledge_graph.kb import KnowledgeBase
 from ..llm.client import LLMError, LLMProvider, OllamaClient
+from ..llm.openai_compat import make_llm_client
 from ..llm.prompts import PromptLibrary
 from ..normalization.lexicon import Lexicon
 from ..normalization.text import match_key
@@ -104,8 +105,12 @@ class ResearchAssistant:
         self.prompts = PromptLibrary(self.settings.path("prompts_dir"))
         self.llm = llm
         if self.llm is None and use_llm:
-            client = OllamaClient.from_settings(self.settings)
-            self.llm = client if client.is_available() else None
+            try:
+                client = make_llm_client(self.settings)
+                self.llm = client if client.is_available() else None
+            except LLMError as exc:
+                log.warning("LLM unavailable for the assistant (%s); graph-only answers", exc)
+                self.llm = None
         docs = load_docs(self.settings.path("processed_dir"))
         docs = [d for d in docs if d.paper.paper_id in kb.papers] or docs
         self.passages = build_passages(docs, self.settings.retrieval.passage_window)

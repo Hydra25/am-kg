@@ -112,3 +112,21 @@ def test_ollama_client_reads_token_usage(monkeypatch):
     assert c.chat("s", "u") == "{}"
     assert c.last_usage == {"prompt_tokens": 120, "output_tokens": 30, "load_seconds": 2.0}
     assert sent["options"]["num_predict"] == 800 and sent["keep_alive"] == "10m"
+
+
+def test_stage_token_cap_is_applied_and_restored(tmp_path):
+    seen = []
+
+    class CapLLM(CountingLLM):
+        num_predict = 1500
+
+        def chat(self, system, user, schema=None, json_mode=True):
+            seen.append(self.num_predict)
+            return super().chat(system, user, schema, json_mode)
+
+    inner = CapLLM(["{}"])
+    llm = InstrumentedLLM(inner, None, stage_max_tokens={"relations": 800})
+    with llm_stage(llm, "relations"):
+        llm.chat("s", "u1")
+    llm.chat("s", "u2")                         # stage "other": no cap
+    assert seen == [800, 1500] and inner.num_predict == 1500

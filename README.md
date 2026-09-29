@@ -105,6 +105,21 @@ python main.py build-graph
 python main.py process data/papers
 ```
 
+### Faster extraction (Phase 1)
+
+| Mode / option | What proposes entities | Relations & findings | Speed |
+|---|---|---|---|
+| `--mode rule` | lexicon + regex | regex rules | seconds, no findings beyond rules |
+| `--mode gliner` | lexicon + GLiNER | regex rules | ~1 min, no LLM needed |
+| `--mode hybrid --entities gliner` | lexicon + GLiNER | rules + LLM | recommended |
+| `--mode hybrid --entities llm` | lexicon + LLM prompt | rules + LLM | slowest (original) |
+
+GLiNER is optional: `pip install -r requirements-optional.txt`. The model (~0.5 GB) downloads once from Hugging Face.
+With `extraction.entity_backend: auto` it is used automatically once it is installed.
+
+To use a free cloud LLM (Groq, Cerebras, Gemini, OpenRouter) instead of Ollama, set `LLM_PROVIDER`, `LLM_MODEL` and `LLM_API_KEY` in `.env` (see `.env.example`).
+Ollama stays the default. Only send published papers to a cloud service.
+
 ## 5. Explore
 
 ```bash
@@ -158,7 +173,7 @@ The app has these pages:
 python -m pytest
 ```
 
-63 tests cover:
+88 tests cover:
 
 - units and normalisation
 - sections and sentences
@@ -173,7 +188,9 @@ python -m pytest
 - assistant citation checking
 - gap wording, evaluation and GROBID TEI parsing
 - the Ollama HTTP client and hybrid mode (fake Ollama server)
-- LLM speed features: timing/token metering, the disk cache and rule-first gating
+- LLM speed features: timing/token metering, the disk cache, rule-first gating and per-stage token caps
+- the GLiNER entity backend (fake model) and the junk-entity filter
+- the OpenAI-compatible cloud client (fake server, rate-limit retry, key from env only)
 
 **No test needs a running Ollama or Neo4j.**
 

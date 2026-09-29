@@ -104,7 +104,7 @@ if any(p.is_synthetic for p in K.papers.values()):
 if page == "Upload & Extract":
     st.header("Upload a paper and extract knowledge")
     up = st.file_uploader("PDF (or .txt/.md)", type=["pdf", "txt", "md"])
-    mode = st.selectbox("Extraction mode", ["auto", "rule", "hybrid", "llm"],
+    mode = st.selectbox("Extraction mode", ["auto", "rule", "gliner", "hybrid", "llm"],
                         help="auto = hybrid if Ollama is reachable, otherwise rule-based")
     if up and st.button("Run extraction"):
         dest = S.path("papers_dir") / up.name
