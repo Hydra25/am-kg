@@ -20,14 +20,16 @@ from typing import Any, Optional
 from pydantic import BaseModel, Field, field_validator
 
 from ..llm.client import LLMProvider
+from ..llm.instrumented import llm_stage
 from ..llm.json_utils import call_llm_json
 from ..llm.prompts import PromptLibrary
 from ..normalization.entity_normalizer import EntityNormalizer
 from ..normalization.lexicon import Lexicon
-from ..normalization.text import match_key, normalize_chars, token_overlap
+from ..normalization.text import match_key, normalize_chars
 from ..normalization.units import parse_quantity_text
 from ..ontology.models import EntityMention, EntityRef, Finding, ParsedDocument, Relation, Sentence, stable_id
 from ..ontology.schema import EntityType, KnowledgeType, RelationType, canonicalize_relation
+from ..quality.junk import junk_reason
 from .rule_based import SentenceAnalysis, evidence_for
 
 log = logging.getLogger(__name__)
@@ -78,13 +80,13 @@ class LLMEntities(BaseModel):
 
 
 class LLMRelation(BaseModel):
+    """Compact relation schema. The model does NOT copy the evidence sentence:
+    the sentence id is enough (we already have its verbatim text), and copying it
+    was the largest share of output tokens (= most of the relation time)."""
     subject: str
-    subject_type: Optional[str] = None
     relation: str
     object: str
-    object_type: Optional[str] = None
     sentence: str
-    evidence: str = ""
     effect: Optional[str] = None
     negated: bool = False
     confidence: float = 0.5
@@ -132,6 +134,27 @@ class LLMExtractionOutput:
     dropped: list[dict[str, Any]] = field(default_factory=list)   # audit trail of rejected proposals
     calls: int = 0
     failures: int = 0
+    chunks: int = 0            # chunks considered for the LLM
+    chunks_skipped: int = 0    # chunks skipped by rule-first gating
+
+
+_FINDING_SECTIONS = ("abstract", "results", "discussion", "results_discussion", "conclusion")
+
+
+def chunk_is_relevant(sents: list[Sentence], analyses: dict[str, "SentenceAnalysis"]) -> bool:
+    """Rule-first gating: a chunk is worth an LLM call only if the (fast, free)
+    rule-based pass found at least one AM entity or a number with a unit in it.
+    Chunks without either are usually affiliations, copyright lines, funding
+    text or generic background, where the LLM mostly produces noise.
+    Abstract and conclusion chunks are always kept: they carry the paper's main
+    findings even when phrased without lexicon terms or numbers."""
+    for s in sents:
+        if s.section_type in ("abstract", "conclusion"):
+            return True
+        an = analyses.get(s.sentence_id)
+        if an is not None and (an.mentions or an.quantities):
+            return True
+    return False
 
 
 def _find_span(needle: str, hay: str) -> Optional[tuple[int, int]]:
@@ -182,31 +205,43 @@ class LLMExtractor:
         """Used by EntityNormalizer: LLM may only pick from the given candidates."""
         user = self.prompts.render("normalization", term=term, entity_type=entity_type,
                                    candidates="\n".join(f"- {c}" for c in candidates))
-        res, _ = call_llm_json(self.llm, self.prompts.raw("system_extraction"), user, NormChoice, 1)
+        with llm_stage(self.llm, "normalization"):
+            res, _ = call_llm_json(self.llm, self.prompts.raw("system_extraction"), user, NormChoice, 1)
         if res and res.choice in candidates and res.confidence >= 0.6:
             return res.choice
         return None
 
     # ------------------------------------------------------------------
     def extract(self, doc: ParsedDocument, analyses: dict[str, SentenceAnalysis], skip: list[str],
-                chunk_chars: int) -> LLMExtractionOutput:
+                chunk_chars: int, gate: bool = False, llm_entities: bool = True) -> LLMExtractionOutput:
+        """`skip`: section types never sent to the LLM. `gate`: skip chunks in which
+        the rule-based pass found nothing (see `chunk_is_relevant`). `llm_entities`:
+        False when another extractor (GLiNER) already proposed the entities."""
         out = LLMExtractionOutput()
         paper_id = doc.paper.paper_id
         system = self.prompts.raw("system_extraction")
         for section, sents in chunk_sentences(doc, skip, chunk_chars):
+            out.chunks += 1
+            if gate and not chunk_is_relevant(sents, analyses):
+                out.chunks_skipped += 1
+                log.debug("Skipping chunk in %r: no rule-based entities or quantities", section)
+                continue
             local = {f"S{i + 1}": s for i, s in enumerate(sents)}
             numbered = "\n".join(f"[{k}] {s.text}" for k, s in local.items())
-            # 1) entities
-            ents, clog = call_llm_json(self.llm, system,
-                                       self.prompts.render("entity_extraction", section=section, sentences=numbered),
-                                       LLMEntities, self.max_retries, wrap_key="entities")
-            out.calls += clog.attempts
-            if ents is None:
-                out.failures += 1
-                out.dropped.append({"stage": "entities", "section": section, "errors": clog.errors})
-            else:
-                for e in ents.entities:
-                    self._accept_entity(e, local, analyses, paper_id, out)
+            # 1) entities (skipped when GLiNER already did this job)
+            if llm_entities:
+                with llm_stage(self.llm, "entities"):
+                    ents, clog = call_llm_json(self.llm, system,
+                                               self.prompts.render("entity_extraction", section=section,
+                                                                   sentences=numbered),
+                                               LLMEntities, self.max_retries, wrap_key="entities")
+                out.calls += clog.attempts
+                if ents is None:
+                    out.failures += 1
+                    out.dropped.append({"stage": "entities", "section": section, "errors": clog.errors})
+                else:
+                    for e in ents.entities:
+                        self._accept_entity(e, local, analyses, paper_id, out)
             # 2) relations (entity list = rule + LLM mentions of these sentences)
             ent_lines = []
             for k, s in local.items():
@@ -214,10 +249,11 @@ class LLMExtractor:
                 if an:
                     ent_lines += [f"{m.text} ({m.entity_type}, {k})" for m in an.mentions]
             if ent_lines:
-                rels, clog = call_llm_json(self.llm, system,
-                                           self.prompts.render("relation_extraction", section=section,
-                                                               sentences=numbered, entities="; ".join(ent_lines)),
-                                           LLMRelations, self.max_retries, wrap_key="relations")
+                with llm_stage(self.llm, "relations"):
+                    rels, clog = call_llm_json(self.llm, system,
+                                               self.prompts.render("relation_extraction", section=section,
+                                                                   sentences=numbered, entities="; ".join(ent_lines)),
+                                               LLMRelations, self.max_retries, wrap_key="relations")
                 out.calls += clog.attempts
                 if rels is None:
                     out.failures += 1
@@ -228,12 +264,12 @@ class LLMExtractor:
                         if rel:
                             out.relations.append(rel)
             # 3) findings
-            if self.extract_findings and any(s.section_type in ("abstract", "results", "discussion",
-                                                                   "results_discussion", "conclusion")
-                                             for s in sents):
-                fnd, clog = call_llm_json(self.llm, system,
-                                          self.prompts.render("finding_extraction", section=section, sentences=numbered),
-                                          LLMFindings, self.max_retries, wrap_key="findings")
+            if self.extract_findings and any(s.section_type in _FINDING_SECTIONS for s in sents):
+                with llm_stage(self.llm, "findings"):
+                    fnd, clog = call_llm_json(self.llm, system,
+                                              self.prompts.render("finding_extraction", section=section,
+                                                                  sentences=numbered),
+                                              LLMFindings, self.max_retries, wrap_key="findings")
                 out.calls += clog.attempts
                 if fnd is None:
                     out.failures += 1
@@ -264,6 +300,11 @@ class LLMExtractor:
             return
         an = analyses.setdefault(s.sentence_id, SentenceAnalysis(sentence=s))
         surface = s.text[span[0]:span[1]]
+        # junk filter BEFORE normalisation (which may itself ask the LLM)
+        reason = None if self.lexicon.lookup_any_type(surface) else junk_reason(surface, etype, False)
+        if reason:
+            out.dropped.append({"stage": "entity", "reason": f"junk:{reason}", "item": e.model_dump()})
+            return
         norm = self.normalizer.normalize(surface, etype)
         quantity = None
         if e.value:
@@ -320,12 +361,11 @@ class LLMExtractor:
             return None
         ev = evidence_for(s, paper_id)
         rel_name = (r.relation or "").strip().upper().replace(" ", "_")
-        overlap = token_overlap(r.evidence, s.text) if r.evidence else 0.5
+        # Grounding: both endpoints were found in the cited sentence (checked above
+        # and below), and the evidence stored with the claim is that sentence verbatim.
         llm_conf = min(max(r.confidence, 0.0), 0.95)
-        attrs: dict[str, Any] = {"llm_evidence_quote": r.evidence[:500], "evidence_overlap": round(overlap, 2)}
+        attrs: dict[str, Any] = {"llm_sentence": r.sentence}
         qc: list[str] = []
-        if overlap < 0.6:
-            qc.append("llm_evidence_quote_not_in_sentence")
 
         if rel_name == "HAS_VALUE":
             vspan = _find_span(r.object, s.text)
@@ -363,7 +403,7 @@ class LLMExtractor:
                           "claim_origin": "background" if s.section_type == "introduction" else "this_study"})
         subj_ref = EntityRef(id=subj.canonical_id or "", name=subj.canonical_name or subj.text, type=subj.entity_type,
                              surface=subj.text, normalization_confidence=subj.normalization_confidence)
-        conf = 0.5 * llm_conf + 0.4 * min(overlap, 1.0) + 0.05
+        conf = 0.5 * llm_conf + 0.45
         if s.section_type == "introduction":
             conf -= 0.15
         cid = stable_id("c", paper_id, subj_ref.id, canon, obj_ref.id, s.sentence_id)

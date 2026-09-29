@@ -19,11 +19,14 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 from .config import PIPELINE_VERSION, Settings, get_settings
+from .entity_extraction.gliner_extractor import GlinerEntityExtractor
 from .entity_extraction.llm_extractor import LLMExtractor
 from .entity_extraction.rule_based import RuleEntityExtractor, SentenceAnalysis
 from .evidence.verify import EvidenceIndex
 from .ingestion.loader import discover_inputs, parse_document, save_parsed
-from .llm.client import LLMProvider, OllamaClient
+from .llm.client import LLMError, LLMProvider
+from .llm.instrumented import InstrumentedLLM
+from .llm.openai_compat import make_llm_client
 from .llm.prompts import PromptLibrary
 from .normalization.entity_normalizer import EntityNormalizer, NormalizationOverrides, find_abbreviations
 from .normalization.lexicon import Lexicon
@@ -44,7 +47,11 @@ from .relation_extraction.findings import rule_findings
 from .relation_extraction.rule_based import RuleRelationExtractor
 
 log = logging.getLogger(__name__)
-VALID_MODES = {"rule", "llm", "hybrid", "auto"}
+# rule   = lexicon + regex only (fast, deterministic)
+# gliner = rule + GLiNER entities, no LLM (fast baseline, no findings/LLM relations)
+# hybrid = rule + entities (GLiNER or LLM) + LLM relations + LLM findings
+# llm    = LLM only (for comparing extractors)
+VALID_MODES = {"rule", "gliner", "llm", "hybrid", "auto"}
 
 
 def _merge_key(r: Relation) -> tuple:
@@ -101,7 +108,7 @@ def consolidate_context_claims(rels: list[Relation]) -> list[Relation]:
 
 class ExtractionPipeline:
     def __init__(self, settings: Optional[Settings] = None, llm: Optional[LLMProvider] = None,
-                 mode: Optional[str] = None) -> None:
+                 mode: Optional[str] = None, gliner: Optional[GlinerEntityExtractor] = None) -> None:
         self.settings = settings or get_settings()
         s = self.settings
         self.lexicon = Lexicon.load(s.path("lexicon_file"))
@@ -115,20 +122,66 @@ class ExtractionPipeline:
             raise ValueError(f"extraction mode must be one of {VALID_MODES}")
         self.llm: Optional[LLMProvider] = llm
         if requested in ("auto", "llm", "hybrid") and self.llm is None:
-            client = OllamaClient.from_settings(s)
-            if client.is_available():
+            try:
+                client = make_llm_client(s)
+                available = client.is_available()
+            except LLMError as exc:          # e.g. cloud provider selected but no API key in .env
+                if requested != "auto":
+                    raise RuntimeError(str(exc)) from exc
+                log.warning("%s -> falling back to rule mode", exc)
+                client, available = None, False
+            if available:
                 self.llm = client
             elif requested != "auto":
-                raise RuntimeError(f"Ollama model '{s.llm.model}' not reachable at {s.llm.base_url}. "
-                                   f"Start Ollama and run: ollama pull {s.llm.model} (or use --mode rule)")
+                if s.llm.provider == "ollama":
+                    raise RuntimeError(f"Ollama model '{s.llm.model}' not reachable at {s.llm.base_url}. "
+                                       f"Start Ollama and run: ollama pull {s.llm.model} (or use --mode rule)")
+                raise RuntimeError(f"LLM provider '{s.llm.provider}' not reachable (check the API key, "
+                                   f"llm.model and your internet connection)")
         self.mode = ("hybrid" if self.llm else "rule") if requested == "auto" else requested
+        if self.llm is not None and not isinstance(self.llm, InstrumentedLLM):
+            # measure every call (time, tokens) and reuse answers for identical prompts
+            self.llm = InstrumentedLLM(self.llm, s.path("cache_dir") if s.llm.cache else None,
+                                       stage_max_tokens=s.llm.num_predict_by_stage)
         self.llm_extractor = None
         if self.llm and self.mode in ("llm", "hybrid"):
             self.llm_extractor = LLMExtractor(self.llm, self.lexicon, self.normalizer, self.prompts,
                                               s.llm.max_retries, s.extraction.llm_findings)
             if s.extraction.llm_normalization:
                 self.normalizer.llm_chooser = self.llm_extractor.choose_canonical
-        log.info("Extraction mode: %s%s", self.mode, f" (model {self.llm.model})" if self.llm else "")
+        self.gliner = gliner
+        self.entity_backend = self._resolve_entity_backend()
+        log.info("Extraction mode: %s%s | entities: %s", self.mode,
+                 f" (model {self.llm.model})" if self.llm else "", self.entity_backend)
+
+    def _resolve_entity_backend(self) -> str:
+        """Decide who proposes entities beyond the lexicon: gliner | llm | none."""
+        if self.mode == "rule":
+            return "none"
+        wanted = self.settings.extraction.entity_backend.lower()
+        if self.mode == "gliner":
+            wanted = "gliner"
+        elif self.mode == "llm":      # pure-LLM comparison mode: the LLM does everything
+            wanted = "llm"
+        if wanted not in {"auto", "gliner", "llm", "none"}:
+            raise ValueError("extraction.entity_backend must be auto | gliner | llm | none")
+        if wanted in ("auto", "gliner") and self.gliner is None:
+            g = self.settings.gliner
+            try:
+                self.gliner = GlinerEntityExtractor.load(
+                    g.model, self.normalizer, self.rule_entities, g.threshold, g.labels or None, g.device, g.batch_size,
+                    set(g.skip_sections))
+            except Exception as exc:   # not installed, no internet for the first download, ...
+                if wanted == "gliner":
+                    raise RuntimeError(f"GLiNER is not available ({exc}). Install it with: pip install gliner "
+                                       f"(the model downloads on first use), or set extraction.entity_backend: llm"
+                                       ) from exc
+                log.warning("GLiNER not available (%s); using the LLM entity prompt instead", exc)
+        if wanted in ("auto", "gliner") and self.gliner is not None:
+            return "gliner"
+        if wanted in ("auto", "llm") and self.llm_extractor is not None:
+            return "llm"
+        return "none"
 
     # ------------------------------------------------------------------
     def process_file(self, path: Path, save: bool = True) -> ExtractionResult:
@@ -160,6 +213,10 @@ class ExtractionPipeline:
     # ------------------------------------------------------------------
     def extract(self, doc: ParsedDocument) -> ExtractionResult:
         s = self.settings
+        if isinstance(self.llm, InstrumentedLLM):
+            # per-paper accounting; reset FIRST so LLM normalisation calls made while
+            # GLiNER/rule entities are normalised are counted too
+            self.llm.reset_stats()
         pid = doc.paper.paper_id
         skip = set(s.extraction.skip_sections)
         full_text = " ".join(x.text for x in doc.sentences if x.section_type not in skip)
@@ -173,15 +230,27 @@ class ExtractionPipeline:
                 continue
             analyses[sent.sentence_id] = self.rule_entities.analyze(sent, pid, abbreviations)
 
+        # 1b) GLiNER entities (fast local NER; replaces the LLM entity prompt)
+        gliner_seconds, gliner_mentions = 0.0, 0
+        gl_dropped: list[dict] = []
+        if self.entity_backend == "gliner" and self.gliner is not None:
+            g = self.gliner.extract(doc, analyses, skip | set(s.extraction.llm_skip_sections))
+            gliner_seconds, gl_dropped = g.seconds, g.dropped
+            gliner_mentions = sum(1 for m in g.mentions if m.method == "gliner")
+
         # 2) LLM proposals (verified against the text)
         llm_rel: list[Relation] = []
         llm_findings: list[Finding] = []
         dropped: list[dict] = []
-        calls = failures = 0
+        calls = failures = chunks = chunks_skipped = 0
         if self.llm_extractor is not None:
-            out = self.llm_extractor.extract(doc, analyses, sorted(skip), s.extraction.chunk_chars)
+            llm_skip = sorted(skip | set(s.extraction.llm_skip_sections))
+            out = self.llm_extractor.extract(doc, analyses, llm_skip, s.extraction.chunk_chars,
+                                             gate=s.extraction.llm_gate,
+                                             llm_entities=self.entity_backend == "llm")
             llm_rel, llm_findings, dropped = out.relations, out.findings, out.dropped
             calls, failures = out.calls, out.failures
+            chunks, chunks_skipped = out.chunks, out.chunks_skipped
             if failures:
                 warnings.append(f"{failures} LLM chunk(s) returned unusable JSON after retries (see logs)")
 
@@ -245,16 +314,28 @@ class ExtractionPipeline:
             accepted=sum(r.status == ClaimStatus.ACCEPTED for r in relations),
             review=sum(r.status == ClaimStatus.REVIEW for r in relations),
             rejected=sum(r.status == ClaimStatus.REJECTED for r in relations),
-            num_findings=len(findings), llm_calls=calls, llm_failures=failures)
+            num_findings=len(findings), llm_calls=calls, llm_failures=failures,
+            llm_chunks=chunks, llm_chunks_skipped=chunks_skipped,
+            gliner_seconds=gliner_seconds, gliner_mentions=gliner_mentions)
+        if isinstance(self.llm, InstrumentedLLM):
+            usage = self.llm.summary()   # includes LLM normalization calls made above
+            stats.llm_seconds = usage["seconds"]
+            stats.llm_cache_hits = usage["cache_hits"]
+            stats.llm_prompt_tokens = usage["prompt_tokens"]
+            stats.llm_output_tokens = usage["output_tokens"]
+            stats.llm_by_stage = usage["by_stage"]
         prov = Provenance(
             pipeline_version=PIPELINE_VERSION, extraction_mode=self.mode,
-            llm_model=self.llm.model if self.llm and self.mode != "rule" else None,
-            prompt_hashes=self.prompts.hashes() if self.mode != "rule" else {},
+            llm_model=self.llm.model if self.llm and self.mode not in ("rule", "gliner") else None,
+            entity_backend=self.entity_backend,
+            gliner_model=self.gliner.model_name if self.entity_backend == "gliner" and self.gliner else None,
+            prompt_hashes=self.prompts.hashes() if self.mode not in ("rule", "gliner") else {},
             lexicon_hash=self.lexicon.file_hash,
             thresholds={"accept": s.quality.accept_threshold, "review": s.quality.review_threshold})
         result = ExtractionResult(paper=doc.paper, entities=mentions, canonical_entities=canon,
                                   relations=relations, findings=sorted(findings.values(), key=lambda f: f.finding_id),
                                   stats=stats, provenance=prov, warnings=warnings)
+        dropped = gl_dropped + dropped
         if dropped:
             dump = s.path("extracted_dir") / "llm_audit"
             dump.mkdir(exist_ok=True)

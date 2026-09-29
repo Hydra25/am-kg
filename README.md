@@ -92,12 +92,33 @@ python main.py extract data/papers --mode auto     # auto = hybrid if Ollama is 
 python main.py extract data/papers --mode rule     # fast, deterministic
 python main.py extract data/papers --mode hybrid   # rule + Qwen (slower; ~3 LLM calls per chunk)
 
+# Every LLM run prints where the time went, e.g.
+#   LLM time 812.4s | chunks 27/33 sent (6 skipped by gating) | cache hits 0 | tokens in/out 61234/18873
+#     - entities      calls=27  cached=0   time=  402.1s  out_tokens=9921
+#     - relations     calls=26  ...
+# The same numbers are stored in data/extracted/<paper_id>.json under "stats".
+
 # (d) build the graph (Neo4j if configured, else data/graph/graph.json)
 python main.py build-graph
 
 # or extract + build in one step
 python main.py process data/papers
 ```
+
+### Faster extraction (Phase 1)
+
+| Mode / option | What proposes entities | Relations & findings | Speed |
+|---|---|---|---|
+| `--mode rule` | lexicon + regex | regex rules | seconds, no findings beyond rules |
+| `--mode gliner` | lexicon + GLiNER | regex rules | ~1 min, no LLM needed |
+| `--mode hybrid --entities gliner` | lexicon + GLiNER | rules + LLM | recommended |
+| `--mode hybrid --entities llm` | lexicon + LLM prompt | rules + LLM | slowest (original) |
+
+GLiNER is optional: `pip install -r requirements-optional.txt`. The model (~0.5 GB) downloads once from Hugging Face.
+With `extraction.entity_backend: auto` it is used automatically once it is installed.
+
+To use a free cloud LLM (Groq, Cerebras, Gemini, OpenRouter) instead of Ollama, set `LLM_PROVIDER`, `LLM_MODEL` and `LLM_API_KEY` in `.env` (see `.env.example`).
+Ollama stays the default. Only send published papers to a cloud service.
 
 ## 5. Explore
 
@@ -149,10 +170,10 @@ The app has these pages:
 ## 7. Tests
 
 ```bash
-pytest -q
+python -m pytest
 ```
 
-56 tests cover:
+94 tests cover:
 
 - units and normalisation
 - sections and sentences
@@ -167,6 +188,9 @@ pytest -q
 - assistant citation checking
 - gap wording, evaluation and GROBID TEI parsing
 - the Ollama HTTP client and hybrid mode (fake Ollama server)
+- LLM speed features: timing/token metering, the disk cache, rule-first gating and per-stage token caps
+- the GLiNER entity backend (fake model) and the junk-entity filter
+- the OpenAI-compatible cloud client (fake server, rate-limit retry, key from env only)
 
 **No test needs a running Ollama or Neo4j.**
 
@@ -188,6 +212,10 @@ tests/
   - `quality.accept_threshold`: 0.85 → accepted
   - `quality.review_threshold`: 0.60 → review; anything lower is rejected
   - `extraction.mode`, `extraction.chunk_chars`
+  - `extraction.llm_skip_sections`: sections parsed but never sent to the LLM (front matter, title)
+  - `extraction.llm_gate`: send a chunk to the LLM only if the rule-based pass found an AM entity or a number with a unit in it (abstract and conclusion are always sent)
+  - `llm.cache`: reuse answers for identical prompts from `data/cache/llm/`. A re-run of an unchanged paper makes no model calls. Disable with `LLM_CACHE=false`.
+  - `llm.num_predict` (max output tokens) and `llm.keep_alive` (how long Ollama keeps the model loaded)
   - `llm.num_ctx`: 8192. Ollama's default of 2048 silently truncates prompts.
   - `graph.insert_review_items`
   - `retrieval.vector_backend`

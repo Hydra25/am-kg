@@ -4,6 +4,7 @@ Examples
   python main.py check                          # Ollama / Neo4j / GROBID status
   python main.py make-demo                      # render DEMO/SYNTHETIC PDFs into data/papers
   python main.py extract data/papers --mode auto
+  python main.py extract data/papers --mode hybrid --entities gliner
   python main.py build-graph                    # Neo4j if configured, else local store
   python main.py query studies_linking --param a="laser power" --param b=porosity
   python main.py why <claim_id>
@@ -36,6 +37,14 @@ def cmd_check(args: argparse.Namespace) -> int:
     from src.llm.client import OllamaClient
     from src.pdf_parser.grobid_parser import grobid_available
     s = get_settings()
+    if s.llm.provider != "ollama":
+        from src.llm.openai_compat import make_llm_client
+        try:
+            c = make_llm_client(s)
+            print(f"LLM provider '{s.llm.provider}' ({c.base_url}), model '{s.llm.model}': "
+                  f"{'reachable' if c.is_available() else 'NOT reachable (check key / model / internet)'}")
+        except Exception as exc:
+            print(f"LLM provider '{s.llm.provider}': {exc}")
     client = OllamaClient.from_settings(s)
     try:
         models = client.list_models()
@@ -46,6 +55,12 @@ def cmd_check(args: argparse.Namespace) -> int:
     ok, why = neo4j_available(s)
     print(f"Neo4j: {'connected' if ok else 'not used/unreachable'} ({why})")
     print(f"GROBID: {'available' if grobid_available(s.grobid_url) else 'not configured/unreachable (PyMuPDF will be used)'}")
+    try:
+        import gliner  # noqa: F401
+        gl = f"installed (model {s.gliner.model})"
+    except ImportError:
+        gl = "not installed (pip install gliner) -> LLM entity prompt is used"
+    print(f"GLiNER: {gl}; entity_backend setting: {s.extraction.entity_backend}")
     print(f"Extraction mode setting: {s.extraction.mode}; thresholds accept>={s.quality.accept_threshold}, review>={s.quality.review_threshold}")
     return 0
 
@@ -76,14 +91,27 @@ def cmd_parse(args: argparse.Namespace) -> int:
 
 def cmd_extract(args: argparse.Namespace) -> int:
     from src.pipeline import ExtractionPipeline
-    pipe = ExtractionPipeline(mode=args.mode)
+    s = get_settings()
+    if getattr(args, "entities", None):
+        s.extraction.entity_backend = args.entities
+    pipe = ExtractionPipeline(s, mode=args.mode)
     results = pipe.process_many(Path(args.path))
     for r in results:
         st = r.stats
         print(f"{r.paper.source_file}: {r.paper.paper_id} mode={r.provenance.extraction_mode if r.provenance else '?'} "
               f"mentions={st.num_mentions} relations={st.num_relations} (accepted={st.accepted}, review={st.review}, "
               f"rejected={st.rejected}) findings={st.num_findings} llm_calls={st.llm_calls} time={st.seconds}s"
+              f" entities_by={r.provenance.entity_backend if r.provenance else '?'}"
               + ("  [DEMO/SYNTHETIC]" if r.paper.is_synthetic else ""))
+        if st.gliner_seconds:
+            print(f"   GLiNER {st.gliner_seconds}s | {st.gliner_mentions} new entity mentions")
+        if st.llm_by_stage:
+            print(f"   LLM time {st.llm_seconds}s | chunks {st.llm_chunks - st.llm_chunks_skipped}/{st.llm_chunks} sent "
+                  f"({st.llm_chunks_skipped} skipped by gating) | cache hits {st.llm_cache_hits} | "
+                  f"tokens in/out {st.llm_prompt_tokens}/{st.llm_output_tokens}")
+            for stage, v in st.llm_by_stage.items():
+                print(f"     - {stage:<13} calls={v['calls']:<3} cached={v['cache_hits']:<3} "
+                      f"time={v['seconds']:>7}s  out_tokens={v['output_tokens']}")
         for w in r.warnings:
             print("   WARNING:", w)
     print(f"Extracted JSON written to {get_settings().path('extracted_dir')}")
@@ -285,7 +313,9 @@ def build_parser() -> argparse.ArgumentParser:
     for name, fn in (("extract", cmd_extract), ("process", cmd_process)):
         sp = sub.add_parser(name)
         sp.add_argument("path")
-        sp.add_argument("--mode", choices=["auto", "rule", "llm", "hybrid"], default=None)
+        sp.add_argument("--mode", choices=["auto", "rule", "gliner", "llm", "hybrid"], default=None)
+        sp.add_argument("--entities", choices=["auto", "gliner", "llm", "none"], default=None,
+                        help="who proposes non-lexicon entities (default: settings.yaml extraction.entity_backend)")
         sp.add_argument("--backend", choices=["auto", "neo4j", "local"], default=None)
         sp.set_defaults(fn=fn)
     sp = sub.add_parser("build-graph")

@@ -2,3 +2,6 @@
 chromadb>=0.5
 # Optional: run the example notebook
 jupyter
+# Optional: fast local entity extraction (extraction.entity_backend: gliner / auto).
+# Pulls in PyTorch (~0.5-1 GB); the GLiNER model (~0.5 GB) downloads on first use.
+gliner>=0.2.13
