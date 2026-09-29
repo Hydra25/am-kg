@@ -28,6 +28,8 @@ data/review/
 data/eval/
 data/exports/
 data/cache/
+data/benchmark/
+data/labelstudio/
 
 # --- Papers: commit only the synthetic DEMO PDFs, never real publisher PDFs ---
 data/papers/*

@@ -120,6 +120,16 @@ With `extraction.entity_backend: auto` it is used automatically once it is insta
 To use a free cloud LLM (Groq, Cerebras, Gemini, OpenRouter) instead of Ollama, set `LLM_PROVIDER`, `LLM_MODEL` and `LLM_API_KEY` in `.env` (see `.env.example`).
 Ollama stays the default. Only send published papers to a cloud service.
 
+### Benchmark (Phase 2)
+
+Build a gold standard with Label Studio and compare the extraction modes. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
+
+```bash
+python main.py annotate-export data/papers/lpbf      # tasks + labeling config -> data/labelstudio/
+python main.py annotate-import export.json           # Label Studio export -> data/annotations/
+python main.py benchmark data/papers/lpbf            # -> data/benchmark/results.md
+```
+
 ## 5. Explore
 
 ```bash
@@ -173,7 +183,7 @@ The app has these pages:
 python -m pytest
 ```
 
-94 tests cover:
+99 tests cover:
 
 - units and normalisation
 - sections and sentences
@@ -191,6 +201,7 @@ python -m pytest
 - LLM speed features: timing/token metering, the disk cache, rule-first gating and per-stage token caps
 - the GLiNER entity backend (fake model) and the junk-entity filter
 - the OpenAI-compatible cloud client (fake server, rate-limit retry, key from env only)
+- the Label Studio round trip (export with pre-annotations, import to gold) and the mode benchmark
 
 **No test needs a running Ollama or Neo4j.**
 

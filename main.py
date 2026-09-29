@@ -5,6 +5,9 @@ Examples
   python main.py make-demo                      # render DEMO/SYNTHETIC PDFs into data/papers
   python main.py extract data/papers --mode auto
   python main.py extract data/papers --mode hybrid --entities gliner
+  python main.py annotate-export data/papers        # Label Studio tasks for the gold benchmark
+  python main.py annotate-import export.json        # Label Studio export -> data/annotations
+  python main.py benchmark data/papers              # compare modes on the gold papers
   python main.py build-graph                    # Neo4j if configured, else local store
   python main.py query studies_linking --param a="laser power" --param b=porosity
   python main.py why <claim_id>
@@ -276,6 +279,71 @@ def cmd_gaps(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_annotate_export(args: argparse.Namespace) -> int:
+    """Write Label Studio tasks (+ labeling config) for the given papers."""
+    from src.evaluation.labelstudio import build_tasks, labeling_config
+    from src.ingestion.loader import discover_inputs, load_parsed, paper_id_for, parse_document, save_parsed
+    from src.pipeline import load_result
+    s = get_settings()
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "labeling_config.xml").write_text(labeling_config(), encoding="utf-8")
+    tasks, missing = [], []
+    for f in discover_inputs(Path(args.path)):
+        pid = paper_id_for(f)
+        pp = s.path("processed_dir") / f"{pid}.json"
+        doc = load_parsed(pp) if pp.exists() else parse_document(f, s)
+        if not pp.exists():
+            save_parsed(doc, s.path("processed_dir"))
+        result = None
+        if not args.no_predictions:
+            ep = s.path("extracted_dir") / f"{pid}.json"
+            if ep.exists():
+                result = load_result(ep)
+            else:
+                missing.append(f.name)
+        new = build_tasks(doc, result, max_sentences=args.chunk_sentences)
+        tasks += new
+        print(f"{f.name}: {len(new)} tasks{' (with pre-annotations)' if result else ''}"
+              + ("  [DEMO/SYNTHETIC]" if doc.paper.is_synthetic else ""))
+    (out_dir / "tasks.json").write_text(json.dumps(tasks, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"\n{len(tasks)} tasks -> {out_dir / 'tasks.json'}\nLabeling config -> {out_dir / 'labeling_config.xml'}")
+    if missing:
+        print("No extraction yet (tasks without pre-annotations) for: " + ", ".join(missing)
+              + "\n  -> run: python main.py extract <pdf> --mode hybrid --entities gliner")
+    return 0
+
+
+def cmd_annotate_import(args: argparse.Namespace) -> int:
+    """Convert a Label Studio JSON export into gold files in data/annotations/."""
+    from src.evaluation.labelstudio import import_annotations, write_gold
+    from src.normalization.entity_normalizer import EntityNormalizer
+    from src.normalization.lexicon import Lexicon
+    s = get_settings()
+    export = json.loads(Path(args.export).read_text(encoding="utf-8"))
+    norm = EntityNormalizer(Lexicon.load(s.path("lexicon_file")))
+    papers = import_annotations(export, norm, annotator=args.annotator,
+                                annotation_mode="from_scratch" if args.from_scratch else "model_assisted")
+    written = write_gold(papers, Path(args.out or s.path("annotations_dir")), overwrite=args.overwrite)
+    for stem, g in papers.items():
+        print(f"{stem}: entities={len(g['entities'])} relations={len(g['relations'])} values={len(g['values'])} "
+              f"normalization_pairs={len(g['normalization'])}")
+    print(f"Wrote {len(written)} gold file(s).")
+    return 0
+
+
+def cmd_benchmark(args: argparse.Namespace) -> int:
+    from src.evaluation.benchmark import run_benchmark
+    s = get_settings()
+    statuses = ("accepted",) if args.accepted_only else ("accepted", "review")
+    summary = run_benchmark(s, Path(args.path), [m.strip() for m in args.modes.split(",") if m.strip()],
+                            Path(args.gold or s.path("annotations_dir")), s.root / "data" / "benchmark", statuses)
+    from src.evaluation.benchmark import to_markdown
+    print(to_markdown(summary))
+    print(f"\nSaved: {s.root / 'data' / 'benchmark'}/results.(md|csv|json)")
+    return 0
+
+
 def cmd_export(args: argparse.Namespace) -> int:
     from src.knowledge_graph.kb import KnowledgeBase
     from src.reporting.tables import build_tables, write_csvs, write_workbook
@@ -346,6 +414,25 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--accepted-only", action="store_true")
     sp.add_argument("--include-derived", action="store_true")
     sp.set_defaults(fn=cmd_evaluate)
+    sp = sub.add_parser("annotate-export", help="Label Studio tasks (+ pre-annotations) for building gold data")
+    sp.add_argument("path")
+    sp.add_argument("--out", default="data/labelstudio")
+    sp.add_argument("--no-predictions", action="store_true", help="empty tasks: annotate from scratch")
+    sp.add_argument("--chunk-sentences", type=int, default=12)
+    sp.set_defaults(fn=cmd_annotate_export)
+    sp = sub.add_parser("annotate-import", help="Label Studio JSON export -> data/annotations/*.json")
+    sp.add_argument("export")
+    sp.add_argument("--out", default=None)
+    sp.add_argument("--annotator", default="")
+    sp.add_argument("--from-scratch", action="store_true", help="tasks were annotated without pre-annotations")
+    sp.add_argument("--overwrite", action="store_true")
+    sp.set_defaults(fn=cmd_annotate_import)
+    sp = sub.add_parser("benchmark", help="compare extraction modes on the gold papers")
+    sp.add_argument("path")
+    sp.add_argument("--modes", default="rule,gliner,hybrid_gliner,hybrid_llm")
+    sp.add_argument("--gold", default=None)
+    sp.add_argument("--accepted-only", action="store_true")
+    sp.set_defaults(fn=cmd_benchmark)
     sp = sub.add_parser("gaps")
     sp.add_argument("--exclude-synthetic", action="store_true")
     sp.add_argument("--limit", type=int, default=25)

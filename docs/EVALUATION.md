@@ -4,6 +4,8 @@
 
 ## Annotating real papers (do this for your thesis)
 
+The recommended route is Label Studio with pre-annotations and the `benchmark` command: see [BENCHMARK.md](BENCHMARK.md). The manual JSON format below is what `annotate-import` produces.
+
 1. Pick 5–10 real AM papers that you are allowed to use. Put the PDFs in `data/papers/` and run extraction.
 2. For each paper, create `data/annotations/<pdf-file-stem>.json` in the format of `demo_01_lpbf_ti64.json`:
    - `entities`: the document-level set of `{type, canonical}`
