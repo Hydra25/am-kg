@@ -1,0 +1,4 @@
+# Optional: dense vector retrieval (VECTOR_BACKEND=chroma) with Ollama embeddings
+chromadb>=0.5
+# Optional: run the example notebook
+jupyter

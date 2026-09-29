@@ -1,0 +1,29 @@
+Extract Additive Manufacturing entities from the numbered sentences below.
+
+Allowed entity types (use exactly these strings):
+- Material: alloys/polymers (e.g. Ti-6Al-4V, AlSi10Mg, Inconel 718, 316L, PLA)
+- Process: AM processes (e.g. LPBF, SLM, DED, WAAM, FDM, SLA, EBM)
+- Parameter: process/machine parameters (e.g. laser power, scanning speed, layer thickness, hatch spacing, energy density, wire feed rate)
+- Property: mechanical/thermal/surface/physical properties (e.g. tensile strength, yield strength, hardness, elongation, relative density, surface roughness)
+- Defect: e.g. porosity, lack of fusion, keyhole porosity, cracking, balling, delamination
+- Microstructure: e.g. grain size, columnar grains, alpha phase, martensite, dendritic structure
+- PostProcessing: e.g. heat treatment, HIP, annealing, machining
+- CharacterizationMethod: e.g. SEM, XRD, CT, EBSD, tensile testing, hardness testing
+- Geometry: e.g. tensile specimen, cube, lattice structure, thin wall
+- ExperimentalCondition: e.g. build orientation, atmosphere, substrate temperature, chamber temperature
+
+For Parameter/Property/Defect/Microstructure/ExperimentalCondition entities, put the numeric value WITH its unit
+exactly as written (e.g. "200 W", "30 μm", "950 ± 12 MPa") in "value" if the sentence states it for that entity, else null.
+
+Return JSON:
+{{"entities": [{{"text": "...", "type": "...", "sentence": "S1", "value": null, "confidence": 0.9}}]}}
+
+Example
+Sentences:
+[S1] Ti-6Al-4V specimens were fabricated by LPBF with a laser power of 200 W.
+Output:
+{{"entities": [{{"text": "Ti-6Al-4V", "type": "Material", "sentence": "S1", "value": null, "confidence": 0.95}}, {{"text": "LPBF", "type": "Process", "sentence": "S1", "value": null, "confidence": 0.95}}, {{"text": "laser power", "type": "Parameter", "sentence": "S1", "value": "200 W", "confidence": 0.95}}]}}
+
+Section: {section}
+Sentences:
+{sentences}

@@ -1,0 +1,1140 @@
+{
+  "paper": {
+    "paper_id": "paper_196cc5400c",
+    "title": "DEMO / SYNTHETIC: Effect of laser power and scanning speed on porosity and tensile properties of LPBF Ti-6Al-4V",
+    "authors": [
+      "Demo Author A",
+      "Demo Author B"
+    ],
+    "year": 2025,
+    "journal": "DEMO / SYNTHETIC dataset (not a real publication)",
+    "doi": "10.0000/demo.synthetic.001",
+    "source_file": "demo_01_lpbf_ti64.pdf",
+    "abstract": "DEMO / SYNTHETIC TEXT generated to test the AM-KG pipeline; the numbers are not real research results. Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm. The resulting tensile strength was 950 MPa. Increasing laser power reduced porosity, while a higher scanning speed increased lack of fusion. Hot isostatic pressing (HIP) improved the elongation of the specimens.",
+    "metadata_source": "heuristic",
+    "is_synthetic": true
+  },
+  "entities": [
+    {
+      "mention_id": "m_a188af6dc963",
+      "text": "Ti-6Al-4V",
+      "entity_type": "Material",
+      "canonical_id": "Material:Ti-6Al-4V",
+      "canonical_name": "Ti-6Al-4V",
+      "normalization_confidence": 1.0,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 0,
+      "char_end": 9,
+      "quantity": null,
+      "confidence": 1.0,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    },
+    {
+      "mention_id": "m_7e90562d8cc2",
+      "text": "laser powder bed fusion",
+      "entity_type": "Process",
+      "canonical_id": "Process:LPBF",
+      "canonical_name": "LPBF",
+      "normalization_confidence": 0.95,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 44,
+      "char_end": 67,
+      "quantity": null,
+      "confidence": 0.95,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    },
+    {
+      "mention_id": "m_95b9420b84fe",
+      "text": "LPBF",
+      "entity_type": "Process",
+      "canonical_id": "Process:LPBF",
+      "canonical_name": "LPBF",
+      "normalization_confidence": 1.0,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 69,
+      "char_end": 73,
+      "quantity": null,
+      "confidence": 1.0,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    },
+    {
+      "mention_id": "m_508de95ea5a8",
+      "text": "laser power",
+      "entity_type": "Parameter",
+      "canonical_id": "Parameter:laser power",
+      "canonical_name": "laser power",
+      "normalization_confidence": 1.0,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 82,
+      "char_end": 93,
+      "quantity": {
+        "raw": "200 W",
+        "value": 200.0,
+        "value_min": null,
+        "value_max": null,
+        "uncertainty": null,
+        "operator": null,
+        "unit": "W",
+        "normalized_value": 200.0,
+        "normalized_min": null,
+        "normalized_max": null,
+        "normalized_uncertainty": null,
+        "normalized_unit": "W",
+        "dimension": "power"
+      },
+      "confidence": 1.0,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    },
+    {
+      "mention_id": "m_986be8a6c63d",
+      "text": "scanning speed",
+      "entity_type": "Parameter",
+      "canonical_id": "Parameter:scanning speed",
+      "canonical_name": "scanning speed",
+      "normalization_confidence": 1.0,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 104,
+      "char_end": 118,
+      "quantity": {
+        "raw": "800 mm/s",
+        "value": 800.0,
+        "value_min": null,
+        "value_max": null,
+        "uncertainty": null,
+        "operator": null,
+        "unit": "mm/s",
+        "normalized_value": 800.0,
+        "normalized_min": null,
+        "normalized_max": null,
+        "normalized_uncertainty": null,
+        "normalized_unit": "mm/s",
+        "dimension": "velocity"
+      },
+      "confidence": 1.0,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    },
+    {
+      "mention_id": "m_be23f828f8a5",
+      "text": "layer thickness",
+      "entity_type": "Parameter",
+      "canonical_id": "Parameter:layer thickness",
+      "canonical_name": "layer thickness",
+      "normalization_confidence": 1.0,
+      "normalization_method": "lexicon",
+      "sentence_id": "paper_196cc5400c_s0001",
+      "char_start": 135,
+      "char_end": 150,
+      "quantity": {
+        "raw": "30 μm",
+        "value": 30.0,
+        "value_min": null,
+        "value_max": null,
+        "uncertainty": null,
+        "operator": null,
+        "unit": "μm",
+        "normalized_value": 30.0,
+        "normalized_min": null,
+        "normalized_max": null,
+        "normalized_uncertainty": null,
+        "normalized_unit": "μm",
+        "dimension": "length"
+      },
+      "confidence": 1.0,
+      "method": "rule",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      }
+    }
+  ],
+  "canonical_entities": {
+    "Material:Ti-6Al-4V": {
+      "id": "Material:Ti-6Al-4V",
+      "entity_type": "Material",
+      "canonical_name": "Ti-6Al-4V",
+      "display_name": null,
+      "aliases": [
+        "Ti6Al4V",
+        "Ti 6Al 4V",
+        "Ti64",
+        "Ti-64",
+        "TC4",
+        "Grade 5 titanium",
+        "Ti-6Al-4V ELI",
+        "Ti–6Al–4V"
+      ],
+      "family": "titanium alloy",
+      "attributes": {
+        "composition": "Ti-6Al-4V (wt.%)"
+      },
+      "normalization_confidence": 1.0,
+      "in_lexicon": true
+    },
+    "Process:LPBF": {
+      "id": "Process:LPBF",
+      "entity_type": "Process",
+      "canonical_name": "LPBF",
+      "display_name": "Laser Powder Bed Fusion",
+      "aliases": [
+        "laser powder bed fusion",
+        "laser powder-bed fusion",
+        "L-PBF",
+        "PBF-LB",
+        "PBF-LB/M",
+        "laser-based powder bed fusion",
+        "laser beam powder bed fusion",
+        "selective laser melting",
+        "SLM",
+        "direct metal laser sintering",
+        "DMLS",
+        "direct metal laser melting",
+        "Selective laser melting"
+      ],
+      "family": "Powder Bed Fusion",
+      "attributes": {},
+      "normalization_confidence": 1.0,
+      "in_lexicon": true
+    },
+    "Parameter:laser power": {
+      "id": "Parameter:laser power",
+      "entity_type": "Parameter",
+      "canonical_name": "laser power",
+      "display_name": null,
+      "aliases": [
+        "laser powers",
+        "beam power",
+        "power",
+        "Laser power"
+      ],
+      "family": null,
+      "attributes": {
+        "dimensions": [
+          "power"
+        ]
+      },
+      "normalization_confidence": 1.0,
+      "in_lexicon": true
+    },
+    "Parameter:scanning speed": {
+      "id": "Parameter:scanning speed",
+      "entity_type": "Parameter",
+      "canonical_name": "scanning speed",
+      "display_name": null,
+      "aliases": [
+        "scan speed",
+        "scanning velocity",
+        "scan velocity",
+        "laser scanning speed",
+        "laser scan speed",
+        "Scanning speed"
+      ],
+      "family": null,
+      "attributes": {
+        "dimensions": [
+          "velocity"
+        ]
+      },
+      "normalization_confidence": 1.0,
+      "in_lexicon": true
+    }
+  },
+  "relations": [
+    {
+      "claim_id": "c_4bc0dc985961",
+      "subject": {
+        "id": "Parameter:laser power",
+        "name": "laser power",
+        "type": "Parameter",
+        "surface": "laser power",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "HAS_VALUE",
+      "object": {
+        "id": "val_285eb78b6be9",
+        "name": "200 W",
+        "type": "ParameterValue",
+        "surface": "200 W",
+        "normalization_confidence": 1.0,
+        "quantity": {
+          "raw": "200 W",
+          "value": 200.0,
+          "value_min": null,
+          "value_max": null,
+          "uncertainty": null,
+          "operator": null,
+          "unit": "W",
+          "normalized_value": 200.0,
+          "normalized_min": null,
+          "normalized_max": null,
+          "normalized_uncertainty": null,
+          "normalized_unit": "W",
+          "dimension": "power"
+        }
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.93,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "value_context": {
+          "materials": [
+            "Ti-6Al-4V"
+          ],
+          "processes": [
+            "LPBF"
+          ],
+          "state": null
+        },
+        "confidence_raw": 0.93
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_9246e40ce723",
+      "subject": {
+        "id": "Parameter:scanning speed",
+        "name": "scanning speed",
+        "type": "Parameter",
+        "surface": "scanning speed",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "HAS_VALUE",
+      "object": {
+        "id": "val_409087912c81",
+        "name": "800 mm/s",
+        "type": "ParameterValue",
+        "surface": "800 mm/s",
+        "normalization_confidence": 1.0,
+        "quantity": {
+          "raw": "800 mm/s",
+          "value": 800.0,
+          "value_min": null,
+          "value_max": null,
+          "uncertainty": null,
+          "operator": null,
+          "unit": "mm/s",
+          "normalized_value": 800.0,
+          "normalized_min": null,
+          "normalized_max": null,
+          "normalized_uncertainty": null,
+          "normalized_unit": "mm/s",
+          "dimension": "velocity"
+        }
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.93,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "value_context": {
+          "materials": [
+            "Ti-6Al-4V"
+          ],
+          "processes": [
+            "LPBF"
+          ],
+          "state": null
+        },
+        "confidence_raw": 0.93
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_42a06215500d",
+      "subject": {
+        "id": "Parameter:layer thickness",
+        "name": "layer thickness",
+        "type": "Parameter",
+        "surface": "layer thickness",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "HAS_VALUE",
+      "object": {
+        "id": "val_94393bf93c53",
+        "name": "30 μm",
+        "type": "ParameterValue",
+        "surface": "30 μm",
+        "normalization_confidence": 1.0,
+        "quantity": {
+          "raw": "30 μm",
+          "value": 30.0,
+          "value_min": null,
+          "value_max": null,
+          "uncertainty": null,
+          "operator": null,
+          "unit": "μm",
+          "normalized_value": 30.0,
+          "normalized_min": null,
+          "normalized_max": null,
+          "normalized_uncertainty": null,
+          "normalized_unit": "μm",
+          "dimension": "length"
+        }
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.93,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "value_context": {
+          "materials": [
+            "Ti-6Al-4V"
+          ],
+          "processes": [
+            "LPBF"
+          ],
+          "state": null
+        },
+        "confidence_raw": 0.93
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_3f493c04cd19",
+      "subject": {
+        "id": "Process:LPBF",
+        "name": "LPBF",
+        "type": "Process",
+        "surface": "laser powder bed fusion",
+        "normalization_confidence": 0.95,
+        "quantity": null
+      },
+      "relation": "HAS_PARAMETER",
+      "object": {
+        "id": "Parameter:laser power",
+        "name": "laser power",
+        "type": "Parameter",
+        "surface": "laser power",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.882,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "context_resolution": "same_sentence",
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_39cb2e80fca5",
+      "subject": {
+        "id": "Process:LPBF",
+        "name": "LPBF",
+        "type": "Process",
+        "surface": "laser powder bed fusion",
+        "normalization_confidence": 0.95,
+        "quantity": null
+      },
+      "relation": "HAS_PARAMETER",
+      "object": {
+        "id": "Parameter:scanning speed",
+        "name": "scanning speed",
+        "type": "Parameter",
+        "surface": "scanning speed",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.882,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "context_resolution": "same_sentence",
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_00c951ed36a7",
+      "subject": {
+        "id": "Process:LPBF",
+        "name": "LPBF",
+        "type": "Process",
+        "surface": "laser powder bed fusion",
+        "normalization_confidence": 0.95,
+        "quantity": null
+      },
+      "relation": "HAS_PARAMETER",
+      "object": {
+        "id": "Parameter:layer thickness",
+        "name": "layer thickness",
+        "type": "Parameter",
+        "surface": "layer thickness",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.882,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "context_resolution": "same_sentence",
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_94560cf2b780",
+      "subject": {
+        "id": "Process:LPBF",
+        "name": "LPBF",
+        "type": "Process",
+        "surface": "laser powder bed fusion",
+        "normalization_confidence": 0.95,
+        "quantity": null
+      },
+      "relation": "PROCESSES",
+      "object": {
+        "id": "Material:Ti-6Al-4V",
+        "name": "Ti-6Al-4V",
+        "type": "Material",
+        "surface": "Ti-6Al-4V",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0001",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.902,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "trigger": "manufactured",
+        "confidence_raw": 0.92
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_6e8cf0c2f155",
+      "subject": {
+        "id": "Property:tensile strength",
+        "name": "tensile strength",
+        "type": "Property",
+        "surface": "tensile strength",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "HAS_VALUE",
+      "object": {
+        "id": "val_e5faf45f6c27",
+        "name": "950 MPa",
+        "type": "PropertyValue",
+        "surface": "950 MPa",
+        "normalization_confidence": 1.0,
+        "quantity": {
+          "raw": "950 MPa",
+          "value": 950.0,
+          "value_min": null,
+          "value_max": null,
+          "uncertainty": null,
+          "operator": null,
+          "unit": "MPa",
+          "normalized_value": 950.0,
+          "normalized_min": null,
+          "normalized_max": null,
+          "normalized_uncertainty": null,
+          "normalized_unit": "MPa",
+          "dimension": "stress"
+        }
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0002",
+        "text": "The resulting tensile strength was 950 MPa.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.93,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "value_context": {
+          "materials": [],
+          "processes": [],
+          "state": null
+        },
+        "confidence_raw": 0.93
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_a1b9aa0b7929",
+      "subject": {
+        "id": "Process:LPBF",
+        "name": "LPBF",
+        "type": "Process",
+        "surface": "laser powder bed fusion",
+        "normalization_confidence": 0.95,
+        "quantity": null
+      },
+      "relation": "PRODUCES",
+      "object": {
+        "id": "Property:tensile strength",
+        "name": "tensile strength",
+        "type": "Property",
+        "surface": "tensile strength",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0002",
+        "text": "Ti-6Al-4V specimens were manufactured using laser powder bed fusion (LPBF) with a laser power of 200 W, scanning speed of 800 mm/s and layer thickness of 30 μm. The resulting tensile strength was 950 MPa.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": [
+          "paper_196cc5400c_s0001"
+        ]
+      },
+      "confidence": 0.843,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "review",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "abstract",
+        "context_resolution": "previous_sentence",
+        "confidence_raw": 0.86
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_80d674ed2eac",
+      "subject": {
+        "id": "Parameter:laser power",
+        "name": "laser power",
+        "type": "Parameter",
+        "surface": "laser power",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "INFLUENCES",
+      "object": {
+        "id": "Defect:porosity",
+        "name": "porosity",
+        "type": "Defect",
+        "surface": "porosity",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0003",
+        "text": "Increasing laser power reduced porosity, while a higher scanning speed increased lack of fusion.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "trigger": "reduced",
+        "trigger_class": "decrease",
+        "claim_type": "finding",
+        "claim_origin": "abstract",
+        "subject_change": "increase",
+        "object_change": "decrease",
+        "trend": "negative",
+        "negated": false,
+        "hedged": false,
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_4252af0adfd5",
+      "subject": {
+        "id": "Parameter:scanning speed",
+        "name": "scanning speed",
+        "type": "Parameter",
+        "surface": "scanning speed",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "INFLUENCES",
+      "object": {
+        "id": "Defect:lack of fusion",
+        "name": "lack of fusion",
+        "type": "Defect",
+        "surface": "lack of fusion",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0003",
+        "text": "Increasing laser power reduced porosity, while a higher scanning speed increased lack of fusion.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "trigger": "increased",
+        "trigger_class": "increase",
+        "claim_type": "finding",
+        "claim_origin": "abstract",
+        "subject_change": "increase",
+        "object_change": "increase",
+        "trend": "positive",
+        "negated": false,
+        "hedged": false,
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_6419b45602d8",
+      "subject": {
+        "id": "PostProcessing:HIP",
+        "name": "HIP",
+        "type": "PostProcessing",
+        "surface": "HIP",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "IMPROVES",
+      "object": {
+        "id": "Property:elongation",
+        "name": "elongation",
+        "type": "Property",
+        "surface": "elongation",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "Abstract",
+        "section_type": "abstract",
+        "sentence_id": "paper_196cc5400c_s0004",
+        "text": "Hot isostatic pressing (HIP) improved the elongation of the specimens.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "trigger": "improved",
+        "trigger_class": "improve",
+        "claim_type": "finding",
+        "claim_origin": "abstract",
+        "object_change": "improve",
+        "trend": "unspecified",
+        "negated": false,
+        "hedged": false,
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_58ba9899ba66",
+      "subject": {
+        "id": "Parameter:laser power",
+        "name": "laser power",
+        "type": "Parameter",
+        "surface": "laser power",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "INFLUENCES",
+      "object": {
+        "id": "Defect:porosity",
+        "name": "porosity",
+        "type": "Defect",
+        "surface": "porosity",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "3. Results and discussion",
+        "section_type": "results_discussion",
+        "sentence_id": "paper_196cc5400c_s0015",
+        "text": "Increasing the laser power from 150 W to 250 W reduced the porosity from 1.1 % to 0.3 %.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "trigger": "reduced",
+        "trigger_class": "decrease",
+        "claim_type": "finding",
+        "claim_origin": "this_study",
+        "subject_change": "increase",
+        "object_change": "decrease",
+        "trend": "negative",
+        "negated": false,
+        "hedged": false,
+        "confidence_raw": 0.9
+      },
+      "reviewed": false,
+      "review_note": null
+    },
+    {
+      "claim_id": "c_6f18f73233db",
+      "subject": {
+        "id": "Parameter:laser power",
+        "name": "laser power",
+        "type": "Parameter",
+        "surface": "laser power",
+        "normalization_confidence": 1.0,
+        "quantity": null
+      },
+      "relation": "HAS_VALUE",
+      "object": {
+        "id": "val_7de53bb9079c",
+        "name": "150 W to 250 W",
+        "type": "ParameterValue",
+        "surface": "150 W to 250 W",
+        "normalization_confidence": 1.0,
+        "quantity": {
+          "raw": "150 W to 250 W",
+          "value": null,
+          "value_min": 150.0,
+          "value_max": 250.0,
+          "uncertainty": null,
+          "operator": "from_to",
+          "unit": "W",
+          "normalized_value": null,
+          "normalized_min": 150.0,
+          "normalized_max": 250.0,
+          "normalized_uncertainty": null,
+          "normalized_unit": "W",
+          "dimension": "power"
+        }
+      },
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "3. Results and discussion",
+        "section_type": "results_discussion",
+        "sentence_id": "paper_196cc5400c_s0015",
+        "text": "Increasing the laser power from 150 W to 250 W reduced the porosity from 1.1 % to 0.3 %.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "confidence": 0.93,
+      "method": "rule",
+      "knowledge_type": "EXTRACTED",
+      "status": "accepted",
+      "qc_reasons": [],
+      "attributes": {
+        "claim_origin": "this_study",
+        "value_context": {
+          "materials": [],
+          "processes": [],
+          "state": null
+        },
+        "confidence_raw": 0.93
+      },
+      "reviewed": false,
+      "review_note": null
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "f_01f9169ab045",
+      "text": "Keyhole porosity may be promoted by excessive laser power.",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "3. Results and discussion",
+        "section_type": "results_discussion",
+        "sentence_id": "paper_196cc5400c_s0023",
+        "text": "Keyhole porosity may be promoted by excessive laser power.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "finding_type": "trend",
+      "related_claim_ids": [
+        "c_6e5adb398e20"
+      ],
+      "confidence": 0.74,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "review"
+    },
+    {
+      "finding_id": "f_116eb8a503b1",
+      "text": "The build orientation did not significantly affect the tensile strength.",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "3. Results and discussion",
+        "section_type": "results_discussion",
+        "sentence_id": "paper_196cc5400c_s0022",
+        "text": "The build orientation did not significantly affect the tensile strength.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "finding_type": "null_result",
+      "related_claim_ids": [
+        "c_9dae287b3f77"
+      ],
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted"
+    },
+    {
+      "finding_id": "f_153cb6fc432f",
+      "text": "Increasing the laser power from 150 W to 250 W reduced the porosity from 1.1 % to 0.3 %.",
+      "evidence": {
+        "paper_id": "paper_196cc5400c",
+        "page": 1,
+        "section": "3. Results and discussion",
+        "section_type": "results_discussion",
+        "sentence_id": "paper_196cc5400c_s0015",
+        "text": "Increasing the laser power from 150 W to 250 W reduced the porosity from 1.1 % to 0.3 %.",
+        "source_type": "text",
+        "table_id": null,
+        "context_sentence_ids": []
+      },
+      "finding_type": "trend",
+      "related_claim_ids": [
+        "c_58ba9899ba66"
+      ],
+      "confidence": 0.9,
+      "method": "rule",
+      "knowledge_type": "EXPLICIT",
+      "status": "accepted"
+    }
+  ],
+  "stats": {
+    "num_sentences": 29,
+    "num_mentions": 79,
+    "num_relations": 59,
+    "accepted": 47,
+    "review": 12,
+    "rejected": 0,
+    "num_findings": 11,
+    "llm_calls": 0,
+    "llm_failures": 0,
+    "seconds": 0.14
+  },
+  "provenance": {
+    "pipeline_version": "0.1.0",
+    "extraction_mode": "rule",
+    "llm_model": null,
+    "prompt_hashes": {},
+    "lexicon_hash": "c3bcc1bd994b",
+    "thresholds": {
+      "accept": 0.85,
+      "review": 0.6
+    },
+    "created_at": "2026-09-27T15:46:55+00:00"
+  },
+  "warnings": [],
+  "_note": "Trimmed excerpt of data/extracted/<paper_id>.json for the DEMO / SYNTHETIC paper demo_01 (rule mode). Not real research data."
+}

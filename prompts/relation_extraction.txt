@@ -1,0 +1,38 @@
+Extract relations between the given AM entities, using ONLY the numbered sentences below.
+
+Allowed relations (subject type -> object type):
+- PROCESSES: Process -> Material            ("Ti-6Al-4V was fabricated by LPBF")
+- HAS_PARAMETER: Process -> Parameter       ("LPBF with a laser power of 200 W")
+- HAS_VALUE: Parameter/Property/Defect/Microstructure/ExperimentalCondition -> value text with unit ("200 W")
+- PRODUCES: Process -> Property or Microstructure
+- AFFECTS: Parameter/Microstructure/PostProcessing/Defect/ExperimentalCondition -> Property or Microstructure
+- INFLUENCES: Parameter/PostProcessing/Microstructure/ExperimentalCondition -> Defect
+- CAUSES: Process -> Defect, or Defect -> Defect
+- IMPROVES: PostProcessing -> Property
+- CHANGES: PostProcessing -> Microstructure
+- CHARACTERIZES: CharacterizationMethod -> Material/Microstructure/Defect/Property
+- HAS_CONDITION: Process -> ExperimentalCondition
+- FABRICATES: Process -> Geometry
+
+Rules:
+- A relation is allowed ONLY if one sentence states it. Do not add relations that merely sound plausible.
+- "evidence" must be an exact quote copied from that sentence.
+- "effect": "increase", "decrease", "improve", "deteriorate", "none" (explicitly no effect) or null.
+- "negated": true if the sentence says there is NO effect/relation.
+- Use subject/object text exactly as listed in the entity list.
+
+Return JSON:
+{{"relations": [{{"subject": "...", "subject_type": "...", "relation": "...", "object": "...", "object_type": "...", "sentence": "S1", "evidence": "...", "effect": null, "negated": false, "confidence": 0.9}}]}}
+
+Example
+Sentences:
+[S1] Increasing the laser power reduced the porosity.
+Entities: laser power (Parameter, S1); porosity (Defect, S1)
+Output:
+{{"relations": [{{"subject": "laser power", "subject_type": "Parameter", "relation": "INFLUENCES", "object": "porosity", "object_type": "Defect", "sentence": "S1", "evidence": "Increasing the laser power reduced the porosity", "effect": "decrease", "negated": false, "confidence": 0.9}}]}}
+
+Section: {section}
+Sentences:
+{sentences}
+Entities:
+{entities}

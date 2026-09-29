@@ -1,0 +1,17 @@
+# Core pipeline (Python >= 3.10)
+pymupdf>=1.24          # PDF text, fonts and tables
+pydantic>=2.5
+pyyaml>=6.0
+requests>=2.31         # Ollama + GROBID HTTP APIs
+python-dotenv>=1.0
+networkx>=3.2
+neo4j>=5.14            # Python driver (the Neo4j server itself is optional)
+
+# User interface
+streamlit>=1.40
+pyvis>=0.3.2
+pandas>=2.0
+openpyxl>=3.1          # Excel export (python main.py export)
+
+# Tests
+pytest>=7.4

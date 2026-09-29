@@ -1,0 +1,9 @@
+A term was found in an Additive Manufacturing paper.
+Term: "{term}"
+Entity type: {entity_type}
+Candidate canonical entities:
+{candidates}
+
+Choose the candidate that denotes EXACTLY the same concept as the term (synonym, abbreviation or spelling
+variant). If none is the same concept (for example a broader, narrower or related concept), answer "NONE".
+Return JSON: {{"choice": "<one candidate exactly as written, or NONE>", "confidence": 0.0}}

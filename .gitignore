@@ -1,0 +1,33 @@
+# --- Secrets (never commit) ---
+.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Logs ---
+logs/
+
+# --- Generated data (re-created by running the pipeline) ---
+data/processed/
+data/extracted/
+data/graph/
+data/index/
+data/review/
+data/eval/
+data/exports/
+
+# --- Papers: commit only the synthetic DEMO PDFs, never real publisher PDFs ---
+data/papers/*
+!data/papers/demo_*.pdf

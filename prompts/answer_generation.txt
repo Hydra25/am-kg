@@ -1,0 +1,14 @@
+Question: {question}
+
+Evidence from the knowledge graph and source papers (each item has an id in brackets):
+{evidence}
+
+Instructions:
+- Answer the question using ONLY the evidence items above. Do not use general knowledge.
+- Cite the evidence ids for every statement, e.g. [E1] or [P2].
+- Keep "EXPLICIT" findings, "EXTRACTED" facts and "DERIVED" trends distinct; mention when evidence is hedged,
+  negated, from background/introduction sections or still under review.
+- If the evidence is insufficient, say "The current corpus does not contain enough evidence to answer this." and
+  describe what is available.
+- Write 3-8 short sentences. Then, on a new line starting with "Interpretation:", you MAY add at most 2 sentences
+  of possible mechanistic explanation; this part is an INTERPRETATION, not a corpus fact, and must not cite ids.

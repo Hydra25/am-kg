@@ -1,0 +1,54 @@
+# AM-KG pipeline configuration. Environment variables (.env) override the
+# connection settings; see src/config.py for the full list of overrides.
+
+paths:                       # relative to the project root
+  papers_dir: data/papers
+  processed_dir: data/processed
+  extracted_dir: data/extracted
+  graph_dir: data/graph
+  review_dir: data/review
+  annotations_dir: data/annotations
+  index_dir: data/index
+  demo_dir: data/demo
+  lexicon_file: config/lexicon.yaml
+  prompts_dir: prompts
+  logs_dir: logs
+
+pdf:
+  parser: auto               # auto (GROBID if GROBID_URL set, else PyMuPDF) | pymupdf | grobid
+  extract_tables: true
+  remove_headers_footers: true
+
+extraction:
+  mode: auto                 # auto = hybrid if Ollama reachable else rule | rule | llm | hybrid
+  chunk_chars: 1200          # characters per LLM chunk (qwen2.5:3b has a small context)
+  skip_sections: [references, acknowledgements]
+  llm_findings: true         # run the finding-extraction prompt in llm/hybrid mode
+  llm_normalization: true    # ask the LLM to pick among candidate canonicals for unknown terms
+
+llm:
+  temperature: 0.0
+  num_ctx: 8192              # Ollama defaults to 2048 which truncates prompts silently
+  timeout_s: 600
+  max_retries: 2
+  structured_output: true    # pass a JSON schema via Ollama's `format` field
+
+quality:
+  accept_threshold: 0.85     # >= accept -> accepted
+  review_threshold: 0.60     # [review, accept) -> review ; < review -> rejected
+  require_evidence: true
+  require_evidence_in_source: true
+
+graph:
+  backend: auto              # auto (neo4j if NEO4J_URI set) | neo4j | local
+  insert_review_items: true  # review-status claims go to the graph flagged status='review'
+
+retrieval:
+  vector_backend: bm25       # bm25 (no extra deps) | chroma (needs chromadb + embed model)
+  top_k_passages: 6
+  top_k_claims: 20
+  passage_window: 2          # sentences per passage
+
+gaps:
+  min_pair_papers: 2         # factor->response pair must be studied in >= this many papers
+  max_context_papers: 1      # ...but in <= this many papers for a material/process context

@@ -1,0 +1,5 @@
+# Developer tools (not needed to run the app)
+-r requirements.txt
+ruff>=0.6
+pre-commit>=3.7
+pytest>=7.4

@@ -1,0 +1,12 @@
+Identify which numbered sentences below report a scientific FINDING of this study
+(an observed result, trend, comparison, null result or conclusion). Do NOT select sentences that only
+describe methods, background from other studies, or the aim of the work.
+
+finding_type: "result", "trend", "comparison", "null_result" or "conclusion".
+
+Return JSON:
+{{"findings": [{{"sentence": "S1", "finding_type": "trend", "confidence": 0.9}}]}}
+
+Section: {section}
+Sentences:
+{sentences}
