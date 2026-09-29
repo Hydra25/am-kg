@@ -40,6 +40,12 @@ def paper_level_relations(doc: ParsedDocument, mentions: list[EntityMention]) ->
     out: list[Relation] = []
     for cid, ms in by_entity.items():
         sects = {smap[m.sentence_id].section_type for m in ms if m.sentence_id in smap}
+        # A NEW (non-lexicon) entity needs >= 2 mentions outside the introduction before the
+        # paper is said to study/use it; single passing mentions only filled the review queue.
+        if all(m.normalization_method == "new_entity" for m in ms):
+            core = [m for m in ms if m.sentence_id in smap and smap[m.sentence_id].section_type != "introduction"]
+            if len(core) < 2:
+                continue
         conf = max(_SECTION_WEIGHT.get(s, 0.8) for s in sects) if sects else 0.6
         in_title = any(m.text.lower() in title_l for m in ms)
         if in_title:

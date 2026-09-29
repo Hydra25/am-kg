@@ -25,6 +25,13 @@ _GENERIC_WORDS = {
     "area", "region", "image", "images", "line", "lines", "point", "points", "side", "type",
     "types", "level", "levels", "group", "series", "set", "range", "et al", "i.e", "e.g",
     "manufacturing", "production", "behaviour", "behavior", "response", "structure", "structures",
+    # generic AM / materials phrases that name no specific thing (seen from GLiNER on a real paper)
+    "am", "additive manufacturing", "additively manufactured", "am process", "am processes",
+    "manufacturing process", "manufacturing processes", "am material", "am materials", "am component",
+    "am components", "am application", "am applications", "base material", "base materials",
+    "defect", "defects", "strength", "mechanical properties", "material properties", "process parameters", "applied process parameters", "geometry", "specimen geometry", "feature",
+    "features", "design", "designs", "steel", "steels", "metal", "metals", "alloy", "alloys",
+    "welded specimens", "specimen width", "preliminary trials", "limited reproducibility",
 }
 # Words that make a phrase plausible as a characterization method.
 _METHOD_CUES = re.compile(
@@ -47,6 +54,7 @@ def junk_reason(text: str, entity_type: str, in_lexicon: bool) -> Optional[str]:
     if in_lexicon:
         return None
     t = normalize_chars(text).strip(" .,;:")
+    t = re.sub(r"^(the|a|an|this|that|these|those|such|their|its|our)\s+", "", t, flags=re.I)
     low = t.lower()
     if len(t) < 2:
         return "too_short"

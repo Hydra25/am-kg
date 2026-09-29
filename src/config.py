@@ -94,6 +94,10 @@ class GlinerConfig(BaseModel):
     device: str = "cpu"            # "mps" uses the Apple GPU (try it if cpu is slow)
     batch_size: int = 8
     labels: dict[str, str] = Field(default_factory=dict)   # empty = built-in AM labels
+    # GLiNER adds NEW entities only outside these sections. Introductions describe
+    # other people's work in general terms ("architected materials", "auxetic
+    # topologies"); on a real paper they produced mostly review-queue noise.
+    skip_sections: list[str] = Field(default_factory=lambda: ["introduction"])
 
 
 class QualityConfig(BaseModel):

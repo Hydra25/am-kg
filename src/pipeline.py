@@ -169,7 +169,8 @@ class ExtractionPipeline:
             g = self.settings.gliner
             try:
                 self.gliner = GlinerEntityExtractor.load(
-                    g.model, self.normalizer, self.rule_entities, g.threshold, g.labels or None, g.device, g.batch_size)
+                    g.model, self.normalizer, self.rule_entities, g.threshold, g.labels or None, g.device, g.batch_size,
+                    set(g.skip_sections))
             except Exception as exc:   # not installed, no internet for the first download, ...
                 if wanted == "gliner":
                     raise RuntimeError(f"GLiNER is not available ({exc}). Install it with: pip install gliner "
@@ -212,6 +213,10 @@ class ExtractionPipeline:
     # ------------------------------------------------------------------
     def extract(self, doc: ParsedDocument) -> ExtractionResult:
         s = self.settings
+        if isinstance(self.llm, InstrumentedLLM):
+            # per-paper accounting; reset FIRST so LLM normalisation calls made while
+            # GLiNER/rule entities are normalised are counted too
+            self.llm.reset_stats()
         pid = doc.paper.paper_id
         skip = set(s.extraction.skip_sections)
         full_text = " ".join(x.text for x in doc.sentences if x.section_type not in skip)
@@ -238,8 +243,6 @@ class ExtractionPipeline:
         llm_findings: list[Finding] = []
         dropped: list[dict] = []
         calls = failures = chunks = chunks_skipped = 0
-        if isinstance(self.llm, InstrumentedLLM):
-            self.llm.reset_stats()          # per-paper accounting
         if self.llm_extractor is not None:
             llm_skip = sorted(skip | set(s.extraction.llm_skip_sections))
             out = self.llm_extractor.extract(doc, analyses, llm_skip, s.extraction.chunk_chars,

@@ -128,3 +128,37 @@ def test_auto_backend_falls_back_to_llm_without_gliner(tmp_project, monkeypatch)
     tmp_project.extraction.entity_backend = "gliner"
     with pytest.raises(RuntimeError, match="pip install gliner"):
         ExtractionPipeline(tmp_project, llm=FakeLLM(['{}']), mode="hybrid")
+
+
+@pytest.mark.parametrize("term,candidate,ok", [
+    ("mechanical properties", "hardness", False),      # wrong LLM mappings seen on a real paper
+    ("titanium", "Ti-6Al-4V", False),
+    ("This defect", "porosity", False),
+    ("treatment at 800 °C", "heat treatment", True),
+    ("laser powers", "laser power", True),
+])
+def test_llm_normalisation_candidates_need_matching_head_noun(term, candidate, ok):
+    from src.normalization.entity_normalizer import head_compatible
+    assert head_compatible(term, candidate) is ok
+
+
+def test_gliner_strips_determiners_and_skips_new_entities_in_introduction(tmp_project):
+    from src.entity_extraction.gliner_extractor import GlinerEntityExtractor
+    from src.ingestion.loader import parse_document
+    from src.pipeline import ExtractionPipeline
+
+    class DetGliner(FakeGliner):
+        PHRASES = {"The Printdur HSA": "material or alloy", "architected materials": "material or alloy"}
+
+    p = tmp_project.path("papers_dir") / "det.md"
+    p.write_text("# T\n\n## 1. Introduction\n\nArchitected materials are popular.\n\n"
+                 "## 2. Materials and methods\n\nThe Printdur HSA powder was used.\n", encoding="utf-8")
+    doc = parse_document(p, tmp_project)
+    probe = ExtractionPipeline(tmp_project, mode="rule")
+    fake = GlinerEntityExtractor(DetGliner(), probe.normalizer, probe.rule_entities, skip_new_in={"introduction"})
+    res = ExtractionPipeline(tmp_project, mode="gliner", gliner=fake).extract(doc)
+    texts = {m.text for m in res.entities}
+    assert "Printdur HSA" in texts and "The Printdur HSA" not in texts
+    assert not any("rchitected" in t for t in texts)
+    # a new entity mentioned once is not turned into a paper-level STUDIES claim
+    assert not any(r.relation == "STUDIES" and "printdur" in r.object.id.lower() for r in res.relations)

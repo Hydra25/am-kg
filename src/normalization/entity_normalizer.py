@@ -141,6 +141,10 @@ class EntityNormalizer:
             cid, ratio = candidates[0]
             return self._result(cid, ratio * 0.85, "fuzzy")
         # 6. LLM choice among candidates (restricted list -> no invented entities)
+        # Only candidates whose head noun occurs in the term are offered: the small
+        # LLM otherwise maps e.g. "mechanical properties" -> "hardness" or
+        # "titanium" -> "Ti-6Al-4V" (seen on a real paper). No candidate left = no call.
+        candidates = [(c, r) for c, r in candidates if head_compatible(surface, self.lexicon.entities[c].canonical_name)]
         if self.llm_chooser and candidates:
             names = [self.lexicon.entities[c].canonical_name for c, _ in candidates[:5]]
             try:
@@ -190,6 +194,22 @@ class EntityNormalizer:
                 in_lexicon=False,
             )
         return self.new_entities[cid]
+
+
+_HEAD_STOP = {"of", "and", "the", "a", "an", "in", "on", "for", "with", "by", "to", "at"}
+
+
+def _tokens(text: str) -> list[str]:
+    return [singularize(t) for t in re.findall(r"[a-z0-9]+", normalize_chars(text).lower()) if t not in _HEAD_STOP]
+
+
+def head_compatible(term: str, candidate: str) -> bool:
+    """True if the candidate's head noun (its last content word) occurs in the term.
+    "tensile strength" is compatible with "ultimate tensile strength" and "strength",
+    but not with "tensile properties"; "heat treatment" is compatible with
+    "treatment at 800 °C"."""
+    cand = _tokens(candidate)
+    return bool(cand) and cand[-1] in set(_tokens(term))
 
 
 _ABBREV_RE = re.compile(r"(?P<long>[A-Za-z][\w\-α-ω ]{3,80}?)\s*\((?P<short>[A-Z][A-Za-z0-9\-/]{1,9})\)")

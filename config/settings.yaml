@@ -47,6 +47,7 @@ gliner:                      # used when extraction.entity_backend is auto/gline
   threshold: 0.5             # higher = fewer but surer entities
   device: cpu                # mps = Apple GPU (try if cpu is slow)
   batch_size: 8
+  skip_sections: [introduction]   # no NEW entities from here (background text -> review noise)
 
 quality:
   accept_threshold: 0.85     # >= accept -> accepted

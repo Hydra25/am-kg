@@ -17,6 +17,7 @@ The model is downloaded from Hugging Face on first use (~0.5 GB) and cached.
 from __future__ import annotations
 
 import logging
+import re
 import time
 from dataclasses import dataclass, field
 from typing import Any, Optional
@@ -27,6 +28,8 @@ from ..quality.junk import junk_reason
 from .rule_based import RuleEntityExtractor, SentenceAnalysis, evidence_for
 
 log = logging.getLogger(__name__)
+# "The weld", "This defect", "Such features", "their material properties" -> drop the determiner
+_LEADING_DET = re.compile(r"^(the|a|an|this|that|these|those|such|their|its|our|his|her|each|both|all)\s+", re.I)
 
 # GLiNER label (natural-language description) -> our ontology entity type.
 DEFAULT_LABELS: dict[str, str] = {
@@ -54,7 +57,7 @@ class GlinerOutput:
 class GlinerEntityExtractor:
     def __init__(self, model: Any, normalizer: EntityNormalizer, rule_extractor: RuleEntityExtractor,
                  threshold: float = 0.5, labels: Optional[dict[str, str]] = None, batch_size: int = 8,
-                 model_name: str = "") -> None:
+                 model_name: str = "", skip_new_in: Optional[set[str]] = None) -> None:
         self.model = model
         self.normalizer = normalizer
         self.rule_extractor = rule_extractor
@@ -62,11 +65,12 @@ class GlinerEntityExtractor:
         self.labels = dict(labels or DEFAULT_LABELS)
         self.batch_size = batch_size
         self.model_name = model_name or getattr(model, "name", "gliner")
+        self.skip_new_in = set(skip_new_in or ())
 
     @classmethod
     def load(cls, model_name: str, normalizer: EntityNormalizer, rule_extractor: RuleEntityExtractor,
              threshold: float = 0.5, labels: Optional[dict[str, str]] = None, device: str = "cpu",
-             batch_size: int = 8) -> "GlinerEntityExtractor":
+             batch_size: int = 8, skip_new_in: Optional[set[str]] = None) -> "GlinerEntityExtractor":
         """Load the Hugging Face model. Raises ImportError if `gliner` is not installed."""
         from gliner import GLiNER  # optional dependency, imported lazily
         t0 = time.perf_counter()
@@ -74,7 +78,7 @@ class GlinerEntityExtractor:
         if device and device != "cpu":
             model = model.to(device)
         log.info("GLiNER model %s loaded in %.1fs (%s)", model_name, time.perf_counter() - t0, device)
-        return cls(model, normalizer, rule_extractor, threshold, labels, batch_size, model_name)
+        return cls(model, normalizer, rule_extractor, threshold, labels, batch_size, model_name, skip_new_in)
 
     # ------------------------------------------------------------------
     def _predict(self, texts: list[str]) -> list[list[dict[str, Any]]]:
@@ -111,6 +115,11 @@ class GlinerEntityExtractor:
                 start, end = int(p.get("start", -1)), int(p.get("end", -1))
                 if etype is None or not (0 <= start < end <= len(s.text)):
                     continue
+                det = _LEADING_DET.match(s.text[start:end])
+                if det:
+                    start += det.end()
+                    if start >= end:
+                        continue
                 surface = s.text[start:end]
                 score = min(float(p.get("score", 0.5)), 0.95)
                 # junk filter BEFORE normalisation (which may ask the LLM to choose a canonical)
@@ -130,6 +139,12 @@ class GlinerEntityExtractor:
                         if hit and m.canonical_id == hit[0] and "gliner" not in m.method:
                             m.method = f"{m.method}+gliner"
                             m.confidence = round(min(0.98, 1 - (1 - m.confidence) * (1 - score * 0.9)), 3)
+                    continue
+                if s.section_type in self.skip_new_in:
+                    # only confirm lexicon terms here; do not create new entities
+                    out.dropped.append({"stage": "gliner_entity", "reason": f"no_new_entities_in_{s.section_type}",
+                                        "text": surface, "type": etype, "sentence_id": s.sentence_id,
+                                        "score": round(score, 3)})
                     continue
                 norm = self.normalizer.normalize(surface, etype)
                 mention = EntityMention(

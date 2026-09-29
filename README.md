@@ -173,7 +173,7 @@ The app has these pages:
 python -m pytest
 ```
 
-88 tests cover:
+94 tests cover:
 
 - units and normalisation
 - sections and sentences
