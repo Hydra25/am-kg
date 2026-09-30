@@ -35,6 +35,7 @@ from .normalization.entity_normalizer import (
     find_symbol_definitions,
 )
 from .normalization.lexicon import Lexicon
+from .normalization.process_context import resolve_generic_processes
 from .ontology.models import (
     CanonicalEntity,
     EntityMention,
@@ -245,6 +246,9 @@ class ExtractionPipeline:
             gliner_seconds, gl_dropped = g.seconds, g.dropped
             gliner_mentions = sum(1 for m in g.mentions if m.method == "gliner")
 
+        # 1c) "the printing process", "fabrication", "the metal printer" -> the paper's main process
+        resolve_generic_processes(analyses, self.lexicon)
+
         # 2) LLM proposals (verified against the text)
         llm_rel: list[Relation] = []
         llm_findings: list[Finding] = []
@@ -262,9 +266,15 @@ class ExtractionPipeline:
                 warnings.append(f"{failures} LLM chunk(s) returned unusable JSON after retries (see logs)")
 
         # 3) rule-based relations (after LLM so that LLM-found mentions/values are included)
-        rrx = RuleRelationExtractor(pid)
+        # only lexicon processes (incl. remapped generic mentions) anchor structural relations;
+        # "remelting" or "Marangoni flow" typed as Process must not collect HAS_PARAMETER claims
+        def process_ok(m: EntityMention) -> bool:
+            return m.canonical_id in self.lexicon.entities
+
+        rrx = RuleRelationExtractor(pid, process_ok=process_ok)
         methods_procs = [m for an in analyses.values() for m in an.mentions
-                         if m.entity_type == "Process" and an.sentence.section_type != "introduction"]
+                         if m.entity_type == "Process" and an.sentence.section_type != "introduction"
+                         and process_ok(m)]
         rule_rel: list[Relation] = []
         prev: list[SentenceAnalysis] = []
         for sent in doc.sentences:
@@ -313,7 +323,8 @@ class ExtractionPipeline:
             rec = canon.setdefault(m.canonical_id, ent.model_copy(deep=True))
             if not rec.in_lexicon:
                 rec.normalization_confidence = min(rec.normalization_confidence, m.normalization_confidence)
-            if m.text != rec.canonical_name and m.text not in rec.aliases:
+            if (m.text != rec.canonical_name and m.text not in rec.aliases
+                    and m.normalization_method != "paper_main_process"):   # "printing" is no LPBF alias
                 rec.aliases.append(m.text)
 
         stats = ExtractionStats(

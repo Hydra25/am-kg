@@ -383,6 +383,9 @@ PostProcessing:
   - canonical: machining
     family: surface finishing
     aliases: [machining, machined, CNC machining]
+  - canonical: EDM
+    family: surface finishing
+    aliases: [EDM, wire EDM, WEDM, electrical discharge machining, electro-discharge machining, wire electrical discharge machining, EDM wire cutting, EDM-wire cutting, wire cutting]
   - canonical: polishing
     family: surface finishing
     aliases: [polishing, polished, mechanical polishing]

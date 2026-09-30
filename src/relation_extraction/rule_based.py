@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Iterable, Optional
+from typing import Callable, Iterable, Optional
 
 from ..entity_extraction.rule_based import SentenceAnalysis, evidence_for
 from ..normalization.text import normalize_chars
@@ -132,8 +132,10 @@ def _ref(m: EntityMention) -> EntityRef:
 class RuleRelationExtractor:
     """Produces Relation objects from SentenceAnalysis objects of one paper."""
 
-    def __init__(self, paper_id: str) -> None:
+    def __init__(self, paper_id: str, process_ok: Optional[Callable[[EntityMention], bool]] = None) -> None:
         self.paper_id = paper_id
+        # which Process mentions may be the subject of structural relations (default: all)
+        self.process_ok = process_ok or (lambda m: True)
 
     # ------------------------------------------------------------------
     def _make(self, s: EntityRef, rel: RelationType, o: EntityRef, ev: Evidence, conf: float,
@@ -254,7 +256,7 @@ class RuleRelationExtractor:
         ev = evidence_for(s, self.paper_id)
         adj, origin = self._base_adjust(s)
         text = s.text
-        procs = an.of_type(E.PROCESS.value)
+        procs = [(i, m) for i, m in an.of_type(E.PROCESS.value) if self.process_ok(m)]
         mats = an.of_type(E.MATERIAL.value)
         state = _material_state(an)
 
@@ -263,7 +265,7 @@ class RuleRelationExtractor:
             if procs:
                 return [m for _, m in procs], ev, 0.0, "same_sentence"
             for p in reversed(prev[-4:]):
-                pp = [m for _, m in p.of_type(E.PROCESS.value)]
+                pp = [m for _, m in p.of_type(E.PROCESS.value) if self.process_ok(m)]
                 if pp and p.sentence.section_id == s.section_id:
                     ctx_ev = Evidence(**{**ev.model_dump(), "text": f"{p.sentence.text} {s.text}",
                                          "context_sentence_ids": [p.sentence.sentence_id]})
