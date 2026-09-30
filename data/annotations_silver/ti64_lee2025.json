@@ -1,0 +1,1665 @@
+{
+  "source_file": "ti64_lee2025",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 24 annotated chunks.",
+  "entities": [
+    {
+      "type": "Material",
+      "canonical": "Ti-6Al-4V"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Property",
+      "canonical": "part precision"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "lattice structure"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "thin-walled component"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "machining"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "polishing"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "stress relief"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "annealing"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "HIP"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile test specimen"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole instability"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface quality"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "thin wall"
+    },
+    {
+      "type": "Defect",
+      "canonical": "subsurface pore"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "wavelength"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "maximum power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "preheated"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "oxygen content"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "bidirectional laser beam path"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "rotation"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile-test sample"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "wire electrical discharge machining"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "EDM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "rectangular bar"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "dogbone shape"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "temperature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "pressure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "atmosphere"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "Property",
+      "canonical": "smoothness"
+    },
+    {
+      "type": "Property",
+      "canonical": "ε"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "Archimedes method"
+    },
+    {
+      "type": "Property",
+      "canonical": "dimensional accuracy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "digital caliper"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "field-emission scanning electron microscope"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "FE-SEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "3D confocal scanning microscope"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "XRD"
+    },
+    {
+      "type": "Property",
+      "canonical": "shape accuracy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "strain rate"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "contact extensometer"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge length"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "precision"
+    },
+    {
+      "type": "Property",
+      "canonical": "lateral dimensional deviation"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "confocal scanning microscopy"
+    },
+    {
+      "type": "Property",
+      "canonical": "arithmetical mean height"
+    },
+    {
+      "type": "Defect",
+      "canonical": "necking"
+    },
+    {
+      "type": "Defect",
+      "canonical": "balling"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "type": "Defect",
+      "canonical": "open pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "protrusion"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface topography"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "confocal 3D imaging"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spatter"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface flatness"
+    },
+    {
+      "type": "Defect",
+      "canonical": "surface protrusion"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "wire EDM"
+    },
+    {
+      "type": "Defect",
+      "canonical": "internal pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "surface notch"
+    },
+    {
+      "type": "Property",
+      "canonical": "strength"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain coars­ ening"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensitic α' phase"
+    },
+    {
+      "type": "Defect",
+      "canonical": "sharp notch"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain growth"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar grains"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "equiaxed grains"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar grain growth"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain coarsening"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructural evolution"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "sample orientation"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface integrity"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "EDM machining"
+    },
+    {
+      "type": "Defect",
+      "canonical": "notch"
+    },
+    {
+      "type": "Defect",
+      "canonical": "surface irregularity"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "post-processing"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α and β phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "basket-weave microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "quasi-cleavage fracture"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "BD"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dimple"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "cleavage facet"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "brittle fracture"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile-tested specimen"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "surface machining"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface smoothness"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Ti-6Al-4V",
+      "evidence": "However, this study demonstrates for the first time that Ti–6Al–4V structures, even in their as-built state, can achieve mechanical properties that satisfy the ASTM B348 standard through proper optimization of the laser powder bed fusion process (PBF-LB/M)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The optimal process condition, characterized by an energy density of 67 J/mm3 and a hatch distance of 60 μm, yielded a relative density of 99.9 %, part precision of 99.9 %, and a side surface roughness of 26.7 μm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The optimal process condition, characterized by an energy density of 67 J/mm3 and a hatch distance of 60 μm, yielded a relative density of 99.9 %, part precision of 99.9 %, and a side surface roughness of 26.7 μm."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The optimal process condition, characterized by an energy density of 67 J/mm3 and a hatch distance of 60 μm, yielded a relative density of 99.9 %, part precision of 99.9 %, and a side surface roughness of 26.7 μm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The optimal process condition, characterized by an energy density of 67 J/mm3 and a hatch distance of 60 μm, yielded a relative density of 99.9 %, part precision of 99.9 %, and a side surface roughness of 26.7 μm."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "volumetric energy density",
+      "evidence": "This study demonstrates the importance of meticulous process control, particularly in terms of energy density and hatch distance, in PBF-LB/M and offers a pathway for enhancing the mechanical properties of as-built Ti–6Al–4V components."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatch spacing",
+      "evidence": "This study demonstrates the importance of meticulous process control, particularly in terms of energy density and hatch distance, in PBF-LB/M and offers a pathway for enhancing the mechanical properties of as-built Ti–6Al–4V components."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The layer thickness minimized the surface roughness by reducing the stair-step effect inherent in layer-by-layer manufacturing processes."
+    },
+    {
+      "subject": "Archimedes method",
+      "relation": "CHARACTERIZES",
+      "object": "relative density",
+      "evidence": "The relative density of the cubic samples built under different pro­ cess conditions was examined using the Archimedes method, as speci­ fied in ASTM B962-08."
+    },
+    {
+      "subject": "digital caliper",
+      "relation": "CHARACTERIZES",
+      "object": "part precision",
+      "evidence": "Part precision and dimensional deviation were evaluated by measuring the widths of the fabricated cubes using a digital caliper with a resolution of 10 μm."
+    },
+    {
+      "subject": "digital caliper",
+      "relation": "CHARACTERIZES",
+      "object": "dimensional accuracy",
+      "evidence": "Part precision and dimensional deviation were evaluated by measuring the widths of the fabricated cubes using a digital caliper with a resolution of 10 μm."
+    },
+    {
+      "subject": "3D confocal scanning microscope",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "To mea­ sure the surface roughness of cubic samples, a 3D confocal scanning microscope (Lasertec, OPTELICS Hybrid C3, wavelength = 405 nm) was employed."
+    },
+    {
+      "subject": "optical microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "microstructure",
+      "evidence": "Microstructures were observed using an optical microscope with a 5 × magnification."
+    },
+    {
+      "subject": "contact extensometer",
+      "relation": "CHARACTERIZES",
+      "object": "elongation",
+      "evidence": "The elongation was determined by measuring the strain using a contact extensometer (Epsilon, SN E100205) with a 25 mm gauge length."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "FABRICATES",
+      "object": "cube",
+      "evidence": "Fig. 4. Relative density of Ti–6Al–4V cubes fabricated by PBF-LB/M under various volumetric energy densities and hatch distances."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "part precision",
+      "evidence": "Optical images of top surfaces of Ti–6Al–4V cubes fabricated by PBF-LB/M under various volumetric energy densities and hatch distances. (a) (b) Fig. 6. (a) Part precision and (b) dimensional deviation of Ti–6Al–4V cubes fabricated by PBF-LB/M at various volumetric energy densities and hatch distances."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "part precision",
+      "evidence": "Optical images of top surfaces of Ti–6Al–4V cubes fabricated by PBF-LB/M under various volumetric energy densities and hatch distances. (a) (b) Fig. 6. (a) Part precision and (b) dimensional deviation of Ti–6Al–4V cubes fabricated by PBF-LB/M at various volumetric energy densities and hatch distances."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "dimensional accuracy",
+      "evidence": "Optical images of top surfaces of Ti–6Al–4V cubes fabricated by PBF-LB/M under various volumetric energy densities and hatch distances. (a) (b) Fig. 6. (a) Part precision and (b) dimensional deviation of Ti–6Al–4V cubes fabricated by PBF-LB/M at various volumetric energy densities and hatch distances."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "dimensional accuracy",
+      "evidence": "Optical images of top surfaces of Ti–6Al–4V cubes fabricated by PBF-LB/M under various volumetric energy densities and hatch distances. (a) (b) Fig. 6. (a) Part precision and (b) dimensional deviation of Ti–6Al–4V cubes fabricated by PBF-LB/M at various volumetric energy densities and hatch distances."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "When the volumetric energy density (E) was low, the density depended on both P and h, even at the same E. At E of 150 J/mm3 and 100 J/mm3, the relative density ranged from 98.5 to 99.2 % and 94.2 to 99.5 %, respectively; notably, a reduction in h resulted in lower densities because it caused a corresponding decrease in P (until P < 80 W)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "Below this energy density, lack-of-fusion defects predominated due to insufficient energy input into the powder [27,28]."
+    },
+    {
+      "subject": "keyhole instability",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "On the other hand, further increases in E over 60 J/mm3, up to 500 J/mm3, resulted in only a slight decrease in density, likely due to keyhole instability."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "This relatively low reduction in relative density at high E can be attributed to the relatively high scan speed (v = 1000 mm/s) used in this study."
+    },
+    {
+      "subject": "optical microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "part precision",
+      "evidence": "Before quantification, the dependence of part precision on E was first assessed qualitatively by examining the top surface of cubes using OM images on part precision (Fig. 5)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "precision",
+      "evidence": "The low density at these specific E values was caused by low P < 80 W, which resulted in large deviations even at the same and/or comparable E. The red regime (E ≥150 J/mm3), representing excessive energy density, resulted in high density (>99 %) but reduced precision (<99 %)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "shape accuracy",
+      "evidence": "When E > 350 J/mm3, the excessive energy input produces cubes with rounded corners and shiny top surfaces, exhibiting poor shape accuracy (part precision < 87 % and lateral dimensional deviation > 0.54 mm), as depicted in Fig. 5."
+    },
+    {
+      "subject": "confocal scanning microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "For the conditions that met the density and precision requirements, surface roughness was analyzed using confocal scanning microscopy and SEM."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "For the conditions that met the density and precision requirements, surface roughness was analyzed using confocal scanning microscopy and SEM."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "The correlation was particularly evident in SEM observations of the top surface (Fig. 7b), which demonstrated a clear decrease in roughness with increasing E. The low E values in the range of 33–58 J/mm3 generated shallow and unstable melt pools, resulting in necking, balling, and a lack of fusion within the scan tracks."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "necking",
+      "evidence": "The correlation was particularly evident in SEM observations of the top surface (Fig. 7b), which demonstrated a clear decrease in roughness with increasing E. The low E values in the range of 33–58 J/mm3 generated shallow and unstable melt pools, resulting in necking, balling, and a lack of fusion within the scan tracks."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "balling",
+      "evidence": "The correlation was particularly evident in SEM observations of the top surface (Fig. 7b), which demonstrated a clear decrease in roughness with increasing E. The low E values in the range of 33–58 J/mm3 generated shallow and unstable melt pools, resulting in necking, balling, and a lack of fusion within the scan tracks."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "unmelted powder",
+      "evidence": "On the other hand, large E reduced the size and number of partially melted particles, open pores, and discontinuities between laser-scanned tracks, thereby lowering top surface roughness (18.0–6.1 μm)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "open pore",
+      "evidence": "On the other hand, large E reduced the size and number of partially melted particles, open pores, and discontinuities between laser-scanned tracks, thereby lowering top surface roughness (18.0–6.1 μm)."
+    },
+    {
+      "subject": "unmelted powder",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "On the other hand, large E reduced the size and number of partially melted particles, open pores, and discontinuities between laser-scanned tracks, thereby lowering top surface roughness (18.0–6.1 μm)."
+    },
+    {
+      "subject": "open pore",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "On the other hand, large E reduced the size and number of partially melted particles, open pores, and discontinuities between laser-scanned tracks, thereby lowering top surface roughness (18.0–6.1 μm)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "With a further increase in E beyond 67 J/mm3, the side surfaces did not show discontinuous laser-scanned tracks, without showing significant lack-of-fusion defects."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "protrusion",
+      "evidence": "This can cause an enlarged melt pool to overflow beyond the intended boundaries and solidify as protrusions, particularly at high E (≥117 J/mm3), as highlighted by the red solid lines in Fig. 7d."
+    },
+    {
+      "subject": "protrusion",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "These protrusions raised the side surface roughness up to a maximum of 53.6 μm, introducing surface irregularities acting as stress concentrators under tensile loading, espe­ cially under uniaxial loading along the BD, to significantly degrade mechanical properties [34–36]."
+    },
+    {
+      "subject": "protrusion",
+      "relation": "AFFECTS",
+      "object": "part precision",
+      "evidence": "As the protrusions enlarged the di­ mensions of each printed structure, part precision also declined sharply at E ≥117 J/mm3."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "surface topography",
+      "evidence": "Supplementary Fig. S1a illustrates the relationship between E and surface topography."
+    },
+    {
+      "subject": "confocal 3D imaging",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "At low E (up to 50 J/mm3), the top surfaces of the cubes, as observed through confocal 3D imaging, exhibited high roughness with a large standard deviation of ~5.5 μm, primarily due to incomplete melting (as also shown in Fig. 7a)."
+    },
+    {
+      "subject": "spatter",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Although melting improved at E of 67 J/mm3, the surface remained uneven, and spatter deposition led to localized increases in roughness, resulting in a higher standard deviation of 5.9 μm."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "surface protrusion",
+      "evidence": "However, at higher E of 125 and 133 J/mm3, significant surface protrusions were observed, severely degrading surface quality."
+    },
+    {
+      "subject": "surface protrusion",
+      "relation": "AFFECTS",
+      "object": "surface quality",
+      "evidence": "However, at higher E of 125 and 133 J/mm3, significant surface protrusions were observed, severely degrading surface quality."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "However, variations in top surface roughness were still observed in the regime, primarily due to the lack-of-fusion defects."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "FABRICATES",
+      "object": "tensile specimen",
+      "evidence": "No post-processing, such as heat treatment, polishing, or machining, was applied to these samples, except for the wire EDM cutting to remove Longitudinal (a) (b) (c) [14] [17] [16] Transverse [15] [14] [10] [18] [13] [9] Fig. 8. (a) Ultimate tensile strength and (b) elongation of Ti–6Al–4V tensile samples fabricated by PBF-LB/M as a function of volumetric energy density and hatch distance. (c) Distribution of the same UTS and ε data."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "No post-processing, such as heat treatment, polishing, or machining, was applied to these samples, except for the wire EDM cutting to remove Longitudinal (a) (b) (c) [14] [17] [16] Transverse [15] [14] [10] [18] [13] [9] Fig. 8. (a) Ultimate tensile strength and (b) elongation of Ti–6Al–4V tensile samples fabricated by PBF-LB/M as a function of volumetric energy density and hatch distance. (c) Distribution of the same UTS and ε data."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "No post-processing, such as heat treatment, polishing, or machining, was applied to these samples, except for the wire EDM cutting to remove Longitudinal (a) (b) (c) [14] [17] [16] Transverse [15] [14] [10] [18] [13] [9] Fig. 8. (a) Ultimate tensile strength and (b) elongation of Ti–6Al–4V tensile samples fabricated by PBF-LB/M as a function of volumetric energy density and hatch distance. (c) Distribution of the same UTS and ε data."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "No post-processing, such as heat treatment, polishing, or machining, was applied to these samples, except for the wire EDM cutting to remove Longitudinal (a) (b) (c) [14] [17] [16] Transverse [15] [14] [10] [18] [13] [9] Fig. 8. (a) Ultimate tensile strength and (b) elongation of Ti–6Al–4V tensile samples fabricated by PBF-LB/M as a function of volumetric energy density and hatch distance. (c) Distribution of the same UTS and ε data."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "No post-processing, such as heat treatment, polishing, or machining, was applied to these samples, except for the wire EDM cutting to remove Longitudinal (a) (b) (c) [14] [17] [16] Transverse [15] [14] [10] [18] [13] [9] Fig. 8. (a) Ultimate tensile strength and (b) elongation of Ti–6Al–4V tensile samples fabricated by PBF-LB/M as a function of volumetric energy density and hatch distance. (c) Distribution of the same UTS and ε data."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "microstructure",
+      "evidence": "Fig. 9. (a) XRD spectra and (b) corresponding microstructures at various volumetric energy densities. them from the build platform as indicated in Fig. 1."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "Fig. 9. (a) XRD spectra and (b) corresponding microstructures at various volumetric energy densities. them from the build platform as indicated in Fig. 1."
+    },
+    {
+      "subject": "grain coars­ ening",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "This reduction in strength correlates with the grain coars­ ening observed at higher E, as evidenced by XRD and microstructural analysis (Fig. 9)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "grain coars­ ening",
+      "evidence": "This reduction in strength correlates with the grain coars­ ening observed at higher E, as evidenced by XRD and microstructural analysis (Fig. 9)."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "grain coars­ ening",
+      "evidence": "This reduction in strength correlates with the grain coars­ ening observed at higher E, as evidenced by XRD and microstructural analysis (Fig. 9)."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "martensitic α' phase",
+      "evidence": "The XRD results confirmed the presence of only the martensitic α′ phase at all E values (Fig. 9a), attributed to the high Fig. 10."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "FABRICATES",
+      "object": "tensile-test sample",
+      "evidence": "Cross-sectional images of Ti–6Al–4V tensile-test sample fabricated by PBF-LB/M at different volumetric energy densities of (a) 67 J/mm3, (b) 83 J/mm3, and (c) 100 J/mm3."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "grain growth",
+      "evidence": "The progressive increase in XRD peak intensity with E indicated grain growth and improved crystallinity, in good agreement with the coarsening observed in Fig. 9b."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "grain growth",
+      "evidence": "The progressive increase in XRD peak intensity with E indicated grain growth and improved crystallinity, in good agreement with the coarsening observed in Fig. 9b."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "columnar grains",
+      "evidence": "With increasing E, enhanced remelting between adjacent scan paths and printed layers promoted directional solidification, resulting in the for­ mation of progressively coarser columnar grains [37–39]."
+    },
+    {
+      "subject": "melt pool",
+      "relation": "AFFECTS",
+      "object": "columnar grain growth",
+      "evidence": "This evolu­ tion can be ascribed to larger melt pools and increased remelting of previous layers at higher E, which extend the longevity of the melt pool, thereby reducing cooling rates and promoting coarser columnar grain growth [40,41]."
+    },
+    {
+      "subject": "grain coarsening",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Accordingly, enlarged grain coarsening resulted in a reduction in the UTS from 1241 to 1187 MPa for the samples built in the longitudinal direction as E varied from 67 to 100 J/mm3."
+    },
+    {
+      "subject": "microstructural evolution",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "These observations are consistent with the Hall–Petch relationship, high­ lighting that even in the as-built condition without surface treatment, tensile strength is strongly influenced by microstructural evolution."
+    },
+    {
+      "subject": "sample orientation",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influence of sample orientation on UTS was also evident: the longitudinal direction, corresponding to the tensile axis perpendicular to BD, consistently exhibited higher strength than the transverse direction, corresponding to the tensile axis parallel to BD."
+    },
+    {
+      "subject": "columnar grains",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The relatively high UTS of longitudinal samples can be attributed to their smaller surface roughness and columnar grains that are perpendicularly aligned with the direction of the tensile load."
+    },
+    {
+      "subject": "build orientation",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Superior surface finish in longitudinal samples results from their build orientation: the lower half curvature (Ra ≈2 μm) was EDM cut during removal from the build platform, and the upper half curvature corresponded to the top surface (Ra ≈18 μm), as summarized in Fig. 1."
+    },
+    {
+      "subject": "unmelted powder",
+      "relation": "AFFECTS",
+      "object": "surface integrity",
+      "evidence": "In contrast, transverse samples contain rough side surfaces (Ra ≈30 μm), where staircase effects and partially melted particles degrade surface integrity."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "ε",
+      "evidence": "In contrast, the E range from 67 to 100 J/mm3, which was selected based on high density, part precision, and low roughness, resulted in significantly greater ε values of 11.7–5.5 % in the longitu­ dinal direction, and 11.1–2.9 % in the transverse direction."
+    },
+    {
+      "subject": "EDM machining",
+      "relation": "IMPROVES",
+      "object": "ε",
+      "evidence": "The superior surface finish of the longitudinal samples, achieved through EDM machining of the lower half curvature and the top surface of the upper half curvature, contributed to 0.6 %, 1.2 %, and 2.6 % higher ε compared to the corresponding transverse samples at each E. Within the E range, ε decreased with increasing E. A similar trend was observed for UTS."
+    },
+    {
+      "subject": "porosity",
+      "relation": "AFFECTS",
+      "object": "ε",
+      "evidence": "Overall, ε was more susceptible to defects (e.g., pores, roughness, and notches) than UTS."
+    },
+    {
+      "subject": "notch",
+      "relation": "AFFECTS",
+      "object": "ε",
+      "evidence": "Overall, ε was more susceptible to defects (e.g., pores, roughness, and notches) than UTS."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "surface irregularity",
+      "evidence": "For example, in terms of surface topography, imperfections such as surface irregularities and sharp notches became more distinct with E. Similarly, the size and number of shallow subsurface pores also increased with E. This trend of increased defects at high E, including both notches and pores, was largely due to the highly localized energy density at the start and end of the laser scan."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "sharp notch",
+      "evidence": "For example, in terms of surface topography, imperfections such as surface irregularities and sharp notches became more distinct with E. Similarly, the size and number of shallow subsurface pores also increased with E. This trend of increased defects at high E, including both notches and pores, was largely due to the highly localized energy density at the start and end of the laser scan."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "subsurface pore",
+      "evidence": "For example, in terms of surface topography, imperfections such as surface irregularities and sharp notches became more distinct with E. Similarly, the size and number of shallow subsurface pores also increased with E. This trend of increased defects at high E, including both notches and pores, was largely due to the highly localized energy density at the start and end of the laser scan."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "notch",
+      "evidence": "For example, in terms of surface topography, imperfections such as surface irregularities and sharp notches became more distinct with E. Similarly, the size and number of shallow subsurface pores also increased with E. This trend of increased defects at high E, including both notches and pores, was largely due to the highly localized energy density at the start and end of the laser scan."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "For example, in terms of surface topography, imperfections such as surface irregularities and sharp notches became more distinct with E. Similarly, the size and number of shallow subsurface pores also increased with E. This trend of increased defects at high E, including both notches and pores, was largely due to the highly localized energy density at the start and end of the laser scan."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "surface quality",
+      "evidence": "As previously discussed with Figs. 5–7, the non-uniformity of energy density caused by accel­ eration and deceleration of the laser beam increased with E. In conclu­ sion, the degradation of surface quality, and thus ε, was found to be more severe at high E, although the roughness level was around ~30 μm at all energy densities."
+    },
+    {
+      "subject": "post-processing",
+      "relation": "IMPROVES",
+      "object": "elongation",
+      "evidence": "On the other hand, the post-processing led to a notable ductility increase by 52.1 % (ε = 17.8 %) for longitudinal samples and by 73.0 % for transverse samples (ε = 19.2 %)."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "β phase",
+      "evidence": "This enhancement can partly be attributed to the increased volume fraction of the β phase resulting from the HIP treatment."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "microstructure",
+      "evidence": "Fig. 13 illustrates microstructures after the HIP treatment."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "martensitic α' phase",
+      "evidence": "During the HIP process, the martensitic α′ phases fully transformed into equilibrium α and β phases, resulting in a uniformly distributed basket-weave microstructure [44]."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "α and β phase",
+      "evidence": "During the HIP process, the martensitic α′ phases fully transformed into equilibrium α and β phases, resulting in a uniformly distributed basket-weave microstructure [44]."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "basket-weave microstructure",
+      "evidence": "During the HIP process, the martensitic α′ phases fully transformed into equilibrium α and β phases, resulting in a uniformly distributed basket-weave microstructure [44]."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "α phase",
+      "evidence": "Accordingly, the XRD analysis revealed the presence of α-phase (HCP) and β-phase (BCC) in the HIP-treated sample."
+    },
+    {
+      "subject": "XRD",
+      "relation": "CHARACTERIZES",
+      "object": "β phase",
+      "evidence": "Accordingly, the XRD analysis revealed the presence of α-phase (HCP) and β-phase (BCC) in the HIP-treated sample."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "α phase",
+      "evidence": "Accordingly, the XRD analysis revealed the presence of α-phase (HCP) and β-phase (BCC) in the HIP-treated sample."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "dimple",
+      "evidence": "High-magnification SEM images in Fig. 14d and e displays dimples corresponding to ductile fracture and cleavage facets corresponding to brittle fracture, confirming that the brittle fracture ultimately limits ε of as-built samples [47–49]."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "cleavage facet",
+      "evidence": "High-magnification SEM images in Fig. 14d and e displays dimples corresponding to ductile fracture and cleavage facets corresponding to brittle fracture, confirming that the brittle fracture ultimately limits ε of as-built samples [47–49]."
+    },
+    {
+      "subject": "brittle fracture",
+      "relation": "AFFECTS",
+      "object": "ε",
+      "evidence": "High-magnification SEM images in Fig. 14d and e displays dimples corresponding to ductile fracture and cleavage facets corresponding to brittle fracture, confirming that the brittle fracture ultimately limits ε of as-built samples [47–49]."
+    },
+    {
+      "subject": "quasi-cleavage fracture",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "Nevertheless, the reduced degree of quasi-cleavage fracture enhanced ductility."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "surface smoothness",
+      "evidence": "The approach optimizes the two parameters, sequentially considering relative density, part precision, surface roughness, and mechanical properties as screening criteria. • Satisfactory mechanical properties were obtained when relative density was higher than 99.9 %, part precision was better than 99.9 %, and side surface roughness was lower than approximately 30 μm. • The conditions 67 ≤E ≤100 J/mm3 and 40 ≤h ≤60 μm were the prerequisites to ensure satisfactory relative density, part precision, and surface smoothness."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "surface smoothness",
+      "evidence": "The approach optimizes the two parameters, sequentially considering relative density, part precision, surface roughness, and mechanical properties as screening criteria. • Satisfactory mechanical properties were obtained when relative density was higher than 99.9 %, part precision was better than 99.9 %, and side surface roughness was lower than approximately 30 μm. • The conditions 67 ≤E ≤100 J/mm3 and 40 ≤h ≤60 μm were the prerequisites to ensure satisfactory relative density, part precision, and surface smoothness."
+    }
+  ],
+  "values": [
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "67 J/mm3",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "60 μm",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99.9 %",
+      "normalized_value": 99.9
+    },
+    {
+      "entity": "part precision",
+      "normalized_unit": "%",
+      "raw": "99.9 %",
+      "normalized_value": 99.9
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "26.7 μm",
+      "normalized_value": 26.7
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1214 MPa",
+      "normalized_value": 1214.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1173 MPa",
+      "normalized_value": 1173.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "11.7 %",
+      "normalized_value": 11.7
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "11.1 %",
+      "normalized_value": 11.1
+    },
+    {
+      "entity": "wavelength",
+      "normalized_unit": "μm",
+      "raw": "1070 nm",
+      "normalized_value": 1.07
+    },
+    {
+      "entity": "maximum power",
+      "normalized_unit": "W",
+      "raw": "200 W",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "wavelength",
+      "normalized_unit": "μm",
+      "raw": "1064 nm",
+      "normalized_value": 1.064
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "40 μm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "preheated",
+      "normalized_unit": "°C",
+      "raw": "80 ◦C",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "argon",
+      "normalized_unit": "%",
+      "raw": "99.999 %",
+      "normalized_value": 99.999
+    },
+    {
+      "entity": "oxygen content",
+      "normalized_unit": "ppm",
+      "raw": "300 ppm",
+      "normalized_value": 300.0
+    },
+    {
+      "entity": "rotation",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "temperature",
+      "normalized_unit": "°C",
+      "raw": "945 ◦C",
+      "normalized_value": 945.0
+    },
+    {
+      "entity": "pressure",
+      "normalized_unit": "MPa",
+      "raw": "100 MPa",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "5 mm × 5 mm × 5 mm",
+      "normalized_value": 5000.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "33–500 J/mm3",
+      "normalized_min": 33.0,
+      "normalized_max": 500.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "20, 40, and 60 μm",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "20 μm",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "20 μm",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "strain rate",
+      "normalized_unit": "mm/s",
+      "raw": "1.5 mm/min",
+      "normalized_value": 0.025
+    },
+    {
+      "entity": "gauge length",
+      "normalized_unit": "μm",
+      "raw": "25 mm",
+      "normalized_value": 25000.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "150 J/mm3",
+      "normalized_value": 150.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "100 J/mm3",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "98.5 to 99.2 %",
+      "normalized_min": 98.5,
+      "normalized_max": 99.2
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "94.2 to 99.5 %",
+      "normalized_min": 94.2,
+      "normalized_max": 99.5
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "80 W",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "167 J/mm3",
+      "normalized_value": 167.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99 %",
+      "normalized_value": 99.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "60 J/mm3",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "91.2 %",
+      "normalized_value": 91.2
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "33 J/mm3",
+      "normalized_value": 33.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "500 J/mm3",
+      "normalized_value": 500.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99.5 %",
+      "normalized_value": 99.5
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99.2 %",
+      "normalized_value": 99.2
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "4 mm",
+      "normalized_value": 4000.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "50 J/mm3",
+      "normalized_value": 50.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "75, 100, and 150 J/ mm3",
+      "normalized_value": 75.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "40, 20, and 20 μm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "part precision",
+      "normalized_unit": "%",
+      "raw": "99 %",
+      "normalized_value": 99.0
+    },
+    {
+      "entity": "precision",
+      "normalized_unit": "%",
+      "raw": "99 %",
+      "normalized_value": 99.0
+    },
+    {
+      "entity": "dimensional accuracy",
+      "normalized_unit": "μm",
+      "raw": "0.06 to 0.86 mm",
+      "normalized_min": 60.0,
+      "normalized_max": 860.0
+    },
+    {
+      "entity": "part precision",
+      "normalized_unit": "%",
+      "raw": "93.5 to 79.3 %",
+      "normalized_min": 93.5,
+      "normalized_max": 79.3
+    },
+    {
+      "entity": "part precision",
+      "normalized_unit": "%",
+      "raw": "98.7 to 97.0 %",
+      "normalized_min": 98.7,
+      "normalized_max": 97.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "6.07 μm",
+      "normalized_value": 6.07
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "350 J/mm3",
+      "normalized_value": 350.0
+    },
+    {
+      "entity": "part precision",
+      "normalized_unit": "%",
+      "raw": "87 %",
+      "normalized_value": 87.0
+    },
+    {
+      "entity": "lateral dimensional deviation",
+      "normalized_unit": "μm",
+      "raw": "0.54 mm",
+      "normalized_value": 540.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "133 J/mm3",
+      "normalized_value": 133.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "33–58 J/mm3",
+      "normalized_min": 33.0,
+      "normalized_max": 58.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "43.0–27.2 μm",
+      "normalized_min": 43.0,
+      "normalized_max": 27.2
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "18.0–6.1 μm",
+      "normalized_min": 18.0,
+      "normalized_max": 6.1
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "117 J/mm3",
+      "normalized_value": 117.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "53.6 μm",
+      "normalized_value": 53.6
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "30 μm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "5.9 μm",
+      "normalized_value": 5.9
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "26.2 μm",
+      "normalized_value": 26.2
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "125 and 133 J/mm3",
+      "normalized_value": 125.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "54.8 μm",
+      "normalized_value": 54.8
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "25 μm",
+      "normalized_value": 25.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "40 W",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "67–100 J/mm3",
+      "normalized_min": 67.0,
+      "normalized_max": 100.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "83 J/mm3",
+      "normalized_value": 83.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "100 W",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "895 MPa",
+      "normalized_value": 895.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1241, 1232, and 1187 MPa",
+      "normalized_value": 1241.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "60 μm",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "200 μm",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "90 μm",
+      "normalized_value": 90.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "300 μm",
+      "normalized_value": 300.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "120 μm",
+      "normalized_value": 120.0
+    },
+    {
+      "entity": "columnar grains",
+      "normalized_unit": "μm",
+      "raw": "600 μm",
+      "normalized_value": 600.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1241 to 1187 MPa",
+      "normalized_min": 1241.0,
+      "normalized_max": 1187.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "2 μm",
+      "normalized_value": 2.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "18 μm",
+      "normalized_value": 18.0
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "11.7–5.5 %",
+      "normalized_min": 11.7,
+      "normalized_max": 5.5
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "11.1–2.9 %",
+      "normalized_min": 11.1,
+      "normalized_max": 2.9
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "0.6 %, 1.2 %, and 2.6 %",
+      "normalized_value": 0.6
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "4.4 %",
+      "normalized_value": 4.4
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "9.8 %",
+      "normalized_value": 9.8
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "53.0 %",
+      "normalized_value": 53.0
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "73.9 %",
+      "normalized_value": 73.9
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "5.5 %",
+      "normalized_value": 5.5
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "8.0 %",
+      "normalized_value": 8.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "10.9 %",
+      "normalized_value": 10.9
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "5.1, 13.8, and 47.3 %",
+      "normalized_value": 5.1
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "27.2, 26.6, and 29.5 μm",
+      "normalized_value": 27.2
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "11.7 %",
+      "normalized_value": 11.7
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "11.1 %",
+      "normalized_value": 11.1
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "10 %",
+      "normalized_value": 10.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1034 MPa",
+      "normalized_value": 1034.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "934 MPa",
+      "normalized_value": 934.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "17.4 %",
+      "normalized_value": 17.4
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "%",
+      "raw": "25.6 %",
+      "normalized_value": 25.6
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "52.1 %",
+      "normalized_value": 52.1
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "73.0 %",
+      "normalized_value": 73.0
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "17.8 %",
+      "normalized_value": 17.8
+    },
+    {
+      "entity": "ε",
+      "normalized_unit": "%",
+      "raw": "19.2 %",
+      "normalized_value": 19.2
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "h",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "E",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "P",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "v",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    }
+  ]
+}

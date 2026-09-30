@@ -301,7 +301,8 @@ class LLMExtractor:
         an = analyses.setdefault(s.sentence_id, SentenceAnalysis(sentence=s))
         surface = s.text[span[0]:span[1]]
         # junk filter BEFORE normalisation (which may itself ask the LLM)
-        reason = None if self.lexicon.lookup_any_type(surface) else junk_reason(surface, etype, False)
+        known = self.lexicon.lookup_any_type(surface) or self.normalizer.resolve_symbol(surface)
+        reason = None if known else junk_reason(surface, etype, False)
         if reason:
             out.dropped.append({"stage": "entity", "reason": f"junk:{reason}", "item": e.model_dump()})
             return

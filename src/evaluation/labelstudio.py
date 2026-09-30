@@ -261,6 +261,6 @@ def write_gold(papers: dict[str, dict], out_dir: Path, overwrite: bool = False) 
         if p.exists() and not overwrite:
             log.warning("%s exists; use --overwrite to replace it", p)
             continue
-        p.write_text(json.dumps(g, indent=2, ensure_ascii=False), encoding="utf-8")
+        p.write_text(json.dumps(g, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         written.append(p)
     return written

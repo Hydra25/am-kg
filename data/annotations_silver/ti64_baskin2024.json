@@ -1,0 +1,1439 @@
+{
+  "source_file": "ti64_baskin2024",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 25 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "beam rotation angle"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "impact toughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Material",
+      "canonical": "Ti-6Al-4V"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity ratio"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity rate"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "preheating temperature"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensitic microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α+β microstructure"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Property",
+      "canonical": "impact resistance"
+    },
+    {
+      "type": "Defect",
+      "canonical": "internal pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "cracking"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "balling"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness"
+    },
+    {
+      "type": "Property",
+      "canonical": "maximum tensile strength"
+    },
+    {
+      "type": "Defect",
+      "canonical": "splashing"
+    },
+    {
+      "type": "Property",
+      "canonical": "material density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "EV"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole phenomenon"
+    },
+    {
+      "type": "Defect",
+      "canonical": "void formation"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "beam scanning strategy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "charpy impact"
+    },
+    {
+      "type": "Property",
+      "canonical": "particle size"
+    },
+    {
+      "type": "Property",
+      "canonical": "apparent density"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon gas environment"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "maximum output"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "wavelength"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "pre-heat value"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser scanning strategy"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile test sample"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "room temperature"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "tensile speed"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "notched impact specimen"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "charpy test"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "pendulum impact tester"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "surface roughness tester"
+    },
+    {
+      "type": "Property",
+      "canonical": "rz"
+    },
+    {
+      "type": "Property",
+      "canonical": "rv"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity percentage"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "CT"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "v notch charpy test"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "notch impact test sample"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α' martensite"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar grains"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "elongated grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensitic needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "herringbone pattern"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning direction"
+    },
+    {
+      "type": "Property",
+      "canonical": "strength"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "v notch charpy test sample"
+    },
+    {
+      "type": "Defect",
+      "canonical": "defect void"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity level"
+    },
+    {
+      "type": "Defect",
+      "canonical": "internal void"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile test specimen"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical micrograph"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore generation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "angle of rotation"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile property"
+    },
+    {
+      "type": "Property",
+      "canonical": "toughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "energy absorption capacity"
+    },
+    {
+      "type": "Property",
+      "canonical": "toughness value"
+    },
+    {
+      "type": "Property",
+      "canonical": "energy absorption"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "acicular α' martensite"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar β grain"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "speed"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "ductile dimple"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "equiaxed dimple"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "charpy impact test"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dimple"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain growth"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore coalescence"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spherical pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "notch impact test"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "overlap ratio"
+    },
+    {
+      "type": "Defect",
+      "canonical": "edge effect"
+    },
+    {
+      "type": "Defect",
+      "canonical": "micro-sized shrinkage"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "X-Ray CT"
+    },
+    {
+      "type": "Defect",
+      "canonical": "defect rate"
+    },
+    {
+      "type": "Defect",
+      "canonical": "crack-like void"
+    },
+    {
+      "type": "Defect",
+      "canonical": "defect volume"
+    },
+    {
+      "type": "Defect",
+      "canonical": "defect ratio"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatching spacing"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unfused powder"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "production direction"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Ti-6Al-4V",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "beam rotation angle",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "beam rotation angle",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "beam rotation angle",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "beam rotation angle",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Therefore, this study examined the influence of laser power, scanning speed, hatch spacing and beam rotation angle on the tensile strength, impact energy, surface roughness, and porosity levels of Ti–6Al–4V produced through the L-PBF method."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The lowest value of impact energy, with a value of 8.7 J, was reached at a rotation angle of 180◦."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "porosity ratio",
+      "evidence": "Surface roughness values of 8.9 μm parallel and 8.35 μm perpendicular to the building direction were achieved at a laser power level of 220 W. Laser power was identified as the most influential factor in determining the porosity ratio, with a high porosity rate 0.48% occurring at 160 W laser power."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "porosity rate",
+      "evidence": "Surface roughness values of 8.9 μm parallel and 8.35 μm perpendicular to the building direction were achieved at a laser power level of 220 W. Laser power was identified as the most influential factor in determining the porosity ratio, with a high porosity rate 0.48% occurring at 160 W laser power."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "porosity rate",
+      "evidence": "Furthermore, an increase in scanning speed resulted in a corresponding increase in the porosity rate."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scan strategy",
+      "evidence": "The L-PBF process employs various scanning strategies and powder bed preheating operations to generate different cooling rates and heat treatments."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_CONDITION",
+      "object": "preheating temperature",
+      "evidence": "The L-PBF process employs various scanning strategies and powder bed preheating operations to generate different cooling rates and heat treatments."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser power",
+      "evidence": "In L-PBF process, laser power, scanning speed, layer thickness, and hatch spacing are common process parameters that greatly affect man­ ufactured parts mechanical and metallurgical properties [9]."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "In L-PBF process, laser power, scanning speed, layer thickness, and hatch spacing are common process parameters that greatly affect man­ ufactured parts mechanical and metallurgical properties [9]."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "In L-PBF process, laser power, scanning speed, layer thickness, and hatch spacing are common process parameters that greatly affect man­ ufactured parts mechanical and metallurgical properties [9]."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatch spacing",
+      "evidence": "In L-PBF process, laser power, scanning speed, layer thickness, and hatch spacing are common process parameters that greatly affect man­ ufactured parts mechanical and metallurgical properties [9]."
+    },
+    {
+      "subject": "charpy test",
+      "relation": "CHARACTERIZES",
+      "object": "impact toughness",
+      "evidence": "In order to investigate impact energies of the samples Charpy tests were performed in accordance with ASTM E23 Fig. 1."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "Ti-6Al-4V",
+      "evidence": "SEM images of a) homogeneously dispersed Ti–6Al–4V powder particles exhibiting a spherical shape, b) powder particles size distribution."
+    },
+    {
+      "subject": "surface roughness tester",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "Surface roughness value was measured by conducting tests in both perpendicular and parallel directions to the building direction using a surface roughness tester (Mitutoyo SJ-410, Japan) (Fig. 3)."
+    },
+    {
+      "subject": "CT",
+      "relation": "CHARACTERIZES",
+      "object": "porosity percentage",
+      "evidence": "The porosity percentage was measured by analyzing the size of the pores within the 3D pore morphologies obtained using an X-ray computed tomography device (Nikon XT H 225 ST, Japan) with a maximum energy capacity of 225 kV."
+    },
+    {
+      "subject": "CT",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "The porosity percentage was measured by analyzing the size of the pores within the 3D pore morphologies obtained using an X-ray computed tomography device (Nikon XT H 225 ST, Japan) with a maximum energy capacity of 225 kV."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "α' martensite",
+      "evidence": "As expected, due to the high tem­ perature gradients that occur during the L-PBF process, the present phase is a very fine acicular martensite."
+    },
+    {
+      "subject": "scanning direction",
+      "relation": "AFFECTS",
+      "object": "herringbone pattern",
+      "evidence": "An angle of 90◦herringbone pattern caused by the alternation of scanning direction can be found [37]."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "tensile strength",
+      "evidence": "Effect of process parameters on tensile strength The results of the tensile test conducted on the Ti–6Al–4V samples at room temperature under various process parameters are shown in Fig. 8."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "The expected increase in strength with higher laser power levels can be attributed to the inherent connection between en­ ergy input and resulting material characteristics, wherein greater energy input leads to reduced porosity, larger martensitic grain dimensions, and ultimately, enhanced strength properties [38]."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "The changes of strengths depending on scanning speed are shown in Fig. 8b."
+    },
+    {
+      "subject": "porosity level",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Increased porosity levels typically result in a reduction in tensile strength, as the internal voids can serve as potential locations for stress concentration and structural failure."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "The decrease in strength observed at shorter hatch spacing can result from the over­ lapping and excessive heating of neighboring scan vectors."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "Increasing the hatch spacing results in a reduction in the size of the melt pool, poten­ tially resulting in insufficient consolidation."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "Ti-6Al-4V",
+      "evidence": "Tensile test results for Ti–6Al–4V alloy depending on (a) laser power, (b) scanning speed, (c) hatch spacing, (d) rotation angle. on the rotation angles are depicted in Fig. 8d."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "energy absorption capacity",
+      "evidence": "Energy absorption capacities were calculated by calculating the areas under the stress-strain curves obtained as a result of the tensile tests."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "energy absorption",
+      "evidence": "As the laser power increased to 160 W–190 W the energy absorption also increased."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "energy absorption capacity",
+      "evidence": "It has been observed that the energy absorption capacity decreases with the increase in scanning speed."
+    },
+    {
+      "subject": "acicular α' martensite",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "On the other hand, with 220 W laser power (case P3), it showed a decrease of 20% on average and resulted as 12 J. The reason for this decrease in impact energy is explained as; by the formation of martensitic (acicular α′ martensite on a columnar β grain) that exhibits a fine acicular (needle-like) microstructure due to the natural rapid cooling of the material [43,44]."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "CAUSES",
+      "object": "cracking",
+      "evidence": "Reduced hatch spacing can result in heightened thermal stress and the accumulation of residual heat, leading to compromised material consolidation, dimin­ ished mechanical properties, and the potential for cracking in the fabricated component."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "ductile dimple",
+      "evidence": "In contrast, a significant decrease was noted in the value at a 180◦ rotation angle, measuring 8.7 J. In addition, based on the SEM result, the fracture surface shown in Fig. 11b exhibited localized areas with ductile dimples."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "grain growth",
+      "evidence": "As seen in Fig. 11d, excessive melting occurred due to the high laser power, initiating grain growth, which is a factor contributing to reduced ductility."
+    },
+    {
+      "subject": "grain growth",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "As seen in Fig. 11d, excessive melting occurred due to the high laser power, initiating grain growth, which is a factor contributing to reduced ductility."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "While the layer thickness remains constant, the increase in scanning speed causes the size of the melt pool to decrease."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "Fig. 13d illustrates that as the rotation angle reaches 180◦, there is a noticeable increase in surface roughness values."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "edge effect",
+      "evidence": "As the scanning angle increases, an edge effect becomes apparent on the material surface."
+    },
+    {
+      "subject": "edge effect",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "This increase in surface roughness is attributed to the edge effect."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "rv",
+      "evidence": "In Fig. 14a, Rv and Rz values depicted according to laser power."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "rz",
+      "evidence": "In Fig. 14a, Rv and Rz values depicted according to laser power."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "rz",
+      "evidence": "In Fig. 14b, in perpendicular measurements, it is seen that the Rz value increases from 76.75 μm to 99.25 μm as the scanning speed increases from 800 mm/s to 1200 mm/s."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "cracking",
+      "evidence": "At elevated scanning speeds, certain components exhibited a characteristic form of micro-cracking commonly associated with high laser scanning speeds."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "micro-sized shrinkage",
+      "evidence": "The presence of micro-sized shrinkage was noted due to an excessive scanning speed applied to the particle powder."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "rv",
+      "evidence": "The same increase is observed in Rv with increasing scanning speed."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "rv",
+      "evidence": "Rv and Rz values with different hatch spacing can be seen in Fig. 14c."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "rz",
+      "evidence": "Rv and Rz values with different hatch spacing can be seen in Fig. 14c."
+    },
+    {
+      "subject": "X-Ray CT",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Effect of process parameters on porosity Fig. 15 shows the X-Ray CT scanning results of samples produced by incrementally increasing the laser power to 160 W, 190 W, and 220 W, while keeping the scanning speed at 900 mm/s, hatch spacing at 0.1 mm, rotation angle at 90◦, and layer thickness at 30 μm."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "defect void",
+      "evidence": "In Fig. 15a, it is evident that at a laser power of 160 W and low en­ ergy input of 59.25 J, the number of defect voids increases, resulting in a higher porosity ratio."
+    },
+    {
+      "subject": "defect void",
+      "relation": "CAUSES",
+      "object": "porosity ratio",
+      "evidence": "In Fig. 15a, it is evident that at a laser power of 160 W and low en­ ergy input of 59.25 J, the number of defect voids increases, resulting in a higher porosity ratio."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "defect volume",
+      "evidence": "In Fig. 15b, it is illustrated that as laser power increases, there is a reduction in the defect volume."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "defect ratio",
+      "evidence": "In Fig. 16b, it is apparent that the defect ratio increases as the scanning speed increases."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "defect volume",
+      "evidence": "As seen in Fig. 16c, at the selected values, increasing hatch spacing resulted in a decrease in material defect volume."
+    },
+    {
+      "subject": "X-Ray CT",
+      "relation": "CHARACTERIZES",
+      "object": "defect void",
+      "evidence": "Fig. 15. 3D image of defect voids via X-Ray CT depending on laser power; (a) 160W (case P1), (b) 190W (case P2), (c) 220 W (case P3)."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "defect volume",
+      "evidence": "Fig. 16. Defect volume depending on (a) laser power, (b) scanning speed, (c) hatch spacing, (d) rotation angle. of a well-balanced set of parameters."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "defect volume",
+      "evidence": "Fig. 16. Defect volume depending on (a) laser power, (b) scanning speed, (c) hatch spacing, (d) rotation angle. of a well-balanced set of parameters."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "defect ratio",
+      "evidence": "The defect ratio, which was 0.12% at a 0.07 hatch spacing value, remained constant at 0.02% for hatch spacing values of 0.09 and 0.11 mm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "material density",
+      "evidence": "The observed decrease in material density is attributed to an increased hatch spacing value leading to high overlap and the elimination of pores in boundary areas that are typically caused by small scanning distances as discussed in the literature [15,32, 51]."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "porosity ratio",
+      "evidence": "In Fig. 16d, the influence of the rotation angle on the material’s porosity ratio was examined, and the corresponding results are dis­ played."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "defect rate",
+      "evidence": "The results indicate that the rotation angle had the least impact on the defect rate."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "defect ratio",
+      "evidence": "The defect ratio, which observed at 0.06% with a rotation angle of 45◦, decreased to 0.01% at a rotation angle of 67◦."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "From non-rotation to 45◦, 67◦, 90◦rotation angle up to a certain stage can eliminate lack of fusion defects."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "Reduced scanning speed leads to the formation of a fewer stable elongated melt pool and a coarser microstructure."
+    }
+  ],
+  "values": [
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "645 MPa",
+      "normalized_value": 645.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.07 mm",
+      "normalized_value": 70.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "190 W",
+      "normalized_value": 190.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "μm",
+      "raw": "900 mm",
+      "normalized_value": 900000.0
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "8.7 J",
+      "normalized_value": 8.7
+    },
+    {
+      "entity": "scan strategy",
+      "normalized_unit": "°",
+      "raw": "180◦",
+      "normalized_value": 180.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "8.9 μm",
+      "normalized_value": 8.9
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "8.35 μm",
+      "normalized_value": 8.35
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "220 W",
+      "normalized_value": 220.0
+    },
+    {
+      "entity": "porosity rate",
+      "normalized_unit": "%",
+      "raw": "0.48%",
+      "normalized_value": 0.48
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "160 W",
+      "normalized_value": 160.0
+    },
+    {
+      "entity": "beam scanning strategy",
+      "normalized_unit": "°",
+      "raw": "45◦",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "beam scanning strategy",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "beam scanning strategy",
+      "normalized_unit": "°",
+      "raw": "180◦",
+      "normalized_value": 180.0
+    },
+    {
+      "entity": "particle size",
+      "normalized_unit": "μm",
+      "raw": "45 μm",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "apparent density",
+      "normalized_unit": "g/cm³",
+      "raw": "2.52 g/cm3",
+      "normalized_value": 2.52
+    },
+    {
+      "entity": "maximum output",
+      "normalized_unit": "W",
+      "raw": "500 W",
+      "normalized_value": 500.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "20 to 100 μm",
+      "normalized_min": 20.0,
+      "normalized_max": 100.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30 μm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "wavelength",
+      "normalized_unit": "μm",
+      "raw": "1070 nm",
+      "normalized_value": 1.07
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "0.085 mm",
+      "normalized_value": 85.0
+    },
+    {
+      "entity": "pre-heat value",
+      "normalized_unit": "°C",
+      "raw": "180 ◦C",
+      "normalized_value": 180.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "800 mm/s",
+      "normalized_value": 800.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1200 mm/s",
+      "normalized_value": 1200.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.09 mm",
+      "normalized_value": 90.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.11 mm",
+      "normalized_value": 110.0
+    },
+    {
+      "entity": "scan strategy",
+      "normalized_unit": "°",
+      "raw": "90◦",
+      "normalized_value": 90.0
+    },
+    {
+      "entity": "scan strategy",
+      "normalized_unit": "°",
+      "raw": "45◦",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "scan strategy",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "tensile speed",
+      "normalized_unit": "mm/s",
+      "raw": "0.008 mm/s",
+      "normalized_value": 0.008
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "10 mm",
+      "normalized_value": 10000.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "900 mm/s",
+      "normalized_value": 900.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.1 mm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "strength",
+      "normalized_unit": "MPa",
+      "raw": "1053 MPa",
+      "normalized_value": 1053.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1140 MPa",
+      "normalized_value": 1140.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "975 MPa",
+      "normalized_value": 975.0
+    },
+    {
+      "entity": "strength",
+      "normalized_unit": "MPa",
+      "raw": "1016 MPa",
+      "normalized_value": 1016.0
+    },
+    {
+      "entity": "strength",
+      "normalized_unit": "MPa",
+      "raw": "991 MPa",
+      "normalized_value": 991.0
+    },
+    {
+      "entity": "maximum tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1130 MPa",
+      "normalized_value": 1130.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1033 MPa",
+      "normalized_value": 1033.0
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "14.9 J",
+      "normalized_value": 14.9
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "15.1 J",
+      "normalized_value": 15.1
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "12 J",
+      "normalized_value": 12.0
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "12.3 J",
+      "normalized_value": 12.3
+    },
+    {
+      "entity": "speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "14.7 J",
+      "normalized_value": 14.7
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "11.8 J",
+      "normalized_value": 11.8
+    },
+    {
+      "entity": "impact toughness",
+      "normalized_unit": "J",
+      "raw": "11.3 J",
+      "normalized_value": 11.3
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "10.81 μm",
+      "normalized_value": 10.81
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "12.64 μm",
+      "normalized_value": 12.64
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "11.92 μm",
+      "normalized_value": 11.92
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "11.35 μm",
+      "normalized_value": 11.35
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "10.97 μm",
+      "normalized_value": 10.97
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "9.82 μm",
+      "normalized_value": 9.82
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "86.76 μm",
+      "normalized_value": 86.76
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "71.58 μm",
+      "normalized_value": 71.58
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "89.36 μm",
+      "normalized_value": 89.36
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "80.10 μm",
+      "normalized_value": 80.1
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "76.75 μm",
+      "normalized_value": 76.75
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "99.25 μm",
+      "normalized_value": 99.25
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J",
+      "raw": "59.25 J",
+      "normalized_value": 59.25
+    },
+    {
+      "entity": "defect ratio",
+      "normalized_unit": "%",
+      "raw": "0.12%",
+      "normalized_value": 0.12
+    },
+    {
+      "entity": "defect ratio",
+      "normalized_unit": "%",
+      "raw": "0.02%",
+      "normalized_value": 0.02
+    },
+    {
+      "entity": "defect ratio",
+      "normalized_unit": "%",
+      "raw": "0.06%",
+      "normalized_value": 0.06
+    },
+    {
+      "entity": "defect ratio",
+      "normalized_unit": "%",
+      "raw": "0.01%",
+      "normalized_value": 0.01
+    },
+    {
+      "entity": "defect volume",
+      "normalized_unit": "%",
+      "raw": "0.08%",
+      "normalized_value": 0.08
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1161 MPa",
+      "normalized_value": 1161.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "100 mm",
+      "normalized_value": 100000.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.7 mm",
+      "normalized_value": 700.0
+    },
+    {
+      "entity": "energy absorption",
+      "normalized_unit": "J",
+      "raw": "15.1 J",
+      "normalized_value": 15.1
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "α+β microstructure",
+      "type": "Microstructure",
+      "canonical": "α+β microstructure"
+    },
+    {
+      "surface": "size",
+      "type": "Property",
+      "canonical": "particle size"
+    },
+    {
+      "surface": "α′ phase",
+      "type": "Microstructure",
+      "canonical": "α' martensite"
+    },
+    {
+      "surface": "scan range",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "scanning distance",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "toughness",
+      "type": "Property",
+      "canonical": "toughness"
+    },
+    {
+      "surface": "notch impact test result",
+      "type": "Property",
+      "canonical": "impact toughness"
+    },
+    {
+      "surface": "laser energy power",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "rotation strategy",
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "surface": "angle of rotation",
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "surface": "construction direction",
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "surface": "overlapping ratio",
+      "type": "Parameter",
+      "canonical": "overlap ratio"
+    },
+    {
+      "surface": "over­ lapping ratio",
+      "type": "Parameter",
+      "canonical": "overlap ratio"
+    },
+    {
+      "surface": "scanning angle",
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "surface": "en­ ergy input",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "scanning distances",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "rotation angle strategy",
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "surface": "notch impact energy",
+      "type": "Property",
+      "canonical": "impact toughness"
+    },
+    {
+      "surface": "scanning range",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "scanning interval",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    }
+  ]
+}

@@ -335,7 +335,7 @@ Microstructure:
   - canonical: β phase
     aliases: [β phase, β-phase, beta phase, prior β grains, prior-β grains]
   - canonical: α' martensite
-    aliases: ["α' martensite", "α′ martensite", "α' martensitic", martensite, martensitic, acicular martensite, "acicular α'"]
+    aliases: ["α' martensite", "α′ martensite", "α' martensitic", martensite, martensitic, acicular martensite, "acicular α'", "α' phase", "α′ phase", "α' laths"]
   - canonical: dendritic structure
     aliases: [dendritic structure, dendrites, dendritic, cellular-dendritic structure, dendritic microstructure, interdendritic]
   - canonical: cellular structure

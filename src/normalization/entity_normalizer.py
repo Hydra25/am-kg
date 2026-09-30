@@ -86,6 +86,32 @@ class EntityNormalizer:
         self.overrides = overrides or NormalizationOverrides()
         self.llm_chooser = llm_chooser
         self.new_entities: dict[str, CanonicalEntity] = {}
+        # per-paper context, set by the pipeline for each paper
+        self.paper_abbreviations: dict[str, str] = {}
+        self.paper_symbols: dict[str, list[str]] = {}
+
+    def set_paper_context(self, abbreviations: Optional[dict[str, str]] = None,
+                          symbols: Optional[dict[str, list[str]]] = None) -> None:
+        """Abbreviations ("VED") and symbols ("P", "v", "h") defined in the current paper."""
+        self.paper_abbreviations = dict(abbreviations or {})
+        self.paper_symbols = dict(symbols or {})
+
+    def resolve_symbol(self, surface: str, entity_type: Optional[str] = None) -> Optional[tuple[str, float]]:
+        """'P' -> laser power if the paper defines "laser power (P)" or "P is the laser power".
+        A symbol the paper defines as two different lexicon terms is ambiguous -> None."""
+        hits: dict[str, float] = {}
+        for long_form in self.paper_symbols.get(surface.strip(), []):
+            words = long_form.split()
+            for n in range(min(len(words), 5), 0, -1):      # longest trailing phrase first
+                phrase = " ".join(words[-n:])
+                hit = (self.lexicon.lookup(phrase, entity_type) if entity_type
+                       else next(iter((h[1], h[2]) for h in self.lexicon.lookup_any_type(phrase)), None))
+                if hit:
+                    hits[hit[0]] = max(hit[1], hits.get(hit[0], 0.0))
+                    break
+        if len(hits) != 1:
+            return None
+        return next(iter(hits.items()))
 
     # ------------------------------------------------------------------
     def entity(self, cid: str) -> Optional[CanonicalEntity]:
@@ -113,11 +139,17 @@ class EntityNormalizer:
         if hit:
             return self._result(hit[0], hit[1], "lexicon")
         # 3. paper-local abbreviation definition
-        if local_abbreviations and surface in local_abbreviations:
-            long_form = local_abbreviations[surface]
+        abbreviations = local_abbreviations if local_abbreviations is not None else self.paper_abbreviations
+        if abbreviations and surface in abbreviations:
+            long_form = abbreviations[surface]
             hit = self.lexicon.lookup(long_form, entity_type)
             if hit:
                 return self._result(hit[0], hit[1] * 0.95, "local_abbreviation")
+        # 3a. paper-local symbol ("P", "v", "h", "E" defined in the text)
+        if surface in self.paper_symbols:
+            hit = self.resolve_symbol(surface, entity_type)
+            if hit:
+                return self._result(hit[0], hit[1] * 0.9, "paper_symbol")
         # 3b. plural / singular variants
         sing = singularize(surface)
         if sing != surface:
@@ -137,7 +169,8 @@ class EntityNormalizer:
             return self._result(cid, conf * 0.85, f"lexicon_retyped_from_{entity_type}")
         # 5. fuzzy
         candidates = self._fuzzy_candidates(surface, entity_type)
-        if candidates and candidates[0][1] >= FUZZY_THRESHOLD:
+        if (candidates and candidates[0][1] >= FUZZY_THRESHOLD
+                and fuzzy_compatible(surface, self._best_alias.get(candidates[0][0], ""))):
             cid, ratio = candidates[0]
             return self._result(cid, ratio * 0.85, "fuzzy")
         # 6. LLM choice among candidates (restricted list -> no invented entities)
@@ -164,6 +197,7 @@ class EntityNormalizer:
         if len(key) < 4:  # short strings/acronyms: fuzzy matching is unreliable
             return []
         best: dict[str, float] = {}
+        self._best_alias: dict[str, str] = {}      # canonical id -> the alias that matched best
         for alias in self.lexicon.aliases:
             if alias.entity_type != entity_type:
                 continue
@@ -173,6 +207,7 @@ class EntityNormalizer:
             r = difflib.SequenceMatcher(None, key, akey).ratio() * min(1.0, alias.confidence + 0.05)
             if r > best.get(alias.canonical_id, 0.0):
                 best[alias.canonical_id] = r
+                self._best_alias[alias.canonical_id] = alias.text
         return sorted(best.items(), key=lambda kv: kv[1], reverse=True)
 
     @staticmethod
@@ -212,6 +247,40 @@ def head_compatible(term: str, candidate: str) -> bool:
     return bool(cand) and cand[-1] in set(_tokens(term))
 
 
+def _fuzzy_tokens(text: str) -> list[str]:
+    """Like _tokens, but keeps Greek letters and primes: α' (martensite) is not α."""
+    t = normalize_chars(text).lower().replace("′", "'")
+    return [singularize(w) for w in re.findall(r"[a-z0-9α-ω']+", t) if w not in _HEAD_STOP]
+
+
+def _similar(a: str, b: str) -> bool:
+    if a == b:
+        return True
+    # a spelling variant keeps the beginning of the word: "tomograpy" ~ "tomography",
+    # but "toughness" !~ "roughness" and "macrostructure" !~ "microstructure"
+    return a[:3] == b[:3] and difflib.SequenceMatcher(None, a, b).ratio() >= 0.8
+
+
+# measurement-location / statistic words that make a term more specific without changing
+# what it is: "top surface roughness" is still surface roughness
+_QUALIFIERS = {"top", "side", "bottom", "lateral", "upper", "lower", "upskin", "downskin", "average", "mean",
+               "overall", "total", "measured", "final", "maximum", "minimum", "max", "min", "bulk", "local"}
+
+
+def fuzzy_compatible(term: str, candidate: str) -> bool:
+    """Guard for fuzzy (string-similarity) matches. Every word of the term must have a
+    spelling-variant counterpart in the candidate and vice versa. Blocks the wrong
+    mappings seen on real papers: toughness -> surface roughness, α' phase -> α phase,
+    macrostructure -> microstructure, α+β microstructure -> microstructure."""
+    a, b = _fuzzy_tokens(term), _fuzzy_tokens(candidate)
+    if not a or not b:
+        return False
+    if "".join(a) == "".join(b):          # "key hole" vs "keyhole"
+        return True
+    return (all(x in _QUALIFIERS or any(_similar(x, y) for y in b) for x in a)
+            and all(any(_similar(y, x) for x in a) for y in b))
+
+
 _ABBREV_RE = re.compile(r"(?P<long>[A-Za-z][\w\-α-ω ]{3,80}?)\s*\((?P<short>[A-Z][A-Za-z0-9\-/]{1,9})\)")
 
 
@@ -232,4 +301,33 @@ def find_abbreviations(text: str) -> dict[str, str]:
                 if all(ch in initials or ch in " ".join(cand).lower() for ch in letters):
                     out[short] = " ".join(cand)
                     break
+    return out
+
+
+# "laser power (P)", "scanning speed (v)", "hatch distance (h)"
+_SYM_PAREN_RE = re.compile(r"(?P<long>[A-Za-z][A-Za-z\- ]{2,60}?)\s*\(\s*(?P<sym>[A-Za-z][a-z]?)\s*\)")
+# "where P is the laser power, v is the scanning speed ...", "P: laser power", "P = laser power"
+_SYM_DEF_RE = re.compile(r"(?<![\w'])(?P<sym>[A-Za-z][a-z]?)(?:\s+(?:is|denotes|represents)\s+|\s*[:=]\s*)(?:the\s+)?"
+                         r"(?P<long>[A-Za-z][A-Za-z\- ]{2,50}?)(?=\s*(?:[,;.(\[]|\band\b|\bin\b|\bwith\b|$))")
+
+
+def find_symbol_definitions(text: str) -> dict[str, list[str]]:
+    """Single-letter (or letter + subscript letter) symbols defined in the text.
+
+    Returns symbol -> candidate long forms in order of appearance. The long forms are
+    raw text; EntityNormalizer.resolve_symbol only accepts one that ends in a lexicon
+    term, so "It is a common process" never turns "It" into anything."""
+    found: list[tuple[int, str, str]] = []
+    norm = normalize_chars(text)
+    for rx in (_SYM_PAREN_RE, _SYM_DEF_RE):
+        for m in rx.finditer(norm):
+            sym, long_form = m.group("sym"), clean_whitespace(m.group("long"))
+            if sym.lower() in {"a", "an", "i", "it", "is", "in", "on", "of", "or", "to", "as", "at", "by", "we"}:
+                continue
+            found.append((m.start(), sym, long_form))
+    out: dict[str, list[str]] = {}
+    for _pos, sym, long_form in sorted(found):
+        lst = out.setdefault(sym, [])
+        if long_form not in lst:
+            lst.append(long_form)
     return out

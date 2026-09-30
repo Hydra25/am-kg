@@ -1,0 +1,1064 @@
+{
+  "source_file": "alsi10mg_kumar2023",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 34 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Material",
+      "canonical": "AlSi10Mg"
+    },
+    {
+      "type": "Defect",
+      "canonical": "balling"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spatter"
+    },
+    {
+      "type": "Property",
+      "canonical": "SS surface roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "BS surface roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EDS"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "nominal power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "spot size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "substrate temperature"
+    },
+    {
+      "type": "Property",
+      "canonical": "thermal stress"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "oxygen content"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "rotational scanning mode"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "wire electric discharge machining"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface hardness"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Property",
+      "canonical": "bulk density"
+    },
+    {
+      "type": "Property",
+      "canonical": "theoretical density"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "Archimedes method"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EDAX"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "hardness testing"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "micro hardness test"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "load"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "microscope"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "surface roughness tester"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "sampling length"
+    },
+    {
+      "type": "Defect",
+      "canonical": "entrapment of gas"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole formation"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "FE-SEM"
+    },
+    {
+      "type": "Property",
+      "canonical": "melt pool temperature"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "precipitates"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain refinement"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "molten pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "exposure time"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "Property",
+      "canonical": "SS roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "BS roughness"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "AlSi10Mg",
+      "evidence": "of Laser Powder Bed Fusion based AlSi10Mg parts by attaining defect OPEN M. Saravana Kumar 1*, Che‑Hua Yang 1, Muhammad Umar Farooq 2*, V. Kavimani 3 & Adediran Adeolu Adesoji 4,5,6* This research aims to fabricate an AlSi10Mg parts using Laser Powder Bed Fusion technique with enhanced structural integrity."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser power",
+      "evidence": "Modelling of the Laser Powder Bed Fusion process parameters such as Laser power, scanning speed, layer thickness and hatch spacing is carried out through Complex Proportional Assessment technique to optimize the parts’ surface attributes and to overcome the defects based on the output responses such as surface roughness on scanning and building side, hardness and porosity."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "Modelling of the Laser Powder Bed Fusion process parameters such as Laser power, scanning speed, layer thickness and hatch spacing is carried out through Complex Proportional Assessment technique to optimize the parts’ surface attributes and to overcome the defects based on the output responses such as surface roughness on scanning and building side, hardness and porosity."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "Modelling of the Laser Powder Bed Fusion process parameters such as Laser power, scanning speed, layer thickness and hatch spacing is carried out through Complex Proportional Assessment technique to optimize the parts’ surface attributes and to overcome the defects based on the output responses such as surface roughness on scanning and building side, hardness and porosity."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatch spacing",
+      "evidence": "Modelling of the Laser Powder Bed Fusion process parameters such as Laser power, scanning speed, layer thickness and hatch spacing is carried out through Complex Proportional Assessment technique to optimize the parts’ surface attributes and to overcome the defects based on the output responses such as surface roughness on scanning and building side, hardness and porosity."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm produces significantly desirable results to achieve maximum hardness and minimum surface roughness and holding the porosity of < 1%."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "powder particle size",
+      "evidence": "The SEM analysis of the particle size confirms that the particles are spherical in shape."
+    },
+    {
+      "subject": "EDS",
+      "relation": "CHARACTERIZES",
+      "object": "AlSi10Mg",
+      "evidence": "The EDX analysis from the powder also approves the occurrence of major elements such as Al (90–91%), Mg (0.2–0.4%) and Si (9–11%), this standard range of major elements confirms the purity of the AlSi10Mg powder."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "nominal power",
+      "evidence": "AlSi10Mg samples were fabricated using the LPBF technique in the EOS M280 system which has 7,000 hPa of compressed air supply; 20 ­m3/h and Ytterbium fibre laser with a nominal power of 400W was used to melt the powder and the laser beam has a diameter of 100 to 500 μm at the building area."
+    },
+    {
+      "subject": "substrate temperature",
+      "relation": "AFFECTS",
+      "object": "thermal stress",
+      "evidence": "To lessen thermal stress and sample deformation, the platform was heated to 150 °C before melting."
+    },
+    {
+      "subject": "Archimedes method",
+      "relation": "CHARACTERIZES",
+      "object": "bulk density",
+      "evidence": "The bulk density of the printed parts were measured using the Archimedes ­methods24."
+    },
+    {
+      "subject": "hardness testing",
+      "relation": "CHARACTERIZES",
+      "object": "hardness",
+      "evidence": "The hardness test was performed on both the top (Scanning surface) and side surface (building surface) to investigate the fluctuation in the hardness values."
+    },
+    {
+      "subject": "microscope",
+      "relation": "CHARACTERIZES",
+      "object": "hardness",
+      "evidence": "A microscope was used to carefully measure the diagonal indentation effect, and the load and indentation size were used to calculate the Vickers hardness."
+    },
+    {
+      "subject": "surface roughness tester",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "Using a Taylor-Hobson Surtronic 3 + surface roughness tester with a 0.8 mm sampling length, surface roughness of the printed parts were examined."
+    },
+    {
+      "subject": "laser power",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Similarly, lower laser power does not possess enough heat for the perfect fusion of the particles which leads to the occurrence of high porosity (Fig. 6)."
+    },
+    {
+      "subject": "entrapment of gas",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "This kind of entrapment of gas may induce the porosity formation."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "keyhole formation",
+      "evidence": "Similarly decrease in scanning speed also increases the porosity, as the prolonged exposure of laser may leads to the keyhole formation or spattering effect (Fig. 5)."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "spatter",
+      "evidence": "Similarly decrease in scanning speed also increases the porosity, as the prolonged exposure of laser may leads to the keyhole formation or spattering effect (Fig. 5)."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "CAUSES",
+      "object": "balling",
+      "evidence": "This will leads to the improper fusion of particles which results in balling ­effect36, the schematic diagram of balling effect was shown in Fig. 5."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "melt pool temperature",
+      "evidence": "This phenomenon proves that the melt pool temperature and the scan speed is inversely proportional and according to Eq. (15), there is a likelihood of proliferation in the formation of ­droplets34."
+    },
+    {
+      "subject": "FE-SEM",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Figure 7.   FE-SEM interaction plots with EDAX mapping for the hatch spacing and porosity."
+    },
+    {
+      "subject": "unmelted powder",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "(17) ∇¯ufb = ∂ufb ˆi + ∂ufb ˆj + ∂ufb ˆk \u001a= 0 ∂x ∂y ∂y This characteristic causes the generation of waves which entraps the unmelted powders and that will leads to the formation of porosities in the subsequent layers."
+    },
+    {
+      "subject": "melt pool",
+      "relation": "AFFECTS",
+      "object": "grain refinement",
+      "evidence": "This was due to the over lapping of melt pools which causes the re-melting and influences the grain refinements and finally it attributes to the enhanced ­hardness41."
+    },
+    {
+      "subject": "grain refinement",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "This was due to the over lapping of melt pools which causes the re-melting and influences the grain refinements and finally it attributes to the enhanced ­hardness41."
+    },
+    {
+      "subject": "molten pool",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The fluidity of the molten liquid and the depth of the molten pool have the most effects on the sample density during the selective laser melting process."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "Increase in scanning speed reduces the exposure time of the fusion process which attributes to improper fusion of particles (Fig. 7)."
+    },
+    {
+      "subject": "grain refinement",
+      "relation": "AFFECTS",
+      "object": "residual stress",
+      "evidence": "This was due to the fact that the overlapping of melt pools and re-melting leads to the grain refinements due to the homogenous distribution of thermal gradient and thereby reducing the residual stress."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "This was due to the fact that the improper fusion of particles may takes place due to the increased layer thickness and this can be observed from the un-melted powders on the printed ­parts43."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "In case of laser power, reduced laser power (< 300W), leads to the improper melt pool formation which consequently attributes to the increase in surface roughness in both top and side surface."
+    },
+    {
+      "subject": "melt pool",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "In case of laser power, reduced laser power (< 300W), leads to the improper melt pool formation which consequently attributes to the increase in surface roughness in both top and side surface."
+    },
+    {
+      "subject": "laser power",
+      "relation": "CAUSES",
+      "object": "keyhole formation",
+      "evidence": "However, if the laser power reaches more than 350W there will be high possibility of keyhole formation and that affects the surface characteristics of the printed parts which was reported in the Fig. 6 with the schematic representation of keyhole formation."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "The increase in scanning speed decreases the exposure time of layer and that will creates a poor melt pool formation and an improper binding of particles, these defects may cause high surface roughness and leads to poor surface finish."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Similarly, minimum scanning speed cause prolonged exposure of laser beam to the particular surface which in turns creates more porosity due to the vaporization of melt ­pools46."
+    },
+    {
+      "subject": "melt pool",
+      "relation": "AFFECTS",
+      "object": "residual stress",
+      "evidence": "The overlapping of melt pools enhances the surface properties by elimination porosity, residual stress and attaining the grain refinements."
+    },
+    {
+      "subject": "FE-SEM",
+      "relation": "CHARACTERIZES",
+      "object": "AlSi10Mg",
+      "evidence": "Figure 13.   Comparison of scanning and building surface FE-SEM images of as-build AlSi10Mg parts based on the influential parameters."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "The following conclusions were drawn from the investigation. •\t The balling effect was considerably reduced by adopting minimum hatch spacing of 0.1 mm which creates better thermodynamic stability and that aids in attaining the perfect fusion of the particles and also avoids the occurrence of un-melted particles."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "unmelted powder",
+      "evidence": "The following conclusions were drawn from the investigation. •\t The balling effect was considerably reduced by adopting minimum hatch spacing of 0.1 mm which creates better thermodynamic stability and that aids in attaining the perfect fusion of the particles and also avoids the occurrence of un-melted particles."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "Another interesting observation made during the analysis was that the hatch spacing of 0.1 mm increases overlapping regions of melt pools, thereby eliminating the balling effect. •\t On evaluating the interaction between the scan speed and laser power, the achieved optimal energy density of 38.46 J/mm3 not only reduced the porosity percentage (< 1%) but also significantly reduced the spattering effects."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Another interesting observation made during the analysis was that the hatch spacing of 0.1 mm increases overlapping regions of melt pools, thereby eliminating the balling effect. •\t On evaluating the interaction between the scan speed and laser power, the achieved optimal energy density of 38.46 J/mm3 not only reduced the porosity percentage (< 1%) but also significantly reduced the spattering effects."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "spatter",
+      "evidence": "Another interesting observation made during the analysis was that the hatch spacing of 0.1 mm increases overlapping regions of melt pools, thereby eliminating the balling effect. •\t On evaluating the interaction between the scan speed and laser power, the achieved optimal energy density of 38.46 J/mm3 not only reduced the porosity percentage (< 1%) but also significantly reduced the spattering effects."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "keyhole formation",
+      "evidence": "Moreover, expanding the overlap between melt pool regions causes re-melting, which promotes grain refinement and, in turn, increases hardness up to 107 VHN, improving the structural integrity of printed parts. •\t Avoiding keyhole formation was one of the important constrain to get an effective melt pool formation and that was accomplished by creating a stable thermal capillary convection with optimal laser power with sufficient scan speed."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "keyhole formation",
+      "evidence": "Moreover, expanding the overlap between melt pool regions causes re-melting, which promotes grain refinement and, in turn, increases hardness up to 107 VHN, improving the structural integrity of printed parts. •\t Avoiding keyhole formation was one of the important constrain to get an effective melt pool formation and that was accomplished by creating a stable thermal capillary convection with optimal laser power with sufficient scan speed."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "SS surface roughness",
+      "evidence": "The laser power of 350W and scan speed of 1130 mm/s obtained from the composite desirability-based mathematical optimization helps in reduction of keyhole formations. •\t SS surface roughness generally depends on laser power, scanning speed and hatch spacing but BS surface roughness mostly depends on layer thickness which was influenced by the re-coater."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "SS surface roughness",
+      "evidence": "The laser power of 350W and scan speed of 1130 mm/s obtained from the composite desirability-based mathematical optimization helps in reduction of keyhole formations. •\t SS surface roughness generally depends on laser power, scanning speed and hatch spacing but BS surface roughness mostly depends on layer thickness which was influenced by the re-coater."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "SS surface roughness",
+      "evidence": "The laser power of 350W and scan speed of 1130 mm/s obtained from the composite desirability-based mathematical optimization helps in reduction of keyhole formations. •\t SS surface roughness generally depends on laser power, scanning speed and hatch spacing but BS surface roughness mostly depends on layer thickness which was influenced by the re-coater."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "BS surface roughness",
+      "evidence": "The laser power of 350W and scan speed of 1130 mm/s obtained from the composite desirability-based mathematical optimization helps in reduction of keyhole formations. •\t SS surface roughness generally depends on laser power, scanning speed and hatch spacing but BS surface roughness mostly depends on layer thickness which was influenced by the re-coater."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "spatter",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "INFLUENCES",
+      "object": "spatter",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "INFLUENCES",
+      "object": "keyhole formation",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "spatter",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "spatter",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "keyhole formation",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "SS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "BS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "SS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "BS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "SS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "BS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "SS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "BS roughness",
+      "evidence": "The laser power of 350 W, layer thickness of 30 µm, scan speed of 1133 mm/s, and hatch spacing of 0.1 mm helps to reduce the spattering and balling effects and also avoids keyhole formation in which these improvements contribute to attain the minimum SS roughness of 9.8 µm, minimum BS roughness of 38 µm."
+    }
+  ],
+  "values": [
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "350 W",
+      "normalized_value": 350.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30 µm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1133 mm/s",
+      "normalized_value": 1133.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.1 mm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "< 1%",
+      "normalized_value": 1.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "25–65 μm",
+      "normalized_min": 25.0,
+      "normalized_max": 65.0
+    },
+    {
+      "entity": "nominal power",
+      "normalized_unit": "W",
+      "raw": "400W",
+      "normalized_value": 400.0
+    },
+    {
+      "entity": "spot size",
+      "normalized_unit": "μm",
+      "raw": "100 to 500 μm",
+      "normalized_min": 100.0,
+      "normalized_max": 500.0
+    },
+    {
+      "entity": "substrate temperature",
+      "normalized_unit": "°C",
+      "raw": "150 °C",
+      "normalized_value": 150.0
+    },
+    {
+      "entity": "oxygen content",
+      "normalized_unit": "%",
+      "raw": "< 0.01%",
+      "normalized_value": 0.01
+    },
+    {
+      "entity": "rotational scanning mode",
+      "normalized_unit": "°",
+      "raw": "67°",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "sampling length",
+      "normalized_unit": "μm",
+      "raw": "0.8 mm",
+      "normalized_value": 800.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "2 to 3%",
+      "normalized_min": 2.0,
+      "normalized_max": 3.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "3 to 4%",
+      "normalized_min": 3.0,
+      "normalized_max": 4.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1100 to 1300 mm/s",
+      "normalized_min": 1100.0,
+      "normalized_max": 1300.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "4%",
+      "normalized_value": 4.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.2 mm",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "40 µm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "3%",
+      "normalized_value": 3.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1600 mm/s",
+      "normalized_value": 1600.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "108 to 109 VHN",
+      "normalized_min": 108.0,
+      "normalized_max": 109.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "330 to 350W",
+      "normalized_min": 330.0,
+      "normalized_max": 350.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "103 to 105 VHN",
+      "normalized_min": 103.0,
+      "normalized_max": 105.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "35 to 30 µm",
+      "normalized_min": 35.0,
+      "normalized_max": 30.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1400 to 1200 mm/s",
+      "normalized_min": 1400.0,
+      "normalized_max": 1200.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "101 to 103 VHN",
+      "normalized_min": 101.0,
+      "normalized_max": 103.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "0.10 to 0.15 mm",
+      "normalized_min": 100.0,
+      "normalized_max": 150.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "95 to 93 VHN",
+      "normalized_min": 95.0,
+      "normalized_max": 93.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "340W",
+      "normalized_value": 340.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "106 VHN",
+      "normalized_value": 106.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "104 VHN",
+      "normalized_value": 104.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1250 mm/s to 1450 mm/s",
+      "normalized_value": 1250.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30 to 35 µm",
+      "normalized_min": 30.0,
+      "normalized_max": 35.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "104 to 105 VHN",
+      "normalized_min": 104.0,
+      "normalized_max": 105.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1200 to 1400 mm/s",
+      "normalized_min": 1200.0,
+      "normalized_max": 1400.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "< 300W",
+      "normalized_value": 300.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "11 µm",
+      "normalized_value": 11.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "40 µm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "14.5 µm",
+      "normalized_value": 14.5
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "45 µm",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1200 mm/s to 1300 mm/s",
+      "normalized_value": 1200.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "42.5 µm",
+      "normalized_value": 42.5
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "14 µm",
+      "normalized_value": 14.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "49 µm",
+      "normalized_value": 49.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "50 µm",
+      "normalized_value": 50.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "52.5 µm",
+      "normalized_value": 52.5
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "38.46 J/mm3",
+      "normalized_value": 38.46
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "107 VHN",
+      "normalized_value": 107.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1130 mm/s",
+      "normalized_value": 1130.0
+    },
+    {
+      "entity": "SS roughness",
+      "normalized_unit": "μm",
+      "raw": "9.8 µm",
+      "normalized_value": 9.8
+    },
+    {
+      "entity": "BS roughness",
+      "normalized_unit": "μm",
+      "raw": "38 µm",
+      "normalized_value": 38.0
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "size range",
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "surface": "diameter",
+      "type": "Parameter",
+      "canonical": "spot size"
+    },
+    {
+      "surface": "platform",
+      "type": "ExperimentalCondition",
+      "canonical": "substrate temperature"
+    },
+    {
+      "surface": "top roughness",
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "surface": "side roughness",
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "surface": "improper fusion",
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "surface": "LPBFed",
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "surface": "Layer power",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "Ra-Top",
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "surface": "Ra-Side",
+      "type": "Property",
+      "canonical": "surface roughness"
+    }
+  ]
+}

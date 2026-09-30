@@ -34,14 +34,14 @@ CANONICAL_UNIT: dict[str, str] = {
     "current": "A", "voltage": "V", "volume_flow": "L/min", "mass_flow": "g/min",
     "frequency": "Hz", "angle": "°", "cycles": "cycles",
     "thermal_conductivity": "W/(m·K)", "fracture_toughness": "MPa·m^0.5",
-    "rotation": "rpm",
+    "rotation": "rpm", "cooling_rate": "°C/s", "mass": "g",
 }
 
 
 def _ratio_variants(num: str, den: str, power: str = "") -> list[str]:
     """All common spellings of num/den^power, e.g. J/mm3, J mm-3, J.mm-3, J/mm^3."""
     p = power
-    out = [f"{num}/{den}{p}", f"{num} / {den}{p}", f"{num}/{den}^{p}" if p else f"{num}/{den}",
+    out = [f"{num}/{den}{p}", f"{num} / {den}{p}", f"{num}/ {den}{p}", f"{num} /{den}{p}", f"{num}/{den}^{p}" if p else f"{num}/{den}",
            f"{num} {den}-{p or 1}", f"{num}.{den}-{p or 1}", f"{num} {den}^-{p or 1}",
            f"{num}{den}-{p or 1}"]
     if not p:
@@ -68,7 +68,8 @@ def _build_table() -> dict[str, UnitDef]:
     add(_ratio_variants("cm", "min"), "velocity", 10.0 / 60.0, symbol="cm/min")
     add(["in/s", "ips"], "velocity", 25.4, symbol="in/s")
     add(["in/min", "ipm"], "velocity", 25.4 / 60.0, symbol="in/min")
-    add(["μm", "um", "micron", "microns", "μ m"], "length", 1.0, symbol="μm")
+    # "lm": Elsevier PDFs often extract the μ of "μm" as "l" (e.g. "30 lm")
+    add(["μm", "um", "micron", "microns", "μ m", "lm"], "length", 1.0, symbol="μm")
     add(["nm"], "length", 0.001)
     add(["mm"], "length", 1000.0)
     add(["cm"], "length", 10000.0)
@@ -88,9 +89,10 @@ def _build_table() -> dict[str, UnitDef]:
     add(_ratio_variants("kJ", "m"), "energy_density_lin", 1.0, symbol="kJ/m")
     add(["J"], "energy", 1.0)
     add(["kJ"], "energy", 1000.0)
+    add(["‰"], "percent", 0.1, symbol="‰")
     add(["%", "pct", "vol%", "vol.%", "vol. %", "wt%", "wt.%", "wt. %", "at.%"], "percent", 1.0, symbol="%")
     add(["ppm"], "ppm", 1.0)
-    add(["HV", "Hv", "HV0.05", "HV0.1", "HV0.2", "HV0.3", "HV0.5", "HV1", "HV5", "HV10", "HV 0.1", "HV 0.5"], "hardness", 1.0, symbol="HV")
+    add(["HV", "Hv", "VHN", "HVN", "HV0.05", "HV0.1", "HV0.2", "HV0.3", "HV0.5", "HV1", "HV5", "HV10", "HV 0.1", "HV 0.5"], "hardness", 1.0, symbol="HV")
     add(["HRC"], "hardness_hrc", 1.0)
     add(_ratio_variants("g", "cm", "3") + ["g/cc"], "mass_density", 1.0, symbol="g/cm³")
     add(_ratio_variants("kg", "m", "3"), "mass_density", 0.001, symbol="kg/m³")
@@ -100,8 +102,16 @@ def _build_table() -> dict[str, UnitDef]:
     add(["h", "hr", "hrs", "hours", "hour"], "time", 3600.0, symbol="h")
     add(["A"], "current", 1.0)
     add(["mA"], "current", 0.001)
-    add(["V", "kV"], "voltage", 1.0, symbol="V")
-    t["kV"] = UnitDef("kV", "voltage", 1000.0)
+    add(["μA", "uA"], "current", 1e-6, symbol="μA")
+    add(["nA"], "current", 1e-9)
+    add(["V"], "voltage", 1.0)
+    add(["kV", "KV"], "voltage", 1000.0, symbol="kV")
+    add(_ratio_variants("°C", "s") + _ratio_variants("K", "s"), "cooling_rate", 1.0, symbol="°C/s")
+    add(_ratio_variants("°C", "min") + _ratio_variants("K", "min"), "cooling_rate", 1.0 / 60.0, symbol="°C/min")
+    add(_ratio_variants("°C", "h") + _ratio_variants("K", "h"), "cooling_rate", 1.0 / 3600.0, symbol="°C/h")
+    add(["g"], "mass", 1.0)
+    add(["kg"], "mass", 1000.0)
+    add(["mg"], "mass", 0.001)
     add(_ratio_variants("L", "min") + _ratio_variants("l", "min") + ["lpm"], "volume_flow", 1.0, symbol="L/min")
     add(_ratio_variants("g", "min"), "mass_flow", 1.0, symbol="g/min")
     add(_ratio_variants("g", "s"), "mass_flow", 60.0, symbol="g/s")
@@ -125,9 +135,11 @@ _SCI = r"(?:\s*x\s*10\s*\^?\s*(?P<{name}>-?\d+))"
 _QTY_RE = re.compile(
     r"(?P<op><=|>=|≤|≥|<|>|~|≈)?\s*"
     r"(?P<sign>(?<![\w.)\]])-)?"
+    r"(?P<lp>\()?"
     rf"(?<![\w.])(?P<n1>{_NUM})" + _SCI.format(name="e1") + "?"
     rf"(?:\s*(?:±|\+/-|\+-)\s*(?P<unc>{_NUM}))?"
-    rf"(?:\s*(?:-|to|~)\s*(?P<n2>{_NUM})" + _SCI.format(name="e2") + "?)?"
+    rf"(?:(?:\s*(?:-|to|~)\s*|(?P<esep>e))(?P<n2>{_NUM})" + _SCI.format(name="e2") + "?)?"
+    r"(?(lp)\))"
     rf"\s?(?P<unit>{_UNIT_ALT})(?![A-Za-z0-9μ])"
 )
 # "150, 200 and 250 W"  -> three quantities
@@ -156,6 +168,11 @@ def lookup_unit(unit: str | None) -> Optional[UnitDef]:
     return UNIT_TABLE.get(compact) or UNIT_TABLE.get(compact.replace("^", ""))
 
 
+def _round(v: float) -> float:
+    """6 decimals, but keep small values (1.4 nA = 1.4e-9 A) instead of rounding them to 0."""
+    return round(v, 6) if abs(v) >= 1e-3 or v == 0 else float(f"{v:.6g}")
+
+
 def normalize_quantity(q: Quantity) -> Quantity:
     """Fill normalized_* fields in-place (and return q). Original fields untouched."""
     ud = lookup_unit(q.unit)
@@ -165,12 +182,12 @@ def normalize_quantity(q: Quantity) -> Quantity:
     q.normalized_unit = CANONICAL_UNIT.get(ud.dimension, ud.symbol)
 
     def conv(v: Optional[float]) -> Optional[float]:
-        return None if v is None else round(v * ud.factor + ud.offset, 6)
+        return None if v is None else _round(v * ud.factor + ud.offset)
 
     q.normalized_value = conv(q.value)
     q.normalized_min = conv(q.value_min)
     q.normalized_max = conv(q.value_max)
-    q.normalized_uncertainty = None if q.uncertainty is None else round(q.uncertainty * ud.factor, 6)
+    q.normalized_uncertainty = None if q.uncertainty is None else _round(q.uncertainty * ud.factor)
     return q
 
 
@@ -209,14 +226,18 @@ def parse_quantities(text: str) -> list[QuantitySpan]:
     for m in _QTY_RE.finditer(norm):
         if any(a <= m.start("n1") < b for a, b in taken):
             continue
-        start = m.start("op") if m.group("op") else (m.start("sign") if m.group("sign") else m.start("n1"))
+        if m.group("esep") and (m.group("sign") or len(m.group("n2")) < 2
+                                or float(m.group("n2").replace(",", "")) <= float(m.group("n1").replace(",", ""))):
+            continue    # "1e5" is scientific notation, not a PDF-mangled "1–5" range
+        start = m.start("op") if m.group("op") else (m.start("sign") if m.group("sign") else
+                                                     (m.start("lp") if m.group("lp") else m.start("n1")))
         raw = text[start:m.end()].strip()
         sign = -1.0 if m.group("sign") else 1.0
         n1 = _num(m.group("n1"), m.group("e1"))
         n2 = _num(m.group("n2"), m.group("e2"))
         q = Quantity(raw=raw, unit=text[m.start("unit"):m.end("unit")], operator=m.group("op"))
         if n2 is not None:
-            q.value_min, q.value_max = sign * n1, n2  # type: ignore[operator]
+            q.value_min, q.value_max = sorted((sign * n1, n2))  # type: ignore[operator]  # "22 to 2 s"
             q.value = None
         else:
             q.value = sign * n1 if n1 is not None else None

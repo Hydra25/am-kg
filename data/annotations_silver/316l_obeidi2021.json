@@ -1,0 +1,924 @@
+{
+  "source_file": "316l_obeidi2021",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 29 annotated chunks.",
+  "entities": [
+    {
+      "type": "Material",
+      "canonical": "316L stainless steel"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile testing sample"
+    },
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "Young's modulus"
+    },
+    {
+      "type": "Process",
+      "canonical": "PBF"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "gas flow"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "part orientation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt-pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "cooling rate"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "fatigue"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface hardness"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spatter"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser scanning strategy"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatching strategy"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning angle rotation"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cylinder"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "horizontal direction"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "machining"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge dimension"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "angular rotation"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "nitrogen"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas type"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spattered powder particle"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "pycnometer"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain morphology"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "3D optical microscope"
+    },
+    {
+      "type": "Defect",
+      "canonical": "internal porosity"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tension testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "testing speed"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "extensometer"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge length"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "stress hardening"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder density"
+    },
+    {
+      "type": "Property",
+      "canonical": "toughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "strain hardening"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "Defect",
+      "canonical": "percentage porosity"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "diameter"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "austenitic grains structure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "nitrogen inert gas atmosphere"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "fully-solid grain"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon gas"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain boundary"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "nitrogen gas"
+    },
+    {
+      "type": "Property",
+      "canonical": "melt-pool temperature"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "infrared pyrometer"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole formation"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "Archimedes method"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "VED1"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "VED2"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "gas flow velocity"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "shielding gas flow rate"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build chamber size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas flow rate"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "narrow grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "austenitic grain"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "powder preheat"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "austenitic microstructure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "thermal energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser energy density"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "moisture content"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "recoater speed"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "orientation"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "fluence"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas circulation"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build plate temperature"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "pyrometer"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "spatter",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Spatters of unstable molten and unmolten metal powder particles could lead to impurities and to the formation of pores and inclusions, thus can result in part property degradation."
+    },
+    {
+      "subject": "PBF",
+      "relation": "FABRICATES",
+      "object": "cylinder",
+      "evidence": "Additive manufacturing process Powder Bed Fusion (PBF) was used for the fabrication of cylindrical samples of 7 mm diameter and 65 mm length with eight different sets of process parameters."
+    },
+    {
+      "subject": "inert gas type",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "M4 was utilised with nitrogen gas in order to investigate the effect of the inert gas type on the mechanical properties and microstructure."
+    },
+    {
+      "subject": "pycnometer",
+      "relation": "CHARACTERIZES",
+      "object": "relative density",
+      "evidence": "AM produced parts characterisation methods Density of the AM parts was obtained by using Micromeritics AccuPyc 1330 Pycnometer."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "microstructure",
+      "evidence": "Scanning Electron Microscope (SEM) was used to investigate the microstructure and grain size of the metal samples and as reported previously [14,22,33,39e41]."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "grain size",
+      "evidence": "Scanning Electron Microscope (SEM) was used to investigate the microstructure and grain size of the metal samples and as reported previously [14,22,33,39e41]."
+    },
+    {
+      "subject": "3D optical microscope",
+      "relation": "CHARACTERIZES",
+      "object": "internal porosity",
+      "evidence": "3D optical microscope Keyence2000 was used to image the samples to visualise the internal porosity produced by the four printers."
+    },
+    {
+      "subject": "nitrogen",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The sample densities results from the Concept Laser machine, where nitrogen rather than argon inert gas was used, were generally lower than those from the other machines."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "316L stainless steel",
+      "evidence": "Fig. 3 e Measured 316L SS L-PBF sample densities, using a powder density of 7.84 g/cm3."
+    },
+    {
+      "subject": "optical microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Optical low-magnification micrographs were obtained for the test samples to show the fracture nature and the worst case porosity content as shown in Figs. 6 and 7, respectively."
+    },
+    {
+      "subject": "nitrogen inert gas atmosphere",
+      "relation": "AFFECTS",
+      "object": "grain",
+      "evidence": "In contrast machine M4 which used a nitrogen inert gas atmosphere, showed grains of approximately 2 mm on the narrower girth and up to more than 100 mm in length."
+    },
+    {
+      "subject": "argon gas",
+      "relation": "AFFECTS",
+      "object": "fully-solid grain",
+      "evidence": "Fig. 9 shows a fully-solid grains formation in general in the argon gas operated chamber machine M3 with reduced localised presence of porosity on the grain boundaries."
+    },
+    {
+      "subject": "argon gas",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Fig. 9 shows a fully-solid grains formation in general in the argon gas operated chamber machine M3 with reduced localised presence of porosity on the grain boundaries."
+    },
+    {
+      "subject": "nitrogen gas",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "In contrast the presence of large and uniformly distributed pores were noted in M4 working under nitrogen gas environment."
+    },
+    {
+      "subject": "infrared pyrometer",
+      "relation": "CHARACTERIZES",
+      "object": "melt-pool",
+      "evidence": "The IR data reflected from the melt-pool was recorded by means of a KLEIBER infrared pyrometer which detects the heat emission light in the range of 1500e1700 nm."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "Fig. 5 e Measured stressestrain curves for (a) 30 and (b) 60 mm layer thickness for 316L L-PBF samples build with varying scan speeds and laser powders."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser power",
+      "evidence": "Fig. 5 e Measured stressestrain curves for (a) 30 and (b) 60 mm layer thickness for 316L L-PBF samples build with varying scan speeds and laser powders."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "Fig. 5 e Measured stressestrain curves for (a) 30 and (b) 60 mm layer thickness for 316L L-PBF samples build with varying scan speeds and laser powders."
+    },
+    {
+      "subject": "keyhole formation",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "This in turn could in-crease the porosity due to the keyhole formation in the case of over-melting."
+    },
+    {
+      "subject": "Archimedes method",
+      "relation": "CHARACTERIZES",
+      "object": "relative density",
+      "evidence": "Archimedes density measurements showed relative densities of 97.67, 96.19 and 93.88% respectively."
+    },
+    {
+      "subject": "gas flow velocity",
+      "relation": "AFFECTS",
+      "object": "residual stress",
+      "evidence": "The height of the build chamber and the gas flow velocity affect the cooling rate and solidification time and thus the thermal residual stresses and mechanical properties are affected."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "narrow grain",
+      "evidence": "This effect can be seen in the more narrow grains observed from the corresponding SEM micrographs in Fig. 8 (d)."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "austenitic grain",
+      "evidence": "In this case, the researchers compared the mechanical properties and microstructure of parts produced on an Fig. 8 e SEM micrographs of the cross-sectional view showing the austenitic grains of the as-build samples. (a) M1A1, (b) M2A1, (c) M3A1 and (d) M4A1."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Fig. 9 e SEM micrographs of the AM samples showing the pores with samples (a) M3A4 and (b) M4 A1."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The main conclusion of these figures and trends can be summarized as; (1) A significant reduction in the ultimate tensile strength was observed in all machines with the exception of the EOS M280 machine when the layer thickness was increased from 30 mm to 60 mm for the same process parameters as an indication of lack of fusion."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "The main conclusion of these figures and trends can be summarized as; (1) A significant reduction in the ultimate tensile strength was observed in all machines with the exception of the EOS M280 machine when the layer thickness was increased from 30 mm to 60 mm for the same process parameters as an indication of lack of fusion."
+    },
+    {
+      "subject": "nitrogen gas",
+      "relation": "AFFECTS",
+      "object": "Young's modulus",
+      "evidence": "(2) Almost constant modulus of elasticity was obtained, except for the Concept Laser machine with the nitrogen gas chamber, which required different setting for the process parameters than those used in the chambers with argon gas."
+    },
+    {
+      "subject": "gas flow",
+      "relation": "AFFECTS",
+      "object": "melt-pool",
+      "evidence": "This is due to the large build chamber size which enhance better removal of the rising fumes and metal vapour from the melt-pool area in addition to the relatively stable/laminar gas flow stream."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "(4) The decrease in porosity and poor tensile performance of the samples produced on the Concept Laser machine especially at the high layer thickness can be explained by the lack of fusion, Figs. 3, 5 and 9."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "(4) The decrease in porosity and poor tensile performance of the samples produced on the Concept Laser machine especially at the high layer thickness can be explained by the lack of fusion, Figs. 3, 5 and 9."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "From Table 4, it can be seen that machines M1, M2 and M4 show a strong and significant inverse correlation between the elongation and the metal powder layer thickness; while, machine M3 exhibited a similar but less significant correlation."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "The only one strong and significant correlation detected in M3 was between the elongation and the input laser power."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "From Table 5, M1, M2 and M4 show direct proportional correlations between the ultimate tensile strength and the elongation with the applied volumetric thermal energy when calculated based on layer thickness (VED1), from Eq. (1) [34]."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "From Table 5, M1, M2 and M4 show direct proportional correlations between the ultimate tensile strength and the elongation with the applied volumetric thermal energy when calculated based on layer thickness (VED1), from Eq. (1) [34]."
+    },
+    {
+      "subject": "VED1",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "This result agrees well with the correlations listed in Table 4 and Fig. 10, where it can be seen that as the layer thickness increases, VED1 decreases and UTS decreases accordingly."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "This indicates for the range of parameters investigated that the power and scan speed (varying inputs in VED2) had more of an influence on porosity development than layer thickness, which is also a varying factor in VED1."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "This indicates for the range of parameters investigated that the power and scan speed (varying inputs in VED2) had more of an influence on porosity development than layer thickness, which is also a varying factor in VED1."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "This indicates for the range of parameters investigated that the power and scan speed (varying inputs in VED2) had more of an influence on porosity development than layer thickness, which is also a varying factor in VED1."
+    },
+    {
+      "subject": "grain size",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "Also, a clear contrast was noted on the nature of the fracture where the samples produced with high density and large grain size exhibited high elongation and necking followed by a ductile fracture, for examples, the samples produced on Aconity and EOS."
+    },
+    {
+      "subject": "porosity",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "This reduced porosity can explain the improved elongation of the parts produced on M3."
+    },
+    {
+      "subject": "pyrometer",
+      "relation": "CHARACTERIZES",
+      "object": "melt-pool temperature",
+      "evidence": "Another route that could be implemented is a closed loop control system in which the data is analysed from high speed cameras or pyrometer measurements of the melt-pool temperature."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "FABRICATES",
+      "object": "cylinder",
+      "evidence": "Table t2, row 1: Table 2 e Input processing parameters used for L-PBF production of the cylindrical samples. = Table 2."
+    }
+  ],
+  "values": [
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "21e37 J/mm3",
+      "normalized_min": 21.0,
+      "normalized_max": 37.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "(4e42)%",
+      "normalized_min": 4.0,
+      "normalized_max": 42.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "(200e716) MPa",
+      "normalized_min": 200.0,
+      "normalized_max": 716.0
+    },
+    {
+      "entity": "Young's modulus",
+      "normalized_unit": "MPa",
+      "raw": "(52e214) GPa",
+      "normalized_min": 52000.0,
+      "normalized_max": 214000.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "30 mm",
+      "normalized_value": 30000.0
+    },
+    {
+      "entity": "cylinder",
+      "normalized_unit": "μm",
+      "raw": "7 mm",
+      "normalized_value": 7000.0
+    },
+    {
+      "entity": "cylinder",
+      "normalized_unit": "μm",
+      "raw": "65 mm",
+      "normalized_value": 65000.0
+    },
+    {
+      "entity": "gauge dimension",
+      "normalized_unit": "μm",
+      "raw": "4 mm",
+      "normalized_value": 4000.0
+    },
+    {
+      "entity": "gauge dimension",
+      "normalized_unit": "μm",
+      "raw": "24 mm",
+      "normalized_value": 24000.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "70 mm",
+      "normalized_value": 70000.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "90 mm",
+      "normalized_value": 90000.0
+    },
+    {
+      "entity": "argon",
+      "normalized_unit": "%",
+      "raw": "99.999%",
+      "normalized_value": 99.999
+    },
+    {
+      "entity": "testing speed",
+      "normalized_unit": "mm/s",
+      "raw": "3 mm/ min",
+      "normalized_value": 0.05
+    },
+    {
+      "entity": "gauge length",
+      "normalized_unit": "μm",
+      "raw": "10 mm",
+      "normalized_value": 10000.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30 and 60 mm",
+      "normalized_value": 30000.0
+    },
+    {
+      "entity": "Young's modulus",
+      "normalized_unit": "MPa",
+      "raw": "188 GPa",
+      "normalized_value": 188000.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "770 MPa",
+      "normalized_value": 770.0
+    },
+    {
+      "entity": "yield tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "515 MPa",
+      "normalized_value": 515.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "52%",
+      "normalized_value": 52.0
+    },
+    {
+      "entity": "powder density",
+      "normalized_unit": "g/cm³",
+      "raw": "7.84 g/cm3",
+      "normalized_value": 7.84
+    },
+    {
+      "entity": "diameter",
+      "normalized_unit": "μm",
+      "raw": "7 mm",
+      "normalized_value": 7000.0
+    },
+    {
+      "entity": "austenitic grains structure",
+      "normalized_unit": "μm",
+      "raw": "between 10 and 50 mm",
+      "normalized_min": 10000.0,
+      "normalized_max": 50000.0
+    },
+    {
+      "entity": "grain",
+      "normalized_unit": "μm",
+      "raw": "2 mm",
+      "normalized_value": 2000.0
+    },
+    {
+      "entity": "grain",
+      "normalized_unit": "μm",
+      "raw": "100 mm",
+      "normalized_value": 100000.0
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "10 mm",
+      "normalized_value": 10000.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "70 microns",
+      "normalized_value": 70.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "60 mm",
+      "normalized_value": 60000.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "97.67, 96.19 and 93.88%",
+      "normalized_value": 97.67
+    },
+    {
+      "entity": "VED1",
+      "normalized_unit": "J/mm³",
+      "raw": "(21e37) J/mm3",
+      "normalized_min": 21.0,
+      "normalized_max": 37.0
+    },
+    {
+      "entity": "VED2",
+      "normalized_unit": "J/mm³",
+      "raw": "(24e88) J/mm3",
+      "normalized_min": 24.0,
+      "normalized_max": 88.0
+    },
+    {
+      "entity": "VED1",
+      "normalized_unit": "J/mm³",
+      "raw": "21 and 37 J/mm3",
+      "normalized_value": 21.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "μm",
+      "raw": "800 mm/sec",
+      "normalized_value": 800000.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "μm",
+      "raw": "1200 mm/sec",
+      "normalized_value": 1200000.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30, 60 and 90 microns",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "90 microns",
+      "normalized_value": 90.0
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "yield",
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "surface": "spacing",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "toughness",
+      "type": "Property",
+      "canonical": "toughness"
+    },
+    {
+      "surface": "Optical low-magnification micrographs",
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "surface": "laser powders",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "Archimedes density measurements",
+      "type": "CharacterizationMethod",
+      "canonical": "Archimedes method"
+    },
+    {
+      "surface": "optical micrographs",
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "surface": "tensile performance",
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "surface": "speed",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "surface": "volumetric thermal energy",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "power",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "Preheating of the build plate",
+      "type": "ExperimentalCondition",
+      "canonical": "build plate temperature"
+    },
+    {
+      "surface": "Thickness",
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    }
+  ]
+}

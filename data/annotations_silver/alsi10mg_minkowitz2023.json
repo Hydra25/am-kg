@@ -1,0 +1,947 @@
+{
+  "source_file": "alsi10mg_minkowitz2023",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 49 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Material",
+      "canonical": "AlSi10Mg"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EBSD"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "area-related energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Defect",
+      "canonical": "cracking"
+    },
+    {
+      "type": "Material",
+      "canonical": "AlSi12"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "T4"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "T5"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "T6 heat treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "stress relief"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "annealing"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "theoretical density"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "wavelength"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "maximum power"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "nitrogen"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon flow"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "shift angle"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "annealing treatment"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "temperature"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "water quenching"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "Archimedes method"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "load"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "holding time"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile property"
+    },
+    {
+      "type": "Property",
+      "canonical": "strength"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile-test sample"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melting pool"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spherical pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "gas porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "UTSs"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain morphology"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "keyhole melting mode"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "conduction melting mode"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "fine-grained microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool boundaries"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "heat affected zone"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness XZ"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness HT"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "phase structure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "eutectic silicon network"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "a-al grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "a-al phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "low-angle boundary"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "substructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "Si network"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "Defect",
+      "canonical": "laser spatter"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "fatigue life"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "AlSi10Mg",
+      "evidence": "In this study, we examined the additive manufacturing of AlSi10Mg, a well-studied aluminium alloy used for L-PBF, and the modelling of its printing process by applying machine learning."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "layer thickness",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The influences of different printing parameters (i.e. laser power, laser spot size, hatching distance, layer height and scanning speed) on the mechanical properties (i.e. density, tensile strength and hardness) were examined by generating different machine learning models based on data obtained with DoE and additional experiments."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser power",
+      "evidence": "In this study, a comprehensive analysis was conducted of some of the most relevant processing parameters selected in the L-PBF process, including the laser power, laser spot size, hatching distance, layer height and scanning speed."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser spot size",
+      "evidence": "In this study, a comprehensive analysis was conducted of some of the most relevant processing parameters selected in the L-PBF process, including the laser power, laser spot size, hatching distance, layer height and scanning speed."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatch spacing",
+      "evidence": "In this study, a comprehensive analysis was conducted of some of the most relevant processing parameters selected in the L-PBF process, including the laser power, laser spot size, hatching distance, layer height and scanning speed."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "In this study, a comprehensive analysis was conducted of some of the most relevant processing parameters selected in the L-PBF process, including the laser power, laser spot size, hatching distance, layer height and scanning speed."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "In this study, a comprehensive analysis was conducted of some of the most relevant processing parameters selected in the L-PBF process, including the laser power, laser spot size, hatching distance, layer height and scanning speed."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "area-related energy density",
+      "evidence": "The main process parameters laser power (P), laser spot size (rÞ, hatching distance (HDÞ, layer height (h) and a secondary input parameter (i.e. the area-related energy density (Ea)) referring to Eq. (1) were utilised to optimise the process and to evaluate the influence of L-PBF on the printed material."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "In order to determine the effect of the heat treatment on the hardness, an annealing treatment described in [4,6] was performed on the printed specimens."
+    },
+    {
+      "subject": "Archimedes method",
+      "relation": "CHARACTERIZES",
+      "object": "relative density",
+      "evidence": "The relative density was measured with the Archimedes method [23] and using the RADWAG PS 210.X2 (Poland) measurement device."
+    },
+    {
+      "subject": "build orientation",
+      "relation": "AFFECTS",
+      "object": "tensile property",
+      "evidence": "In the current study, only horizontally printed tensile samples were tested, which is a common practice in L-PBF [26–29,31] as this build orientation yields the largest tensile properties (i.e. higher strength and ductility)."
+    },
+    {
+      "subject": "build orientation",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "In the current study, only horizontally printed tensile samples were tested, which is a common practice in L-PBF [26–29,31] as this build orientation yields the largest tensile properties (i.e. higher strength and ductility)."
+    },
+    {
+      "subject": "build orientation",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "In the current study, only horizontally printed tensile samples were tested, which is a common practice in L-PBF [26–29,31] as this build orientation yields the largest tensile properties (i.e. higher strength and ductility)."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The strong effect of the scanning speed could be attributed to the formation of pores during the printing process."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "Therefore, high speeds can result in the insufficient melting of the distributed powder layer and lead to lack of fusion pores [12,13]."
+    },
+    {
+      "subject": "porosity",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "This relationship is also described in the literature, whereas a high degree of porosity due to more lack of fusion pores leads to a low UTS [10]."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "This relationship is also described in the literature, whereas a high degree of porosity due to more lack of fusion pores leads to a low UTS [10]."
+    },
+    {
+      "subject": "porosity",
+      "relation": "CAUSES",
+      "object": "cracking",
+      "evidence": "Such pores tend to be crack-initiating sites; they also reduce the effective cross section of the tensile sample."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "gas porosity",
+      "evidence": "In addition, lack of fusion pores are irregularly shaped (see Fig. 12b), while gas pores, which occur when high energy inputs occur (e.g. at lower scanning speeds), are spherically shaped (see Fig. 12a) [11–13]."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "grain morphology",
+      "evidence": "A change in the microstructure of the samples can be addressed as one possible reason for these results, since the grain structure changes on different scales when the laser spot size, scanning speed and the other input parameters are varied."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "grain morphology",
+      "evidence": "A change in the microstructure of the samples can be addressed as one possible reason for these results, since the grain structure changes on different scales when the laser spot size, scanning speed and the other input parameters are varied."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "Fig. 17. Relative density (a), ultimate tensile strength (b) and hardness parallel to the building direction (as-printed) (c) depending on the volumetric energy density."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Fig. 17. Relative density (a), ultimate tensile strength (b) and hardness parallel to the building direction (as-printed) (c) depending on the volumetric energy density."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "Fig. 17. Relative density (a), ultimate tensile strength (b) and hardness parallel to the building direction (as-printed) (c) depending on the volumetric energy density."
+    },
+    {
+      "subject": "microstructure",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "Reducing this speed would consequently lead to a reduction in the measured hardness, which could be attributed to changes in the microstructure that occur by lowering v. If the scanning speed is increased to values above 1000 mm/s, more pores are formed (see Fig. 11b) and, consequently, the hardness decreases again, since the pyramid of the hardness measurement device intrudes into areas which are softened due to the presence of these pores."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "Reducing this speed would consequently lead to a reduction in the measured hardness, which could be attributed to changes in the microstructure that occur by lowering v. If the scanning speed is increased to values above 1000 mm/s, more pores are formed (see Fig. 11b) and, consequently, the hardness decreases again, since the pyramid of the hardness measurement device intrudes into areas which are softened due to the presence of these pores."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Reducing this speed would consequently lead to a reduction in the measured hardness, which could be attributed to changes in the microstructure that occur by lowering v. If the scanning speed is increased to values above 1000 mm/s, more pores are formed (see Fig. 11b) and, consequently, the hardness decreases again, since the pyramid of the hardness measurement device intrudes into areas which are softened due to the presence of these pores."
+    },
+    {
+      "subject": "porosity",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "Reducing this speed would consequently lead to a reduction in the measured hardness, which could be attributed to changes in the microstructure that occur by lowering v. If the scanning speed is increased to values above 1000 mm/s, more pores are formed (see Fig. 11b) and, consequently, the hardness decreases again, since the pyramid of the hardness measurement device intrudes into areas which are softened due to the presence of these pores."
+    },
+    {
+      "subject": "fine-grained microstructure",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "Since the peak temperature in the molten pool is low if conduction mode melting occurs, high cooling rates are obtained, resulting in a fine-grained microstructure with enhanced hardness values, as Dong et al.[46] already have shown."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "hardness XZ",
+      "evidence": "The plots in Fig. 19 display the dependency of the hardness XZ in the heat-treated condition on the parameters r, HD and v (retained variables are in accordance with those described in the previous sections)."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "hardness XZ",
+      "evidence": "The plots in Fig. 19 display the dependency of the hardness XZ in the heat-treated condition on the parameters r, HD and v (retained variables are in accordance with those described in the previous sections)."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "hardness XZ",
+      "evidence": "The plots in Fig. 19 display the dependency of the hardness XZ in the heat-treated condition on the parameters r, HD and v (retained variables are in accordance with those described in the previous sections)."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "hardness HT",
+      "evidence": "At higher HD (above 120 lm), this model does not show the same behaviour as that displayed in Fig. 16b, since the change in the response (hardness HT) depending on the laser spot size and hatching distance can nearly be neglected here (Fig. 19a)."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "hardness HT",
+      "evidence": "At higher HD (above 120 lm), this model does not show the same behaviour as that displayed in Fig. 16b, since the change in the response (hardness HT) depending on the laser spot size and hatching distance can nearly be neglected here (Fig. 19a)."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "phase structure",
+      "evidence": "This decrease in hardness is related to the change in the microstructure, in particular the change of the phase structure in the material, which occurs during the heat treatment at 300 \u0004C."
+    },
+    {
+      "subject": "phase structure",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "This decrease in hardness is related to the change in the microstructure, in particular the change of the phase structure in the material, which occurs during the heat treatment at 300 \u0004C."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "a-al phase",
+      "evidence": "Moreover, the a-Al phase is supersaturated with silicon in the as-printed condition and, during the subsequent heat treatment, this Si precipitates from this a-Al phase [4]."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "low-angle boundary",
+      "evidence": "Additionally, a fine substructure made up of low-angle boundaries is formed within the a-Al grains during the L-PBF process [4]."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "substructure",
+      "evidence": "First, the precipitation of the silicon leads to a decrease in solid solution within the a-Al phase; second, the mentioned substructure is destroyed during the performed heat treatment; and, third, the decomposition of the Si-network occurs [4]."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "Si network",
+      "evidence": "First, the precipitation of the silicon leads to a decrease in solid solution within the a-Al phase; second, the mentioned substructure is destroyed during the performed heat treatment; and, third, the decomposition of the Si-network occurs [4]."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "microstructure",
+      "evidence": "Fig. 20. Change in the microstructure due to the performed heat treatment at 300 \u0004C: (a) shows the as-printed condition with clearly visible melt pools, whereas (b) shows the heat-treated condition; in (c) and (d), SEM images show the decomposition of the Si-network ((c) as-printed; (d) heat-treated). the surface quality and the sample shape."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "Si network",
+      "evidence": "Fig. 20. Change in the microstructure due to the performed heat treatment at 300 \u0004C: (a) shows the as-printed condition with clearly visible melt pools, whereas (b) shows the heat-treated condition; in (c) and (d), SEM images show the decomposition of the Si-network ((c) as-printed; (d) heat-treated). the surface quality and the sample shape."
+    },
+    {
+      "subject": "laser spatter",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Laser spatters and other features of surface roughness as well as process-related deviations from the ideal shape all have a great impact on the resulting diameter; therefore, these could have influenced the resulting UTS (the diameters had a standard deviation of ±0.93 % on average)."
+    }
+  ],
+  "values": [
+    {
+      "entity": "theoretical density",
+      "normalized_unit": "g/cm³",
+      "raw": "2.68 g/cm3",
+      "normalized_value": 2.68
+    },
+    {
+      "entity": "grain size",
+      "normalized_unit": "μm",
+      "raw": "20 to 63 lm",
+      "normalized_min": 20.0,
+      "normalized_max": 63.0
+    },
+    {
+      "entity": "wavelength",
+      "normalized_unit": "μm",
+      "raw": "1070 nm",
+      "normalized_value": 1.07
+    },
+    {
+      "entity": "maximum power",
+      "normalized_unit": "W",
+      "raw": "250 W",
+      "normalized_value": 250.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "40 lm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "7.8 \u0003 7.8 \u0003 7.8 mm",
+      "normalized_value": 7800.0
+    },
+    {
+      "entity": "holding time",
+      "normalized_unit": "s",
+      "raw": "15 s",
+      "normalized_value": 15.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "240 W",
+      "normalized_value": 240.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "80 lm",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "120 lm",
+      "normalized_value": 120.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "40 lm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1200 mm/s",
+      "normalized_value": 1200.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "98.8 %",
+      "normalized_value": 98.8
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "40 – 80 lm",
+      "normalized_min": 40.0,
+      "normalized_max": 80.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "130 – 200 lm",
+      "normalized_min": 130.0,
+      "normalized_max": 200.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "98.5 %",
+      "normalized_value": 98.5
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1100 mm/s",
+      "normalized_value": 1100.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "140 lm",
+      "normalized_value": 140.0
+    },
+    {
+      "entity": "UTSs",
+      "normalized_unit": "MPa",
+      "raw": "405 MPa",
+      "normalized_value": 405.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "90 lm",
+      "normalized_value": 90.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "100 HV",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "200 J/mm3",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "96 %",
+      "normalized_value": 96.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99 %",
+      "normalized_value": 99.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "280–350 MPa",
+      "normalized_min": 280.0,
+      "normalized_max": 350.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "70–98 HV",
+      "normalized_min": 70.0,
+      "normalized_max": 98.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "110 HV",
+      "normalized_value": 110.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "115 HV",
+      "normalized_value": 115.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "200 mm/s",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "75 HV",
+      "normalized_value": 75.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "40–50 lm",
+      "normalized_min": 40.0,
+      "normalized_max": 50.0
+    },
+    {
+      "entity": "hatch spacing",
+      "normalized_unit": "μm",
+      "raw": "170 lm",
+      "normalized_value": 170.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "20 lm",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000–1200 mm/s",
+      "normalized_min": 1000.0,
+      "normalized_max": 1200.0
+    },
+    {
+      "entity": "UTSs",
+      "normalized_unit": "MPa",
+      "raw": "380 MPa",
+      "normalized_value": 380.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "102 HV",
+      "normalized_value": 102.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "80 HV",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "400 MPa",
+      "normalized_value": 400.0
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "70 HV",
+      "normalized_value": 70.0
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "areal-related energy density",
+      "type": "Parameter",
+      "canonical": "area-related energy density"
+    },
+    {
+      "surface": "Ea",
+      "type": "Parameter",
+      "canonical": "area-related energy density"
+    },
+    {
+      "surface": "HD",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "h",
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "surface": "P",
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "surface": "r",
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "surface": "v",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "surface": "areal-related energy densities",
+      "type": "Parameter",
+      "canonical": "area-related energy density"
+    },
+    {
+      "surface": "speed",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "surface": "speeds",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "surface": "Ev",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "processing power",
+      "type": "Parameter",
+      "canonical": "laser power"
+    }
+  ]
+}

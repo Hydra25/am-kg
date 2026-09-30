@@ -19,6 +19,8 @@ _ONE_TO_ONE = {
     "×": "x",        # multiplication sign
     "·": ".", "⋅": ".",  # middle dot (units like W·m-1)
     "³": "3", "²": "2", "⁻": "-", "¹": "1",
+    # degree sign look-alikes produced by PDF fonts: "920 ◦C", "67∘", "20 ˚C"
+    "◦": "°", "∘": "°", "˚": "°", "º": "°",
 }
 _TRANS = str.maketrans(_ONE_TO_ONE)
 

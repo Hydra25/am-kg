@@ -123,7 +123,8 @@ class GlinerEntityExtractor:
                 surface = s.text[start:end]
                 score = min(float(p.get("score", 0.5)), 0.95)
                 # junk filter BEFORE normalisation (which may ask the LLM to choose a canonical)
-                in_lex = bool(self.normalizer.lexicon.lookup_any_type(surface))
+                in_lex = bool(self.normalizer.lexicon.lookup_any_type(surface)
+                              or self.normalizer.resolve_symbol(surface))
                 reason = None if in_lex else junk_reason(surface, etype, False)
                 if reason:
                     out.dropped.append({"stage": "gliner_entity", "reason": reason, "text": surface,

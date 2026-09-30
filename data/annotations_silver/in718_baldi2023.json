@@ -1,0 +1,428 @@
+{
+  "source_file": "in718_baldi2023",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 41 annotated chunks.",
+  "entities": [
+    {
+      "type": "Parameter",
+      "canonical": "interlayer dwell time"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "ILCT"
+    },
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Material",
+      "canonical": "Inconel 718"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cylinder specimen"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool shape"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "inter-layer time"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "ILT"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "substrate temperature"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spherical porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "single track"
+    },
+    {
+      "type": "Property",
+      "canonical": "Young's modulus"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile stress"
+    },
+    {
+      "type": "Property",
+      "canonical": "density"
+    },
+    {
+      "type": "Property",
+      "canonical": "thermal conductivity"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "beam wavelength"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "building platform temperature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "oxygen content"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "machining"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool width"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "inverted truncated cone specimen"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool depth"
+    },
+    {
+      "type": "Defect",
+      "canonical": "maximum defect diameter"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "part orientation"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "ILCT",
+      "evidence": "This paper investigates the effects on the material microstructure of varying the Inter-Layer Cooling Time (ILCT) during the printing process in laser powder bed fusion (L-PBF) multi-laser machines."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The effect of ILCT on the microstructure of the material is evaluated in terms of porosity and melt pool analysis on printed cylinder specimens, considering ILCT decreasing and increasing in the range of 22 to 2 s. The experimental campaign shows that an ILCT of less than 6 s introduces criticality in the material microstructure."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "The effect of ILCT on the microstructure of the material is evaluated in terms of porosity and melt pool analysis on printed cylinder specimens, considering ILCT decreasing and increasing in the range of 22 to 2 s. The experimental campaign shows that an ILCT of less than 6 s introduces criticality in the material microstructure."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "INFLUENCES",
+      "object": "keyhole porosity",
+      "evidence": "In particular, at an ILCT value of 2 s, widespread keyhole porosity (close to 1‰) and critical and deeper melt pool (about 200 microns depth) are measured."
+    },
+    {
+      "subject": "interlayer dwell time",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Citation: Baldi, N.; Giorgetti, A.; Palladino, M.; Giovannetti, I.; Arcidiacono, G.; Citti, P. Study on the Effect of Inter-Layer Cooling Time on Porosity and Melt Pool in Inconel 718 Components Processed by Laser Powder Bed Fusion."
+    },
+    {
+      "subject": "interlayer dwell time",
+      "relation": "AFFECTS",
+      "object": "melt pool",
+      "evidence": "Citation: Baldi, N.; Giorgetti, A.; Palladino, M.; Giovannetti, I.; Arcidiacono, G.; Citti, P. Study on the Effect of Inter-Layer Cooling Time on Porosity and Melt Pool in Inconel 718 Components Processed by Laser Powder Bed Fusion."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Inconel 718",
+      "evidence": "Citation: Baldi, N.; Giorgetti, A.; Palladino, M.; Giovannetti, I.; Arcidiacono, G.; Citti, P. Study on the Effect of Inter-Layer Cooling Time on Porosity and Melt Pool in Inconel 718 Components Processed by Laser Powder Bed Fusion."
+    },
+    {
+      "subject": "spherical porosity",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "This results in the widespread formation of spherical porosity that can affect the density of the material."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "This paper investigates the effects of ILCT variations on the microstructure of IN718 superalloys processed by a multi-laser machine to obtain an ILCT value of a few seconds."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "residual stress",
+      "evidence": "In addition, working in this VED region was interesting to avoid high residual stresses in the component as the remelting of several previous layers was obtainable."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "melt pool shape",
+      "evidence": "Single tracks and single laser exposition on the powder bed were also made on the top surface of each specimen (Figure 3) in order to investigate the variation in melt pool shape and calculate the melting regime at different ILCT levels in relation to the melt pool dimensions ratio [46]."
+    },
+    {
+      "subject": "optical microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "This analysis was performed using a Leica Leitz DMRME (Leica Microsystems GmbH, Wetzlar, Germany) optical microscope, and the percent porosity was evaluated by analyzing six fields for each specimen."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "By virtue of these results, it is possible to state that, consistent with the material and machine type used to carry out the tests, the ILCT range from 6 to 2 s presents a criticality in terms of densification level."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "melt pool depth",
+      "evidence": "For example, specimens 5 and 7, exposed with the same ILCT value, have a similar average melt pool depth (153.9 µm and 156.0 µm, respectively)."
+    },
+    {
+      "subject": "ILCT",
+      "relation": "AFFECTS",
+      "object": "melt pool width",
+      "evidence": "Similarly, the effect of ILCT on the melt pool width is not significant."
+    }
+  ],
+  "values": [
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "22 to 2 s",
+      "normalized_min": 22.0,
+      "normalized_max": 2.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "6 s",
+      "normalized_value": 6.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "2 s",
+      "normalized_value": 2.0
+    },
+    {
+      "entity": "keyhole porosity",
+      "normalized_unit": "%",
+      "raw": "1‰",
+      "normalized_value": 0.1
+    },
+    {
+      "entity": "melt pool",
+      "normalized_unit": "μm",
+      "raw": "200 microns",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "3‰",
+      "normalized_value": 0.3
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "60 microns",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "20 and 63 microns",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "beam wavelength",
+      "normalized_unit": "μm",
+      "raw": "1070 nm",
+      "normalized_value": 1.07
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "82 µm",
+      "normalized_value": 82.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "500 W",
+      "normalized_value": 500.0
+    },
+    {
+      "entity": "building platform temperature",
+      "normalized_unit": "°C",
+      "raw": "170 ◦C",
+      "normalized_value": 170.0
+    },
+    {
+      "entity": "oxygen content",
+      "normalized_unit": "ppm",
+      "raw": "100 ppm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "22 s to 2 s",
+      "normalized_value": 22.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "4 s",
+      "normalized_value": 4.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "0.1%",
+      "normalized_value": 0.1
+    },
+    {
+      "entity": "maximum defect diameter",
+      "normalized_unit": "μm",
+      "raw": "58 µm",
+      "normalized_value": 58.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "6 to 2 s",
+      "normalized_min": 6.0,
+      "normalized_max": 2.0
+    },
+    {
+      "entity": "ILCT",
+      "normalized_unit": "s",
+      "raw": "2 to 22 s",
+      "normalized_min": 2.0,
+      "normalized_max": 22.0
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "153.9 µm",
+      "normalized_value": 153.9
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "156.0 µm",
+      "normalized_value": 156.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "0.284%",
+      "normalized_value": 0.284
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "153.3 microns",
+      "normalized_value": 153.3
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "192.8 microns",
+      "normalized_value": 192.8
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "208.4 microns",
+      "normalized_value": 208.4
+    },
+    {
+      "entity": "melt pool depth",
+      "normalized_unit": "μm",
+      "raw": "200 microns",
+      "normalized_value": 200.0
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "Density",
+      "type": "Property",
+      "canonical": "density"
+    }
+  ]
+}

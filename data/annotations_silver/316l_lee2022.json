@@ -1,0 +1,1329 @@
+{
+  "source_file": "316l_lee2022",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 31 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "PBF"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile characteristic"
+    },
+    {
+      "type": "Material",
+      "canonical": "ASTM 316L"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "overlap ratio"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "strain"
+    },
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Process",
+      "canonical": "EBM"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatching angle"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "ambient temperature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "temperature of the building plate"
+    },
+    {
+      "type": "Defect",
+      "canonical": "delamination"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Material",
+      "canonical": "316L stainless steel"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cuboid specimen"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "wavelength"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "maximum power"
+    },
+    {
+      "type": "Material",
+      "canonical": "ASTM 1045"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "preheating temperature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "oxygen"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "nitrogen gas"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas atmosphere"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build plate temperature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "gas atmosphere"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "machining"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "bead overlapping ratio"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "bead width"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "particle size analyser"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "3D laser microscope"
+    },
+    {
+      "type": "Property",
+      "canonical": "rz"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "stereomicroscope"
+    },
+    {
+      "type": "Defect",
+      "canonical": "sectional porosity"
+    },
+    {
+      "type": "Defect",
+      "canonical": "average porosity"
+    },
+    {
+      "type": "Defect",
+      "canonical": "average pore size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "hardness testing"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "universal testing system"
+    },
+    {
+      "type": "Defect",
+      "canonical": "surface soot"
+    },
+    {
+      "type": "Defect",
+      "canonical": "weak fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "collapse"
+    },
+    {
+      "type": "Defect",
+      "canonical": "balling"
+    },
+    {
+      "type": "Defect",
+      "canonical": "incomplete melting"
+    },
+    {
+      "type": "Defect",
+      "canonical": "over-melted region"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore size"
+    },
+    {
+      "type": "Defect",
+      "canonical": "internal pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "small pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "type": "Defect",
+      "canonical": "trapping of gas"
+    },
+    {
+      "type": "Defect",
+      "canonical": "large pore"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "profilometry"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spatter"
+    },
+    {
+      "type": "Defect",
+      "canonical": "soot"
+    },
+    {
+      "type": "Defect",
+      "canonical": "valley"
+    },
+    {
+      "type": "Defect",
+      "canonical": "partially melted powder particle"
+    },
+    {
+      "type": "Defect",
+      "canonical": "crater"
+    },
+    {
+      "type": "Property",
+      "canonical": "fracture characteristic"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "fracture surface"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "Property",
+      "canonical": "fracture behaviour"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dimple structure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "cleavage facet"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "cleavage ratio"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "quasicleavage"
+    },
+    {
+      "type": "Property",
+      "canonical": "fracture property"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The aim of this study is to investigate the effects of energy density on the pore, hardness, surface roughness, and tensile characteristics of deposited ASTM 316L specimens using a powder-bed fusion process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The aim of this study is to investigate the effects of energy density on the pore, hardness, surface roughness, and tensile characteristics of deposited ASTM 316L specimens using a powder-bed fusion process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "surface roughness",
+      "evidence": "The aim of this study is to investigate the effects of energy density on the pore, hardness, surface roughness, and tensile characteristics of deposited ASTM 316L specimens using a powder-bed fusion process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "tensile characteristic",
+      "evidence": "The aim of this study is to investigate the effects of energy density on the pore, hardness, surface roughness, and tensile characteristics of deposited ASTM 316L specimens using a powder-bed fusion process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "PROCESSES",
+      "object": "ASTM 316L",
+      "evidence": "The aim of this study is to investigate the effects of energy density on the pore, hardness, surface roughness, and tensile characteristics of deposited ASTM 316L specimens using a powder-bed fusion process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser power",
+      "evidence": "Twenty-seven types of specimens with different laser powers, scanning speeds, and overlap ratios were fabricated using the PBF process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "Twenty-seven types of specimens with different laser powers, scanning speeds, and overlap ratios were fabricated using the PBF process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "overlap ratio",
+      "evidence": "Twenty-seven types of specimens with different laser powers, scanning speeds, and overlap ratios were fabricated using the PBF process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The effects of the energy density on the porosity, hardness, surface roughness, tensile strength, and fracture properties of ASTM 316L specimens were examined."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "With the critical energy density level, relative density, surface roughness (Ra) and hardness were observed 99.5%, 1.2 µm, and 240 HV, respectively."
+    },
+    {
+      "subject": "PBF",
+      "relation": "FABRICATES",
+      "object": "tensile specimen",
+      "evidence": "Five representative conditions were chosen to fabricate tensile specimens with the ASTM 316L powder through the PBF process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "Tensile characteristics, including ultimate strength, yield strength, strain, and fracture shape, were examined for different energy densities."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "strain",
+      "evidence": "Tensile characteristics, including ultimate strength, yield strength, strain, and fracture shape, were examined for different energy densities."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser spot size",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatch spacing",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "hatching angle",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_CONDITION",
+      "object": "ambient temperature",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_CONDITION",
+      "object": "temperature of the building plate",
+      "evidence": "The PBF process has various process parameters, including laser power, scanning speed, layer thickness, beam diameter, hatching distance, hatching angle, ambient temperature, and temperature of the building plate [9–12]."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "CAUSES",
+      "object": "delamination",
+      "evidence": "The delamination defect is the delamination between the layers owing to the lack of fusion or an inappropriate tool path."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Pores are also created with poor parameter conditions, such as a weak energy density, to melt the deposition material fully."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "These tensile specimens were then used to examine the yield strength, ultimate strength, elongation, and failure properties based on the energy densities used in the additive process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "FABRICATES",
+      "object": "cube",
+      "evidence": "The dimensions of the cuboid deposition specimens produced by the PBF process are 10 mm × 10 mm × 5 mm, as shown in Figure 3a."
+    },
+    {
+      "subject": "laser power",
+      "relation": "AFFECTS",
+      "object": "bead width",
+      "evidence": "OR(%) = WO(mm) HD(mm) (2) WO(mm) = WB(mm) −HD(mm) (3) As the bead width varies according to the laser power and scanning speed, the widths of the beads created in the laser power range of 100–200 W and scanning speed range of 500–1500 mm/s were measured experimentally to calculate the bead overlapping ratio."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "bead width",
+      "evidence": "OR(%) = WO(mm) HD(mm) (2) WO(mm) = WB(mm) −HD(mm) (3) As the bead width varies according to the laser power and scanning speed, the widths of the beads created in the laser power range of 100–200 W and scanning speed range of 500–1500 mm/s were measured experimentally to calculate the bead overlapping ratio."
+    },
+    {
+      "subject": "particle size analyser",
+      "relation": "CHARACTERIZES",
+      "object": "powder particle size",
+      "evidence": "Figure 5b shows the results of measuring the particle size distribution of the powder used in the experiments, which was measured using a particle size analyser, Mastersizer-3000 (Malvern Panalytical, Malvern, UK)."
+    },
+    {
+      "subject": "3D laser microscope",
+      "relation": "CHARACTERIZES",
+      "object": "surface roughness",
+      "evidence": "The surface roughness was measured using a 3D laser microscope (LEXT OLS4100-SAA, Olympus, Tokyo, Japan) and evaluated using Ra and Rz."
+    },
+    {
+      "subject": "3D laser microscope",
+      "relation": "CHARACTERIZES",
+      "object": "rz",
+      "evidence": "The surface roughness was measured using a 3D laser microscope (LEXT OLS4100-SAA, Olympus, Tokyo, Japan) and evaluated using Ra and Rz."
+    },
+    {
+      "subject": "stereomicroscope",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Z l Ra = 1 0 |f(x)|dx (4) l 5 ∑ n=1 5 ∑ n=1 RZ = 1 Pn + 1 Vn (5) 5 5 Pores were measured using a Stemi508 stereomicroscope (Zeiss, Oberkochen)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "average porosity",
+      "evidence": "The average porosity was used for discussing the energy density effects."
+    },
+    {
+      "subject": "stereomicroscope",
+      "relation": "CHARACTERIZES",
+      "object": "average pore size",
+      "evidence": "The average pore size was also measured using a stereomicroscope."
+    },
+    {
+      "subject": "hardness testing",
+      "relation": "CHARACTERIZES",
+      "object": "hardness",
+      "evidence": "Hardness was measured using a hardness tester, HR-500 (Mitutoyo, Kawasaki, Japan)."
+    },
+    {
+      "subject": "universal testing system",
+      "relation": "CHARACTERIZES",
+      "object": "yield strength",
+      "evidence": "The yield strength, ultimate strength, and elongation were measured using a 400-KN 5988 universal testing system (Instron, Norwood, USA)."
+    },
+    {
+      "subject": "universal testing system",
+      "relation": "CHARACTERIZES",
+      "object": "tensile strength",
+      "evidence": "The yield strength, ultimate strength, and elongation were measured using a 400-KN 5988 universal testing system (Instron, Norwood, USA)."
+    },
+    {
+      "subject": "universal testing system",
+      "relation": "CHARACTERIZES",
+      "object": "elongation",
+      "evidence": "The yield strength, ultimate strength, and elongation were measured using a 400-KN 5988 universal testing system (Instron, Norwood, USA)."
+    },
+    {
+      "subject": "PBF",
+      "relation": "FABRICATES",
+      "object": "cuboid specimen",
+      "evidence": "Morphology of Specimen according to Process Parameters Cuboid specimens for the 27 conditions according to the laser power, scanning speed, and bead overlapping ratio variations were deposited using the PBF process."
+    },
+    {
+      "subject": "PBF",
+      "relation": "HAS_PARAMETER",
+      "object": "bead overlapping ratio",
+      "evidence": "Morphology of Specimen according to Process Parameters Cuboid specimens for the 27 conditions according to the laser power, scanning speed, and bead overlapping ratio variations were deposited using the PBF process."
+    },
+    {
+      "subject": "incomplete melting",
+      "relation": "CAUSES",
+      "object": "weak fusion",
+      "evidence": "Weak fusion resulted from incomplete melting and bonding in the sintered form."
+    },
+    {
+      "subject": "bead overlapping ratio",
+      "relation": "INFLUENCES",
+      "object": "surface soot",
+      "evidence": "Surface soot was found regardless of the bead overlapping ratio when the laser power was 200 W, and scanning speed was 500 mm/s."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "surface soot",
+      "evidence": "Surface soot was found regardless of the bead overlapping ratio when the laser power was 200 W, and scanning speed was 500 mm/s."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "surface soot",
+      "evidence": "Surface soot was found regardless of the bead overlapping ratio when the laser power was 200 W, and scanning speed was 500 mm/s."
+    },
+    {
+      "subject": "over-melted region",
+      "relation": "CAUSES",
+      "object": "surface soot",
+      "evidence": "Surface soot was also found under identical conditions, potentially caused by the over-melted regions."
+    },
+    {
+      "subject": "bead overlapping ratio",
+      "relation": "INFLUENCES",
+      "object": "collapse",
+      "evidence": "Collapses were found regardless of the bead overlapping ratio when the laser power was 100 W, and scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "collapse",
+      "evidence": "Collapses were found regardless of the bead overlapping ratio when the laser power was 100 W, and scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "collapse",
+      "evidence": "Collapses were found regardless of the bead overlapping ratio when the laser power was 100 W, and scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "weak fusion",
+      "evidence": "Weak fusion defects were found regardless of the laser power and bead overlapping ratio when the scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "bead overlapping ratio",
+      "relation": "INFLUENCES",
+      "object": "weak fusion",
+      "evidence": "Weak fusion defects were found regardless of the laser power and bead overlapping ratio when the scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "weak fusion",
+      "evidence": "Weak fusion defects were found regardless of the laser power and bead overlapping ratio when the scanning speed was 1500 mm/s."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "weak fusion",
+      "evidence": "The weak fusion and collapse defects were caused by the insufficient heat input capacities used in the fusion."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "collapse",
+      "evidence": "The weak fusion and collapse defects were caused by the insufficient heat input capacities used in the fusion."
+    },
+    {
+      "subject": "laser power",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "Balling defects (some regions swelling like balls) were observed when the laser power was 100 W; the scanning speed was 1000 mm/s, and the bead overlapping ratio was 0%."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "Balling defects (some regions swelling like balls) were observed when the laser power was 100 W; the scanning speed was 1000 mm/s, and the bead overlapping ratio was 0%."
+    },
+    {
+      "subject": "bead overlapping ratio",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "Balling defects (some regions swelling like balls) were observed when the laser power was 100 W; the scanning speed was 1000 mm/s, and the bead overlapping ratio was 0%."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "sectional porosity",
+      "evidence": "Figure 7a shows the results of measuring the sectional porosity variation according to the energy density used in the specimen deposition."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "average pore size",
+      "evidence": "Figure 7b shows the results of measuring the variation in the average pore size according to the energy density used in the specimen deposition."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "internal pore",
+      "evidence": "Figure 7d shows the morphology of the internal pores according to the energy density."
+    },
+    {
+      "subject": "PBF",
+      "relation": "CAUSES",
+      "object": "small pore",
+      "evidence": "Small pores of hundreds of nanometres were created over the entire experimental range in the ASTM 316L specimens produced using the PBF process."
+    },
+    {
+      "subject": "trapping of gas",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "Hence, pores were generated by the partial trapping of gas during the deposition process."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "large pore",
+      "evidence": "However, large pores with maximum lengths of 100 µm or longer were observed when the energy density was lower than 137 J/mm3."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "rz",
+      "evidence": "The surface roughness, Rz, ranged from 1.6 µm to 21 µm according to the energy density."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "balling",
+      "evidence": "When the energy density level was 79 J/mm3 or less, irregular shapes with balling and collapse defects were observed."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "collapse",
+      "evidence": "When the energy density level was 79 J/mm3 or less, irregular shapes with balling and collapse defects were observed."
+    },
+    {
+      "subject": "profilometry",
+      "relation": "CHARACTERIZES",
+      "object": "ASTM 316L",
+      "evidence": "Figure 8b shows a confocal microscopy image of the ASTM 316L specimens according to the energy densities."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "soot",
+      "evidence": "The soot was caused by a high heat input, becoming severe under high-energy-density conditions."
+    },
+    {
+      "subject": "spatter",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "These spatters were assumed to be the major cause of the pores observed when the energy density was 103 J/mm3 or higher, as shown in Figure 7."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "valley",
+      "evidence": "When the energy density was 79 J/mm3, valleys were created intermittently between the beads."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "crater",
+      "evidence": "Numerous craters were created on the surface when the energy density was <50 J/mm3."
+    },
+    {
+      "subject": "PBF",
+      "relation": "PRODUCES",
+      "object": "hardness",
+      "evidence": "Considering that the hardness of ASTM 316L in ASTM standard, specimens perfectly constructed by the PBF process will have a hardness of approximately 20% higher than the standard level owing to rapid heating and cooling in the PBF process [17,19,22]."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "fracture characteristic",
+      "evidence": "Fracture Characteristics according to Energy Density Images of the fracture surfaces were used to discuss the failure characteristics of the tensile specimens."
+    },
+    {
+      "subject": "internal pore",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "The low elongation under both conditions compared with the standard elongation of ASTM 316L was caused by the internal pores and powder particles that remained unmelted. (a) (b) (c) Figure 11."
+    },
+    {
+      "subject": "unmelted powder",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "The low elongation under both conditions compared with the standard elongation of ASTM 316L was caused by the internal pores and powder particles that remained unmelted. (a) (b) (c) Figure 11."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "The low yield strength, ultimate strength, and elongation under these conditions were caused by the sintered bonding properties without complete fusion."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The low yield strength, ultimate strength, and elongation under these conditions were caused by the sintered bonding properties without complete fusion."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "The low yield strength, ultimate strength, and elongation under these conditions were caused by the sintered bonding properties without complete fusion."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "fracture behaviour",
+      "evidence": "The results of analysing the fracture behaviours of the tensile specimens produced under the three energy density conditions are shown in Figure 12."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "dimple structure",
+      "evidence": "When the energy density was 155 J/mm3, dimple structures caused by ductile fracture occupied most of the fracture surface, with some cleavage facets from brittle fractures."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "cleavage facet",
+      "evidence": "When the energy density was 155 J/mm3, dimple structures caused by ductile fracture occupied most of the fracture surface, with some cleavage facets from brittle fractures."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "cleavage ratio",
+      "evidence": "When the energy density was 68 J/mm3, the cleavage ratio further increased to the level of dimple structures."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "fracture property",
+      "evidence": "The variation in the fracture property according to the energy density was because the powder completely melted at a high energy density."
+    }
+  ],
+  "values": [
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "79 J/mm3",
+      "normalized_value": 79.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99.5%",
+      "normalized_value": 99.5
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "1.2 µm",
+      "normalized_value": 1.2
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "240 HV",
+      "normalized_value": 240.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "155 J/mm3",
+      "normalized_value": 155.0
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "72 µm",
+      "normalized_value": 72.0
+    },
+    {
+      "entity": "wavelength",
+      "normalized_unit": "μm",
+      "raw": "1076 nm",
+      "normalized_value": 1.076
+    },
+    {
+      "entity": "maximum power",
+      "normalized_unit": "W",
+      "raw": "400 W",
+      "normalized_value": 400.0
+    },
+    {
+      "entity": "oxygen",
+      "normalized_unit": "%",
+      "raw": "0.3%",
+      "normalized_value": 0.3
+    },
+    {
+      "entity": "build plate temperature",
+      "normalized_unit": "°C",
+      "raw": "150 ◦C",
+      "normalized_value": 150.0
+    },
+    {
+      "entity": "cube",
+      "normalized_unit": "μm",
+      "raw": "10 mm × 10 mm × 5 mm",
+      "normalized_value": 10000.0
+    },
+    {
+      "entity": "tensile specimen",
+      "normalized_unit": "μm",
+      "raw": "85 mm × 20 mm × 5 mm",
+      "normalized_value": 85000.0
+    },
+    {
+      "entity": "tensile specimen",
+      "normalized_unit": "μm",
+      "raw": "81 mm × 12 mm × 2 mm",
+      "normalized_value": 81000.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "100–200 W",
+      "normalized_min": 100.0,
+      "normalized_max": 200.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "500–1500 mm/s",
+      "normalized_min": 500.0,
+      "normalized_max": 1500.0
+    },
+    {
+      "entity": "bead overlapping ratio",
+      "normalized_unit": "%",
+      "raw": "0–50%",
+      "normalized_min": 0.0,
+      "normalized_max": 50.0
+    },
+    {
+      "entity": "hatching angle",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "30 µm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "25–155 J/mm3",
+      "normalized_min": 25.0,
+      "normalized_max": 155.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "35 µm",
+      "normalized_value": 35.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "200 W",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "500 mm/s",
+      "normalized_value": 500.0
+    },
+    {
+      "entity": "laser power",
+      "normalized_unit": "W",
+      "raw": "100 W",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1500 mm/s",
+      "normalized_value": 1500.0
+    },
+    {
+      "entity": "bead overlapping ratio",
+      "normalized_unit": "%",
+      "raw": "0%",
+      "normalized_value": 0.0
+    },
+    {
+      "entity": "bead overlapping ratio",
+      "normalized_unit": "%",
+      "raw": "25%",
+      "normalized_value": 25.0
+    },
+    {
+      "entity": "scanning speed",
+      "normalized_unit": "mm/s",
+      "raw": "1000 mm/s",
+      "normalized_value": 1000.0
+    },
+    {
+      "entity": "sectional porosity",
+      "normalized_unit": "%",
+      "raw": "0.1%",
+      "normalized_value": 0.1
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "103 J/mm3",
+      "normalized_value": 103.0
+    },
+    {
+      "entity": "sectional porosity",
+      "normalized_unit": "%",
+      "raw": "0.002%",
+      "normalized_value": 0.002
+    },
+    {
+      "entity": "sectional porosity",
+      "normalized_unit": "%",
+      "raw": "0.2–0.5%",
+      "normalized_min": 0.2,
+      "normalized_max": 0.5
+    },
+    {
+      "entity": "sectional porosity",
+      "normalized_unit": "%",
+      "raw": "0.03–12%",
+      "normalized_min": 0.03,
+      "normalized_max": 12.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "50 J/mm3",
+      "normalized_value": 50.0
+    },
+    {
+      "entity": "sectional porosity",
+      "normalized_unit": "%",
+      "raw": "1.6–48%",
+      "normalized_min": 1.6,
+      "normalized_max": 48.0
+    },
+    {
+      "entity": "relative density",
+      "normalized_unit": "%",
+      "raw": "99.9%",
+      "normalized_value": 99.9
+    },
+    {
+      "entity": "average pore size",
+      "normalized_unit": "μm",
+      "raw": "130 µm",
+      "normalized_value": 130.0
+    },
+    {
+      "entity": "average pore size",
+      "normalized_unit": "μm",
+      "raw": "25 µm",
+      "normalized_value": 25.0
+    },
+    {
+      "entity": "average pore size",
+      "normalized_unit": "μm",
+      "raw": "150–688 µm",
+      "normalized_min": 150.0,
+      "normalized_max": 688.0
+    },
+    {
+      "entity": "average pore size",
+      "normalized_unit": "μm",
+      "raw": "41 and 4200 µm",
+      "normalized_value": 41.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "50–79 J/mm3",
+      "normalized_min": 50.0,
+      "normalized_max": 79.0
+    },
+    {
+      "entity": "average pore size",
+      "normalized_unit": "μm",
+      "raw": "580 µm to 9438 µm",
+      "normalized_value": 580.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "μm",
+      "raw": "12 µm",
+      "normalized_value": 12.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "137 J/mm3",
+      "normalized_value": 137.0
+    },
+    {
+      "entity": "large pore",
+      "normalized_unit": "μm",
+      "raw": "100 µm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "63 J/mm3",
+      "normalized_value": 63.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "49 J/mm3",
+      "normalized_value": 49.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "33 J/mm3",
+      "normalized_value": 33.0
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "0.3 µm to 3.9 µm",
+      "normalized_value": 0.3
+    },
+    {
+      "entity": "surface roughness",
+      "normalized_unit": "μm",
+      "raw": "0.7 µm",
+      "normalized_value": 0.7
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "1.6 µm to 21 µm",
+      "normalized_value": 1.6
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "1.7–21.1 µm",
+      "normalized_min": 1.7,
+      "normalized_max": 21.1
+    },
+    {
+      "entity": "rz",
+      "normalized_unit": "μm",
+      "raw": "3.65–6.38 µm",
+      "normalized_min": 3.65,
+      "normalized_max": 6.38
+    },
+    {
+      "entity": "hardness",
+      "normalized_unit": "HV",
+      "raw": "164~247 HV",
+      "normalized_min": 164.0,
+      "normalized_max": 247.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "573 to 582 MPa",
+      "normalized_min": 573.0,
+      "normalized_max": 582.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "664–675 MPa",
+      "normalized_min": 664.0,
+      "normalized_max": 675.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "585 MPa",
+      "normalized_value": 585.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "670 MPa",
+      "normalized_value": 670.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "118 J/mm3",
+      "normalized_value": 118.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "19.8%",
+      "normalized_value": 19.8
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "35.3%",
+      "normalized_value": 35.3
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "68 and 70 J/mm3",
+      "normalized_value": 68.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "469 MPa",
+      "normalized_value": 469.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "530 MPa",
+      "normalized_value": 530.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "8%",
+      "normalized_value": 8.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "70 J/mm3",
+      "normalized_value": 70.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "240 MPa",
+      "normalized_value": 240.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "251 MPa",
+      "normalized_value": 251.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "3.7%",
+      "normalized_value": 3.7
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "diameter",
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "surface": "building plate",
+      "type": "ExperimentalCondition",
+      "canonical": "build plate temperature"
+    },
+    {
+      "surface": "cuboid deposition specimens",
+      "type": "Geometry",
+      "canonical": "cube"
+    },
+    {
+      "surface": "HA",
+      "type": "Parameter",
+      "canonical": "hatching angle"
+    },
+    {
+      "surface": "thickness between the layers",
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "surface": "TL",
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "surface": "average particle size",
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "surface": "Weak fusion defects",
+      "type": "Defect",
+      "canonical": "weak fusion"
+    },
+    {
+      "surface": "collapse defects",
+      "type": "Defect",
+      "canonical": "collapse"
+    },
+    {
+      "surface": "heat input",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "average powder particle size",
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "surface": "incompletely melted powder particles",
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "surface": "Energy conditions",
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "surface": "tensile",
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "surface": "FE-SEM",
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "surface": "powder particles that remained unmelted",
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "surface": "sintered bonding",
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "surface": "yield",
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "surface": "ASTM316L",
+      "type": "Material",
+      "canonical": "ASTM 316L"
+    }
+  ]
+}

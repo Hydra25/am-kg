@@ -28,7 +28,12 @@ from .llm.client import LLMError, LLMProvider
 from .llm.instrumented import InstrumentedLLM
 from .llm.openai_compat import make_llm_client
 from .llm.prompts import PromptLibrary
-from .normalization.entity_normalizer import EntityNormalizer, NormalizationOverrides, find_abbreviations
+from .normalization.entity_normalizer import (
+    EntityNormalizer,
+    NormalizationOverrides,
+    find_abbreviations,
+    find_symbol_definitions,
+)
 from .normalization.lexicon import Lexicon
 from .ontology.models import (
     CanonicalEntity,
@@ -221,6 +226,8 @@ class ExtractionPipeline:
         skip = set(s.extraction.skip_sections)
         full_text = " ".join(x.text for x in doc.sentences if x.section_type not in skip)
         abbreviations = find_abbreviations(full_text)
+        # symbols such as P, v, h, E are resolved during normalisation only (never matched on their own)
+        self.normalizer.set_paper_context(abbreviations, find_symbol_definitions(full_text))
         warnings = list(doc.warnings)
 
         # 1) rule-based entities and values

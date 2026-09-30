@@ -1,0 +1,1904 @@
+{
+  "source_file": "ti64_squillaci2025",
+  "annotator": "Claude (LLM, silver standard; not human-verified)",
+  "annotation_mode": "llm_silver",
+  "notes": "SILVER STANDARD: annotated by an LLM (Claude) from the raw text without seeing system predictions, following docs/SILVER_GUIDELINE.md; NOT human-verified. Do not report as human gold. Imported from Label Studio. 46 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Material",
+      "canonical": "Ti-6Al-4V"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "HIP"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "stress relief"
+    },
+    {
+      "type": "Property",
+      "canonical": "impact toughness"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Property",
+      "canonical": "reduction of area"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "bi-modal microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "recrystallisation"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation density"
+    },
+    {
+      "type": "Property",
+      "canonical": "hardness"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "crystallographic texture"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "microstructure"
+    },
+    {
+      "type": "Property",
+      "canonical": "surface roughness"
+    },
+    {
+      "type": "Process",
+      "canonical": "PBF"
+    },
+    {
+      "type": "Property",
+      "canonical": "packing density"
+    },
+    {
+      "type": "Property",
+      "canonical": "flowability"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Property",
+      "canonical": "fatigue strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "fracture toughness"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "hydride"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α' martensite"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation at fracture"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "lamellar structure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "substrate temperature"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "retained β"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "solution treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "post-build heat treatment"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β grain size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar grains"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "impact toughness testing"
+    },
+    {
+      "type": "Property",
+      "canonical": "charpy v-notch impact toughness"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "macrozone"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "prior-β grain boundary"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α colony"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "powder range"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "PSD"
+    },
+    {
+      "type": "Property",
+      "canonical": "charpy impact toughness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "impact toughness test bar"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "powder cut"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "laser diffraction"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "D10"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "D50"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "D90"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "build orientation"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "type": "Property",
+      "canonical": "density"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "cuboid"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "thin wall"
+    },
+    {
+      "type": "Property",
+      "canonical": "dimensional accuracy"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "blank"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "round blank"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "machining"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "contour scanning strategy"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "atmosphere"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "isostatic pressure"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "annealing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "pressure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "cooling rate"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "coupon"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "vnotch"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "room temperature"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "digital microscope"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge diameter"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "parallel length"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "strain rate"
+    },
+    {
+      "type": "Property",
+      "canonical": "work hardening rate"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "coal cart"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "impact toughness specimen"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "light optical microscopy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "LOM"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "phase fraction"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EBSD"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "acceleration voltage"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "current"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "step size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "prior-β grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α lath thickness"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α colony size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "interlamellar spacing"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "vickers microindentation hardness testing"
+    },
+    {
+      "type": "Property",
+      "canonical": "strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "stiffness"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "load"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "indentation dwell time"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "HIP heat treatment"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "HIP temperature"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "image analysis"
+    },
+    {
+      "type": "Property",
+      "canonical": "area reduction"
+    },
+    {
+      "type": "Property",
+      "canonical": "Young's modulus"
+    },
+    {
+      "type": "Property",
+      "canonical": "fracture stress"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "macrostructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "BSE"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "light optical microscope"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "prior-β grain diameter"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "equiaxed prior-β grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α and β phase"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "β transus"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "beam spot size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "acicular α needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "metastable martensite"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α' needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensitic phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "basketweave-type microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "thick lath"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "αp"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "transformed β"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "BCC β phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "αGB"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α plate"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "widmanst¨atten type microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "basketweave structure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain boundary α"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "acicular α/α' grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "prior-β grain shape"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "parent grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "lamellar needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α and β phase fraction"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "heat treatment temperature"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "ultrafine grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "retained β fraction"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β fraction"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "slip system"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α grain size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α thickness"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size distribution"
+    },
+    {
+      "type": "Process",
+      "canonical": "EBM"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "finer grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "coarser grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain aspect ratio"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α lath"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "thin lamellae"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "equiaxed"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "thin lath"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "equiaxed proportion"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "impact toughness cross section"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "gas flow di­ rection"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "inert gas"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α globular"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α lamellar morphology"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "lamellar α+β microstructure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "gas cooling rate"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "β transus temperature"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "acicular α' martensite"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "rapid cooling"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "Defect",
+      "canonical": "delamination"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensite decomposition"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "thin acicular needle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "ultrafine stiff grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensitic decomposition"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β matrix"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "retained-β phase fraction"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "retained-β phase content"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "fine lamellar microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β phase fraction"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "primary α"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "globularisation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α grain size distribution"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "aspect ratio"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "duplex microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation pile-up"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "more-equiaxed structure"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "heating rate"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β grain growth"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "HIP dwell time"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "widmanst¨atten microstructure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "super-β microstructure"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "XRD"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "charpy v-notch test"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain boundary"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unmelted powder"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "scan track"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "uniaxial tensile testing"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "martensite decompo­ sition"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α/α' phase"
+    },
+    {
+      "type": "Defect",
+      "canonical": "micro-void"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "high aspect ratio grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain growth"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "powder size distribution"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "low aspect ratio grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "αp grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α lamellae"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "globular duplex microstructure"
+    },
+    {
+      "type": "Defect",
+      "canonical": "melt defect"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar structure"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "lath coarsening"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "β grain"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "α phase morphology"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon gas"
+    },
+    {
+      "type": "Defect",
+      "canonical": "spherical porosity"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "HIP tem­ perature"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "Defect",
+      "canonical": "gas porosity"
+    },
+    {
+      "type": "Defect",
+      "canonical": "argon-pore"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "widmanst¨atten type of microstructure"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "tensile strength",
+      "evidence": "Room temperature impact toughness and tensile testing are used to compare the materials by determining UTS and Yield strength, elongation and reduction of area for the different process conditions and post build heat treatments."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "yield strength",
+      "evidence": "Room temperature impact toughness and tensile testing are used to compare the materials by determining UTS and Yield strength, elongation and reduction of area for the different process conditions and post build heat treatments."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "elongation",
+      "evidence": "Room temperature impact toughness and tensile testing are used to compare the materials by determining UTS and Yield strength, elongation and reduction of area for the different process conditions and post build heat treatments."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "reduction of area",
+      "evidence": "Room temperature impact toughness and tensile testing are used to compare the materials by determining UTS and Yield strength, elongation and reduction of area for the different process conditions and post build heat treatments."
+    },
+    {
+      "subject": "HIP",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "This phenomenon is triggered by the closure of lack of fusion (LoF) defects via hot isostatic pressing, due to a higher dislocation density at the tip of these particular defects."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "It is demonstrated that in those cases where a fast scanning speed creates LoF defects, those can assist in modifying microstructure during the consolidation process which has a positive effect on ductility."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "It is demonstrated that in those cases where a fast scanning speed creates LoF defects, those can assist in modifying microstructure during the consolidation process which has a positive effect on ductility."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "It is demonstrated that in those cases where a fast scanning speed creates LoF defects, those can assist in modifying microstructure during the consolidation process which has a positive effect on ductility."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "layer thickness",
+      "evidence": "The powder range evaluated is 15–90 μm and it is coupled with a 70 μm layer thickness, to compare two sets of PBF-LB process parameters."
+    },
+    {
+      "subject": "light optical microscopy",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Light optical microscopy (LOM) was performed using a Zeiss (AX10) apparatus and its built-in software (ZEN Core 2.7) to image the coal carts’ cross sections and obtain porosity values by image segmentation at a fixed threshold level."
+    },
+    {
+      "subject": "LOM",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "Light optical microscopy (LOM) was performed using a Zeiss (AX10) apparatus and its built-in software (ZEN Core 2.7) to image the coal carts’ cross sections and obtain porosity values by image segmentation at a fixed threshold level."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "phase fraction",
+      "evidence": "JMatPro® computational software was employed to predict the phase fraction evolution from heat treatment temperatures, as a function of material cooling rates."
+    },
+    {
+      "subject": "cooling rate",
+      "relation": "AFFECTS",
+      "object": "phase fraction",
+      "evidence": "JMatPro® computational software was employed to predict the phase fraction evolution from heat treatment temperatures, as a function of material cooling rates."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "crystallographic texture",
+      "evidence": "Electron backscattered diffraction analysis In addition to optical microscopy, one impact toughness specimen per condition was sectioned parallel to the build direction and texture measurements were carried out close to the fracture surface but on material unaffected by the applied impact, using a Zeiss Gemini 450 SEM."
+    },
+    {
+      "subject": "HIP heat treatment",
+      "relation": "IMPROVES",
+      "object": "impact toughness",
+      "evidence": "The main trend emerging is that impact toughness tends to improve when specimens undergo HIP heat treatments, with the stress relieved coupons showing minimum impact energy."
+    },
+    {
+      "subject": "stress relief",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The main trend emerging is that impact toughness tends to improve when specimens undergo HIP heat treatments, with the stress relieved coupons showing minimum impact energy."
+    },
+    {
+      "subject": "HIP temperature",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The upward trend is more evident for the specimens built with minimal porosity, where increasing the HIP temperature also slightly improves impact toughness (super-β has higher impact toughness than sub-β HIP)."
+    },
+    {
+      "subject": "image analysis",
+      "relation": "CHARACTERIZES",
+      "object": "reduction of area",
+      "evidence": "In addition to impact energy data, the reduction of area percentage is derived for all specimens via image analysis (Table 3)."
+    },
+    {
+      "subject": "HIP",
+      "relation": "IMPROVES",
+      "object": "reduction of area",
+      "evidence": "The HIPed high productivity specimens show a larger reduction of area, which depends on the process theme used."
+    },
+    {
+      "subject": "stress relief",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "Measures of strength, such as UTS and yield stress both follow a downward trend: stress relieving results in the highest values whilst both HIP treatments lower the strength (Fig. 3a and b) compounded by the inability of HIP to close the pores due to specimens without contour."
+    },
+    {
+      "subject": "stress relief",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "Measures of strength, such as UTS and yield stress both follow a downward trend: stress relieving results in the highest values whilst both HIP treatments lower the strength (Fig. 3a and b) compounded by the inability of HIP to close the pores due to specimens without contour."
+    },
+    {
+      "subject": "HIP",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "Measures of strength, such as UTS and yield stress both follow a downward trend: stress relieving results in the highest values whilst both HIP treatments lower the strength (Fig. 3a and b) compounded by the inability of HIP to close the pores due to specimens without contour."
+    },
+    {
+      "subject": "HIP",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "Measures of strength, such as UTS and yield stress both follow a downward trend: stress relieving results in the highest values whilst both HIP treatments lower the strength (Fig. 3a and b) compounded by the inability of HIP to close the pores due to specimens without contour."
+    },
+    {
+      "subject": "HIP",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "As for elongation results in Fig. 3c, the HIP 920C minimal porosity theme presents consistently high elongation, with a median of 19 %."
+    },
+    {
+      "subject": "HIP",
+      "relation": "IMPROVES",
+      "object": "elongation",
+      "evidence": "Round symbol represents the intersection point according to the Consid`ere criterion. relation to strength, whilst HIP material surpasses the SR 720C material in terms of elongation and ductility."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "macrostructure",
+      "evidence": "It can be observed that the HIP 1050C reveals a coarser and more faceted macrostructure, that is consistent across the two PBF-LB process parameter sets."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "equiaxed prior-β grain",
+      "evidence": "Conversely, HIP 1050C is characterised by large equiaxed prior-β grains, in addition to cleavage surface that can be either intergranular or transgranular in nature."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "α and β phase",
+      "evidence": "Fig. 11. EBSD data constitutes of two types of graphs for each process theme: top images are the IPF for α and β phases, whilst the bottom row shows the reconstructed prior-β grains."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "prior-β grain",
+      "evidence": "Fig. 11. EBSD data constitutes of two types of graphs for each process theme: top images are the IPF for α and β phases, whilst the bottom row shows the reconstructed prior-β grains."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser spot size",
+      "evidence": "These two elements are a typical signature of the laser powder bed fusion process, where the combination of a tight spot size and high scanning speed impart a large amount of energy to the powder in a very short time and can cause metastable martensite to form due to high cooling rates."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "scanning speed",
+      "evidence": "These two elements are a typical signature of the laser powder bed fusion process, where the combination of a tight spot size and high scanning speed impart a large amount of energy to the powder in a very short time and can cause metastable martensite to form due to high cooling rates."
+    },
+    {
+      "subject": "laser spot size",
+      "relation": "AFFECTS",
+      "object": "metastable martensite",
+      "evidence": "These two elements are a typical signature of the laser powder bed fusion process, where the combination of a tight spot size and high scanning speed impart a large amount of energy to the powder in a very short time and can cause metastable martensite to form due to high cooling rates."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "AFFECTS",
+      "object": "metastable martensite",
+      "evidence": "These two elements are a typical signature of the laser powder bed fusion process, where the combination of a tight spot size and high scanning speed impart a large amount of energy to the powder in a very short time and can cause metastable martensite to form due to high cooling rates."
+    },
+    {
+      "subject": "cooling rate",
+      "relation": "AFFECTS",
+      "object": "metastable martensite",
+      "evidence": "These two elements are a typical signature of the laser powder bed fusion process, where the combination of a tight spot size and high scanning speed impart a large amount of energy to the powder in a very short time and can cause metastable martensite to form due to high cooling rates."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "martensitic phase",
+      "evidence": "The HIP 920C rendered complete decomposition of the initial martensitic phase into a mixture of α and β phases which coexist at elevated temperature."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "α and β phase",
+      "evidence": "The HIP 920C rendered complete decomposition of the initial martensitic phase into a mixture of α and β phases which coexist at elevated temperature."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "transformed β",
+      "evidence": "The HIP 1050C yielded a substantially different microstructure when compared to the previous two conditions, as shown in Fig. 9c–f, Fig. 10c and f. It is known as “transformed β” microstructure and its main distinctive feature is a coarse β grain size."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "β grain size",
+      "evidence": "The HIP 1050C yielded a substantially different microstructure when compared to the previous two conditions, as shown in Fig. 9c–f, Fig. 10c and f. It is known as “transformed β” microstructure and its main distinctive feature is a coarse β grain size."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "basketweave structure",
+      "evidence": "For the HIP 920C specimens, the basketweave structure is highlighted whilst no PBF-LB epitaxial growth of prior-β grains is immediately recognisable (see Fig. 10b and e)."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "α colony",
+      "evidence": "As for the HIP 1050C, α colonies are seen to cover the entire surface of equiaxed prior-β grains, whose contours are surrounded by grain boundary α."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "microstructure",
+      "evidence": "EBSD was conducted below the fracture surface of impact toughness specimens, on undeformed microstructure, to complement the micro­ structural evaluation performed with LOM."
+    },
+    {
+      "subject": "melt pool",
+      "relation": "AFFECTS",
+      "object": "prior-β grain shape",
+      "evidence": "HIP 920C micro­ structure from the minimal porosity theme shows that the prior-β grain shape is inherited from the PBF-LB melt pool, despite the dwell time at a high temperature."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "grain size",
+      "evidence": "HIP 1050C micro­ structures are characterised by a large prior-β grain size, which is a shared feature among process themes."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "crystallographic texture",
+      "evidence": "The mid value is for SR 720C, with texture induced by the highly directional PBF-LB cooling that does not get erased by heat treatment."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "crystallographic texture",
+      "evidence": "The mid value is for SR 720C, with texture induced by the highly directional PBF-LB cooling that does not get erased by heat treatment."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "crystallographic texture",
+      "evidence": "Lastly, the lowest texture values corre­ sponded to the HIP 920C, which presents a more isotropic arrangement of lamellar needles."
+    },
+    {
+      "subject": "heat treatment temperature",
+      "relation": "AFFECTS",
+      "object": "α and β phase fraction",
+      "evidence": "A piece of complementary information can be extracted from JMatPro®, MTEX and Aztec Crystal packages regarding α and β phase fractions to estimate their evolution depending on the heat treatment temperature."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "phase fraction",
+      "evidence": "The third column shows room temperature data from EBSD analysis and post-processed with MTEX software, where the phase fractions refer to data that was filled based on neighbouring pixels."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "β fraction",
+      "evidence": "It is observed that the HIP 920C presents the highest β fracture for both themes."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "α grain size",
+      "evidence": "Grain size and Hall Petch relationship From the EBSD data, α grain size measurements are extracted via ellipse fitting method for each grain in the probed area."
+    },
+    {
+      "subject": "α grain size",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "An average value of α grain size is derived from each distribution and can be used as the d parameter to calculate the yield strength via the Hall-Petch relationship in the form: σy = σ0 + kyd−1/2 In this work, two sets of empirical constants σ0, ky are used for com­ parison to the measured yield strengths, one derived from a study on PBF-LB material [37] and one from PBF-EB [38] via linear regression, with values: σy PBF−LB = 743 + 242d−1/2, σy PBF−EB = 737 + 144d−1/2 The two equations are displayed as lines in Fig. 14b, where d−1/2 is plotted against the calculated yield strength."
+    },
+    {
+      "subject": "grain size",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "The Hall Petch lines follow an upward trend, meaning that for larger grain sizes (i.e., small d−1/2) the yield strength is low, whereas the finer grains render in higher yield strength."
+    },
+    {
+      "subject": "finer grain",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "The Hall Petch lines follow an upward trend, meaning that for larger grain sizes (i.e., small d−1/2) the yield strength is low, whereas the finer grains render in higher yield strength."
+    },
+    {
+      "subject": "porosity",
+      "relation": "AFFECTS",
+      "object": "microstructure",
+      "evidence": "Therefore, this grain size difference indicates that porosity and its healing via HIP influence the kinetics for the microstructure evolution for the HIP 920C specimens."
+    },
+    {
+      "subject": "HIP",
+      "relation": "CHANGES",
+      "object": "microstructure",
+      "evidence": "Therefore, this grain size difference indicates that porosity and its healing via HIP influence the kinetics for the microstructure evolution for the HIP 920C specimens."
+    },
+    {
+      "subject": "thin lamellae",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "Thus, two points can be added to the plot in Fig. 14b: grains with AR>10 represent thin lamellae that would result in the highest yield strength (circular symbol in Fig. 14b)."
+    },
+    {
+      "subject": "grain",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "This suggests that this particular microstructure has undergone a transformation whereby a large portion of the grains in the probed area are thicker and rounder, which can drive the overall yield strength down."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "It is noted that excluding some results increases the average hardness because indentations that hit lack of fusion defects result in larger indent-area, which lowers hardness."
+    },
+    {
+      "subject": "HIP",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "Even after the data had been refined, the HIP 920C specimens showed the lowest data spread and the lowest average values of hardness."
+    },
+    {
+      "subject": "HIP temperature",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "The high productivity theme is characterised by more pronounced LoF defects than the slower theme across both geometries and no clear trend is observed as HIP temperature increases."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "As a consequence of the fast theme choice, it is also likely that defects remained open to the surface and high-pressure heat treatments of the high productivity built material were not as effective in eliminating process induced LoF."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Ti-6Al-4V",
+      "evidence": "On the contrary, high productivity specimens yield most of the results below the ductility expected for PBF-LB Ti-6Al-4V."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "α' martensite",
+      "evidence": "PBF-LB Ti-6Al-4V in its as-built condition is known to be prone to extensive acicular martensite formation due to its inherent sequence of melting and rapid solidification cycles from the β field, at each laser pass."
+    },
+    {
+      "subject": "rapid cooling",
+      "relation": "AFFECTS",
+      "object": "acicular α' martensite",
+      "evidence": "When the material is fast cooled from the β field, acicular α’ martensite is formed as a result of a diffusionless transformation, due to rapid cooling and/or to shear deformations in the lattice."
+    },
+    {
+      "subject": "thin acicular needle",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Results in the present work confirmed that specimens characterised by a prevalence of thin acicular needles (i.e., stress relieved) yielded low impact energy, which was marginally improved upon heat treatment."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "IMPROVES",
+      "object": "impact toughness",
+      "evidence": "Results in the present work confirmed that specimens characterised by a prevalence of thin acicular needles (i.e., stress relieved) yielded low impact energy, which was marginally improved upon heat treatment."
+    },
+    {
+      "subject": "ultrafine stiff grain",
+      "relation": "AFFECTS",
+      "object": "hardness",
+      "evidence": "The corresponding high hardness values recorded for SR 720C and both process parameter sets confirmed that the structure has a prevalence of ultrafine stiff grains."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "The largest difference in impact toughness was noticed for stress-relieved specimens produced with minimal porosity and high productivity themes: the fast-scanning speed coupled with large hatch distance created a material with extensive PBF-LB defects, where LoF induces sudden brittle failures by creating weaknesses and crack-like features."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The largest difference in impact toughness was noticed for stress-relieved specimens produced with minimal porosity and high productivity themes: the fast-scanning speed coupled with large hatch distance created a material with extensive PBF-LB defects, where LoF induces sudden brittle failures by creating weaknesses and crack-like features."
+    },
+    {
+      "subject": "fine lamellar microstructure",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, the combination of a fine lamellar microstructure and a larger β phase fraction could help explain the in­ crease in impact toughness recorded due to its inherent ductility (Table 9)."
+    },
+    {
+      "subject": "β phase fraction",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "Therefore, the combination of a fine lamellar microstructure and a larger β phase fraction could help explain the in­ crease in impact toughness recorded due to its inherent ductility (Table 9)."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "α grain size distribution",
+      "evidence": "Boxplots of α grain size distributions extracted from EBSD analysis (a)."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "dislocation",
+      "evidence": "It is possible that material with larger defect content will be compressed and generate more internal deformation, which increases the dislocations at LoF defects and creates an environment where more-equiaxed structures can nucleate, prompted by isostatic pressure, that is applied both during HIP and annealing (i.e., once at 920 ◦C/1050 ◦C followed by 720 ◦C annealing with a pressure applied)."
+    },
+    {
+      "subject": "isostatic pressure",
+      "relation": "AFFECTS",
+      "object": "more-equiaxed structure",
+      "evidence": "It is possible that material with larger defect content will be compressed and generate more internal deformation, which increases the dislocations at LoF defects and creates an environment where more-equiaxed structures can nucleate, prompted by isostatic pressure, that is applied both during HIP and annealing (i.e., once at 920 ◦C/1050 ◦C followed by 720 ◦C annealing with a pressure applied)."
+    },
+    {
+      "subject": "HIP dwell time",
+      "relation": "AFFECTS",
+      "object": "β grain growth",
+      "evidence": "Time and temperature influence the β grain growth: due to the 2 h dwell time at 1050 ◦C, β grain growth occurred, as evident in the β reconstruction map in Fig. 11."
+    },
+    {
+      "subject": "super-β microstructure",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The present results align with what was found in Ref. [31]: on average, a super-β microstructure provides higher impact toughness than lamellar, when the material is near full density."
+    },
+    {
+      "subject": "α colony size",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "The tortuosity of the fracture surface is evident when the super-β specimens are compared to the other conditions: despite the presence of unwanted αGB at triple junctions [20] it appears that the tight α colony size and the difficulty of cracks breaking through that type of structure results in marginally better impact toughness than its sub-β alternative."
+    },
+    {
+      "subject": "cooling rate",
+      "relation": "AFFECTS",
+      "object": "αGB",
+      "evidence": "It is believed that the cooling rate adopted for this treatment (i.e., 3.3 ◦C/s) was instrumental in limiting the αGB growth, thus contributing to the slight increase in toughness."
+    },
+    {
+      "subject": "retained-β phase fraction",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "One last aspect to be discussed is the possible effect of retained-β phase fraction on the toughness of the materials."
+    },
+    {
+      "subject": "α lath",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "This information could help explain the gains in impact toughness recorded in the current work when α laths coarsen, at the same time as β fraction increases from 720 ◦C to 920 ◦C however more work is needed to confirm exact quantities to not only rely on EBSD data (Table 6)."
+    },
+    {
+      "subject": "β fraction",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "This information could help explain the gains in impact toughness recorded in the current work when α laths coarsen, at the same time as β fraction increases from 720 ◦C to 920 ◦C however more work is needed to confirm exact quantities to not only rely on EBSD data (Table 6)."
+    },
+    {
+      "subject": "β phase",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "These can be activated more easily so estab­ lishing the exact coupling between the presence of β phase and the ductility gains should be pursued further."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "From the data presented in this work, it is clear that the original strategy of slower build rate and tighter hatch distance (i.e., minimal porosity), generated a dense material, which proved to yield significant toughness in the Charpy V-notch tests."
+    },
+    {
+      "subject": "charpy v-notch test",
+      "relation": "CHARACTERIZES",
+      "object": "impact toughness",
+      "evidence": "From the data presented in this work, it is clear that the original strategy of slower build rate and tighter hatch distance (i.e., minimal porosity), generated a dense material, which proved to yield significant toughness in the Charpy V-notch tests."
+    },
+    {
+      "subject": "hatch",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "On the other hand, fast scanning combined with a large hatch left considerable unfused material which was responsible for decreased impact energy and was only partly recovered by post-processing heat treatments."
+    },
+    {
+      "subject": "αGB",
+      "relation": "AFFECTS",
+      "object": "grain boundary",
+      "evidence": "Presence of αGB weakens grain boundaries."
+    },
+    {
+      "subject": "heat treatment temperature",
+      "relation": "AFFECTS",
+      "object": "area reduction",
+      "evidence": "Increasing the heat treatment temperature increases area reduction, although data scatter also increases with respect to non-HIP material, which is characterised by consistently low reduction of area values."
+    },
+    {
+      "subject": "scanning speed",
+      "relation": "CAUSES",
+      "object": "unmelted powder",
+      "evidence": "LoF is mainly responsible for the low impact toughness of stress-relieved specimens, where unmelted particles are still present due to fast laser scanning speed."
+    },
+    {
+      "subject": "HIP",
+      "relation": "AFFECTS",
+      "object": "reduction of area",
+      "evidence": "In opposition to this, HIP 1050C showed low reduction of area and faceted fracture surfaces from both tensile and impact toughness specimens, though achieving comparable strength to HIP 920C."
+    },
+    {
+      "subject": "slip system",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "This could imply that the strength might come from the activation of slip systems between different α colonies and prior-β grain boundaries [29], which requires some energy, given the scale of the colonies compared to fully lamellar structures."
+    },
+    {
+      "subject": "heat treatment temperature",
+      "relation": "AFFECTS",
+      "object": "impact toughness",
+      "evidence": "As the heat treatment temperature increases, impact toughness follows an upward trend whilst tensile strength tends to decrease, for minimal porosity."
+    },
+    {
+      "subject": "heat treatment temperature",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "As the heat treatment temperature increases, impact toughness follows an upward trend whilst tensile strength tends to decrease, for minimal porosity."
+    },
+    {
+      "subject": "duplex microstructure",
+      "relation": "AFFECTS",
+      "object": "work hardening rate",
+      "evidence": "This brings about an improvement in the hardening behaviour, when compared to the HIP 920C minimal porosity, which is also visible in Fig. 5, where the work hardening rate of the duplex microstructure is consistently higher than the traditional lamellar arrangement."
+    },
+    {
+      "subject": "globular duplex microstructure",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "This study also highlights that in absolute terms the highest elongation and reduction of area values are recorded for HIP 920C produced with the high productivity theme, due to a globular duplex microstructure."
+    },
+    {
+      "subject": "globular duplex microstructure",
+      "relation": "AFFECTS",
+      "object": "reduction of area",
+      "evidence": "This study also highlights that in absolute terms the highest elongation and reduction of area values are recorded for HIP 920C produced with the high productivity theme, due to a globular duplex microstructure."
+    },
+    {
+      "subject": "melt defect",
+      "relation": "AFFECTS",
+      "object": "Young's modulus",
+      "evidence": "Finally, Young’s modulus presented in Fig. 3e is seen to remain around the 100 GPa mark with some variations due to the presence of melt defects reducing the load bearing area."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "columnar structure",
+      "evidence": "The aim in both cases is to break the columnar structure inherent to the PBF-LB process for Ti-6Al-4V material."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "A portion of the LoF defects in both cases was likely open to the surface, affecting the porosity following the HIP 1050C cycle."
+    },
+    {
+      "subject": "HIP",
+      "relation": "IMPROVES",
+      "object": "impact toughness",
+      "evidence": "Applying a high productivity theme re­ sults in unmelted particles that significantly lower load bearing ability of the material • Impact toughness follows a steady upward trend when applying a HIP of increasing temperature for minimal porosity theme."
+    },
+    {
+      "subject": "tensile testing",
+      "relation": "CHARACTERIZES",
+      "object": "strength",
+      "evidence": "Tensile tests for the same theme reveal a gain in elongation and a marginal loss in strength when the high-pressure heat treatments are applied • Open-to-surface pores remain after HIP due to the use of material without a gas-tight contour."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "IMPROVES",
+      "object": "elongation",
+      "evidence": "Tensile tests for the same theme reveal a gain in elongation and a marginal loss in strength when the high-pressure heat treatments are applied • Open-to-surface pores remain after HIP due to the use of material without a gas-tight contour."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "Tensile tests for the same theme reveal a gain in elongation and a marginal loss in strength when the high-pressure heat treatments are applied • Open-to-surface pores remain after HIP due to the use of material without a gas-tight contour."
+    },
+    {
+      "subject": "HIP",
+      "relation": "IMPROVES",
+      "object": "tensile strength",
+      "evidence": "Producing material with high density from the start and then applying HIP proves to be effective in rendering higher impact toughness and tensile strength above the ASTM F3001 limits for UTS and yield minimum values (i. e., 0.2 % YS > 795 MPa) • Heat treatment above β-transus completely erases the traces of any previous PBF-LB process signature due to the residence time that allows complete α→β transformation to occur."
+    },
+    {
+      "subject": "cooling rate",
+      "relation": "AFFECTS",
+      "object": "widmanst¨atten type of microstructure",
+      "evidence": "The cooling rates applied render in a Widmanst¨atten type of microstructure that con­ sists of α colonies encapsulated in large equiaxed prior-β grains."
+    },
+    {
+      "subject": "lack of fusion",
+      "relation": "AFFECTS",
+      "object": "recrystallisation",
+      "evidence": "The tensile properties of this material are inferior as compared to the sub-β transus HIP, resulting in a less strong and less ductile alternative to the conventional HIP 920C • High Productivity theme induces lack of fusion defects that, upon successful consolidation, act as recrystallisation sites therefore paving the way for future tailoring of microstructure."
+    }
+  ],
+  "values": [
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "15–90 μm",
+      "normalized_min": 15.0,
+      "normalized_max": 90.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "860 MPa",
+      "normalized_value": 860.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "795 MPa",
+      "normalized_value": 795.0
+    },
+    {
+      "entity": "reduction of area",
+      "normalized_unit": "%",
+      "raw": "45 %",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "20 %",
+      "normalized_value": 20.0
+    },
+    {
+      "entity": "powder range",
+      "normalized_unit": "μm",
+      "raw": "15–90 μm",
+      "normalized_min": 15.0,
+      "normalized_max": 90.0
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "70 μm",
+      "normalized_value": 70.0
+    },
+    {
+      "entity": "powder cut",
+      "normalized_unit": "μm",
+      "raw": "15–90 μm",
+      "normalized_min": 15.0,
+      "normalized_max": 90.0
+    },
+    {
+      "entity": "D10",
+      "normalized_unit": "μm",
+      "raw": "24.5 μm",
+      "normalized_value": 24.5
+    },
+    {
+      "entity": "D50",
+      "normalized_unit": "μm",
+      "raw": "53.2 μm",
+      "normalized_value": 53.2
+    },
+    {
+      "entity": "D90",
+      "normalized_unit": "μm",
+      "raw": "96.2 μm",
+      "normalized_value": 96.2
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "100 μm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "substrate temperature",
+      "normalized_unit": "°C",
+      "raw": "200 ◦C",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "scan strategy",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "cuboid",
+      "normalized_unit": "μm",
+      "raw": "12 × 15 × 20 mm",
+      "normalized_value": 20000.0
+    },
+    {
+      "entity": "blank",
+      "normalized_unit": "μm",
+      "raw": "13 × 16 × 80 mm",
+      "normalized_value": 80000.0
+    },
+    {
+      "entity": "round blank",
+      "normalized_unit": "μm",
+      "raw": "15 mm",
+      "normalized_value": 15000.0
+    },
+    {
+      "entity": "round blank",
+      "normalized_unit": "μm",
+      "raw": "100 mm",
+      "normalized_value": 100000.0
+    },
+    {
+      "entity": "pressure",
+      "normalized_unit": "MPa",
+      "raw": "100 MPa",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "isostatic pressure",
+      "normalized_unit": "MPa",
+      "raw": "100 MPa",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "pressure",
+      "normalized_unit": "MPa",
+      "raw": "80 MPa",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "cooling rate",
+      "normalized_unit": "°C/s",
+      "raw": "20 ◦C/min",
+      "normalized_value": 0.333333
+    },
+    {
+      "entity": "cooling rate",
+      "normalized_unit": "°C/s",
+      "raw": "200 ◦C/min",
+      "normalized_value": 3.333333
+    },
+    {
+      "entity": "coupon",
+      "normalized_unit": "μm",
+      "raw": "10 × 10 × 55 mm",
+      "normalized_value": 55000.0
+    },
+    {
+      "entity": "vnotch",
+      "normalized_unit": "μm",
+      "raw": "2 mm",
+      "normalized_value": 2000.0
+    },
+    {
+      "entity": "vnotch",
+      "normalized_unit": "°",
+      "raw": "45◦",
+      "normalized_value": 45.0
+    },
+    {
+      "entity": "gauge diameter",
+      "normalized_unit": "μm",
+      "raw": "6.35 mm",
+      "normalized_value": 6350.0
+    },
+    {
+      "entity": "parallel length",
+      "normalized_unit": "μm",
+      "raw": "34.3 mm",
+      "normalized_value": 34300.0
+    },
+    {
+      "entity": "strain rate",
+      "normalized_unit": "%",
+      "raw": "0.5 %/min",
+      "normalized_value": 0.5
+    },
+    {
+      "entity": "grain size",
+      "normalized_unit": "μm",
+      "raw": "50 μm",
+      "normalized_value": 50.0
+    },
+    {
+      "entity": "acceleration voltage",
+      "normalized_unit": "V",
+      "raw": "15 kV",
+      "normalized_value": 15000.0
+    },
+    {
+      "entity": "current",
+      "normalized_unit": "A",
+      "raw": "1.4 nA",
+      "normalized_value": 1.4e-09
+    },
+    {
+      "entity": "step size",
+      "normalized_unit": "μm",
+      "raw": "0.4 and 0.6 μm",
+      "normalized_value": 0.4
+    },
+    {
+      "entity": "load",
+      "normalized_unit": "g",
+      "raw": "500 g",
+      "normalized_value": 500.0
+    },
+    {
+      "entity": "indentation dwell time",
+      "normalized_unit": "s",
+      "raw": "10 s",
+      "normalized_value": 10.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "19 %",
+      "normalized_value": 19.0
+    },
+    {
+      "entity": "reduction of area",
+      "normalized_unit": "%",
+      "raw": "48 %",
+      "normalized_value": 48.0
+    },
+    {
+      "entity": "β transus",
+      "normalized_unit": "°C",
+      "raw": "995 ◦C",
+      "normalized_value": 995.0
+    },
+    {
+      "entity": "retained β fraction",
+      "normalized_unit": "%",
+      "raw": "2 %",
+      "normalized_value": 2.0
+    },
+    {
+      "entity": "equiaxed",
+      "normalized_unit": "%",
+      "raw": "99.73 %",
+      "normalized_value": 99.73
+    },
+    {
+      "entity": "thin lath",
+      "normalized_unit": "%",
+      "raw": "0.27 %",
+      "normalized_value": 0.27
+    },
+    {
+      "entity": "equiaxed proportion",
+      "normalized_unit": "%",
+      "raw": "98.06 %",
+      "normalized_value": 98.06
+    },
+    {
+      "entity": "α lath",
+      "normalized_unit": "%",
+      "raw": "1.94 %",
+      "normalized_value": 1.94
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "4 %",
+      "normalized_value": 4.0
+    },
+    {
+      "entity": "gas cooling rate",
+      "normalized_unit": "°C/s",
+      "raw": "300 ◦C/min",
+      "normalized_value": 5.0
+    },
+    {
+      "entity": "β transus temperature",
+      "normalized_unit": "°C",
+      "raw": "975 ◦C",
+      "normalized_value": 975.0
+    },
+    {
+      "entity": "HIP dwell time",
+      "normalized_unit": "s",
+      "raw": "2 h",
+      "normalized_value": 7200.0
+    },
+    {
+      "entity": "cooling rate",
+      "normalized_unit": "°C/s",
+      "raw": "3.3 ◦C/s",
+      "normalized_value": 3.3
+    },
+    {
+      "entity": "Young's modulus",
+      "normalized_unit": "MPa",
+      "raw": "100 GPa",
+      "normalized_value": 100000.0
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "0.2 % Yield",
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "surface": "bulk material density",
+      "type": "Property",
+      "canonical": "density"
+    },
+    {
+      "surface": "Prior-β grains",
+      "type": "Microstructure",
+      "canonical": "prior-β grain"
+    },
+    {
+      "surface": "dwell time",
+      "type": "ExperimentalCondition",
+      "canonical": "indentation dwell time"
+    },
+    {
+      "surface": "reduction area",
+      "type": "Property",
+      "canonical": "reduction of area"
+    },
+    {
+      "surface": "0.2 % offset yield stress",
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "surface": "macrostructure",
+      "type": "Microstructure",
+      "canonical": "macrostructure"
+    },
+    {
+      "surface": "β fracture",
+      "type": "Microstructure",
+      "canonical": "β fraction"
+    },
+    {
+      "surface": "laths",
+      "type": "Microstructure",
+      "canonical": "α lath"
+    },
+    {
+      "surface": "material density",
+      "type": "Property",
+      "canonical": "density"
+    },
+    {
+      "surface": "toughness",
+      "type": "Property",
+      "canonical": "impact toughness"
+    },
+    {
+      "surface": "α laths",
+      "type": "Microstructure",
+      "canonical": "α lath"
+    },
+    {
+      "surface": "scanning",
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "surface": "unfused material",
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "surface": "0.2 % YS",
+      "type": "Property",
+      "canonical": "yield strength"
+    }
+  ]
+}
