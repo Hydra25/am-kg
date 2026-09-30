@@ -15,8 +15,10 @@ papers, never unpublished manuscripts.
 """
 from __future__ import annotations
 
+import json
 import logging
 import os
+import re
 import time
 from typing import Any, Optional
 
@@ -52,6 +54,7 @@ class OpenAICompatClient:
         self.max_rate_limit_retries = max_rate_limit_retries
         self.http = session or requests.Session()
         self.use_json_format = True
+        self.daily_limit_until = 0.0     # set when the provider reports a per-day quota as used up
         # provider-specific request fields, e.g. reasoning controls for reasoning models
         self.extra_body: dict[str, Any] = dict(extra_body or {})
         self.last_usage: dict[str, Any] = {}
@@ -117,6 +120,10 @@ class OpenAICompatClient:
         if json_mode and self.use_json_format:
             payload["response_format"] = {"type": "json_object"}
         payload.update(self.extra_body)
+        if self.daily_limit_until and time.time() < self.daily_limit_until:
+            self.failures += 1                         # fail fast: no point waiting for hours per chunk
+            raise LLMHTTPError(f"{self.provider}: daily limit reached earlier in this run", 429,
+                               self.daily_limit_until - time.time(), "daily limit")
         self.calls += 1
         wait = 2.0
         for attempt in range(self.max_rate_limit_retries + 3 + len(self.extra_body)):   # + fallbacks
@@ -126,9 +133,19 @@ class OpenAICompatClient:
             except requests.RequestException as exc:
                 self.failures += 1
                 raise LLMError(f"{self.provider} request failed: {exc}") from exc
+            if r.status_code == 429 and is_daily_limit(r.text):
+                # e.g. Groq: "Rate limit reached for model ... on tokens per day (TPD): Limit 200000, Used ..."
+                self.daily_limit_until = time.time() + (_retry_after(r) or 3600.0)
+                self.failures += 1
+                log.warning("%s: DAILY LIMIT REACHED for %s -> %s | Finished calls are cached: run the same "
+                            "command again after the reset and only the missing chunks are sent.",
+                            self.provider, self.model, _error_message(r.text))
+                raise LLMHTTPError(f"{self.provider} daily limit: {_error_message(r.text)}", 429,
+                                   _retry_after(r), r.text[:500])
             if r.status_code == 429 and attempt < self.max_rate_limit_retries:
                 delay = _retry_after(r) or wait
-                log.info("%s rate limit (429); waiting %.1fs", self.provider, delay)
+                log.info("%s rate limit (429); waiting %.1fs | %s", self.provider, delay,
+                         _error_message(r.text)[:160])
                 time.sleep(min(delay, 60.0))
                 wait = min(wait * 2, 60.0)
                 continue
@@ -161,6 +178,23 @@ class OpenAICompatClient:
 
     def embed(self, texts: list[str], model: Optional[str] = None) -> list[list[float]]:
         raise LLMError("Embeddings are only supported through Ollama (set llm.provider: ollama for Chroma)")
+
+
+_DAILY_RE = re.compile(r"per day|\bTPD\b|\bRPD\b|daily|quota exceeded|RESOURCE_EXHAUSTED", re.I)
+
+
+def is_daily_limit(body: str) -> bool:
+    """True if a 429 says a per-day quota is used up (not the short per-minute limit)."""
+    return bool(_DAILY_RE.search(body or ""))
+
+
+def _error_message(body: str) -> str:
+    try:
+        err = json.loads(body).get("error")
+        msg = err.get("message") if isinstance(err, dict) else err
+        return str(msg or body)[:300]
+    except (ValueError, AttributeError):
+        return (body or "")[:300]
 
 
 def reasoning_defaults(provider: str, model: str) -> dict[str, Any]:

@@ -78,3 +78,38 @@ def test_pipeline_sends_only_relations_to_the_relation_model(tmp_project, server
     assert res.provenance.relation_llm_model == "lmstudio:big-model"
     assert res.stats.llm_by_provider.get("lmstudio", 0) == len(Handler.payloads)
     assert res.stats.llm_by_stage["relations"]["calls"] == len(Handler.payloads)
+
+
+def test_daily_limit_stops_fast_with_clear_message(server, caplog):
+    from src.llm.client import LLMHTTPError
+    from src.llm.openai_compat import is_daily_limit
+
+    body = ('{"error": {"message": "Rate limit reached for model `openai/gpt-oss-120b` on tokens per day (TPD): '
+            'Limit 200000, Used 199500, Requested 1500."}}')
+    assert is_daily_limit(body) and not is_daily_limit('{"error": {"message": "tokens per minute (TPM)"}}')
+
+    class Daily(Handler):
+        def do_POST(self):
+            Handler.payloads.append(1)
+            b = body.encode()
+            self.send_response(429)
+            self.send_header("Content-Length", str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+
+    import threading
+    from http.server import HTTPServer
+    srv = HTTPServer(("127.0.0.1", 0), Daily)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        c = OpenAICompatClient(f"http://127.0.0.1:{srv.server_address[1]}/v1", "m", max_rate_limit_retries=12)
+        with pytest.raises(LLMHTTPError, match="daily limit"):
+            c.chat("s", "u")
+        n = len(Handler.payloads)
+        assert n == 1                                   # no 12 x 60 s of waiting
+        with pytest.raises(LLMHTTPError):
+            c.chat("s", "u")                            # later chunks fail fast, without a request
+        assert len(Handler.payloads) == n
+        assert "DAILY LIMIT REACHED" in caplog.text
+    finally:
+        srv.shutdown()
