@@ -106,6 +106,7 @@ def run_benchmark(base: Settings, papers_path: Path, modes: list[str], gold_dir:
             "entity_f1": rep["entities"]["f1"],
             "relation_p": rep["relations_strict"]["precision"], "relation_r": rep["relations_strict"]["recall"],
             "relation_f1": rep["relations_strict"]["f1"], "relation_pair_f1": rep["relations_lenient_pair"]["f1"],
+            "relation_relaxed_f1": rep["relations_relaxed"]["f1"],
             "value_p": rep["values"]["precision"], "value_r": rep["values"]["recall"], "value_f1": rep["values"]["f1"],
             "sec_per_paper": round(sum(r.stats.seconds for r in results) / n, 1),
             "llm_calls_per_paper": round(sum(r.stats.llm_calls for r in results) / n, 1),
@@ -130,11 +131,12 @@ def run_benchmark(base: Settings, papers_path: Path, modes: list[str], gold_dir:
 def to_markdown(summary: dict[str, Any]) -> str:
     lines = [f"# Extraction benchmark ({len(summary['papers'])} papers)", "",
              f"Claims counted: {', '.join(summary['statuses'])}. DERIVED relations excluded. No human review applied.", "",
-             "| Mode | Entity P / R / F1 | Relation P / R / F1 | Pair F1 | Value P / R / F1 | s / paper | LLM calls / paper | out tokens / paper |",
-             "|---|---|---|---|---|---|---|---|"]
+             "| Mode | Entity P / R / F1 | Relation P / R / F1 | Relaxed F1 | Pair F1 | Value P / R / F1 | s / paper | LLM calls / paper | out tokens / paper |",
+             "|---|---|---|---|---|---|---|---|---|"]
     for r in summary["rows"]:
         lines.append(f"| {r['mode']} | {r['entity_p']} / {r['entity_r']} / **{r['entity_f1']}** | "
-                     f"{r['relation_p']} / {r['relation_r']} / **{r['relation_f1']}** | {r['relation_pair_f1']} | "
+                     f"{r['relation_p']} / {r['relation_r']} / **{r['relation_f1']}** | {r['relation_relaxed_f1']} | "
+                     f"{r['relation_pair_f1']} | "
                      f"{r['value_p']} / {r['value_r']} / **{r['value_f1']}** | {r['sec_per_paper']} | "
                      f"{r['llm_calls_per_paper']} | {r['llm_out_tokens_per_paper']} |")
     lines += ["", "Modes:"] + [f"- **{r['mode']}**: {r['description']}" for r in summary["rows"]]

@@ -16,7 +16,7 @@ from typing import Iterable, Optional
 from ..evidence.verify import EvidenceIndex
 from ..ingestion.loader import load_parsed
 from ..knowledge_graph.kb import KnowledgeBase
-from ..normalization.entity_normalizer import EntityNormalizer
+from ..normalization.entity_normalizer import EntityNormalizer, _fuzzy_tokens
 from ..normalization.text import match_key, token_overlap
 from ..ontology.models import Relation
 
@@ -62,6 +62,56 @@ def _k(s: str) -> str:
     return match_key(s)
 
 
+# ---------------------------------------------------------------------------- relaxed relation matching
+# Effect-type relations differ mostly in wording ("improved" vs "affected"); structural ones do not.
+RELATION_FAMILY = {"AFFECTS": "EFFECT", "INFLUENCES": "EFFECT", "CAUSES": "EFFECT", "IMPROVES": "EFFECT",
+                   "CHANGES": "EFFECT", "PRODUCES": "EFFECT"}
+
+
+def _family(rel: str) -> str:
+    return RELATION_FAMILY.get(rel, rel)
+
+
+def names_compatible(a: str, b: str) -> bool:
+    """Same entity at a different granularity: equal keys, or the same head noun and all words of the
+    shorter name inside the longer one ("solution treatment" ~ "single solution heat treatment",
+    "strength" ~ "tensile strength"; but "heat treatment" !~ "solution treatment")."""
+    if _k(a) == _k(b):
+        return True
+    ta, tb = _fuzzy_tokens(a), _fuzzy_tokens(b)
+    if not ta or not tb or ta[-1] != tb[-1]:
+        return False
+    short, long_ = (ta, tb) if len(ta) <= len(tb) else (tb, ta)
+    return set(short) <= set(long_)
+
+
+def relaxed_relation_prf(gold: list[tuple[str, str, str]], pred: list[tuple[str, str, str]]) -> "PRF":
+    """One-to-one matching: relation family + compatible endpoint names. Exact matches are paired first,
+    so the relaxed score is never below the strict one and no prediction is counted twice."""
+    gold = list(dict.fromkeys(gold))
+    pred = list(dict.fromkeys(pred))
+    used_g: set[int] = set()
+    used_p: set[int] = set()
+    exact = {(_k(s), r, _k(o)): i for i, (s, r, o) in enumerate(pred)}
+    for gi, (s, r, o) in enumerate(gold):
+        pi = exact.get((_k(s), r, _k(o)))
+        if pi is not None and pi not in used_p:
+            used_g.add(gi)
+            used_p.add(pi)
+    for gi, (gs, gr, go) in enumerate(gold):
+        if gi in used_g:
+            continue
+        for pi, (ps, pr, po) in enumerate(pred):
+            if pi not in used_p and _family(pr) == _family(gr) and names_compatible(gs, ps) and names_compatible(go, po):
+                used_g.add(gi)
+                used_p.add(pi)
+                break
+    prf = PRF(tp=len(used_g), fp=len(pred) - len(used_p), fn=len(gold) - len(used_g))
+    prf.false_positives = [str(p) for i, p in enumerate(pred) if i not in used_p]
+    prf.false_negatives = [str(g) for i, g in enumerate(gold) if i not in used_g]
+    return prf
+
+
 def _value_match(gold: dict, q) -> bool:
     if q is None or (q.normalized_unit or "") != gold.get("normalized_unit"):
         return False
@@ -77,6 +127,7 @@ def evaluate(kb: KnowledgeBase, gold_dir: Path, processed_dir: Path, normalizer:
              statuses: Iterable[str] = ("accepted", "review"), include_derived: bool = False) -> dict:
     statuses = set(statuses)
     ent, rel_strict, rel_lenient, val = PRF(), PRF(), PRF(), PRF()
+    rel_relaxed = PRF()
     norm_total = norm_correct = 0
     norm_errors: list[dict] = []
     ev_total = ev_correct = 0
@@ -112,6 +163,11 @@ def evaluate(kb: KnowledgeBase, gold_dir: Path, processed_dir: Path, normalizer:
         r_prf.add(g_rel, p_rel)
         rel_strict.add(g_rel, p_rel)
         rel_lenient.add({frozenset((s, o)) for s, _, o in g_rel}, {frozenset((s, o)) for s, _, o in p_rel})
+        rx = relaxed_relation_prf([(r["subject"], r["relation"], r["object"]) for r in gold["relations"]],
+                                  [(c.subject.name, c.relation, c.object.name) for c in p_claims])
+        rel_relaxed.tp += rx.tp
+        rel_relaxed.fp += rx.fp
+        rel_relaxed.fn += rx.fn
         # --- values ------------------------------------------------------------------
         preds = [c for c in claims if c.relation == "HAS_VALUE"]
         used: set[int] = set()
@@ -170,6 +226,10 @@ def evaluate(kb: KnowledgeBase, gold_dir: Path, processed_dir: Path, normalizer:
         "relations_strict": {**rel_strict.summary(), "false_positives": rel_strict.false_positives,
                              "false_negatives": rel_strict.false_negatives},
         "relations_lenient_pair": rel_lenient.summary(),
+        "relations_relaxed": {**rel_relaxed.summary(),
+                              "definition": "one-to-one; relation family (AFFECTS/INFLUENCES/CAUSES/IMPROVES/CHANGES/"
+                                            "PRODUCES = effect) + endpoint names equal or same head noun with the "
+                                            "shorter name's words inside the longer"},
         "values": {**val.summary(), "false_positives": val.false_positives, "false_negatives": val.false_negatives},
         "normalization": {"accuracy": round(norm_correct / norm_total, 3) if norm_total else None,
                           "correct": norm_correct, "total": norm_total, "errors": norm_errors},
@@ -226,7 +286,7 @@ def to_markdown(report: dict, quality: dict) -> str:
     lines = ["# AM-KG evaluation report", ""]
     lines.append("| Task | Precision | Recall | F1 | TP | FP | FN |")
     lines.append("|---|---|---|---|---|---|---|")
-    for name in ("entities", "relations_strict", "relations_lenient_pair", "values"):
+    for name in ("entities", "relations_strict", "relations_relaxed", "relations_lenient_pair", "values"):
         r = report[name]
         lines.append(f"| {name} | {r['precision']} | {r['recall']} | {r['f1']} | {r['tp']} | {r['fp']} | {r['fn']} |")
     n = report["normalization"]

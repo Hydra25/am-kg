@@ -6,6 +6,12 @@
 > subset is needed before any claim about "gold" accuracy. Build: `python scripts/silver_annotate.py build`,
 > then `python main.py annotate-import data/labelstudio/silver_export.json --out data/annotations_silver`
 > and set `annotation_mode: llm_silver`.
+>
+> **Consistency check (2026-09-30).** Two papers (ti64_cacace2026, in718_tan2023) were annotated a second time by
+> an independent sub-agent (`data/annotations_silver_b/`). Agreement with the first pass
+> (`python scripts/silver_agreement.py data/annotations_silver data/annotations_silver_b`): entities F1 0.92,
+> relations F1 0.85 strict / 0.88 relaxed, values F1 0.91. This shows the silver standard is consistent; both
+> passes share one model, so it does not show that it is correct.
 
 You are annotating one scientific paper (laser powder bed fusion of metals) to build a reference
 ("silver standard") for scoring an information-extraction system. Be careful, consistent and literal:

@@ -1,0 +1,883 @@
+{
+  "source_file": "in718_tan2023",
+  "annotator": "Claude (LLM, second independent silver pass; not human-verified)",
+  "annotation_mode": "llm_silver_b",
+  "notes": "SECOND SILVER PASS for inter-annotator agreement (same guideline, independent sub-agent). Imported from Label Studio. 20 annotated chunks.",
+  "entities": [
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "Material",
+      "canonical": "Inconel 718"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "gas hole"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "single solution"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "direct aging"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "segregation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "Laves phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dendritic structure"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "solution treatment"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "δ phase"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "aging heat treatment"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'/γ'' phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "second phase"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile characteristic"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "DA"
+    },
+    {
+      "type": "Property",
+      "canonical": "strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "Defect",
+      "canonical": "cracking"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'/γ''-strengthened phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'' precipitates"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unfused defect"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "direct-aging heat treatment"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile property"
+    },
+    {
+      "type": "Property",
+      "canonical": "particle size"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "preheated"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "argon"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "oxygen content"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "stripe scanning strategy"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "rotation angle"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scanning speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Defect",
+      "canonical": "unfused gas pore"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "direct-aging treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "furnace cooling"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "air cooling"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "optical microscopy"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EDS"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "EBSD"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain size"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "orientation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "precipitates"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "TEM"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "room temperature"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile test piece"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser scanning strategy"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore size"
+    },
+    {
+      "type": "Defect",
+      "canonical": "long pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "small pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "gas porosity"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser energy"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "power density"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "molten pool"
+    },
+    {
+      "type": "Property",
+      "canonical": "fatigue life"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "striped-laser-scanning path"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar grains"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "aging"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "single-solution heat treatment"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "SS"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "columnar pattern"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "aging treatment"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'/γ''"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer rotation angle"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'/γ\"-strengthening phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "micro-segregation"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "γ'/γ\"-strengthened phase"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "strengthening phase"
+    },
+    {
+      "type": "Property",
+      "canonical": "residual stress"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dislocation density"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "dendrite morphology"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "grain boundary"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Inconel 718",
+      "evidence": "A laser powder bed fusion (LPBF) Inconel 718 (IN718) alloy was fabricated under different process parameters, and the samples with optimal process parameters were treated by subsequent heat treatment."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "The porosity of the samples first grew and subsequently reduced as the volume energy density increased, and the types of pores changed from lack-of-fusion pores to gas holes and keyhole pores."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "The porosity of the samples first grew and subsequently reduced as the volume energy density increased, and the types of pores changed from lack-of-fusion pores to gas holes and keyhole pores."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "gas hole",
+      "evidence": "The porosity of the samples first grew and subsequently reduced as the volume energy density increased, and the types of pores changed from lack-of-fusion pores to gas holes and keyhole pores."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "keyhole porosity",
+      "evidence": "The porosity of the samples first grew and subsequently reduced as the volume energy density increased, and the types of pores changed from lack-of-fusion pores to gas holes and keyhole pores."
+    },
+    {
+      "subject": "segregation",
+      "relation": "AFFECTS",
+      "object": "Laves phase",
+      "evidence": "Because of the segregation of the elements Nb and Mo, the Laves phase was distributed among the dendrites in the as-built (AB) sample."
+    },
+    {
+      "subject": "solution treatment",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "The solution heat treatment dissolved the Laves phase and precipitated the δ phase, while aging heat treatment precipitated the γ′/γ′′ phases."
+    },
+    {
+      "subject": "solution treatment",
+      "relation": "CHANGES",
+      "object": "δ phase",
+      "evidence": "The solution heat treatment dissolved the Laves phase and precipitated the δ phase, while aging heat treatment precipitated the γ′/γ′′ phases."
+    },
+    {
+      "subject": "aging heat treatment",
+      "relation": "CHANGES",
+      "object": "γ'/γ'' phase",
+      "evidence": "The solution heat treatment dissolved the Laves phase and precipitated the δ phase, while aging heat treatment precipitated the γ′/γ′′ phases."
+    },
+    {
+      "subject": "second phase",
+      "relation": "AFFECTS",
+      "object": "tensile characteristic",
+      "evidence": "Additionally, the impact of the second phase on the tensile characteristics was looked into."
+    },
+    {
+      "subject": "DA",
+      "relation": "IMPROVES",
+      "object": "strength",
+      "evidence": "The DA sample had the highest strength, with a tensile strength of 1458 MPa and a yield strength of 1271 MPa."
+    },
+    {
+      "subject": "Laves phase",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "With tensile and yield strengths of 980 MPa and 620 MPa, respectively, the AB sample had the lowest strength due to the Laves phase’s role as the crack initiator."
+    },
+    {
+      "subject": "γ'/γ''-strengthened phase",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "The Laves phase dissolved and the γ′/γ′′-strengthened phase precipitated, leading to an increase in the strength of the heat-treated specimens."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "unfused defect",
+      "evidence": "The pore types of the samples were found to be unfused defects, pores and keyholes with increasing volume energy density."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "keyhole",
+      "evidence": "The pore types of the samples were found to be unfused defects, pores and keyholes with increasing volume energy density."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "Inconel 718",
+      "evidence": "Figure 1. Various magnifications of an IN718 powder image from a scanning electron micro-scope (SEM)."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "grain size",
+      "evidence": "Through the use of electron backscatter diffraction (EBSD), the grain size and orientation of various samples were examined."
+    },
+    {
+      "subject": "EBSD",
+      "relation": "CHARACTERIZES",
+      "object": "orientation",
+      "evidence": "Through the use of electron backscatter diffraction (EBSD), the grain size and orientation of various samples were examined."
+    },
+    {
+      "subject": "TEM",
+      "relation": "CHARACTERIZES",
+      "object": "precipitates",
+      "evidence": "To examine the precise microstructure and distribution of the precipitates, a transmission electron microscope (TEM, FEI USA, Inc., Hillsboro, OR, USA) using a Tecnai G2 F30 S-TWIN was run at 300 KV."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser scanning strategy",
+      "evidence": "Figure 2. Schematic diagrams of (a) the laser scanning strategy used in LPBF experiments, (b,c) the geometry of the tensile specimen (unit: mm)."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "Because there wasn’t enough laser energy to melt the powder particles when the VED was lower, the majority of pores were lack-of-fusion pores, as shown in Figure 5a."
+    },
+    {
+      "subject": "laser energy",
+      "relation": "CAUSES",
+      "object": "lack of fusion",
+      "evidence": "Because there wasn’t enough laser energy to melt the powder particles when the VED was lower, the majority of pores were lack-of-fusion pores, as shown in Figure 5a."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "AFFECTS",
+      "object": "relative density",
+      "evidence": "When the volume energy density was increased to 60.0 J/mm3, the pores almost disappeared and the sample exhibited the best relative density, as shown in Figure 5b."
+    },
+    {
+      "subject": "power density",
+      "relation": "AFFECTS",
+      "object": "molten pool",
+      "evidence": "This was attributed to the high-power density that induced the oscillation of the molten pool and affected the overflow of bubbles during solidification."
+    },
+    {
+      "subject": "TEM",
+      "relation": "CHARACTERIZES",
+      "object": "dislocation",
+      "evidence": "A large number of dislocations and Laves phase morphologies were observed under TEM, and no other second phases were formed in the as-built samples, as shown in Figure 6e."
+    },
+    {
+      "subject": "TEM",
+      "relation": "CHARACTERIZES",
+      "object": "Laves phase",
+      "evidence": "A large number of dislocations and Laves phase morphologies were observed under TEM, and no other second phases were formed in the as-built samples, as shown in Figure 6e."
+    },
+    {
+      "subject": "Laves phase",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The brittle Laves phase significantly decreased the alloy’s tensile strength and ductility."
+    },
+    {
+      "subject": "Laves phase",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "The brittle Laves phase significantly decreased the alloy’s tensile strength and ductility."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "Therefore, the IN718 alloy created by LPBF required heat treatment to homogenize the distribution of the alloy’s elements and to dissolve the destructive Laves phase because the Laves phase was harmful to the alloy’s mechanical properties [23]."
+    },
+    {
+      "subject": "Laves phase",
+      "relation": "AFFECTS",
+      "object": "δ phase",
+      "evidence": "The dissolved Laves phase could act as a nucleation site for the δ phase, which typically measured several micrometers and whose chemical composition was determined to be Ni3Nb in the IN718 alloy [24]."
+    },
+    {
+      "subject": "aging treatment",
+      "relation": "CHANGES",
+      "object": "γ'/γ''",
+      "evidence": "The IN718 alloy required aging treatment in order to precipitate the strengthening phases of γ′/γ′′ and fully utilize the material property [18]."
+    },
+    {
+      "subject": "DA",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "The Laves phase still existed inside the sample, as shown in Figure 8b, because the DA temperature was not high enough to dissolve it."
+    },
+    {
+      "subject": "DA",
+      "relation": "CHANGES",
+      "object": "γ'/γ\"-strengthening phase",
+      "evidence": "However, a large number of γ′/γ”-strengthening phases were precipitated in the DA sample."
+    },
+    {
+      "subject": "micro-segregation",
+      "relation": "AFFECTS",
+      "object": "Laves phase",
+      "evidence": "Due to the micro-segregations of these alloying elements, a large amount of Laves phases were formed in the IN718 alloy at the termination of the solidification process."
+    },
+    {
+      "subject": "direct aging",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "Due to the low temperature of direct aging, the Laves phase was still presented in the samples that had undergone directaging heat treatment."
+    },
+    {
+      "subject": "directaging heat treatment",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "Due to the low temperature of direct aging, the Laves phase was still presented in the samples that had undergone directaging heat treatment."
+    },
+    {
+      "subject": "direct aging",
+      "relation": "CHANGES",
+      "object": "γ'/γ\"-strengthened phase",
+      "evidence": "However, a large amount of γ′/γ”-strengthened phases precipitated in the direct-aging heat-treated samples."
+    },
+    {
+      "subject": "single-solution",
+      "relation": "CHANGES",
+      "object": "Laves phase",
+      "evidence": "In the single-solution heat-treated samples, the Laves phase dissolved and precipitated in the form of needles and short rods of the δ phase."
+    },
+    {
+      "subject": "single-solution",
+      "relation": "CHANGES",
+      "object": "δ phase",
+      "evidence": "In the single-solution heat-treated samples, the Laves phase dissolved and precipitated in the form of needles and short rods of the δ phase."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "CHANGES",
+      "object": "grain size",
+      "evidence": "The grain size of the samples did not change significantly before and after heat treatment."
+    },
+    {
+      "subject": "SS",
+      "relation": "IMPROVES",
+      "object": "tensile strength",
+      "evidence": "The solution heat treatment dissolved the Laves phase, but the tensile strength of the SS sample was slightly increased because the strengthening phases did not precipitate in the matrix."
+    },
+    {
+      "subject": "strengthening phase",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The solution heat treatment dissolved the Laves phase, but the tensile strength of the SS sample was slightly increased because the strengthening phases did not precipitate in the matrix."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "residual stress",
+      "evidence": "This was due to rapid heating and cooling during the LPBF process, resulting in residual stress build-up and high dislocation density, which acted as strain-hardening [26]."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "PRODUCES",
+      "object": "dislocation density",
+      "evidence": "This was due to rapid heating and cooling during the LPBF process, resulting in residual stress build-up and high dislocation density, which acted as strain-hardening [26]."
+    },
+    {
+      "subject": "strengthening phase",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "On the other hand, the precipitation of the strengthening phases would lead to an increase in tensile strengths at the expense of ductility."
+    },
+    {
+      "subject": "heat treatment",
+      "relation": "AFFECTS",
+      "object": "tensile property",
+      "evidence": "As shown in Figure 10, the fracture morphologies of the samples were observed to clarify the effect of different heat treatments on the tensile properties."
+    },
+    {
+      "subject": "SS",
+      "relation": "CHANGES",
+      "object": "dendrite morphology",
+      "evidence": "However, the SS sample lacked dendrite morphology."
+    },
+    {
+      "subject": "δ phase",
+      "relation": "AFFECTS",
+      "object": "strength",
+      "evidence": "The strength of the IN718 alloy was not significantly affected by the δ phase because it was incompatible with the matrix [28]."
+    },
+    {
+      "subject": "δ phase",
+      "relation": "AFFECTS",
+      "object": "elongation",
+      "evidence": "As shown in Figure 11b, the dissolution of the Laves phase led to a slight increase in the strength of the SS sample compared to the deposited state, while the fractured and migrated state with the matrix of the δ phase resulted in the highest elongation of the SS sample."
+    },
+    {
+      "subject": "γ'/γ'' phase",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "The presence of the γ′/γ′′ phase would improve the tensile strength of the specimen, but due to the presence of the Laves phase, the location of its appearance was prone to defects and extension, depicted by a large number of white streaks of the Laves phase near the fracture (Figure 11c)."
+    },
+    {
+      "subject": "aging heat treatment",
+      "relation": "CHANGES",
+      "object": "dislocation density",
+      "evidence": "Due to the low temperature used during the aging heat treatment, the dislocation density remained relatively high [18]."
+    },
+    {
+      "subject": "second phase",
+      "relation": "AFFECTS",
+      "object": "tensile property",
+      "evidence": "The present work investigated the microstructure evolution in heat treatment and the influence of the second phases on the tensile properties."
+    },
+    {
+      "subject": "single-solution heat treatment",
+      "relation": "CHANGES",
+      "object": "δ phase",
+      "evidence": "In single-solution heat treatment, the needle-like δ phase was distributed along the grain boundaries, which increased the tensile strength and had the highest elongation of 34.5 %."
+    },
+    {
+      "subject": "δ phase",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "In single-solution heat treatment, the needle-like δ phase was distributed along the grain boundaries, which increased the tensile strength and had the highest elongation of 34.5 %."
+    },
+    {
+      "subject": "γ'/γ''- strengthened phase",
+      "relation": "AFFECTS",
+      "object": "tensile strength",
+      "evidence": "In the direct-aging heat treatment, although the Laves phase was still present, the precipitation of the γ′/γ′′- strengthened phase resulted in the highest tensile strength and yield strength of the sample, 1458 and 1271 MPa, respectively."
+    },
+    {
+      "subject": "γ'/γ''- strengthened phase",
+      "relation": "AFFECTS",
+      "object": "yield strength",
+      "evidence": "In the direct-aging heat treatment, although the Laves phase was still present, the precipitation of the γ′/γ′′- strengthened phase resulted in the highest tensile strength and yield strength of the sample, 1458 and 1271 MPa, respectively."
+    }
+  ],
+  "values": [
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "3.46%",
+      "normalized_value": 3.46
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "0.15%",
+      "normalized_value": 0.15
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "%",
+      "raw": "1.26%",
+      "normalized_value": 1.26
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1458 MPa",
+      "normalized_value": 1458.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "1271 MPa",
+      "normalized_value": 1271.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "980 MPa",
+      "normalized_value": 980.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "620 MPa",
+      "normalized_value": 620.0
+    },
+    {
+      "entity": "particle size",
+      "normalized_unit": "μm",
+      "raw": "15 µm",
+      "normalized_value": 15.0
+    },
+    {
+      "entity": "particle size",
+      "normalized_unit": "μm",
+      "raw": "53 µm",
+      "normalized_value": 53.0
+    },
+    {
+      "entity": "preheated",
+      "normalized_unit": "°C",
+      "raw": "80 ◦C",
+      "normalized_value": 80.0
+    },
+    {
+      "entity": "oxygen content",
+      "normalized_unit": "ppm",
+      "raw": "100 ppm",
+      "normalized_value": 100.0
+    },
+    {
+      "entity": "rotation angle",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "20.4 J/mm3",
+      "normalized_value": 20.4
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "123.5 J/mm3",
+      "normalized_value": 123.5
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "84.4 J/mm3",
+      "normalized_value": 84.4
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "43.8 J/mm3",
+      "normalized_value": 43.8
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "60.0 J/mm3",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "lack of fusion",
+      "normalized_unit": "μm",
+      "raw": "40 µm",
+      "normalized_value": 40.0
+    },
+    {
+      "entity": "lack of fusion",
+      "normalized_unit": "μm",
+      "raw": "30 µm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "grain size",
+      "normalized_unit": "μm",
+      "raw": "26.85 µm",
+      "normalized_value": 26.85
+    },
+    {
+      "entity": "grain size",
+      "normalized_unit": "μm",
+      "raw": "30.29 µm",
+      "normalized_value": 30.29
+    },
+    {
+      "entity": "layer rotation angle",
+      "normalized_unit": "°",
+      "raw": "67◦",
+      "normalized_value": 67.0
+    },
+    {
+      "entity": "grain size",
+      "normalized_unit": "μm",
+      "raw": "28.36 µm",
+      "normalized_value": 28.36
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "16.9%",
+      "normalized_value": 16.9
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "34.5 %",
+      "normalized_value": 34.5
+    }
+  ],
+  "normalization": [
+    {
+      "surface": "direct aging",
+      "type": "PostProcessing",
+      "canonical": "direct aging"
+    },
+    {
+      "surface": "tensile",
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "surface": "size",
+      "type": "Property",
+      "canonical": "particle size"
+    },
+    {
+      "surface": "rotation angle",
+      "type": "Parameter",
+      "canonical": "rotation angle"
+    },
+    {
+      "surface": "Hatch",
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "surface": "Thickness",
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "surface": "average size",
+      "type": "Microstructure",
+      "canonical": "grain size"
+    }
+  ]
+}

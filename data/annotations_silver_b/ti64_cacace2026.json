@@ -1,0 +1,348 @@
+{
+  "source_file": "ti64_cacace2026",
+  "annotator": "Claude (LLM, second independent silver pass; not human-verified)",
+  "annotation_mode": "llm_silver_b",
+  "notes": "SECOND SILVER PASS for inter-annotator agreement (same guideline, independent sub-agent). Imported from Label Studio. 14 annotated chunks.",
+  "entities": [
+    {
+      "type": "Material",
+      "canonical": "Ti-6Al-4V"
+    },
+    {
+      "type": "Process",
+      "canonical": "LPBF"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "CT"
+    },
+    {
+      "type": "Defect",
+      "canonical": "porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile strength"
+    },
+    {
+      "type": "Property",
+      "canonical": "elongation"
+    },
+    {
+      "type": "Property",
+      "canonical": "fatigue resistance"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "melt pool"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "volumetric energy density"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser power"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser speed"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "hatch spacing"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "layer thickness"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "point distance"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "exposure time"
+    },
+    {
+      "type": "Property",
+      "canonical": "relative density"
+    },
+    {
+      "type": "Defect",
+      "canonical": "lack of fusion"
+    },
+    {
+      "type": "Defect",
+      "canonical": "keyhole porosity"
+    },
+    {
+      "type": "Property",
+      "canonical": "tensile property"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "tensile specimen"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "laser spot size"
+    },
+    {
+      "type": "Property",
+      "canonical": "powder particle size"
+    },
+    {
+      "type": "Parameter",
+      "canonical": "scan strategy"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "preheated"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge section"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore diameter"
+    },
+    {
+      "type": "Geometry",
+      "canonical": "gauge diameter"
+    },
+    {
+      "type": "Defect",
+      "canonical": "equivalent sphere diameter"
+    },
+    {
+      "type": "Defect",
+      "canonical": "ESD"
+    },
+    {
+      "type": "Defect",
+      "canonical": "sphericity"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "tensile testing"
+    },
+    {
+      "type": "ExperimentalCondition",
+      "canonical": "room temperature"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "extensometer"
+    },
+    {
+      "type": "Microstructure",
+      "canonical": "fracture surface"
+    },
+    {
+      "type": "CharacterizationMethod",
+      "canonical": "SEM"
+    },
+    {
+      "type": "Property",
+      "canonical": "yield strength"
+    },
+    {
+      "type": "PostProcessing",
+      "canonical": "heat treatment"
+    },
+    {
+      "type": "Defect",
+      "canonical": "equivalent spherical diameter"
+    },
+    {
+      "type": "Defect",
+      "canonical": "over-melting"
+    },
+    {
+      "type": "Defect",
+      "canonical": "under-skin porosity"
+    },
+    {
+      "type": "Defect",
+      "canonical": "under-skin pore"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore size"
+    },
+    {
+      "type": "Defect",
+      "canonical": "pore distribution"
+    }
+  ],
+  "relations": [
+    {
+      "subject": "LPBF",
+      "relation": "PROCESSES",
+      "object": "Ti-6Al-4V",
+      "evidence": "This study explores the tensile behavior of Ti6Al4V LPBF-produced parts, correlating it with XCT-detected porosity."
+    },
+    {
+      "subject": "CT",
+      "relation": "CHARACTERIZES",
+      "object": "porosity",
+      "evidence": "This study explores the tensile behavior of Ti6Al4V LPBF-produced parts, correlating it with XCT-detected porosity."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "FABRICATES",
+      "object": "tensile specimen",
+      "evidence": "LPBF system Tensile specimens were fabricated using a Renishaw AM 250 machine equipped with a 200 W active fiber laser, which features a spot size of approximately 70 µm."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "HAS_PARAMETER",
+      "object": "laser spot size",
+      "evidence": "LPBF system Tensile specimens were fabricated using a Renishaw AM 250 machine equipped with a 200 W active fiber laser, which features a spot size of approximately 70 µm."
+    },
+    {
+      "subject": "extensometer",
+      "relation": "CHARACTERIZES",
+      "object": "elongation",
+      "evidence": "An extensometer was employed to measure the elongation across the gauge length of the specimens."
+    },
+    {
+      "subject": "SEM",
+      "relation": "CHARACTERIZES",
+      "object": "fracture surface",
+      "evidence": "Post-testing, the fracture surfaces were analyzed under a Zeiss EVO 50 Scanning Electron Microscope."
+    },
+    {
+      "subject": "hatch spacing",
+      "relation": "INFLUENCES",
+      "object": "porosity",
+      "evidence": "In contrast, specimens from OC5 (Figure 3b) displayed noticeably greater porosity, potentially attributable to the wider hatch spacing used in this condition."
+    },
+    {
+      "subject": "LPBF",
+      "relation": "CAUSES",
+      "object": "porosity",
+      "evidence": "This pattern indicates that the porosity structure mainly consists of small, spherical pores, which are characteristic defects of the LPBF process [4]."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "lack of fusion",
+      "evidence": "The absence of lack of fusion and over-melting defects is likely due to the employment of a VED within the stable parameter region."
+    },
+    {
+      "subject": "volumetric energy density",
+      "relation": "INFLUENCES",
+      "object": "over-melting",
+      "evidence": "The absence of lack of fusion and over-melting defects is likely due to the employment of a VED within the stable parameter region."
+    },
+    {
+      "subject": "scan strategy",
+      "relation": "INFLUENCES",
+      "object": "pore distribution",
+      "evidence": "This outcome implies that pore distribution might be more affected by the scanning strategy than by the process parameters."
+    }
+  ],
+  "values": [
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "1235±24 MPa",
+      "normalized_value": 1235.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "4.33±1.4%",
+      "normalized_value": 4.33
+    },
+    {
+      "entity": "laser spot size",
+      "normalized_unit": "μm",
+      "raw": "70 µm",
+      "normalized_value": 70.0
+    },
+    {
+      "entity": "powder particle size",
+      "normalized_unit": "μm",
+      "raw": "15-50 µm",
+      "normalized_min": 15.0,
+      "normalized_max": 50.0
+    },
+    {
+      "entity": "volumetric energy density",
+      "normalized_unit": "J/mm³",
+      "raw": "40.9±1 J/mm³",
+      "normalized_value": 40.9
+    },
+    {
+      "entity": "layer thickness",
+      "normalized_unit": "μm",
+      "raw": "60 µm",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "preheated",
+      "normalized_unit": "°C",
+      "raw": "200°C",
+      "normalized_value": 200.0
+    },
+    {
+      "entity": "gauge section",
+      "normalized_unit": "μm",
+      "raw": "6 mm",
+      "normalized_value": 6000.0
+    },
+    {
+      "entity": "gauge section",
+      "normalized_unit": "μm",
+      "raw": "26 mm",
+      "normalized_value": 26000.0
+    },
+    {
+      "entity": "pore diameter",
+      "normalized_unit": "μm",
+      "raw": "30 µm",
+      "normalized_value": 30.0
+    },
+    {
+      "entity": "gauge diameter",
+      "normalized_unit": "μm",
+      "raw": "6 mm",
+      "normalized_value": 6000.0
+    },
+    {
+      "entity": "elongation",
+      "normalized_unit": "%",
+      "raw": "10%",
+      "normalized_value": 10.0
+    },
+    {
+      "entity": "tensile strength",
+      "normalized_unit": "MPa",
+      "raw": "895 MPa",
+      "normalized_value": 895.0
+    },
+    {
+      "entity": "yield strength",
+      "normalized_unit": "MPa",
+      "raw": "825 MPa",
+      "normalized_value": 825.0
+    },
+    {
+      "entity": "ESD",
+      "normalized_unit": "μm",
+      "raw": "60 and 75 μm",
+      "normalized_value": 60.0
+    },
+    {
+      "entity": "porosity",
+      "normalized_unit": "μm",
+      "raw": "2.8 mm",
+      "normalized_value": 2800.0
+    }
+  ],
+  "normalization": []
+}
