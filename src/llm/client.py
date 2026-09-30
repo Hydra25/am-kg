@@ -19,6 +19,16 @@ class LLMError(RuntimeError):
     pass
 
 
+class LLMHTTPError(LLMError):
+    """An HTTP error from an LLM API, with what a fallback chain needs to decide."""
+
+    def __init__(self, message: str, status: int, retry_after: Optional[float] = None, body: str = "") -> None:
+        super().__init__(message)
+        self.status = status
+        self.retry_after = retry_after
+        self.body = body
+
+
 class LLMProvider(Protocol):
     model: str
 

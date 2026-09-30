@@ -324,6 +324,7 @@ class ExtractionPipeline:
             stats.llm_prompt_tokens = usage["prompt_tokens"]
             stats.llm_output_tokens = usage["output_tokens"]
             stats.llm_by_stage = usage["by_stage"]
+            stats.llm_by_provider = usage.get("by_provider", {})
         prov = Provenance(
             pipeline_version=PIPELINE_VERSION, extraction_mode=self.mode,
             llm_model=self.llm.model if self.llm and self.mode not in ("rule", "gliner") else None,

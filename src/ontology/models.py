@@ -211,6 +211,7 @@ class ExtractionStats(BaseModel):
     llm_chunks: int = 0            # chunks considered for the LLM
     llm_chunks_skipped: int = 0    # ...of which skipped by rule-first gating
     llm_by_stage: dict[str, Any] = Field(default_factory=dict)
+    llm_by_provider: dict[str, int] = Field(default_factory=dict)   # calls per provider (fallback chain)
     gliner_seconds: float = 0.0
     gliner_mentions: int = 0
 

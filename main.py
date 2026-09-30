@@ -40,7 +40,27 @@ def cmd_check(args: argparse.Namespace) -> int:
     from src.llm.client import OllamaClient
     from src.pdf_parser.grobid_parser import grobid_available
     s = get_settings()
-    if s.llm.provider != "ollama":
+    if s.llm.provider == "fallback":
+        from src.llm.fallback import FallbackLLM
+        chain = FallbackLLM.from_settings(s)
+        print("LLM fallback chain (used in this order):")
+        for i, (name, c) in enumerate(chain.members, 1):
+            try:
+                up = c.is_available()
+            except Exception:  # noqa: BLE001
+                up = False
+            paused = chain.cooldown_until.get(name, 0) - __import__("time").time()
+            state = "reachable" if up else "NOT reachable"
+            if paused > 0:
+                state += f", paused {int(paused)}s (quota/rate limit)"
+            print(f"  {i}. {name:<11} model={getattr(c, 'model', '?')}  -> {state}")
+            if up and name != "ollama" and args.list_models:
+                try:
+                    print("       models: " + ", ".join(sorted(c.list_models())[:40]))
+                except Exception as exc:  # noqa: BLE001
+                    print(f"       (could not list models: {exc})")
+        print("  (entries without an API key / model in .env are skipped)")
+    elif s.llm.provider != "ollama":
         from src.llm.openai_compat import make_llm_client
         try:
             c = make_llm_client(s)
@@ -112,6 +132,8 @@ def cmd_extract(args: argparse.Namespace) -> int:
             print(f"   LLM time {st.llm_seconds}s | chunks {st.llm_chunks - st.llm_chunks_skipped}/{st.llm_chunks} sent "
                   f"({st.llm_chunks_skipped} skipped by gating) | cache hits {st.llm_cache_hits} | "
                   f"tokens in/out {st.llm_prompt_tokens}/{st.llm_output_tokens}")
+            if len(st.llm_by_provider) > 1 or r.provenance and "fallback" in (r.provenance.llm_model or ""):
+                print("   LLM calls by provider: " + ", ".join(f"{k}={v}" for k, v in st.llm_by_provider.items()))
             for stage, v in st.llm_by_stage.items():
                 print(f"     - {stage:<13} calls={v['calls']:<3} cached={v['cache_hits']:<3} "
                       f"time={v['seconds']:>7}s  out_tokens={v['output_tokens']}")
@@ -375,7 +397,9 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Additive Manufacturing Knowledge Graph")
     p.add_argument("--log-level", default=None)
     sub = p.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("check").set_defaults(fn=cmd_check)
+    sp = sub.add_parser("check")
+    sp.add_argument("--list-models", action="store_true", help="also list the models each cloud provider offers")
+    sp.set_defaults(fn=cmd_check)
     sub.add_parser("make-demo").set_defaults(fn=cmd_make_demo)
     sp = sub.add_parser("parse"); sp.add_argument("path"); sp.set_defaults(fn=cmd_parse)
     for name, fn in (("extract", cmd_extract), ("process", cmd_process)):

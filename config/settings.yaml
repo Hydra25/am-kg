@@ -31,7 +31,9 @@ extraction:
 
 llm:
   provider: ollama           # ollama (local, default) | groq | cerebras | gemini | openrouter | lmstudio
-                             # cloud providers: set LLM_MODEL and LLM_API_KEY in .env (see .env.example)
+                             # | fallback = free cloud APIs in order (groq -> cerebras -> gemini -> openrouter),
+                             #   then local Ollama when their quotas are used up. Keys/models go in .env.
+                             # single cloud provider: set LLM_MODEL and LLM_API_KEY in .env (see .env.example)
   temperature: 0.0
   num_ctx: 8192              # Ollama defaults to 2048 which truncates prompts silently
   timeout_s: 600

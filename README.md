@@ -120,6 +120,15 @@ With `extraction.entity_backend: auto` it is used automatically once it is insta
 To use a free cloud LLM (Groq, Cerebras, Gemini, OpenRouter) instead of Ollama, set `LLM_PROVIDER`, `LLM_MODEL` and `LLM_API_KEY` in `.env` (see `.env.example`).
 Ollama stays the default. Only send published papers to a cloud service.
 
+**Automatic fallback chain.** With `LLM_PROVIDER=fallback`, every call goes to the first free cloud API that still has quota, in this order: Groq → Cerebras → Gemini → OpenRouter → local Ollama.
+
+- A provider that answers HTTP 429 (rate limit or daily quota) is paused. The same call is sent to the next provider.
+- Pauses are saved in `data/cache/llm_quota.json`, so a later run skips providers that are still exhausted.
+- `python main.py check --list-models` shows the chain, what is reachable and which models each provider offers.
+- The extraction output reports how many calls each provider served.
+
+For benchmark runs, use one fixed provider, not the chain: mixing models inside one run makes results hard to compare.
+
 ### Benchmark (Phase 2)
 
 Build a gold standard with Label Studio and compare the extraction modes. See [docs/BENCHMARK.md](docs/BENCHMARK.md).
@@ -183,7 +192,7 @@ The app has these pages:
 python -m pytest
 ```
 
-99 tests cover:
+107 tests cover:
 
 - units and normalisation
 - sections and sentences

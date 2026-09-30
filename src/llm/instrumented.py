@@ -51,6 +51,7 @@ class InstrumentedLLM:
         self.model = getattr(inner, "model", "unknown")
         self.stage = "other"
         self.stats: dict[str, StageStats] = {}
+        self.by_provider: dict[str, int] = {}     # which member of a fallback chain answered
         # Only cache deterministic generations (temperature 0).
         temperature = getattr(inner, "temperature", 0.0) or 0.0
         self.cache_dir = Path(cache_dir) / "llm" if cache_dir and temperature == 0 else None
@@ -85,6 +86,7 @@ class InstrumentedLLM:
 
     def reset_stats(self) -> None:
         self.stats = {}
+        self.by_provider = {}
 
     def summary(self) -> dict[str, Any]:
         """Totals plus a per-stage breakdown (JSON-serialisable)."""
@@ -95,6 +97,7 @@ class InstrumentedLLM:
         out = asdict(total)
         out["seconds"] = round(out["seconds"], 2)
         out["by_stage"] = {k: {**asdict(v), "seconds": round(v.seconds, 2)} for k, v in sorted(self.stats.items())}
+        out["by_provider"] = dict(self.by_provider)
         return out
 
     # --- the actual call -------------------------------------------------------
@@ -136,6 +139,8 @@ class InstrumentedLLM:
                 self.inner.num_predict = default_cap
         st.calls += 1
         st.seconds += time.perf_counter() - t0
+        prov = getattr(self.inner, "last_provider", None) or getattr(self.inner, "provider", "ollama")
+        self.by_provider[prov] = self.by_provider.get(prov, 0) + 1
         usage = getattr(self.inner, "last_usage", None) or {}
         st.prompt_tokens += int(usage.get("prompt_tokens", 0) or 0)
         st.output_tokens += int(usage.get("output_tokens", 0) or 0)

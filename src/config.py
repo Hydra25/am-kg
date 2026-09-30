@@ -66,7 +66,17 @@ class ExtractionConfig(BaseModel):
 
 class LLMConfig(BaseModel):
     # ollama (default, local, free) | groq | cerebras | gemini | openrouter | lmstudio | openai_compat
+    # | fallback = the free cloud APIs of `fallback_chain` in order, then local Ollama
     provider: str = "ollama"
+    # Used when provider == "fallback". A cloud entry is skipped automatically when its
+    # API key (api_key_env) or model (model_env) is not set in .env.
+    fallback_chain: list[dict[str, Any]] = Field(default_factory=lambda: [
+        {"provider": "groq", "api_key_env": "GROQ_API_KEY", "model_env": "GROQ_MODEL"},
+        {"provider": "cerebras", "api_key_env": "CEREBRAS_API_KEY", "model_env": "CEREBRAS_MODEL"},
+        {"provider": "gemini", "api_key_env": "GEMINI_API_KEY", "model_env": "GEMINI_MODEL"},
+        {"provider": "openrouter", "api_key_env": "OPENROUTER_API_KEY", "model_env": "OPENROUTER_MODEL"},
+        {"provider": "ollama"},
+    ])
     api_base: str = ""               # only for provider openai_compat (others have a built-in URL)
     api_key_env: str = "LLM_API_KEY"  # NAME of the env variable holding the key (key itself lives in .env)
     base_url: str = "http://localhost:11434"

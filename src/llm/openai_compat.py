@@ -22,7 +22,7 @@ from typing import Any, Optional
 
 import requests
 
-from .client import LLMError
+from .client import LLMError, LLMHTTPError
 
 log = logging.getLogger(__name__)
 
@@ -61,14 +61,26 @@ class OpenAICompatClient:
     @classmethod
     def from_settings(cls, settings: Any) -> "OpenAICompatClient":
         c = settings.llm
-        provider = c.provider.lower()
-        base = c.api_base or PROVIDER_URLS.get(provider, "")
+        return cls.from_spec({"provider": c.provider, "model": c.model, "api_base": c.api_base,
+                              "api_key_env": c.api_key_env}, settings)
+
+    @classmethod
+    def from_spec(cls, spec: dict[str, Any], settings: Any, max_rate_limit_retries: int = 6) -> "OpenAICompatClient":
+        """spec: provider, model | model_env, api_key_env, api_base (optional)."""
+        c = settings.llm
+        provider = str(spec.get("provider", "openai_compat")).lower()
+        base = spec.get("api_base") or PROVIDER_URLS.get(provider, "")
         if not base:
-            raise LLMError(f"llm.provider={provider!r} needs llm.api_base (or LLM_API_BASE in .env)")
-        key = os.environ.get(c.api_key_env, "")
+            raise LLMError(f"provider {provider!r} needs an api_base (or LLM_API_BASE in .env)")
+        model = spec.get("model") or os.environ.get(spec.get("model_env") or "", "")
+        if not model:
+            raise LLMError(f"provider {provider!r}: no model set ({spec.get('model_env') or 'model'} in .env)")
+        key_env = spec.get("api_key_env") or "LLM_API_KEY"
+        key = os.environ.get(key_env, "")
         if not key and provider != "lmstudio":
-            raise LLMError(f"No API key: put {c.api_key_env}=... in your .env file (never in settings.yaml)")
-        return cls(base, c.model, key, c.temperature, c.timeout_s, c.num_predict, provider)
+            raise LLMError(f"No API key for {provider}: put {key_env}=... in your .env file (never in settings.yaml)")
+        return cls(base, model, key, c.temperature, c.timeout_s, c.num_predict, provider,
+                   max_rate_limit_retries=max_rate_limit_retries)
 
     def _headers(self) -> dict[str, str]:
         h = {"Content-Type": "application/json"}
@@ -101,7 +113,7 @@ class OpenAICompatClient:
             payload["response_format"] = {"type": "json_object"}
         self.calls += 1
         wait = 2.0
-        for attempt in range(self.max_rate_limit_retries + 1):
+        for attempt in range(self.max_rate_limit_retries + 3):   # +2 for the format/seed fallbacks
             try:
                 r = self.http.post(f"{self.base_url}/chat/completions", json=payload,
                                    headers=self._headers(), timeout=self.timeout_s)
@@ -109,11 +121,13 @@ class OpenAICompatClient:
                 self.failures += 1
                 raise LLMError(f"{self.provider} request failed: {exc}") from exc
             if r.status_code == 429 and attempt < self.max_rate_limit_retries:
-                retry_after = r.headers.get("retry-after")
-                delay = float(retry_after) if retry_after and retry_after.replace(".", "", 1).isdigit() else wait
+                delay = _retry_after(r) or wait
                 log.info("%s rate limit (429); waiting %.1fs", self.provider, delay)
                 time.sleep(min(delay, 60.0))
                 wait = min(wait * 2, 60.0)
+                continue
+            if r.status_code == 400 and "seed" in payload and "seed" in r.text.lower():
+                payload.pop("seed")                    # some providers reject the seed field
                 continue
             if r.status_code == 400 and "response_format" in payload:
                 # some models do not support JSON mode -> plain text (our JSON repair handles it)
@@ -122,7 +136,8 @@ class OpenAICompatClient:
                 continue
             if r.status_code >= 400:
                 self.failures += 1
-                raise LLMError(f"{self.provider} HTTP {r.status_code}: {r.text[:300]}")
+                raise LLMHTTPError(f"{self.provider} HTTP {r.status_code}: {r.text[:300]}", r.status_code,
+                                   _retry_after(r), r.text[:500])
             data = r.json()
             usage = data.get("usage") or {}
             self.last_usage = {"prompt_tokens": usage.get("prompt_tokens", 0) or 0,
@@ -130,16 +145,28 @@ class OpenAICompatClient:
             choices = data.get("choices") or [{}]
             return (choices[0].get("message") or {}).get("content") or ""
         self.failures += 1
-        raise LLMError(f"{self.provider}: still rate-limited after {self.max_rate_limit_retries} retries")
+        raise LLMHTTPError(f"{self.provider}: rate-limited (HTTP 429)", 429, _retry_after(r), r.text[:500])
 
     def embed(self, texts: list[str], model: Optional[str] = None) -> list[list[float]]:
         raise LLMError("Embeddings are only supported through Ollama (set llm.provider: ollama for Chroma)")
 
 
+def _retry_after(r: Any) -> Optional[float]:
+    v = (getattr(r, "headers", None) or {}).get("retry-after")
+    try:
+        return float(v) if v is not None else None
+    except ValueError:
+        return None
+
+
 def make_llm_client(settings: Any) -> Any:
-    """The LLM client selected by `llm.provider` (default: local Ollama)."""
+    """The LLM client selected by `llm.provider` (default: local Ollama).
+    `fallback` = free cloud APIs in order, then local Ollama (see src/llm/fallback.py)."""
     from .client import OllamaClient
     provider = (settings.llm.provider or "ollama").lower()
     if provider == "ollama":
         return OllamaClient.from_settings(settings)
+    if provider == "fallback":
+        from .fallback import FallbackLLM
+        return FallbackLLM.from_settings(settings)
     return OpenAICompatClient.from_settings(settings)

@@ -93,3 +93,13 @@ def test_pipeline_runs_on_cloud_provider(tmp_project, monkeypatch, server):
     res = pipe.extract(doc)
     assert res.stats.llm_calls > 0 and res.stats.llm_prompt_tokens > 0
     assert res.provenance.llm_model == "llama-test"
+
+
+def test_rate_limit_raises_typed_error_for_fast_failover(server):
+    from src.llm.client import LLMHTTPError
+    Handler.rate_limit_first = 1
+    c = OpenAICompatClient(server, "llama-test", api_key="test-key", max_rate_limit_retries=0)
+    with pytest.raises(LLMHTTPError) as ei:
+        c.chat("s", "u")
+    assert ei.value.status == 429 and ei.value.retry_after == 0
+    Handler.rate_limit_first = 0
