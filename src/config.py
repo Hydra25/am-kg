@@ -62,6 +62,9 @@ class ExtractionConfig(BaseModel):
     #   llm    = LLM entity prompt (slow; the original behaviour)
     #   none   = lexicon only
     entity_backend: str = "auto"
+    # optional separate model for the relation prompt only, "provider:model"
+    # (e.g. "groq:openai/gpt-oss-120b"); empty = the main llm. CLI: extract --relations-llm
+    relation_llm: str = ""
 
 
 class LLMConfig(BaseModel):

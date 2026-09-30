@@ -149,10 +149,17 @@ class ExtractionPipeline:
             # measure every call (time, tokens) and reuse answers for identical prompts
             self.llm = InstrumentedLLM(self.llm, s.path("cache_dir") if s.llm.cache else None,
                                        stage_max_tokens=s.llm.num_predict_by_stage)
+        self.rel_llm: Optional[InstrumentedLLM] = None
+        if self.llm and self.mode in ("llm", "hybrid") and s.extraction.relation_llm:
+            from .llm.openai_compat import parse_llm_spec
+            rel_client = parse_llm_spec(s.extraction.relation_llm, s)
+            self.rel_llm = InstrumentedLLM(rel_client, s.path("cache_dir") if s.llm.cache else None)
+            log.info("Relations use a separate model: %s", s.extraction.relation_llm)
         self.llm_extractor = None
         if self.llm and self.mode in ("llm", "hybrid"):
             self.llm_extractor = LLMExtractor(self.llm, self.lexicon, self.normalizer, self.prompts,
-                                              s.llm.max_retries, s.extraction.llm_findings)
+                                              s.llm.max_retries, s.extraction.llm_findings,
+                                              relation_llm=self.rel_llm)
             if s.extraction.llm_normalization:
                 self.normalizer.llm_chooser = self.llm_extractor.choose_canonical
         self.gliner = gliner
@@ -223,6 +230,8 @@ class ExtractionPipeline:
             # per-paper accounting; reset FIRST so LLM normalisation calls made while
             # GLiNER/rule entities are normalised are counted too
             self.llm.reset_stats()
+        if self.rel_llm is not None:
+            self.rel_llm.reset_stats()
         pid = doc.paper.paper_id
         skip = set(s.extraction.skip_sections)
         full_text = " ".join(x.text for x in doc.sentences if x.section_type not in skip)
@@ -343,9 +352,19 @@ class ExtractionPipeline:
             stats.llm_output_tokens = usage["output_tokens"]
             stats.llm_by_stage = usage["by_stage"]
             stats.llm_by_provider = usage.get("by_provider", {})
+        if self.rel_llm is not None:          # add the separate relation model's usage
+            ru = self.rel_llm.summary()
+            stats.llm_seconds = round(stats.llm_seconds + ru["seconds"], 2)
+            stats.llm_cache_hits += ru["cache_hits"]
+            stats.llm_prompt_tokens += ru["prompt_tokens"]
+            stats.llm_output_tokens += ru["output_tokens"]
+            stats.llm_by_stage = {**stats.llm_by_stage, **ru["by_stage"]}
+            for k, v in ru.get("by_provider", {}).items():
+                stats.llm_by_provider[k] = stats.llm_by_provider.get(k, 0) + v
         prov = Provenance(
             pipeline_version=PIPELINE_VERSION, extraction_mode=self.mode,
             llm_model=self.llm.model if self.llm and self.mode not in ("rule", "gliner") else None,
+            relation_llm_model=(f"{self.rel_llm.inner.provider}:{self.rel_llm.model}" if self.rel_llm else None),
             entity_backend=self.entity_backend,
             gliner_model=self.gliner.model_name if self.entity_backend == "gliner" and self.gliner else None,
             prompt_hashes=self.prompts.hashes() if self.mode not in ("rule", "gliner") else {},

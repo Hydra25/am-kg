@@ -220,6 +220,7 @@ class Provenance(BaseModel):
     pipeline_version: str
     extraction_mode: str
     llm_model: Optional[str] = None
+    relation_llm_model: Optional[str] = None  # set when relations used a different model (experiments)
     entity_backend: Optional[str] = None     # which extractor proposed non-lexicon entities: llm | gliner | none
     gliner_model: Optional[str] = None
     prompt_hashes: dict[str, str] = Field(default_factory=dict)

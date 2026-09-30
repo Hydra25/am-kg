@@ -192,8 +192,10 @@ def chunk_sentences(doc: ParsedDocument, skip: list[str], max_chars: int) -> lis
 
 class LLMExtractor:
     def __init__(self, llm: LLMProvider, lexicon: Lexicon, normalizer: EntityNormalizer,
-                 prompts: PromptLibrary, max_retries: int = 2, extract_findings: bool = True) -> None:
+                 prompts: PromptLibrary, max_retries: int = 2, extract_findings: bool = True,
+                 relation_llm: Optional[LLMProvider] = None) -> None:
         self.llm = llm
+        self.rel_llm = relation_llm or llm      # optional bigger model just for relations
         self.lexicon = lexicon
         self.normalizer = normalizer
         self.prompts = prompts
@@ -249,8 +251,8 @@ class LLMExtractor:
                 if an:
                     ent_lines += [f"{m.text} ({m.entity_type}, {k})" for m in an.mentions]
             if ent_lines:
-                with llm_stage(self.llm, "relations"):
-                    rels, clog = call_llm_json(self.llm, system,
+                with llm_stage(self.rel_llm, "relations"):
+                    rels, clog = call_llm_json(self.rel_llm, system,
                                                self.prompts.render("relation_extraction", section=section,
                                                                    sentences=numbered, entities="; ".join(ent_lines)),
                                                LLMRelations, self.max_retries, wrap_key="relations")

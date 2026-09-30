@@ -40,7 +40,8 @@ PROVIDER_URLS: dict[str, str] = {
 class OpenAICompatClient:
     def __init__(self, base_url: str, model: str, api_key: str = "", temperature: float = 0.0,
                  timeout_s: int = 120, num_predict: int = 1500, provider: str = "openai_compat",
-                 max_rate_limit_retries: int = 6, session: Optional[requests.Session] = None) -> None:
+                 max_rate_limit_retries: int = 6, session: Optional[requests.Session] = None,
+                 extra_body: Optional[dict[str, Any]] = None) -> None:
         self.base_url = base_url.rstrip("/")
         self.model = model
         self.api_key = api_key
@@ -51,6 +52,8 @@ class OpenAICompatClient:
         self.max_rate_limit_retries = max_rate_limit_retries
         self.http = session or requests.Session()
         self.use_json_format = True
+        # provider-specific request fields, e.g. reasoning controls for reasoning models
+        self.extra_body: dict[str, Any] = dict(extra_body or {})
         self.last_usage: dict[str, Any] = {}
         self.calls = 0
         self.failures = 0
@@ -79,8 +82,10 @@ class OpenAICompatClient:
         key = os.environ.get(key_env, "")
         if not key and provider != "lmstudio":
             raise LLMError(f"No API key for {provider}: put {key_env}=... in your .env file (never in settings.yaml)")
-        return cls(base, model, key, c.temperature, c.timeout_s, c.num_predict, provider,
-                   max_rate_limit_retries=max_rate_limit_retries)
+        extra = dict(spec.get("extra_body") or reasoning_defaults(provider, model))
+        num_predict = int(spec.get("num_predict") or c.num_predict)
+        return cls(base, model, key, c.temperature, c.timeout_s, num_predict, provider,
+                   max_rate_limit_retries=max_rate_limit_retries, extra_body=extra)
 
     def _headers(self) -> dict[str, str]:
         h = {"Content-Type": "application/json"}
@@ -111,9 +116,10 @@ class OpenAICompatClient:
         }
         if json_mode and self.use_json_format:
             payload["response_format"] = {"type": "json_object"}
+        payload.update(self.extra_body)
         self.calls += 1
         wait = 2.0
-        for attempt in range(self.max_rate_limit_retries + 3):   # +2 for the format/seed fallbacks
+        for attempt in range(self.max_rate_limit_retries + 3 + len(self.extra_body)):   # + fallbacks
             try:
                 r = self.http.post(f"{self.base_url}/chat/completions", json=payload,
                                    headers=self._headers(), timeout=self.timeout_s)
@@ -128,6 +134,12 @@ class OpenAICompatClient:
                 continue
             if r.status_code == 400 and "seed" in payload and "seed" in r.text.lower():
                 payload.pop("seed")                    # some providers reject the seed field
+                continue
+            bad_extra = [k for k in self.extra_body if k in payload and k in r.text] if r.status_code == 400 else []
+            if bad_extra:                              # provider does not know this reasoning field
+                for k in bad_extra:
+                    payload.pop(k)
+                    self.extra_body.pop(k, None)
                 continue
             if r.status_code == 400 and "response_format" in payload:
                 # some models do not support JSON mode -> plain text (our JSON repair handles it)
@@ -149,6 +161,32 @@ class OpenAICompatClient:
 
     def embed(self, texts: list[str], model: Optional[str] = None) -> list[list[float]]:
         raise LLMError("Embeddings are only supported through Ollama (set llm.provider: ollama for Chroma)")
+
+
+def reasoning_defaults(provider: str, model: str) -> dict[str, Any]:
+    """Keep reasoning models short and their thinking out of the JSON answer (Groq API fields).
+    Unknown fields are dropped automatically if a provider rejects them (HTTP 400)."""
+    m = (model or "").lower()
+    if provider == "groq" and m.startswith("openai/gpt-oss"):
+        return {"reasoning_effort": "low", "include_reasoning": False}
+    if provider == "groq" and "qwen3" in m:
+        return {"reasoning_effort": "low", "reasoning_format": "hidden"}
+    return {}
+
+
+def parse_llm_spec(text: str, settings: Any, num_predict: int = 3000) -> OpenAICompatClient:
+    """'groq:openai/gpt-oss-120b' -> client (key from the provider's env variable, e.g. GROQ_API_KEY).
+    Used for a separate relation-extraction model (`extract --relations-llm`)."""
+    provider, _, model = text.partition(":")
+    provider = provider.strip().lower()
+    if not model:
+        raise LLMError("relation model must look like provider:model, e.g. groq:openai/gpt-oss-120b")
+    key_env = next((e.get("api_key_env") for e in settings.llm.fallback_chain
+                    if str(e.get("provider", "")).lower() == provider and e.get("api_key_env")),
+                   f"{provider.upper()}_API_KEY")
+    # a fixed model for a whole run: wait on rate limits (Retry-After) instead of switching providers
+    return OpenAICompatClient.from_spec({"provider": provider, "model": model.strip(), "api_key_env": key_env,
+                                         "num_predict": num_predict}, settings, max_rate_limit_retries=12)
 
 
 def _retry_after(r: Any) -> Optional[float]:

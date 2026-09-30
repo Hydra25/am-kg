@@ -35,11 +35,43 @@ def _print_rows(rows: list[dict], limit: int = 50) -> None:
         print(f"... {len(rows) - limit} more")
 
 
+def _list_cloud_models(s) -> None:
+    """For every cloud provider with an API key in .env: is the key accepted, which models exist.
+    Works before a model is chosen (GROQ_MODEL etc. not set yet). The key is never printed."""
+    import os
+
+    from src.llm.openai_compat import PROVIDER_URLS, OpenAICompatClient
+    print("Cloud providers with an API key in .env:")
+    found = False
+    for spec in s.llm.fallback_chain:
+        prov, key_env = str(spec.get("provider", "")).lower(), spec.get("api_key_env") or ""
+        if prov == "ollama" or not os.environ.get(key_env):
+            continue
+        found = True
+        base = spec.get("api_base") or PROVIDER_URLS.get(prov, "")
+        c = OpenAICompatClient(base, "-", os.environ[key_env], provider=prov)
+        model_env = spec.get("model_env") or ""
+        chosen = os.environ.get(model_env, "") if model_env else spec.get("model", "")
+        try:
+            models = sorted(c.list_models())
+            print(f"  {prov}: key accepted; {model_env or 'model'}={chosen or '(not set)'}; {len(models)} models:")
+            for m in models:
+                print(f"     - {m}")
+        except Exception as exc:  # noqa: BLE001
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            print(f"  {prov}: key found in .env but listing failed "
+                  f"({'HTTP ' + str(status) if status else exc.__class__.__name__}; 401 = wrong key)")
+    if not found:
+        print("  none (add e.g. GROQ_API_KEY=... to .env)")
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     from src.knowledge_graph.store import neo4j_available
     from src.llm.client import OllamaClient
     from src.pdf_parser.grobid_parser import grobid_available
     s = get_settings()
+    if args.list_models:
+        _list_cloud_models(s)
     if s.llm.provider == "fallback":
         from src.llm.fallback import FallbackLLM
         chain = FallbackLLM.from_settings(s)
@@ -117,8 +149,21 @@ def cmd_extract(args: argparse.Namespace) -> int:
     s = get_settings()
     if getattr(args, "entities", None):
         s.extraction.entity_backend = args.entities
+    if getattr(args, "relations_llm", None):
+        s.extraction.relation_llm = args.relations_llm
+    if getattr(args, "out_dir", None):
+        s.paths.extracted_dir = args.out_dir          # keep experiment output apart from data/extracted
     pipe = ExtractionPipeline(s, mode=args.mode)
-    results = pipe.process_many(Path(args.path))
+    only = {x.strip() for x in (getattr(args, "only", None) or "").split(",") if x.strip()}
+    if only:
+        from src.ingestion.loader import discover_inputs
+        results = []
+        for f in discover_inputs(Path(args.path)):
+            if f.stem in only:
+                print(f"Processing {f.name}", flush=True)
+                results.append(pipe.process_file(f))
+    else:
+        results = pipe.process_many(Path(args.path))
     for r in results:
         st = r.stats
         print(f"{r.paper.source_file}: {r.paper.paper_id} mode={r.provenance.extraction_mode if r.provenance else '?'} "
@@ -262,11 +307,22 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
     from src.normalization.entity_normalizer import EntityNormalizer, NormalizationOverrides
     from src.normalization.lexicon import Lexicon
     s = get_settings()
-    kb = KnowledgeBase.load()
+    if args.extracted_dir:
+        s.paths.extracted_dir = args.extracted_dir
+    kb = KnowledgeBase.load(s)
     norm = EntityNormalizer(Lexicon.load(s.path("lexicon_file")),
                             NormalizationOverrides(s.path("review_dir") / "normalization_overrides.json"))
     statuses = ["accepted"] if args.accepted_only else ["accepted", "review"]
-    rep = evaluate(kb, Path(args.gold or s.path("annotations_dir")), s.path("processed_dir"), norm, statuses,
+    gold_dir = Path(args.gold or s.path("annotations_dir"))
+    if args.only:                         # score a subset of papers (e.g. a pilot experiment)
+        import shutil
+        import tempfile
+        sub_dir = Path(tempfile.mkdtemp(prefix="gold_subset_"))
+        for stem in (x.strip() for x in args.only.split(",")):
+            if (gold_dir / f"{stem}.json").exists():
+                shutil.copy(gold_dir / f"{stem}.json", sub_dir)
+        gold_dir = sub_dir
+    rep = evaluate(kb, gold_dir, s.path("processed_dir"), norm, statuses,
                    include_derived=args.include_derived)
     q = graph_quality(kb, s.path("processed_dir"), statuses)
     out_dir = s.root / "data" / "eval"
@@ -285,7 +341,9 @@ def cmd_gaps(args: argparse.Namespace) -> int:
     from src.analysis.gaps import find_gaps
     from src.knowledge_graph.kb import KnowledgeBase
     s = get_settings()
-    kb = KnowledgeBase.load()
+    if args.extracted_dir:
+        s.paths.extracted_dir = args.extracted_dir
+    kb = KnowledgeBase.load(s)
     rep = find_gaps(kb, s.gaps.min_pair_papers, s.gaps.max_context_papers,
                     include_synthetic=not args.exclude_synthetic, limit=args.limit)
     print("EXPERIMENTAL research-gap candidates (NOT confirmed research gaps)")
@@ -409,6 +467,10 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--entities", choices=["auto", "gliner", "llm", "none"], default=None,
                         help="who proposes non-lexicon entities (default: settings.yaml extraction.entity_backend)")
         sp.add_argument("--backend", choices=["auto", "neo4j", "local"], default=None)
+        sp.add_argument("--relations-llm", default=None,
+                        help="separate model for relations only, provider:model (e.g. groq:openai/gpt-oss-120b)")
+        sp.add_argument("--only", default=None, help="comma-separated file stems to process (subset/pilot runs)")
+        sp.add_argument("--out-dir", default=None, help="write extracted JSON here instead of data/extracted")
         sp.set_defaults(fn=fn)
     sp = sub.add_parser("build-graph")
     sp.add_argument("--backend", choices=["auto", "neo4j", "local"], default=None)
@@ -435,6 +497,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp.set_defaults(fn=cmd_review)
     sp = sub.add_parser("evaluate")
     sp.add_argument("--gold", default=None)
+    sp.add_argument("--extracted-dir", default=None, help="score these extraction results (default data/extracted)")
+    sp.add_argument("--only", default=None, help="comma-separated paper stems to score")
     sp.add_argument("--accepted-only", action="store_true")
     sp.add_argument("--include-derived", action="store_true")
     sp.set_defaults(fn=cmd_evaluate)
