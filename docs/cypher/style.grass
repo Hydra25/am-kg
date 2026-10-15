@@ -1,0 +1,95 @@
+node {
+  diameter: 50px;
+  color: #A5ABB6;
+  border-color: #9AA1AC;
+  border-width: 2px;
+  text-color-internal: #FFFFFF;
+  font-size: 10px;
+}
+relationship {
+  color: #A5ABB6;
+  shaft-width: 1px;
+  font-size: 8px;
+  padding: 3px;
+  text-color-external: #000000;
+  text-color-internal: #FFFFFF;
+  caption: "<type>";
+}
+node.Paper {
+  color: #3B6FD8;
+  border-color: #2A55AB;
+  diameter: 65px;
+  caption: "{source_file}";
+}
+node.Material {
+  color: #1F77B4;
+  border-color: #155A8A;
+  diameter: 60px;
+  caption: "{canonical_name}";
+}
+node.Process {
+  color: #2CA02C;
+  border-color: #1E7A1E;
+  diameter: 60px;
+  caption: "{canonical_name}";
+}
+node.Parameter {
+  color: #FF7F0E;
+  border-color: #C76200;
+  caption: "{canonical_name}";
+}
+node.Property {
+  color: #D62728;
+  border-color: #A31D1E;
+  caption: "{canonical_name}";
+}
+node.Defect {
+  color: #8C564B;
+  border-color: #6A4038;
+  caption: "{canonical_name}";
+}
+node.Microstructure {
+  color: #9467BD;
+  border-color: #73509A;
+  caption: "{canonical_name}";
+}
+node.PostProcessing {
+  color: #E377C2;
+  border-color: #B85C9D;
+  caption: "{canonical_name}";
+}
+node.CharacterizationMethod {
+  color: #17BECF;
+  border-color: #1293A0;
+  caption: "{canonical_name}";
+}
+node.Geometry {
+  color: #7F7F7F;
+  border-color: #636363;
+  caption: "{canonical_name}";
+}
+node.ExperimentalCondition {
+  color: #BCBD22;
+  border-color: #929318;
+  caption: "{canonical_name}";
+}
+node.Value {
+  color: #F2F2F2;
+  border-color: #BDBDBD;
+  text-color-internal: #333333;
+  diameter: 40px;
+  caption: "{raw}";
+}
+node.Claim {
+  color: #FFE08A;
+  border-color: #C9A227;
+  text-color-internal: #333333;
+  diameter: 35px;
+  caption: "{relation}";
+}
+node.Finding {
+  color: #FFF3C4;
+  border-color: #C9A227;
+  text-color-internal: #333333;
+  caption: "{finding_type}";
+}

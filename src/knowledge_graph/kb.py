@@ -66,10 +66,12 @@ class KnowledgeBase:
         return kb
 
     @classmethod
-    def load(cls, settings: Optional[Settings] = None) -> "KnowledgeBase":
+    def load(cls, settings: Optional[Settings] = None, exclude_synthetic: bool = False) -> "KnowledgeBase":
         from ..pipeline import load_all_results
         s = settings or get_settings()
         results = load_all_results(s.path("extracted_dir"))
+        if exclude_synthetic:                 # real papers only (e.g. for a demo / the paper)
+            results = [r for r in results if not r.paper.is_synthetic]
         review = ReviewStore(s.path("review_dir"))
         overrides = NormalizationOverrides(s.path("review_dir") / "normalization_overrides.json")
         return cls.from_results(results, review, overrides, QualityController(s.quality))

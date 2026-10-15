@@ -13,7 +13,7 @@ from __future__ import annotations
 import csv
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Iterable, Optional
+from typing import Any, Iterable, Optional
 
 from ..knowledge_graph.kb import KnowledgeBase
 from ..ontology.models import Relation
@@ -166,10 +166,22 @@ LEGEND = [
 ]
 
 
+def _excel_safe(v: Any) -> Any:
+    """PDF text can contain control characters (e.g. \x04 for a degree sign) that Excel files cannot
+    store, and text starting with '=' would be read as a formula."""
+    if not isinstance(v, str):
+        return v
+    from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
+    v = ILLEGAL_CHARACTERS_RE.sub("", v)
+    return " " + v if v.startswith("=") else v
+
+
 def write_workbook(tables: dict[str, list[dict]], out_path: Path) -> Path:
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Font, PatternFill
     from openpyxl.utils import get_column_letter
+
+    tables = {name: [{k: _excel_safe(v) for k, v in row.items()} for row in rows] for name, rows in tables.items()}
 
     wb = Workbook()
     font = Font(name="Arial", size=10)

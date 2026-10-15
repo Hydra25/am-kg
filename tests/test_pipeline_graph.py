@@ -113,3 +113,11 @@ def test_neo4j_loader_cypher(demo_corpus):
     rows = store.run_query("processes_for_material", material="Ti6Al4V")
     assert rows == [{"process": "LPBF", "papers": 2}]
     assert drv.log[-1][1]["material_id"] == "Material:Ti-6Al-4V"      # resolved before the Cypher runs
+
+
+def test_knowledge_base_can_exclude_synthetic_papers(demo_corpus):
+    from src.knowledge_graph.kb import KnowledgeBase
+    all_papers = KnowledgeBase.load(demo_corpus)
+    real = KnowledgeBase.load(demo_corpus, exclude_synthetic=True)
+    assert all_papers.papers and all(p.is_synthetic for p in all_papers.papers.values())
+    assert not real.papers and not real.claims

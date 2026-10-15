@@ -189,10 +189,15 @@ def cmd_extract(args: argparse.Namespace) -> int:
 
 
 def cmd_build_graph(args: argparse.Namespace) -> int:
+    from src.knowledge_graph.kb import KnowledgeBase
     from src.knowledge_graph.store import get_store
-    store = get_store(backend=args.backend)
+    s = get_settings()
+    kb = KnowledgeBase.load(s, exclude_synthetic=getattr(args, "real_only", False))
+    store = get_store(s, kb, backend=args.backend)
     counts = store.build(reset=not args.no_reset)
-    print(f"Graph built with backend '{store.name}': {counts}")
+    print(f"Graph built with backend '{store.name}' from {len(kb.papers)} paper(s): {counts}")
+    if store.name == "neo4j":
+        print("Open Neo4j Browser at http://localhost:7474 and try docs/cypher/demo.cypher")
     store.close()
     return 0
 
@@ -475,6 +480,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp = sub.add_parser("build-graph")
     sp.add_argument("--backend", choices=["auto", "neo4j", "local"], default=None)
     sp.add_argument("--no-reset", action="store_true")
+    sp.add_argument("--real-only", action="store_true", help="leave out the synthetic DEMO papers")
     sp.set_defaults(fn=cmd_build_graph)
     sub.add_parser("queries").set_defaults(fn=cmd_queries)
     sp = sub.add_parser("query")

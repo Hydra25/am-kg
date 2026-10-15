@@ -37,12 +37,47 @@ def show_df(df) -> None:
 
 
 @st.cache_resource(show_spinner="Loading knowledge base ...")
-def load_kb(version: int) -> KnowledgeBase:
-    return KnowledgeBase.load(S)
+def load_kb(version: int, real_only: bool = False) -> KnowledgeBase:
+    return KnowledgeBase.load(S, exclude_synthetic=real_only)
 
 
 def kb() -> KnowledgeBase:
-    return load_kb(st.session_state.get("kb_version", 0))
+    return load_kb(st.session_state.get("kb_version", 0), st.session_state.get("real_only", False))
+
+
+@st.cache_resource(show_spinner="Connecting to Neo4j ...")
+def neo4j_driver(uri: str, user: str, password: str):
+    from neo4j import GraphDatabase
+    drv = GraphDatabase.driver(uri, auth=(user, password))
+    drv.verify_connectivity()
+    return drv
+
+
+NEO4J_COLORS = {**TYPE_COLORS, "Paper": "#3b6fd8", "Claim": "#f2c94c", "Finding": "#f6e7a8"}
+
+
+def render_neo4j_graph(graph: dict, height: int = 680) -> None:
+    try:
+        from pyvis.network import Network
+    except ImportError:
+        st.warning("pip install pyvis to see the interactive graph")
+        return
+    net = Network(height=f"{height}px", width="100%", directed=True, bgcolor="#ffffff")
+    for n in graph["nodes"]:
+        small = n["type"] in ("Claim", "Finding", "ParameterValue", "PropertyValue")
+        net.add_node(n["id"], label=n["label"][:40], title=n["title"], color=NEO4J_COLORS.get(n["type"], "#cccccc"),
+                     size=10 if small else (24 if n["type"] == "Paper" else 18), shape="dot")
+    for e in graph["edges"]:
+        net.add_edge(e["from"], e["to"], label=e["label"], title=e["title"],
+                     dashes=e.get("status") == "review", width=1 + min(e.get("papers", 0), 6))
+    net.set_options('{"physics": {"barnesHut": {"springLength": 170}}, '
+                    '"edges": {"font": {"size": 9}, "arrows": {"to": {"enabled": true}}}}')
+    html = net.generate_html()
+    if hasattr(st, "iframe"):
+        st.iframe(html, height=height + 20)
+    else:
+        import streamlit.components.v1 as components
+        components.html(html, height=height + 20)
 
 
 def refresh() -> None:
@@ -86,11 +121,12 @@ def render_graph(rows: dict, height: int = 650, include_values: bool = False) ->
 
 
 # ---------------------------------------------------------------------------
-page = st.sidebar.radio("Page", ["Upload & Extract", "Review", "Knowledge Graph", "Graph Explorer",
+page = st.sidebar.radio("Page", ["Upload & Extract", "Review", "Knowledge Graph", "Neo4j Explorer", "Graph Explorer",
                                  "Research Assistant", "Paper Evidence", "Export Tables", "Queries", "Research Gaps",
                                  "Evaluation"])
 st.sidebar.caption(f"Model: {S.llm.model} @ {S.llm.base_url}")
 st.sidebar.caption(f"Graph backend: {S.graph.backend} | Neo4j: {'configured' if S.neo4j.enabled else 'not configured'}")
+st.sidebar.checkbox("Real papers only (hide DEMO papers)", key="real_only")
 if st.sidebar.button("Reload knowledge base"):
     refresh()
 K = kb()
@@ -221,6 +257,76 @@ elif page == "Knowledge Graph":
     st.caption("Dashed edges contain only claims under review. Edge width = number of supporting papers.")
     render_graph(rows, include_values=include_values)
     st.json(K.stats(), expanded=False)
+
+elif page == "Neo4j Explorer":
+    from src.knowledge_graph.neo4j_explorer import DEMO_QUERIES, PICKER_QUERIES, run_read, to_graph, to_table
+    st.header("Neo4j Explorer")
+    if not S.neo4j.enabled:
+        st.info("Neo4j is not configured. Set NEO4J_URI / NEO4J_USERNAME / NEO4J_PASSWORD in .env, start Neo4j and run "
+                "`python main.py build-graph --backend neo4j --real-only` (see docs/NEO4J_SETUP.md).")
+        st.stop()
+    try:
+        drv = neo4j_driver(S.neo4j.uri, S.neo4j.username, S.neo4j.password)
+    except Exception as exc:  # noqa: BLE001
+        st.error(f"Neo4j not reachable at {S.neo4j.uri}: {exc}. Is it running? (`neo4j status`, `neo4j start`)")
+        st.stop()
+    db = S.neo4j.database or None
+    st.caption(f"Connected to {S.neo4j.uri} (read-only). Every relation in the graph keeps its evidence sentence, "
+               "page and confidence; hover over nodes and edges for details.")
+    c1, c2 = st.columns([3, 1])
+    names = [q.name for q in DEMO_QUERIES] + ["Custom Cypher"]
+    choice = c1.selectbox("Question", names)
+    accepted_only = getattr(c2, "toggle", c2.checkbox)("Accepted claims only", value=True,
+                              help="accepted = confidence >= 0.85; off = also claims waiting for review (0.60-0.85)")
+    statuses = ["accepted"] if accepted_only else ["accepted", "review"]
+    params: dict = {"statuses": statuses}
+    if choice == "Custom Cypher":
+        cypher = st.text_area("Cypher (read-only)", "MATCH (a:Entity)-[r:INFLUENCES]->(b:Entity) RETURN a, r, b LIMIT 50",
+                              height=140)
+        view = st.radio("Show as", ["graph", "table"], horizontal=True)
+    else:
+        dq = next(q for q in DEMO_QUERIES if q.name == choice)
+        st.write(dq.description)
+        view = dq.view
+        if dq.picker:
+            _, opts = run_read(drv, PICKER_QUERIES[dq.picker], {"statuses": statuses}, db)
+            if not opts:
+                st.warning("Nothing to choose from with this filter. Try switching 'Accepted claims only' off.")
+                st.stop()
+            if dq.picker == "pair":
+                labels = [f"{o[2]} —{o[3]}→ {o[4]}  ({o[5]} paper{'s' if o[5] != 1 else ''})" for o in opts]
+                pick = st.selectbox("Relation", range(len(opts)), format_func=lambda i: labels[i])
+                params.update(s_id=opts[pick][0], o_id=opts[pick][1])
+            else:
+                fmt = (lambda o: f"{o[1]}  ({o[2]}, {o[3]})") if dq.picker in ("target", "quantity") else \
+                    (lambda o: f"{o[1]}  ({o[2]} papers)")
+                default = next((i for i, o in enumerate(opts) if o[0] == "Defect:porosity"), 0)
+                pick = st.selectbox("Entity", range(len(opts)), index=default, format_func=lambda i: fmt(opts[i]))
+                key = {"target": "target_id", "quantity": "q_id", "material": "m_id"}[dq.picker]
+                params[key] = opts[pick][0]
+        cypher = dq.cypher
+        with st.expander("Cypher behind this view"):
+            st.code(cypher, language="cypher")
+    try:
+        keys, rows = run_read(drv, cypher, params, db)
+    except Exception as exc:  # noqa: BLE001
+        st.error(f"Query failed: {exc}")
+        st.stop()
+    if not rows:
+        st.info("No results.")
+    elif view == "graph":
+        g = to_graph(rows)
+        if not g["nodes"]:
+            st.info("The result has no nodes or relationships; showing it as a table.")
+            show_df(pd.DataFrame(to_table(keys, rows)))
+        else:
+            st.caption(f"{len(g['nodes'])} nodes, {len(g['edges'])} relationships. "
+                       "Colours = entity type; edge width = number of papers; dashed = under review.")
+            render_neo4j_graph(g)
+            with st.expander("As a table"):
+                show_df(pd.DataFrame(to_table(keys, rows)))
+    else:
+        show_df(pd.DataFrame(to_table(keys, rows)))
 
 elif page == "Graph Explorer":
     st.header("Graph explorer")
