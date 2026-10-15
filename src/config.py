@@ -112,8 +112,10 @@ class GlinerConfig(BaseModel):
     # topologies"); on a real paper they produced mostly review-queue noise.
     skip_sections: list[str] = Field(default_factory=lambda: ["introduction"])
     # precision controls (tuned on the DEV papers with scripts/gliner_sweep.py)
-    label_set: str = "lpbf"        # default | lpbf (longer, descriptive labels); ignored if `labels` is set
+    label_set: str = "lpbf"        # default | lpbf | lpbf_multi (descriptive labels); ignored if `labels` is set
     type_thresholds: dict[str, float] = Field(default_factory=dict)   # e.g. {Property: 0.7}; others: threshold
+    context: str = "sentence"      # sentence | neighbours (GLiNER also reads the previous and next sentence)
+    verify_llm: str = ""           # LLM checker for NEW GLiNER entities, e.g. "ollama:qwen2.5:3b" ("" = off)
     require_support: bool = False  # keep a NEW GLiNER entity only if it is in a relation, has a value,
     min_mentions: int = 2          # ... or is mentioned at least min_mentions times in the paper
 

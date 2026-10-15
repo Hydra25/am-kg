@@ -196,6 +196,12 @@ class ExtractionPipeline:
                                        ) from exc
                 log.warning("GLiNER not available (%s); using the LLM entity prompt instead", exc)
         if wanted in ("auto", "gliner") and self.gliner is not None:
+            from .entity_extraction.gliner_extractor import CONTEXTS
+            if self.settings.gliner.context not in CONTEXTS:
+                raise ValueError(f"gliner.context must be one of {CONTEXTS}")
+            self.gliner.context = self.settings.gliner.context
+            from .entity_extraction.gliner_verifier import make_verifier
+            self.gliner.verifier = make_verifier(self.settings.gliner.verify_llm, self.settings)
             return "gliner"
         if wanted in ("auto", "llm") and self.llm_extractor is not None:
             return "llm"

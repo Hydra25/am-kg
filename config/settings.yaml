@@ -50,7 +50,9 @@ gliner:                      # used when extraction.entity_backend is auto/gline
   device: cpu                # mps = Apple GPU (try if cpu is slow)
   batch_size: 8
   skip_sections: [introduction]   # no NEW entities from here (background text -> review noise)
-  label_set: lpbf            # default | lpbf (descriptive labels; lpbf chosen on DEV, checked on TEST)
+  label_set: lpbf            # default | lpbf | lpbf_multi (descriptive labels; lpbf chosen on DEV, checked on TEST)
+  context: sentence          # sentence | neighbours (GLiNER also reads the previous + next sentence)
+  verify_llm: ""             # LLM checker for NEW GLiNER entities, e.g. "ollama:qwen2.5:3b" ("" = off)
   type_thresholds: {}        # per entity type, e.g. {Property: 0.7, Defect: 0.6}
   require_support: false     # keep a NEW GLiNER entity only if in a relation / has a value / repeated
   min_mentions: 2

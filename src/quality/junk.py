@@ -32,6 +32,10 @@ _GENERIC_WORDS = {
     "defect", "defects", "strength", "mechanical properties", "material properties", "process parameters", "applied process parameters", "geometry", "specimen geometry", "feature",
     "features", "design", "designs", "steel", "steels", "metal", "metals", "alloy", "alloys",
     "welded specimens", "specimen width", "preliminary trials", "limited reproducibility",
+    # single generic words / process words GLiNER proposed on the DEV papers (error analysis 2026-10-16)
+    "powder", "powders", "particle", "particles", "grain", "grains", "shape", "shapes", "morphology",
+    "morphologies", "matrix", "bead", "beads", "surface", "surfaces", "cross-section", "cross-sections",
+    "printing", "post-processing", "pre-testing", "post-testing", "sample production", "interlayer",
 }
 # Words that make a phrase plausible as a characterization method.
 _METHOD_CUES = re.compile(
@@ -47,6 +51,13 @@ _SPECIMEN_ID = re.compile(r"[A-Z]{1,3}[-_]?\d{1,2}[a-z]?")
 # Specimen labels that the LLM likes to call materials ("LT1", "MT3"): 2-3 letters + ONE digit.
 # Real grades such as H13, S460 or 316L do not match.
 _SPECIMEN_ID_STRICT = re.compile(r"[A-Z]{2,3}[-_]?\d")
+# Specimen labels inside a phrase: "AB sample", "P2 sample", "sample P2", "OC1 specimens", "specimens from OC5".
+_LABEL = r"[A-Z]{1,3}\d{0,2}[a-z]?"
+_SPECIMEN_LABEL_PHRASE = re.compile(
+    rf"(?:{_LABEL}\s+(?:samples?|specimens?|parts?|pieces?|coupons?))|"
+    rf"(?:(?:samples?|specimens?|parts?)\s+(?:(?:from|of)\s+)?{_LABEL})")
+# A reference number glued to a word by PDF extraction: "strength35", "pores44", "parts43".
+_CITATION_GLUED = re.compile(r".*[a-z]{3,}\d{2}")
 
 
 # Bare letter abbreviations / symbols ("FC", "OC", "qi", "rmin", "γSG") are only usable when the paper
@@ -68,7 +79,11 @@ _STATS = re.compile(r"\b(p-?value|anova|f-anova|analysis of variance|standard de
 _GENERIC_HEADS = {"parameter", "parameters", "condition", "conditions", "defect", "defects", "property",
                   "properties", "performance", "characteristic", "characteristics", "behavior", "behaviour",
                   "state", "situation", "analysis", "process", "processes", "feature", "features", "factor",
-                  "factors", "variable", "variables", "setting", "settings", "result", "results", "value", "values"}
+                  "factors", "variable", "variables", "setting", "settings", "result", "results", "value", "values",
+                  # objects that need a specific name to be an entity ("as-built samples", "supplied powder")
+                  "sample", "samples", "specimen", "specimens", "part", "parts", "component", "components",
+                  "shape", "shapes", "powder", "powders", "material", "materials", "surface", "surfaces",
+                  "area", "areas", "piece", "pieces"}
 _GENERIC_MODIFIERS = {"different", "various", "several", "typical", "three", "two", "four", "five", "some", "many",
                       "few", "very", "minor", "major", "visible", "combined", "investigated", "fixed", "output",
                       "input", "optimal", "optimum", "non-optimal", "optimized", "operating", "operational", "overall",
@@ -76,13 +91,19 @@ _GENERIC_MODIFIERS = {"different", "various", "several", "typical", "three", "tw
                       "main", "important", "critical", "characteristic", "qualitative", "quantitative", "parametric",
                       "real-world", "experimental", "selected", "given", "specific", "general", "other", "new",
                       "certain", "relevant", "corresponding", "respective", "possible", "applied", "scanning",
-                      "printing", "influence", "obvious", "high", "low", "better", "good", "poor", "and", "of", "the"}
+                      "printing", "influence", "obvious", "high", "low", "better", "good", "poor", "and", "of", "the",
+                      "one", "six", "seven", "eight", "nine", "ten", "all", "each", "single", "multiple", "for", "from",
+                      "as-built", "printed", "deposited", "solidified", "supplied", "original", "desired", "raw",
+                      "representative", "average", "test", "homogeneous", "initial", "final", "used", "building",
+                      "flat", "whole", "entire", "same", "similar", "remaining", "individual", "produced",
+                      "fabricated", "manufactured", "built"}
 
 
 def _generic_phrase(low: str) -> bool:
-    words = re.findall(r"[a-z][a-z\-]*", low)
-    return (len(words) >= 2 and words[-1] in _GENERIC_HEADS
-            and all(w in _GENERIC_MODIFIERS or w in _GENERIC_HEADS for w in words[:-1]))
+    """Generic head noun with only generic modifiers or counts: "27 conditions", "various samples"."""
+    tokens = re.findall(r"[a-z][a-z\-]*|\d+", low)
+    return (len(tokens) >= 2 and tokens[-1] in _GENERIC_HEADS
+            and all(w.isdigit() or w in _GENERIC_MODIFIERS or w in _GENERIC_HEADS for w in tokens[:-1]))
 
 
 def junk_reason(text: str, entity_type: str, in_lexicon: bool) -> Optional[str]:
@@ -106,6 +127,10 @@ def junk_reason(text: str, entity_type: str, in_lexicon: bool) -> Optional[str]:
         return "specimen_id"
     if _SPECIMEN_ID_STRICT.fullmatch(t):
         return "specimen_id"
+    if _SPECIMEN_LABEL_PHRASE.fullmatch(t):
+        return "specimen_id"             # "AB sample", "sample P2", "OC1 specimens"
+    if entity_type != "Material" and _CITATION_GLUED.fullmatch(t):
+        return "citation_artifact"       # "strength35": word + reference number from the PDF
     if parse_quantity_text(t) is not None and re.search(r"\d", t):
         return "contains_value"          # "length of 26 mm", "size range of 25-65 μm"
     if _STATS.search(t):

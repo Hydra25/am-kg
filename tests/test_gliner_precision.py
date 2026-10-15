@@ -106,3 +106,115 @@ def test_support_filter_keeps_only_useful_new_entities():
                      "Microstructure:colony", "Property:odd thing"}
     assert {d["canonical_id"] for d in dropped} == {"Property:utility degree", "Defect:crack tip"}
     assert all(d["reason"] == "no_support" for d in dropped)
+
+
+def test_nuner_gets_lowercase_labels_and_results_map_back():
+    class LowerOnly:
+        name = "nuner"
+
+        def __init__(self):
+            self.labels = None
+
+        def predict_entities(self, text, labels, threshold=0.5):
+            self.labels = labels
+            i = text.find("keyhole")
+            return [{"start": i, "end": i + 7, "label": labels[0], "score": 0.9}]
+
+    model = LowerOnly()
+    g = GlinerEntityExtractor(model, normalizer=None, rule_extractor=None, labels=dict(LABEL_SETS["lpbf"]),
+                              model_name="numind/NuNER_Zero")
+    preds = g._predict(["a keyhole pore"])[0]
+    assert all(lab == lab.lower() for lab in model.labels)
+    assert preds[0]["label"] in g.labels          # mapped back to the original label -> entity type works
+
+
+def test_neighbour_context_keeps_only_spans_of_the_target_sentence():
+    from types import SimpleNamespace as NS
+
+    model = RecordingModel()
+    g = _extractor(model)
+    g.context = "neighbours"
+    sents = [NS(sentence_id="a", text="A keyhole formed.", section_id="s1", source_type="text"),
+             NS(sentence_id="b", text="Porosity rose.", section_id="s1", source_type="text"),
+             NS(sentence_id="c", text="Another keyhole here.", section_id="s1", source_type="text")]
+    doc = NS(sentences=sents)
+    preds = g._predict_with_neighbours(doc, sents)
+    # the model saw "previous + sentence + next" for the middle sentence
+    assert any("A keyhole formed. Porosity rose. Another keyhole here." == t for t in model.texts)
+    assert preds[1] == []                                  # 'keyhole' in a neighbour is not given to sentence b
+    assert sents[0].text[preds[0][0]["start"]:preds[0][0]["end"]] == "keyhole"
+    assert sents[2].text[preds[2][0]["start"]:preds[2][0]["end"]] == "keyhole"
+
+
+def test_lpbf_multi_labels_cover_all_types():
+    assert set(LABEL_SETS["lpbf_multi"].values()) == set(LABEL_SETS["lpbf"].values())
+
+
+# ------------------------------------------------------------------ way 2: LLM checker
+def test_verifier_keeps_drops_and_retypes():
+    import json as _json
+
+    from src.entity_extraction.gliner_verifier import Candidate, GlinerVerifier
+    from src.llm.client import FakeLLM
+
+    answer = _json.dumps({"decisions": [{"id": 1, "keep": True, "type": "Defect"},
+                                        {"id": 2, "keep": False, "type": "Property"},
+                                        {"id": 3, "keep": "yes", "type": "Nonsense"}]})
+    v = GlinerVerifier(FakeLLM([answer]))
+    out = v.verify([Candidate("Spatter particles raised porosity.", "spatter particles", "Microstructure"),
+                    Candidate("The utility degree was 0.8.", "utility degree", "Property"),
+                    Candidate("Dimples were seen.", "dimples", "Microstructure"),
+                    Candidate("x", "y", "Defect")])          # id 4 missing -> kept (fail open)
+    assert [x.keep for x in out] == [True, False, True, True]
+    assert out[0].entity_type == "Defect"                     # corrected type
+    assert out[2].entity_type == "Microstructure"             # unknown type -> proposed type kept
+    assert out[3].reason == "no_answer"
+
+
+def test_verifier_fails_open_on_bad_llm():
+    from src.entity_extraction.gliner_verifier import Candidate, GlinerVerifier
+    from src.llm.client import FakeLLM
+
+    def boom(system, user):
+        raise RuntimeError("ollama down")
+
+    v = GlinerVerifier(FakeLLM(boom))
+    out = v.verify([Candidate("s", "keyhole", "Defect")])
+    assert out[0].keep and v.failures == 1
+
+
+def test_make_verifier_off_by_default():
+    from src.entity_extraction.gliner_verifier import make_verifier
+    assert make_verifier("", None) is None
+
+
+# ------------------------------------------------------------------ junk rules from the DEV error analysis
+@pytest.mark.parametrize("text,etype,reason", [
+    ("AB sample", "Geometry", "specimen_id"),
+    ("sample P2", "Geometry", "specimen_id"),
+    ("OC1 specimens", "Geometry", "specimen_id"),
+    ("specimens from OC5", "Defect", "specimen_id"),
+    ("strength35", "Property", "citation_artifact"),
+    ("pores44", "Defect", "citation_artifact"),
+    ("27 conditions", "ExperimentalCondition", "generic_phrase"),
+    ("Five representative conditions", "ExperimentalCondition", "generic_phrase"),
+    ("as-built samples", "Geometry", "generic_phrase"),
+    ("supplied powder", "Material", "generic_phrase"),
+    ("desired shape", "Geometry", "generic_phrase"),
+    ("average values", "Property", "generic_phrase"),
+    ("powder", "Material", "generic_word"),
+    ("grains", "Microstructure", "generic_word"),
+    ("Pre-testing", "PostProcessing", "generic_word"),
+])
+def test_error_analysis_junk(text, etype, reason):
+    assert junk_reason(text, etype, in_lexicon=False) == reason
+
+
+@pytest.mark.parametrize("text,etype", [
+    ("surface tension", "Property"), ("Marangoni flow", "Microstructure"), ("grain boundaries", "Microstructure"),
+    ("gas bubbles", "Defect"), ("improper fusion", "Defect"), ("Weak fusion defects", "Defect"),
+    ("tensile test specimen", "Geometry"), ("Inconel718", "Material"), ("powder morphology", "Microstructure"),
+    ("stainless-steel substrate", "Material"), ("ASTM 1045", "Material"), ("strain", "Property"),
+])
+def test_error_analysis_real_terms_kept(text, etype):
+    assert junk_reason(text, etype, in_lexicon=False) is None
