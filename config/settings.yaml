@@ -50,6 +50,10 @@ gliner:                      # used when extraction.entity_backend is auto/gline
   device: cpu                # mps = Apple GPU (try if cpu is slow)
   batch_size: 8
   skip_sections: [introduction]   # no NEW entities from here (background text -> review noise)
+  label_set: lpbf            # default | lpbf (descriptive labels; lpbf chosen on DEV, checked on TEST)
+  type_thresholds: {}        # per entity type, e.g. {Property: 0.7, Defect: 0.6}
+  require_support: false     # keep a NEW GLiNER entity only if in a relation / has a value / repeated
+  min_mentions: 2
 
 quality:
   accept_threshold: 0.85     # >= accept -> accepted

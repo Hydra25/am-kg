@@ -49,6 +49,42 @@ _SPECIMEN_ID = re.compile(r"[A-Z]{1,3}[-_]?\d{1,2}[a-z]?")
 _SPECIMEN_ID_STRICT = re.compile(r"[A-Z]{2,3}[-_]?\d")
 
 
+# Bare letter abbreviations / symbols ("FC", "OC", "qi", "rmin", "γSG") are only usable when the paper
+# defines them (then they are resolved before this filter) or when they are chemical elements.
+_SHORT_SYMBOL = re.compile(r"[A-Za-zα-ωΑ-Ω]{1,4}")
+
+
+def _looks_like_symbol(t: str) -> bool:
+    """'FC', 'qi', 'γSG', 'tmp' -> True; real short words such as 'pore', 'lath', 'bead' -> False."""
+    return bool(_SHORT_SYMBOL.fullmatch(t)) and (
+        len(t) <= 2 or any(c.isupper() or "α" <= c.lower() <= "ω" for c in t) or not re.search(r"[aeiouy]", t, re.I))
+_ELEMENTS = {"Al", "Ti", "Ni", "Fe", "Cu", "Co", "Cr", "Mo", "Nb", "Mg", "Si", "Mn", "V", "W", "Zr", "Ta", "Zn",
+             "Sn", "Ag", "Au", "Pt", "Pd", "Hf", "Re", "Sc", "Y", "C", "N", "O", "B"}
+# Statistics and data-analysis terms are not LPBF entities.
+_STATS = re.compile(r"\b(p-?value|anova|f-anova|analysis of variance|standard deviation|regression|"
+                    r"correlation coefficient|utility degree|r2|rmse|mse|confidence interval|t-test)\b", re.I)
+# "different process parameters", "three typical process parameters", "very few visible defects",
+# "optimal processing condition": a generic head noun with only generic modifiers names no specific thing.
+_GENERIC_HEADS = {"parameter", "parameters", "condition", "conditions", "defect", "defects", "property",
+                  "properties", "performance", "characteristic", "characteristics", "behavior", "behaviour",
+                  "state", "situation", "analysis", "process", "processes", "feature", "features", "factor",
+                  "factors", "variable", "variables", "setting", "settings", "result", "results", "value", "values"}
+_GENERIC_MODIFIERS = {"different", "various", "several", "typical", "three", "two", "four", "five", "some", "many",
+                      "few", "very", "minor", "major", "visible", "combined", "investigated", "fixed", "output",
+                      "input", "optimal", "optimum", "non-optimal", "optimized", "operating", "operational", "overall",
+                      "mechanical", "material", "process", "processing", "manufacturing", "comprehensive", "key",
+                      "main", "important", "critical", "characteristic", "qualitative", "quantitative", "parametric",
+                      "real-world", "experimental", "selected", "given", "specific", "general", "other", "new",
+                      "certain", "relevant", "corresponding", "respective", "possible", "applied", "scanning",
+                      "printing", "influence", "obvious", "high", "low", "better", "good", "poor", "and", "of", "the"}
+
+
+def _generic_phrase(low: str) -> bool:
+    words = re.findall(r"[a-z][a-z\-]*", low)
+    return (len(words) >= 2 and words[-1] in _GENERIC_HEADS
+            and all(w in _GENERIC_MODIFIERS or w in _GENERIC_HEADS for w in words[:-1]))
+
+
 def junk_reason(text: str, entity_type: str, in_lexicon: bool) -> Optional[str]:
     """Return why `text` is not a usable entity, or None if it looks fine."""
     if in_lexicon:
@@ -70,6 +106,15 @@ def junk_reason(text: str, entity_type: str, in_lexicon: bool) -> Optional[str]:
         return "specimen_id"
     if _SPECIMEN_ID_STRICT.fullmatch(t):
         return "specimen_id"
+    if parse_quantity_text(t) is not None and re.search(r"\d", t):
+        return "contains_value"          # "length of 26 mm", "size range of 25-65 μm"
+    if _STATS.search(t):
+        return "statistics_term"
+    if (_looks_like_symbol(t) and not (entity_type == "Material" and t in _ELEMENTS)
+            and not (entity_type == "CharacterizationMethod" and _METHOD_CUES.search(t))):
+        return "unknown_abbreviation"    # paper-defined symbols/abbreviations are resolved before this check
+    if _generic_phrase(low):
+        return "generic_phrase"
     if len(t) > 80 or t.count(" ") > 8:
         return "too_long"
     if entity_type == "CharacterizationMethod" and not _METHOD_CUES.search(t):

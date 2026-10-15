@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 from .config import PIPELINE_VERSION, Settings, get_settings
-from .entity_extraction.gliner_extractor import GlinerEntityExtractor
+from .entity_extraction.gliner_extractor import LABEL_SETS, GlinerEntityExtractor
 from .entity_extraction.llm_extractor import LLMExtractor
 from .entity_extraction.rule_based import RuleEntityExtractor, SentenceAnalysis
 from .evidence.verify import EvidenceIndex
@@ -47,6 +47,7 @@ from .ontology.models import (
     Relation,
 )
 from .ontology.schema import ClaimStatus, KnowledgeType
+from .quality.entity_support import support_filter
 from .quality.validator import QualityController
 from .relation_extraction.derived import paper_level_relations, table_trend_relations
 from .relation_extraction.findings import rule_findings
@@ -163,6 +164,8 @@ class ExtractionPipeline:
             if s.extraction.llm_normalization:
                 self.normalizer.llm_chooser = self.llm_extractor.choose_canonical
         self.gliner = gliner
+        if gliner is not None:   # a shared, already loaded model: use this pipeline's lexicon/normalizer
+            gliner.normalizer, gliner.rule_extractor = self.normalizer, self.rule_entities
         self.entity_backend = self._resolve_entity_backend()
         log.info("Extraction mode: %s%s | entities: %s", self.mode,
                  f" (model {self.llm.model})" if self.llm else "", self.entity_backend)
@@ -180,10 +183,12 @@ class ExtractionPipeline:
             raise ValueError("extraction.entity_backend must be auto | gliner | llm | none")
         if wanted in ("auto", "gliner") and self.gliner is None:
             g = self.settings.gliner
+            if g.label_set not in LABEL_SETS:
+                raise ValueError(f"gliner.label_set must be one of {sorted(LABEL_SETS)}")
             try:
                 self.gliner = GlinerEntityExtractor.load(
-                    g.model, self.normalizer, self.rule_entities, g.threshold, g.labels or None, g.device, g.batch_size,
-                    set(g.skip_sections))
+                    g.model, self.normalizer, self.rule_entities, g.threshold, g.labels or LABEL_SETS[g.label_set],
+                    g.device, g.batch_size, set(g.skip_sections), g.type_thresholds)
             except Exception as exc:   # not installed, no internet for the first download, ...
                 if wanted == "gliner":
                     raise RuntimeError(f"GLiNER is not available ({exc}). Install it with: pip install gliner "
@@ -307,6 +312,12 @@ class ExtractionPipeline:
         index = EvidenceIndex(doc)
         for r in relations:
             self.qc.assess(r, index)
+
+        # 5b) keep only NEW GLiNER entities with support (relation endpoint, value, or repeated)
+        if self.entity_backend == "gliner" and s.gliner.require_support:
+            mentions, unsupported = support_filter(mentions, relations, self.lexicon.entities, s.gliner.min_mentions)
+            gl_dropped += unsupported
+            gliner_mentions = sum(1 for m in mentions if m.method == "gliner")
 
         # 6) findings (verbatim sentences)
         findings: dict[str, Finding] = {}
