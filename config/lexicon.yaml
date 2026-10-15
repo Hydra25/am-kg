@@ -9,7 +9,11 @@
 # * Manual corrections made in the review UI are stored separately in
 #   data/review/normalization_overrides.json and take precedence over this file.
 #
-# Sources for process terminology: ISO/ASTM 52900 process categories.
+# Sources: process terminology from ISO/ASTM 52900 (process categories, PBF-LB/M);
+# surface texture parameters from ISO 21920-2 (Ra, Rz, Rq, Rv) and ISO 25178-2 (Sa, Sq, Sz);
+# powder properties from ASTM B212 (apparent density) / B527 (tap density); impact testing
+# from ASTM E23 (Charpy); tensile testing from ASTM E8 / ISO 6892-1; hardness from ASTM E384.
+# Entity types follow docs/SILVER_GUIDELINE.md (e.g. preheating temperature = ExperimentalCondition).
 
 Process:
   - canonical: LPBF
@@ -139,13 +143,13 @@ Parameter:
     aliases: [laser power, laser powers, beam power, {text: power, confidence: 0.7}]
   - canonical: scanning speed
     dimensions: [velocity]
-    aliases: [scanning speed, scan speed, scanning velocity, scan velocity, laser scanning speed, laser scan speed]
+    aliases: [scanning speed, scan speed, scanning velocity, scan velocity, laser scanning speed, laser scan speed, laser speed]
   - canonical: layer thickness
     dimensions: [length]
     aliases: [layer thickness, layer height, powder layer thickness]
   - canonical: hatch spacing
     dimensions: [length]
-    aliases: [hatch spacing, hatch distance, hatch space, hatching distance, hatching space]
+    aliases: [hatch spacing, hatch distance, hatch space, hatching distance, hatching space, hatching spacing]
   - canonical: volumetric energy density
     dimensions: [energy_density_vol]
     aliases: [volumetric energy density, energy density, {text: VED, confidence: 0.9}, volume energy density]
@@ -158,9 +162,6 @@ Parameter:
   - canonical: scan strategy
     dimensions: [angle, none]
     aliases: [scan strategy, scanning strategy, scan pattern, rotation angle, interlayer rotation]
-  - canonical: preheating temperature
-    dimensions: [temperature]
-    aliases: [preheating temperature, preheat temperature, preheating, powder bed preheating]
   - canonical: extrusion temperature
     dimensions: [temperature]
     aliases: [extrusion temperature, nozzle temperature, printing temperature, extruder temperature]
@@ -193,7 +194,7 @@ Parameter:
     aliases: [arc current, welding current]
   - canonical: arc voltage
     dimensions: [voltage]
-    aliases: [arc voltage, welding voltage, voltage]
+    aliases: [arc voltage, welding voltage]   # bare "voltage" hit SEM accelerating voltage
   - canonical: powder feed rate
     dimensions: [mass_flow]
     aliases: [powder feed rate, powder feeding rate, powder mass flow rate]
@@ -212,25 +213,49 @@ Parameter:
   - canonical: exposure time
     dimensions: [time]
     aliases: [exposure time, point exposure time]
+  - canonical: point distance
+    dimensions: [length]
+    aliases: [point distance, point-to-point distance]
+  - canonical: overlap ratio
+    dimensions: [percent, none]
+    aliases: [overlap ratio, overlapping ratio, overlap rate, track overlap, bead overlapping ratio, bead overlap ratio]
+  - canonical: wavelength
+    display: laser wavelength
+    dimensions: [length]
+    aliases: [wavelength, laser wavelength]
+  - canonical: power density
+    aliases: [power density, laser power density]
 
 ExperimentalCondition:
   - canonical: build orientation
     dimensions: [angle, none]
     aliases: [build orientation, building orientation, build direction, building direction, printing orientation, print orientation]
   - canonical: atmosphere
-    aliases: [argon atmosphere, inert atmosphere, nitrogen atmosphere, protective atmosphere, argon-filled chamber]
-  - canonical: substrate temperature
+    aliases: [argon atmosphere, inert atmosphere, nitrogen atmosphere, protective atmosphere, argon-filled chamber,
+              gas atmosphere, inert gas atmosphere, argon gas atmosphere, shielding atmosphere]
+  - canonical: argon
+    aliases: [argon, argon gas, Ar gas, high-purity argon, argon gas environment]
+  - canonical: preheating temperature
     dimensions: [temperature]
-    aliases: [substrate temperature, baseplate temperature, base plate temperature, build plate temperature, build platform temperature, platform temperature]
+    aliases: [preheating temperature, preheat temperature, pre-heating temperature, preheating, pre-heating, powder bed preheating]
+  - canonical: build plate temperature
+    dimensions: [temperature]
+    aliases: [build plate temperature, building plate temperature, substrate temperature, baseplate temperature, base plate temperature,
+              build platform temperature, platform temperature, temperature of the building plate, temperature of the build plate]
+  - canonical: room temperature
+    dimensions: [temperature]
+    aliases: [room temperature, ambient temperature]
+  - canonical: strain rate
+    aliases: [strain rate, strain rates]
+  - canonical: crosshead speed
+    dimensions: [velocity]
+    aliases: [crosshead speed, cross-head speed, tensile speed, test speed, loading speed]
   - canonical: chamber temperature
     dimensions: [temperature]
     aliases: [chamber temperature, build chamber temperature, enclosure temperature]
   - canonical: oxygen content
     dimensions: [percent, ppm]
     aliases: [oxygen content, oxygen level, oxygen concentration]
-  - canonical: powder particle size
-    dimensions: [length]
-    aliases: [powder particle size, particle size distribution, powder size, particle size]
 
 Property:
   - canonical: tensile strength
@@ -281,6 +306,38 @@ Property:
   - canonical: coefficient of thermal expansion
     dimensions: [cte]
     aliases: [coefficient of thermal expansion, thermal expansion coefficient, CTE]
+  - canonical: powder particle size
+    dimensions: [length]
+    aliases: [powder particle size, particle size distribution, powder size, particle size]
+  - canonical: apparent density
+    dimensions: [mass_density]
+    aliases: [apparent density, powder apparent density]
+  - canonical: tap density
+    dimensions: [mass_density]
+    aliases: [tap density, tapped density]
+  - canonical: tensile property
+    aliases: [tensile property, tensile properties, tensile behavior, tensile behaviour, tensile characteristic,
+              tensile characteristics, tensile performance]
+  - canonical: Rz
+    display: maximum height of the roughness profile (ISO 21920-2)
+    dimensions: [length]
+    aliases: [{text: Rz, case_sensitive: true}]
+  - canonical: Rq
+    display: root-mean-square roughness (ISO 21920-2)
+    dimensions: [length]
+    aliases: [{text: Rq, case_sensitive: true}]
+  - canonical: Rv
+    display: maximum valley depth (ISO 21920-2)
+    dimensions: [length]
+    aliases: [{text: Rv, case_sensitive: true}]
+  - canonical: Sq
+    display: root-mean-square areal roughness (ISO 25178-2)
+    dimensions: [length]
+    aliases: [{text: Sq, case_sensitive: true}]
+  - canonical: Sz
+    display: maximum areal height (ISO 25178-2)
+    dimensions: [length]
+    aliases: [{text: Sz, case_sensitive: true}]
   - canonical: dimensional accuracy
     dimensions: [length, percent]
     aliases: [dimensional accuracy, dimensional deviation, geometric accuracy]
@@ -313,7 +370,16 @@ Defect:
   - canonical: spatter
     aliases: [spatter, spattering]
   - canonical: unmelted powder
-    aliases: [unmelted powder, unmelted particles, partially melted particles, unmelted powder particles]
+    aliases: [unmelted powder, unmelted particles, partially melted particles, unmelted powder particles,
+              unfused powder, unfused powder particles, unfused particles, partially melted powder particles]
+  - canonical: keyhole
+    aliases: [keyhole, keyholes, keyhole formation, keyhole phenomenon]
+  - canonical: pore size
+    dimensions: [length]
+    aliases: [pore size, pore sizes, pore diameter, average pore size, mean pore size, equivalent spherical diameter,
+              equivalent sphere diameter]
+  - canonical: over-melting
+    aliases: [over-melting, overmelting, over melting, over-melted region, over-melted regions]
   - canonical: humping
     aliases: [humping]
 
@@ -340,6 +406,8 @@ Microstructure:
     aliases: [dendritic structure, dendrites, dendritic, cellular-dendritic structure, dendritic microstructure, interdendritic]
   - canonical: cellular structure
     aliases: [cellular structure, cellular microstructure, cellular sub-structure, cell structure]
+  - canonical: melt pool
+    aliases: [melt pool, melt pools, molten pool, molten pools, meltpool]
   - canonical: melt pool boundaries
     aliases: [melt pool boundaries, melt pool boundary, molten pool boundaries]
   - canonical: Laves phase
@@ -356,6 +424,17 @@ Microstructure:
     aliases: [lamellar α+β, α+β lamellar, lamellar microstructure, Widmanstätten, basket-weave]
   - canonical: precipitates
     aliases: [precipitates, precipitation]
+  - canonical: segregation
+    aliases: [segregation, micro-segregation, microsegregation, elemental segregation]
+  - canonical: dislocation density
+    aliases: [dislocation density, dislocation densities]
+  - canonical: dimple
+    display: dimples (ductile fracture)
+    aliases: [dimple, dimples, ductile dimples, dimple structure, dimpled]
+  - canonical: cleavage facet
+    aliases: [cleavage facet, cleavage facets, cleavage planes]
+  - canonical: fracture surface
+    aliases: [fracture surface, fracture surfaces, fractured surface, fractured surfaces]
 
 PostProcessing:
   - canonical: heat treatment
@@ -373,10 +452,21 @@ PostProcessing:
     aliases: [stress relief, stress relieving, stress-relief annealing, stress-relieved, stress relief annealing]
   - canonical: solution treatment
     family: heat treatment
-    aliases: [solution treatment, solution heat treatment, solutionizing, solution treated]
+    aliases: [solution treatment, solution heat treatment, solutionizing, solution treated, single solution,
+              single-solution heat treatment, solution annealing]
   - canonical: aging
     family: heat treatment
-    aliases: [aging, ageing, aged, age hardening, direct aging]
+    aliases: [aging, ageing, aged, age hardening, aging treatment, ageing treatment, aging heat treatment]
+  - canonical: direct aging
+    family: heat treatment
+    aliases: [direct aging, direct ageing, direct-aging, direct-aged, direct aging treatment, direct-aging treatment,
+              direct-aging heat treatment]
+  - canonical: air cooling
+    family: heat treatment
+    aliases: [air cooling, air-cooled, air cooled]
+  - canonical: furnace cooling
+    family: heat treatment
+    aliases: [furnace cooling, furnace-cooled, furnace cooled]
   - canonical: T6 heat treatment
     family: heat treatment
     aliases: [T6 heat treatment, T6 treatment, T6]
@@ -385,7 +475,8 @@ PostProcessing:
     aliases: [machining, machined, CNC machining]
   - canonical: EDM
     family: surface finishing
-    aliases: [EDM, wire EDM, WEDM, electrical discharge machining, electro-discharge machining, wire electrical discharge machining, EDM wire cutting, EDM-wire cutting, wire cutting]
+    aliases: [EDM, wire EDM, WEDM, electrical discharge machining, electro-discharge machining, wire electrical discharge machining, EDM wire cutting, EDM-wire cutting, wire cutting,
+              electric discharge machining, wire electric discharge machining]
   - canonical: polishing
     family: surface finishing
     aliases: [polishing, polished, mechanical polishing]
@@ -402,13 +493,14 @@ PostProcessing:
 CharacterizationMethod:
   - canonical: SEM
     display: Scanning Electron Microscopy
-    aliases: [scanning electron microscopy, scanning electron microscope, SEM]
+    aliases: [scanning electron microscopy, scanning electron microscope, SEM, FE-SEM, FESEM,
+              field emission scanning electron microscopy, field-emission scanning electron microscope]
   - canonical: XRD
     display: X-ray Diffraction
     aliases: [X-ray diffraction, XRD]
   - canonical: CT
     display: X-ray Computed Tomography
-    aliases: [X-ray computed tomography, computed tomography, micro-computed tomography, micro-CT, μCT, XCT, CT]
+    aliases: [X-ray computed tomography, computed tomography, micro-computed tomography, micro-CT, μCT, XCT, CT, X-ray CT, X-Ray CT]
   - canonical: EBSD
     display: Electron Backscatter Diffraction
     aliases: [electron backscatter diffraction, electron back-scatter diffraction, electron backscattered diffraction, EBSD]
@@ -416,20 +508,30 @@ CharacterizationMethod:
     aliases: [optical microscopy, optical microscope, light microscopy, OM]
   - canonical: EDS
     display: Energy-Dispersive X-ray Spectroscopy
-    aliases: [energy dispersive spectroscopy, energy-dispersive X-ray spectroscopy, energy dispersive X-ray spectroscopy, EDS, EDX]
+    aliases: [energy dispersive spectroscopy, energy-dispersive X-ray spectroscopy, energy dispersive X-ray spectroscopy, EDS, EDX, EDAX]
   - canonical: TEM
     display: Transmission Electron Microscopy
     aliases: [transmission electron microscopy, TEM]
   - canonical: tensile testing
     aliases: [tensile testing, tensile test, tensile tests, uniaxial tensile test, uniaxial tensile tests, tensile tester]
   - canonical: hardness testing
-    aliases: [hardness testing, hardness test, hardness tests, Vickers hardness tester, microhardness tester, microhardness testing, Vickers indentation]
+    aliases: [hardness testing, hardness test, hardness tests, Vickers hardness tester, microhardness tester, microhardness testing, Vickers indentation, micro hardness test,
+              microhardness test, micro-hardness test]
   - canonical: fatigue testing
     aliases: [fatigue testing, fatigue test, fatigue tests]
   - canonical: Archimedes method
     aliases: [Archimedes method, Archimedes' method, Archimedes principle, Archimedes density]
   - canonical: profilometry
-    aliases: [profilometry, profilometer, surface profilometer, confocal microscopy]
+    aliases: [profilometry, profilometer, surface profilometer, confocal microscopy, surface roughness tester,
+              roughness tester, 3D laser microscope, laser scanning microscope]
+  - canonical: Charpy impact test
+    display: Charpy impact test (ASTM E23)
+    aliases: [Charpy impact test, Charpy impact tests, Charpy impact testing, Charpy test, Charpy tests,
+              notched impact test, notch impact test, V-notch Charpy test, impact test, impact tests, pendulum impact tester]
+  - canonical: particle size analysis
+    aliases: [particle size analysis, particle size analyser, particle size analyzer, laser diffraction]
+  - canonical: stereomicroscopy
+    aliases: [stereomicroscopy, stereomicroscope, stereo microscope, stereo-microscope]
   - canonical: DSC
     display: Differential Scanning Calorimetry
     aliases: [differential scanning calorimetry, DSC]
@@ -438,9 +540,11 @@ CharacterizationMethod:
 
 Geometry:
   - canonical: tensile specimen
-    aliases: [tensile specimen, tensile specimens, tensile samples, tensile sample, dog-bone specimens, dog-bone specimen, dogbone specimens, tensile bars, tensile bar]
+    aliases: [tensile specimen, tensile specimens, tensile samples, tensile sample, dog-bone specimens, dog-bone specimen, dogbone specimens, tensile bars, tensile bar,
+              tensile test specimen, tensile test specimens, tensile test sample, tensile test samples,
+              tensile test piece, tensile test pieces]
   - canonical: cube
-    aliases: [cube, cubes, cubic samples, cubic specimens, cuboid samples]
+    aliases: [cube, cubes, cubic samples, cubic specimens, cuboid samples, cuboid specimen, cuboid specimens]
   - canonical: lattice structure
     aliases: [lattice structure, lattice structures, lattice samples, gyroid lattice, cellular lattice]
   - canonical: thin wall
@@ -449,5 +553,8 @@ Geometry:
     aliases: [cylindrical specimens, cylindrical samples, cylinders]
   - canonical: overhang
     aliases: [overhang, overhangs, overhanging structures]
+  - canonical: Charpy specimen
+    aliases: [Charpy specimen, Charpy specimens, Charpy samples, impact specimen, impact specimens, notched impact specimen,
+              notched impact specimens, impact test sample, impact test samples, notch impact test sample]
   - canonical: fatigue specimen
     aliases: [fatigue specimens, fatigue specimen, fatigue samples]
