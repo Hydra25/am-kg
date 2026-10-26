@@ -46,6 +46,10 @@ from src.normalization.text import match_key  # noqa: E402
 from src.quality.junk import junk_reason  # noqa: E402
 
 MIN_PAPERS, MIN_MATERIALS, MIN_TYPE_SHARE = 3, 2, 0.7
+MIN_PAPERS_SINGLE_WORD = 5        # one-word terms ("track", "block", "island") are often generic: need more papers
+# capitalised words that are names, not sentence starts ("Marangoni flow" stays, "Bare plate" -> "bare plate")
+_PROPER = {"marangoni", "vickers", "archimedes", "charpy", "rockwell", "brinell", "young's", "young",
+           "widmanstätten", "laves", "hall-petch", "hall", "petch", "kirkendall", "burgers", "schmid", "weibull"}
 TYPES = ["Material", "Process", "Parameter", "Property", "Defect", "Microstructure", "PostProcessing",
          "CharacterizationMethod", "Geometry", "ExperimentalCondition"]
 _DET = re.compile(r"^(the|a|an|this|that|these|those|such|its|their)\s+", re.I)
@@ -97,7 +101,11 @@ class Candidate:
         """The most frequent written form, preferring a singular form ("pore", not "pores")."""
         forms = [n for n, _ in self.names.most_common()]
         single = [n for n in forms if n.split(" ")[-1] == singular(n.split(" ")[-1])]
-        return (single or forms)[0]
+        best = (single or forms)[0]
+        first = best.split(" ")[0]
+        if re.fullmatch(r"[A-Z][a-z][a-z'-]*", first) and first.lower() not in _PROPER:
+            best = best[0].lower() + best[1:]          # "Bare plate" (sentence start) -> "bare plate"
+        return best
 
     @property
     def type(self) -> str:
@@ -144,6 +152,8 @@ def pre_classify(c: Candidate, lexicon: Lexicon, blocklist: dict[str, str]) -> N
         c.tier, c.reason = "watch", f"materials_{len(c.materials)}<{MIN_MATERIALS}"
     elif c.type_share < MIN_TYPE_SHARE:
         c.tier, c.reason = "watch", f"type_share_{c.type_share:.2f}<{MIN_TYPE_SHARE}"
+    elif " " not in name.strip() and len(c.papers) < MIN_PAPERS_SINGLE_WORD:
+        c.tier, c.reason = "watch", f"single_word_papers_{len(c.papers)}<{MIN_PAPERS_SINGLE_WORD}"
     else:
         c.tier, c.reason = "llm", ""
 
@@ -223,10 +233,10 @@ class TermChecker:
 # ---------------------------------------------------------------------------------------- outputs
 def write_auto_lexicon(path: Path, cands: list[Candidate], lexicon: Lexicon, model: str,
                        doi_of: dict[str, str]) -> tuple[int, int]:
-    data = yaml.safe_load(path.read_text(encoding="utf-8")) if path.exists() else None
-    data = data or {}
-    entries = {(e["type"], e["canonical"]): e for e in data.get("entries") or []}
-    aliases = {(a["type"], a["canonical"], a["alias"]): a for a in data.get("aliases") or []}
+    # rebuilt from scratch every run: all harvested papers are re-aggregated from the cache, so the file
+    # always reflects the current rule (a term that no longer qualifies disappears)
+    entries: dict[tuple, dict] = {}
+    aliases: dict[tuple, dict] = {}
     today = time.strftime("%Y-%m-%d")
     added_e = added_a = 0
     for c in cands:
@@ -359,7 +369,7 @@ def main() -> None:
     papers = extract_all(args, work)
     if not papers:
         raise SystemExit("No extracted papers. Run scripts/harvest_oa.py first.")
-    lexicon = Lexicon.load(ROOT / "config" / "lexicon.yaml")         # curated + current auto terms
+    lexicon = Lexicon.load(ROOT / "config" / "lexicon.yaml", auto=False)   # curated only: auto file is rebuilt
     blocklist_path = work / "blocklist.json"
     blocklist = json.loads(blocklist_path.read_text(encoding="utf-8")) if blocklist_path.exists() else {}
     cands = list(aggregate(papers).values())
@@ -404,7 +414,7 @@ def main() -> None:
         for c in [c for c in cands if c.tier == tier]:
             extra = f" -> {c.target}" if tier == "alias" else ""
             print(f"  {tier:5} {c.type:22} {c.name}{extra}  ({len(c.papers)} papers, {len(c.materials)} materials)")
-    print(f"\nAdded to config/{AUTO_FILE_NAME}: {added_e} new term(s), {added_a} alias(es)")
+    print(f"\nconfig/{AUTO_FILE_NAME} now has {added_e} new term(s) and {added_a} alias(es) (rebuilt each run)")
     print(f"All candidates: {work / 'candidates.csv'}")
     if args.check:
         regression_check()

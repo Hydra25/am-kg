@@ -109,3 +109,13 @@ def test_harvester_uses_repository_copies():
                       {"is_oa": False, "pdf_url": "https://paywalled.example/x.pdf"}]
     row, reason = judge(w, set())
     assert reason == "" and row["pdf_url"] == "https://europepmc.org/articles/PMC1/pdf" and row["alt_urls"] == []
+
+
+def test_single_word_terms_need_more_papers_and_names_are_decapitalised(lexicon):
+    track = next(iter(aggregate(_papers("track", "Geometry", ["316L", "IN718", "Ti-6Al-4V"])).values()))
+    pre_classify(track, lexicon, {})
+    assert track.tier == "watch" and track.reason.startswith("single_word")
+    bare = next(iter(aggregate(_papers("Bare plate", "Geometry", ["316L", "IN718", "Ti-6Al-4V"])).values()))
+    assert bare.name == "bare plate"
+    mar = next(iter(aggregate(_papers("Marangoni flow", "Microstructure", ["316L", "IN718"])).values()))
+    assert mar.name == "Marangoni flow"
