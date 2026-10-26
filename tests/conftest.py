@@ -2,6 +2,7 @@
 Neo4j driver are replaced by deterministic fakes."""
 from __future__ import annotations
 
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -10,6 +11,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+# tests use the curated lexicon only (auto-discovered terms in config/lexicon_auto.yaml would make them drift)
+os.environ["AMKG_LEXICON_AUTO"] = "0"
 
 from src.config import load_settings  # noqa: E402
 from src.normalization.entity_normalizer import EntityNormalizer  # noqa: E402

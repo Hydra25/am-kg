@@ -31,6 +31,7 @@ data/cache/
 data/benchmark/
 data/experiments/
 data/labelstudio/
+data/harvest/
 
 # --- Papers: commit only the synthetic DEMO PDFs, never real publisher PDFs ---
 data/papers/*
