@@ -334,21 +334,21 @@ def extract_all(args: argparse.Namespace, work: Path) -> list[dict]:
             for p in pdfs if (cache / f"{p.stem}.json").exists()]
 
 
-def regression_check() -> None:
-    """Rules-only entity F1 on DEV with and without the auto lexicon (TEST stays untouched)."""
+def regression_check(split: str = "dev") -> None:
+    """Rules-only entity F1 with and without the auto lexicon. Use DEV while tuning; TEST once for the final number."""
     from scripts.gliner_sweep import Sweep
     f1 = {}
     for flag in ("0", "1"):
         os.environ["AMKG_LEXICON_AUTO"] = flag
-        sw = Sweep("dev", ROOT / "data/annotations_silver", ROOT / "data/experiments/lexicon_check",
+        sw = Sweep(split, ROOT / "data/annotations_silver", ROOT / "data/experiments/lexicon_check",
                    ROOT / "data/processed")
         f1[flag] = sw.run("rules_only" + (" + auto lexicon" if flag == "1" else ""), {}, mode="rule")["entity_f1"]
     os.environ.pop("AMKG_LEXICON_AUTO", None)
     if f1["1"] < f1["0"] - 0.005:
-        print(f"WARNING: DEV entity F1 dropped {f1['0']:.3f} -> {f1['1']:.3f}. To undo: rename "
+        print(f"WARNING: {split.upper()} entity F1 dropped {f1['0']:.3f} -> {f1['1']:.3f}. To undo: rename "
               f"config/{AUTO_FILE_NAME} (e.g. to lexicon_auto.rejected.yaml).")
     else:
-        print(f"Regression check OK: DEV entity F1 {f1['0']:.3f} -> {f1['1']:.3f}")
+        print(f"Regression check OK: {split.upper()} entity F1 {f1['0']:.3f} -> {f1['1']:.3f}")
 
 
 def main() -> None:
@@ -362,9 +362,15 @@ def main() -> None:
     ap.add_argument("--llm", default="groq:openai/gpt-oss-120b", help="checker, provider:model (free tier)")
     ap.add_argument("--no-llm", action="store_true")
     ap.add_argument("--check", action="store_true", help="regression check on DEV after writing")
+    ap.add_argument("--check-split", choices=["dev", "test"], default="dev",
+                    help="split for --check (test: final number only, never for tuning)")
+    ap.add_argument("--check-only", action="store_true", help="skip discovery, only run the regression check")
     args = ap.parse_args()
     work = ROOT / args.work
     work.mkdir(parents=True, exist_ok=True)
+    if args.check_only:
+        regression_check(args.check_split)
+        return
 
     papers = extract_all(args, work)
     if not papers:
@@ -417,7 +423,7 @@ def main() -> None:
     print(f"\nconfig/{AUTO_FILE_NAME} now has {added_e} new term(s) and {added_a} alias(es) (rebuilt each run)")
     print(f"All candidates: {work / 'candidates.csv'}")
     if args.check:
-        regression_check()
+        regression_check(args.check_split)
 
 
 if __name__ == "__main__":
